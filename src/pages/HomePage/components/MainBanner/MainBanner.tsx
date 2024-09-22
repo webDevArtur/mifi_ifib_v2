@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Button, Spin, Flex } from 'antd';
 import { Link } from 'react-router-dom';
+import atom from './assets/atom.png';
 import styles from './MainBanner.module.scss';
 
 const MainBanner = () => {
@@ -36,7 +37,7 @@ const MainBanner = () => {
               </div>
             </div>
 
-          <img className={styles.atom} src="../src/assets/atom.png" alt="Preview" />
+          <img className={styles.atom} src={atom} alt="Preview" />
           </div>
         </div>
 
