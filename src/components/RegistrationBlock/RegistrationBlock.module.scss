@@ -1,0 +1,49 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+    border-radius: 32px;
+    border: 1px solid #25492A;
+    background-color: #F4F7D3;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+  }
+
+  .box {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #25492A;
+    margin-bottom: 5px;
+  }
+  
+  .text {
+    font-size: 16px;
+    color: #25492A;
+    margin-right: 16px;
+  }
+  
+  .button {
+    display: flex;
+    justify-content: center;
+    width: 40%;
+    background-color: #2b5329;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #25492A;
+  }

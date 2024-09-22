@@ -1,0 +1,54 @@
+.container {
+    padding: 20px 60px;
+  }
+  
+  .breadcrumb {
+    font-size: 16px;
+    color: #7D7D7D;
+    margin-bottom: 40px;
+  }
+
+  .breadcrumb a {
+    text-decoration: none;
+    color: #666;
+  }
+  
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+  
+  .articleHeader {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  
+  .articleImage {
+    width: 150px;
+    height: auto;
+    margin-right: 20px;
+  }
+  
+  .articleInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+  
+    h1 {
+      font-size: 24px;
+      margin: 0 0 10px;
+    }
+  
+    .author {
+      font-size: 16px;
+      color: #25492A;
+      margin-bottom: 10px;
+    }
+  
+    .description {
+      font-size: 16px;
+      color: #25492A;
+    }
+  }
+  

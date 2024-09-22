@@ -1,0 +1,88 @@
+.introPage {
+    padding: 20px 50px; 
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .breadcrumb {
+    font-size: 16px;
+    color: #7D7D7D;
+    margin-bottom: 40px;
+  }
+  
+  .breadcrumb a {
+    text-decoration: none;
+    color: #666;
+  }
+  
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+  
+  h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .contentBlock {
+    margin-bottom: 40px;
+  }
+  
+  .contentBlock h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .contentBlock p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+  }
+  
+  .cardsContainer {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 40px;
+    margin-bottom: 40px;
+  }
+  
+  .card {
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    min-height: 150px;
+    background-image: url('./assets/science-article.png');
+    background-size: 100% 100%;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card h3 {
+    font-size: 25px;
+    margin: 0 15px;
+  }
+  
+  .card ul li {
+    width: 60%;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  .spinner {
+    width: 100%;
+    min-height: 500px;
+  }
+
+  .video {
+    min-width: 100%;
+    min-height: 500px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 0;
+    margin-bottom: 50px;
+}
