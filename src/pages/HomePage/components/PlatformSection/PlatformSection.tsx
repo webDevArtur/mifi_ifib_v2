@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import styles from './PlatformSection.module.scss';
-import books from '../../../../assets/books.png';
+import books from './assets/books.png';
 
 const PlatformSection = () => {
   return (

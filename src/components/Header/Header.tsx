@@ -1,7 +1,8 @@
 import { Button, Input, Menu, Dropdown } from 'antd';
 import { Link } from 'react-router-dom';
 import { SearchOutlined } from '@ant-design/icons';
-import mifiLogo from '../../assets/mifiLogo.png';
+import mifiLogo from './assets/mifiLogo.png';
+
 import styles from './Header.module.scss';
   
 const Header = () => {

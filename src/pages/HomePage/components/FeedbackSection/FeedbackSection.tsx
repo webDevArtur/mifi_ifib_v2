@@ -1,6 +1,6 @@
 import styles from './FeedbackSection.module.scss';
 import { Input } from 'antd';
-import feedback from '../../../../assets/feedback.png';
+import feedback from './assets/feedback.png';
 
 const { TextArea } = Input;
 
