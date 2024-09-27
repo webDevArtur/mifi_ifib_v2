@@ -73,8 +73,9 @@
       color: #7D7D7D;
     }
   }
-  
-  .lockIcon {
-    font-size: 20px;
-    color: #4CAF50;
-  }
+
+.lockedCheckbox {
+  display: flex;
+  justify-content: center;
+  width: 5%;
+}

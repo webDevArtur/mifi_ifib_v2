@@ -1,5 +1,6 @@
+import { Carousel } from 'antd';
 import styles from './AboutSection.module.scss';
-import aboutIfib from './assets/aboutIFIB.png';
+import aboutIfib1 from './assets/aboutIFIB1.png';
 
 const AboutSection = () => {
   return (
@@ -7,11 +8,31 @@ const AboutSection = () => {
       <h1 className={styles.title}>Об ИФИБ</h1>
       <div className={styles.content}>
         <div className={styles.imageContainer}>
-          <img
-            src={aboutIfib}
-            alt="Students at the Institute"
-            className={styles.image}
-          />
+        <Carousel autoplay dots dotPosition='bottom' className={styles.imageCarusel}>
+            <div>
+              <img
+                src={aboutIfib1}
+                alt="Students at the Institute"
+                className={styles.image}
+              />
+            </div>
+
+            <div>
+              <img
+                src={aboutIfib1}
+                alt="Another description"
+                className={styles.image}
+              />
+            </div>
+
+            <div>
+              <img
+                src={aboutIfib1}
+                alt="Another description"
+                className={styles.image}
+              />
+            </div>
+          </Carousel>
         </div>
 
         <div className={styles.textContainer}>

@@ -1,4 +1,5 @@
 import Input from 'antd/es/input/Input';
+import { Checkbox } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import RegistrationBlock from '../../components/RegistrationBlock/RegistrationBlock';
 import cover from './assets/cover.png';
@@ -18,7 +19,7 @@ const ArticlePage = () => {
         'Nuclear Medicine in Cardiovascular Diagnostics: Techniques and Benefits',
       author: 'Эмили Чен',
       image: cover,
-      locked: true,
+      locked: false,
     },
     {
       title: 'Advancements in PET Imaging: A Review of Recent Innovations',
@@ -30,7 +31,7 @@ const ArticlePage = () => {
       title: 'The Role of Nuclear Medicine in Modern Healthcare',
       author: 'Джон Хопкинс',
       image: cover,
-      locked: true,
+      locked: false,
     },
   ];
 
@@ -73,7 +74,9 @@ const ArticlePage = () => {
                 <p>{article.author}</p>
               </div>
 
-              {article.locked && <div className={styles.lockIcon}>🔒</div>}
+              <div className={styles.lockedCheckbox}>
+                <Checkbox checked={article.locked} />
+              </div>
             </Link>
           </li>
         ))}

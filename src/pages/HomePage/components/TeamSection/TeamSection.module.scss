@@ -17,11 +17,15 @@
     justify-content: space-between;
     align-items: center;
     gap: 20px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #E3E3E3 #F5F5F5;
   }
   
   .teamMember {
     flex: 1;
     text-align: center;
+    margin-bottom: 15px;
   }
   
   .teamMemberImage {

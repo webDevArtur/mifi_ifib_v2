@@ -8,6 +8,10 @@ const TeamSection = () => {
     { name: 'Дубов Леонид', image: member2 },
     { name: 'Громушкина Елена', image: member1 },
     { name: 'Трухин Алексей', image: member2 },
+    { name: 'Константинова Елена', image: member1 },
+    { name: 'Дубов Леонид', image: member2 },
+    { name: 'Громушкина Елена', image: member1 },
+    { name: 'Трухин Алексей', image: member2 },
   ];
 
   return (
