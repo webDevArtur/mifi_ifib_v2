@@ -33,7 +33,6 @@
   .searchInput {
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #D3D3D3;
     background-color: #F5F5F5;
     border: 1px solid #B0B0B0;
     border-radius: 5px;
@@ -51,7 +50,7 @@
     width: 90%;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -64,14 +63,11 @@
   
     .overlay {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: rgba(0, 0, 0, 0.3);
+      background-color: rgb(0 0 0 / 30%);
   
       .playButton {
         width: 100%;

@@ -20,42 +20,57 @@ const MainBanner = () => {
 
           <div className={styles.infoContainer}>
             <div className={styles.info}>
-              <p className={styles.subtitle}>Обучайся передовым технологиям в медицине вместе с нами!</p>
+              <p className={styles.subtitle}>
+                Обучайся передовым технологиям в медицине вместе с нами!
+              </p>
 
               <div className={styles.buttonGroup}>
-                <Button className={styles.button} type="default">Видеолекции</Button>
+                <Button className={styles.button} type="default">
+                  Видеолекции
+                </Button>
 
-                <Button className={styles.button} type="default">Статьи</Button>
+                <Button className={styles.button} type="default">
+                  Статьи
+                </Button>
 
-                <Button className={styles.button} type="default">Подкасты</Button>
+                <Button className={styles.button} type="default">
+                  Подкасты
+                </Button>
 
-                <Button className={styles.button} type="default">VR тренажеры</Button>
-                
-                <Button className={styles.button} type="default">Практика</Button>
-                
-                <Button className={styles.button} type="default">ИФИБ</Button>
+                <Button className={styles.button} type="default">
+                  VR тренажеры
+                </Button>
+
+                <Button className={styles.button} type="default">
+                  Практика
+                </Button>
+
+                <Button className={styles.button} type="default">
+                  ИФИБ
+                </Button>
               </div>
             </div>
 
-          <img className={styles.atom} src={atom} alt="Preview" />
+            <img className={styles.atom} src={atom} alt="Preview" />
           </div>
         </div>
 
-        <Link style={{width: '100%'}} to="/registration">
+        <Link style={{ width: '100%' }} to="/registration">
           <Button className={styles.registerBtn} type="primary">
-              Зарегистрироваться
+            Зарегистрироваться
           </Button>
         </Link>
       </div>
-      
+
       {loading && (
-        <Flex className={styles.spinner} justify="center" align="center" >
+        <Flex className={styles.spinner} justify="center" align="center">
           <Spin indicator={<LoadingOutlined spin />} size="large" />
         </Flex>
       )}
 
       <iframe
-        src="https://www.youtube.com/embed/iSjvnUn27EU"
+        src="https://vk.com/video_ext.php?oid=-142173315&id=456239350&hd=2&autoplay=1"
+        title="Video"
         frameBorder="0"
         allowFullScreen
         className={styles.video}

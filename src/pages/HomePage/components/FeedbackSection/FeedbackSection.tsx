@@ -46,19 +46,26 @@ const FeedbackSection = () => {
           <div className={styles.textAreaField}>
             <label htmlFor="message">Текст обращения *</label>
 
-            <TextArea className={styles.textArea} id="message" placeholder="Напишите текст обращения/вопрос" rows={4} />
+            <TextArea
+              className={styles.textArea}
+              id="message"
+              placeholder="Напишите текст обращения/вопрос"
+              rows={4}
+            />
           </div>
 
           <div className={styles.checkboxField}>
             <input type="checkbox" id="accept" />
 
             <p className={styles.footerText}>
-            Нажимая кнопку «Отправить», я даю согласие на обработку, передачу и хранение
-            персональных данных
+              Нажимая кнопку «Отправить», я даю согласие на обработку, передачу
+              и хранение персональных данных
             </p>
           </div>
 
-          <button type="submit" className={styles.submitButton}>Отправить</button>
+          <button type="submit" className={styles.submitButton}>
+            Отправить
+          </button>
         </form>
       </div>
     </div>

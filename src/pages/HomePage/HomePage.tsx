@@ -10,7 +10,7 @@ function HomePage() {
   return (
     <div className={styles.homePage}>
       <MainBanner />
-      
+
       <AboutPlatform />
 
       <AboutSection />

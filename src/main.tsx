@@ -18,39 +18,37 @@ import ScrollToTop from './hooks/ScrollToTop/ScrollToTop';
 import App from './app/App';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-      <ConfigProvider locale={ruRU}>
-        <React.StrictMode>
-          <Router>
-            
-          <ScrollToTop />
+  <ConfigProvider locale={ruRU}>
+    <React.StrictMode>
+      <Router>
+        <ScrollToTop />
 
-            <Routes>
-              <Route path="*" element={<ErrorPage />} />
+        <Routes>
+          <Route path="*" element={<ErrorPage />} />
 
-              <Route path="registration" element={<RegistrationPage />} />
+          <Route path="registration" element={<RegistrationPage />} />
 
-              <Route path="login" element={<LoginPage />} />
+          <Route path="login" element={<LoginPage />} />
 
-              <Route path="/" element={<App />} >
-                <Route index element={<HomePage />} />
+          <Route path="/" element={<App />}>
+            <Route index element={<HomePage />} />
 
-                <Route path="/introduction" element={<IntroPage />} />
+            <Route path="/introduction" element={<IntroPage />} />
 
-                <Route path="/knowledge" element={<KnowledgePage />} />
+            <Route path="/knowledge" element={<KnowledgePage />} />
 
-                <Route path="/video-lectures" element={<VideoLecturesPage />} />
+            <Route path="/video-lectures" element={<VideoLecturesPage />} />
 
-                <Route path="/video-lectures/:id" element={<VideoLecturePage />} />
+            <Route path="/video-lectures/:id" element={<VideoLecturePage />} />
 
-                <Route path="/diagnostics" element={<DiagnosticsPage />} />
+            <Route path="/diagnostics" element={<DiagnosticsPage />} />
 
-                <Route path="/articles" element={<ArticlePage />} />
+            <Route path="/articles" element={<ArticlePage />} />
 
-                <Route path="/articles/:id" element={<ArticleDetailsPage />} />
-
-              </Route>
-            </Routes>
-          </Router>
-        </React.StrictMode>
-      </ConfigProvider>
+            <Route path="/articles/:id" element={<ArticleDetailsPage />} />
+          </Route>
+        </Routes>
+      </Router>
+    </React.StrictMode>
+  </ConfigProvider>
 );

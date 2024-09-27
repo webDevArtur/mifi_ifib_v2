@@ -9,11 +9,11 @@
   }
   
   .registrationCard {
-    background: rgba(255, 255, 255);
+    background: rgb(255 255 255);
     padding: 2rem;
     border-radius: 10px;
     width: 45%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
   }
   
   .registrationTitle {
@@ -81,7 +81,6 @@
   
   .loginLink a {
     color: #2A6F2B;
-    text-decoration: none;
     margin-left: 5px;
     text-decoration: underline;
   }

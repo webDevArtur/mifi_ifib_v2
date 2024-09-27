@@ -61,8 +61,7 @@
 .socialIcons {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
-  align-content: center;
+  place-content: center flex-end;
   gap: 10px;
 }
 

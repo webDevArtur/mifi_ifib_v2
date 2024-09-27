@@ -8,7 +8,8 @@ const VideoLecturesPage = () => {
   const lectures = [
     {
       id: 1,
-      title: 'Основы позитронно-эмиссионной томографии (ПЭТ): Принципы и Применение',
+      title:
+        'Основы позитронно-эмиссионной томографии (ПЭТ): Принципы и Применение',
       teacher: 'Банникова Ирина, медицинская физика',
       locked: true,
     },
@@ -26,30 +27,34 @@ const VideoLecturesPage = () => {
     },
     {
       id: 4,
-      title: 'Основы позитронно-эмиссионной томографии (ПЭТ): Принципы и Применение',
+      title:
+        'Основы позитронно-эмиссионной томографии (ПЭТ): Принципы и Применение',
       teacher: 'Банникова Ирина, медицинская физика',
       locked: true,
-    }
+    },
   ];
 
   return (
     <div className={styles.container}>
       <div className={styles.breadcrumb}>
-        <Link to="/">Главная</Link> / <Link to="/introduction">Введение в медицинскую физику</Link> / Видеолекции
+        <Link to="/">Главная</Link> /{' '}
+        <Link to="/introduction">Введение в медицинскую физику</Link> /
+        Видеолекции
       </div>
 
       <h1>Видеолекции</h1>
       <p className={styles.description}>
-        Рекомендуется проходить материалы в указанной последовательности для лучшего усвоения темы.
-        Все видеолекции и подкасты должны быть прослушаны до выполнения практических заданий.
+        Рекомендуется проходить материалы в указанной последовательности для
+        лучшего усвоения темы. Все видеолекции и подкасты должны быть прослушаны
+        до выполнения практических заданий.
       </p>
 
-        <Input
-            className={styles.searchInput}
-            placeholder="Введите название видеолекции"
-            prefix={<SearchOutlined />}
-            bordered={false}
-        />
+      <Input
+        className={styles.searchInput}
+        placeholder="Введите название видеолекции"
+        prefix={<SearchOutlined />}
+        bordered={false}
+      />
 
       <div className={styles.videoGrid}>
         {lectures.map((lecture) => (

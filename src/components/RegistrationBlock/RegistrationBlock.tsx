@@ -5,16 +5,16 @@ const Button = () => {
   return (
     <div className={styles.container}>
       <div className={styles.box}>
-        <div className={styles.title}>
-            Зарегистрируйтесь
-        </div>
+        <div className={styles.title}>Зарегистрируйтесь</div>
 
         <div className={styles.text}>
-            чтобы получить доступ ко всем материалам!
+          чтобы получить доступ ко всем материалам!
         </div>
       </div>
 
-      <Link to="/registration" className={styles.button}>Зарегистрироваться</Link>
+      <Link to="/registration" className={styles.button}>
+        Зарегистрироваться
+      </Link>
     </div>
   );
 };
