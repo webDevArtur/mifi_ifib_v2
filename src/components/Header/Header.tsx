@@ -2,7 +2,7 @@ import { Button, Input, Menu, Dropdown } from 'antd';
 import { Link } from 'react-router-dom';
 import { SearchOutlined } from '@ant-design/icons';
 import mifiLogo from './assets/mifiLogo.png';
-import {useAuth} from 'hooks/AuthProvider';
+import { useAuth } from 'hooks/AuthProvider';
 
 import styles from './Header.module.scss';
 
@@ -133,13 +133,13 @@ const Header = () => {
 
         {isAuthenticated ? (
           <Link to="/">
-          <Button
-            className={styles.loginButton}
-            type="primary"
-            onClick={logout}
-          >
-            Выйти
-            <svg
+            <Button
+              className={styles.loginButton}
+              type="primary"
+              onClick={logout}
+            >
+              Выйти
+              <svg
                 className={styles.loginButtonIcon}
                 width="16"
                 height="17"
@@ -152,7 +152,7 @@ const Header = () => {
                   fill="white"
                 />
               </svg>
-          </Button>
+            </Button>
           </Link>
         ) : (
           <Link to="/login">

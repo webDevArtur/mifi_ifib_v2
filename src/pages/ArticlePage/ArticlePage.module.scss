@@ -42,6 +42,11 @@
     padding: 0;
     margin: 0;
   }
+
+  .spinner {
+    width: 100%;
+    min-height: 500px;
+  }
   
   .articleItem {
     display: flex;
@@ -54,8 +59,8 @@
   }
   
   .articleImage {
-    width: 60px;
-    height: 80px;
+    width: 120px;
+    height: 160px;
     object-fit: cover;
     margin-right: 20px;
   }
@@ -73,9 +78,3 @@
       color: #7D7D7D;
     }
   }
-
-.lockedCheckbox {
-  display: flex;
-  justify-content: center;
-  width: 5%;
-}

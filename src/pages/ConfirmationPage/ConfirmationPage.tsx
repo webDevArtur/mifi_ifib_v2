@@ -2,7 +2,10 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Typography, Button, Input, Alert } from 'antd';
 import { useEffect, useState } from 'react';
 import { useAuth } from 'hooks/AuthProvider';
-import { useConfirmRegistration, useResendConfirmationCode } from 'hooks/useRegistration';
+import {
+  useConfirmRegistration,
+  useResendConfirmationCode,
+} from 'hooks/useRegistration';
 import styles from './ConfirmationPage.module.scss';
 
 const { Title, Paragraph } = Typography;
@@ -31,8 +34,8 @@ const ConfirmationPage = () => {
 
   const handleResend = async () => {
     if (!token) {
-        setErrorMessage("Token is missing. Please try again.");
-        return;
+      setErrorMessage('Token is missing. Please try again.');
+      return;
     }
 
     await resend({ registerToken: token });
@@ -42,11 +45,12 @@ const ConfirmationPage = () => {
 
   const handleConfirm = async () => {
     if (!token) {
-        setErrorMessage("Token is missing. Please try again.");
-        return;
+      setErrorMessage('Token is missing. Please try again.');
+      return;
     }
 
-    confirm({ confirmationCode, registerToken: token },
+    confirm(
+      { confirmationCode, registerToken: token },
       {
         onSuccess: (data) => {
           if (data.token) {
@@ -55,8 +59,10 @@ const ConfirmationPage = () => {
           }
         },
         onError: () => {
-          setErrorMessage('Неправильный код подтверждения. Пожалуйста, попробуйте снова.');
-        }
+          setErrorMessage(
+            'Неправильный код подтверждения. Пожалуйста, попробуйте снова.'
+          );
+        },
       }
     );
   };
@@ -85,7 +91,8 @@ const ConfirmationPage = () => {
         </Title>
 
         <Paragraph className={styles.confirmationMessage}>
-          Мы отправили вам письмо для подтверждения. Пожалуйста, проверьте свою почту и следуйте инструкциям.
+          Мы отправили вам письмо для подтверждения. Пожалуйста, проверьте свою
+          почту и следуйте инструкциям.
         </Paragraph>
 
         {errorMessage && (
@@ -111,12 +118,14 @@ const ConfirmationPage = () => {
           Подтвердить
         </Button>
 
-        <Button 
+        <Button
           className={styles.resendButton}
           onClick={handleResend}
           disabled={isTimerActive}
         >
-          {isTimerActive ? `Повторно отправить письмо (${countdown}s)` : 'Повторно отправить письмо'}
+          {isTimerActive
+            ? `Повторно отправить письмо (${countdown}s)`
+            : 'Повторно отправить письмо'}
         </Button>
       </div>
     </div>

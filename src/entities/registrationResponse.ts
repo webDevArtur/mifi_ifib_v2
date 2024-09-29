@@ -1,5 +1,5 @@
-import {z} from 'zod';
+import { z } from 'zod';
 
 export const RegistrationResponseSchema = z.object({
-    token: z.string(),
+  token: z.string(),
 });

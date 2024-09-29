@@ -8,7 +8,12 @@ const AboutSection = () => {
       <h1 className={styles.title}>Об ИФИБ</h1>
       <div className={styles.content}>
         <div className={styles.imageContainer}>
-        <Carousel autoplay dots dotPosition='bottom' className={styles.imageCarusel}>
+          <Carousel
+            autoplay
+            dots
+            dotPosition="bottom"
+            className={styles.imageCarusel}
+          >
             <div>
               <img
                 src={aboutIfib1}

@@ -19,7 +19,7 @@ const LoginPage = () => {
       },
       onError: (error) => {
         setErrorMessage('Неверный логин или пароль');
-        console.error("Login failed", error);
+        console.error('Login failed', error);
       },
     });
   };
@@ -45,7 +45,15 @@ const LoginPage = () => {
       <div className={styles.loginCard}>
         <h2 className={styles.loginTitle}>Вход в личный кабинет</h2>
 
-        {errorMessage && <Alert message={errorMessage} type="error" showIcon closable onClose={() => setErrorMessage('')} />}
+        {errorMessage && (
+          <Alert
+            message={errorMessage}
+            type="error"
+            showIcon
+            closable
+            onClose={() => setErrorMessage('')}
+          />
+        )}
 
         <Form
           name="login"
@@ -60,7 +68,14 @@ const LoginPage = () => {
               </span>
             }
             name="username"
-            rules={[{ validator: (_, value) => value ? Promise.resolve() : Promise.reject('Введите вашу почту!') }]}
+            rules={[
+              {
+                validator: (_, value) =>
+                  value
+                    ? Promise.resolve()
+                    : Promise.reject('Введите вашу почту!'),
+              },
+            ]}
             className={styles.inputItem}
           >
             <Input placeholder="example@email.com" />
@@ -73,7 +88,12 @@ const LoginPage = () => {
               </span>
             }
             name="password"
-            rules={[{ validator: (_, value) => value ? Promise.resolve() : Promise.reject('Введите пароль') }]}
+            rules={[
+              {
+                validator: (_, value) =>
+                  value ? Promise.resolve() : Promise.reject('Введите пароль'),
+              },
+            ]}
             className={styles.inputItem}
           >
             <Input.Password placeholder="Введите пароль" />

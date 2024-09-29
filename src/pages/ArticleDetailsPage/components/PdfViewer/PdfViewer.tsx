@@ -6,6 +6,7 @@ interface PDFViewerProps {
 }
 
 const PDFViewer: React.FC<PDFViewerProps> = ({ file }) => {
+  console.log(file);
   return (
     <object className={style.viewContainer}>
       <embed src={file} type="application/pdf" className={style.pdfViewer} />

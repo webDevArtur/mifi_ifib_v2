@@ -1,10 +1,15 @@
 import PDFViewer from './components/PdfViewer/PdfViewer';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { Spin, Flex } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+import { useArticleDetails } from 'hooks/useArticleDetails';
 import styles from './ArticleDetailsPage.module.scss';
-import pdf from './assets/test.pdf';
 import cover from './assets/cover.png';
 
 const ArticleDetailsPage = () => {
+  const { id } = useParams();
+  const { data: article, isLoading } = useArticleDetails(Number(id));
+
   return (
     <div className={styles.container}>
       <div className={styles.breadcrumb}>
@@ -14,30 +19,34 @@ const ArticleDetailsPage = () => {
       </div>
 
       <div className={styles.articleHeader}>
-        <img
-          src={cover}
-          alt="Nuclear Medicine Book"
-          className={styles.articleImage}
-        />
+        {isLoading && (
+          <Flex className={styles.spinner} justify="center" align="center">
+            <Spin indicator={<LoadingOutlined spin />} size="large" />
+          </Flex>
+        )}
 
-        <div className={styles.articleInfo}>
-          <h1>The Role of Nuclear Medicine in Modern Healthcare</h1>
-          <p className={styles.author}>Джон Хопкинс</p>
-          <p className={styles.description}>
-            Статья обсуждает важность ядерной медицины в современном
-            здравоохранении, подчеркивая её роль в диагностике и лечении
-            заболеваний. Автор анализирует различные методы, такие как ПЭТ и
-            СКТ, и их применение в клинической практике. Рассматриваются
-            преимущества ядерной медицины, включая высокую точность диагностики
-            и возможность оценки функций органов. Также акцентируется внимание
-            на будущих направлениях развития этой области, включая новые
-            радиомаркировочные препараты и технологии, которые могут улучшить
-            результаты лечения и расширить возможности диагностики.
-          </p>
-        </div>
+        {article && (
+          <>
+            <img
+              src={`https://cybernexvpn-stage.ru/${article?.coverUrl}` || cover}
+              alt={article?.name || 'Статья'}
+              className={styles.articleImage}
+            />
+
+            <div className={styles.articleInfo}>
+              <h1>{article?.name}</h1>
+              <p className={styles.author}>{article?.author}</p>
+              <p className={styles.description}>{article?.description}</p>
+            </div>
+          </>
+        )}
       </div>
 
-      <PDFViewer file={pdf} />
+      {article?.documentUrl && (
+        <PDFViewer
+          file={`https://cybernexvpn-stage.ru/${article?.documentUrl}`}
+        />
+      )}
     </div>
   );
 };

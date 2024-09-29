@@ -1,5 +1,5 @@
 import React from 'react';
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ConfigProvider } from 'antd';
 import ruRU from 'antd/es/locale/ru_RU';
 import ReactDOM from 'react-dom/client';
@@ -17,16 +17,16 @@ import ArticlePage from 'pages/ArticlePage/ArticlePage';
 import ArticleDetailsPage from 'pages/ArticleDetailsPage/ArticleDetailsPage';
 import ConfirmationPage from 'pages/ConfirmationPage/ConfirmationPage';
 import ScrollToTop from 'hooks/ScrollToTop';
-import {AuthProvider} from 'hooks/AuthProvider';
+import { AuthProvider } from 'hooks/AuthProvider';
 import App from 'app/App';
 
 const queryClient = new QueryClient({
-	defaultOptions: {
-		queries: {
-			retry: 2,
-			staleTime: 60 * 1000,
-		},
-	},
+  defaultOptions: {
+    queries: {
+      retry: 2,
+      staleTime: 60 * 1000,
+    },
+  },
 });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -42,7 +42,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
               <Route path="registration" element={<RegistrationPage />} />
 
-              <Route path="registration/confirmation/:token" element={<ConfirmationPage />} />
+              <Route
+                path="registration/confirmation/:token"
+                element={<ConfirmationPage />}
+              />
 
               <Route path="login" element={<LoginPage />} />
 
@@ -55,7 +58,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
                 <Route path="/video-lectures" element={<VideoLecturesPage />} />
 
-                <Route path="/video-lectures/:id" element={<VideoLecturePage />} />
+                <Route
+                  path="/video-lectures/:id"
+                  element={<VideoLecturePage />}
+                />
 
                 <Route path="/diagnostics" element={<DiagnosticsPage />} />
 

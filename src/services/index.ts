@@ -10,7 +10,7 @@ const getAccessToken = () => {
     return parsedData.access_token;
   }
 
- throw new Error('Токен просрочен или отсутствует');
+  throw new Error('Токен просрочен или отсутствует');
 };
 
 export const configureAxios = () => {

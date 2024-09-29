@@ -1,39 +1,56 @@
-import Input from 'antd/es/input/Input';
-import { Checkbox } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import { useState, useEffect } from 'react';
+import { Input, Pagination, Spin, Flex } from 'antd';
+import { SearchOutlined, LoadingOutlined } from '@ant-design/icons';
+import { Link, useSearchParams } from 'react-router-dom';
+import { useArticles } from 'hooks/useArticles';
 import RegistrationBlock from 'components/RegistrationBlock/RegistrationBlock';
-import cover from './assets/cover.png';
 import styles from './ArticlePage.module.scss';
-import { Link } from 'react-router-dom';
 
 const ArticlePage = () => {
-  const articles = [
-    {
-      title: 'The Role of Nuclear Medicine in Modern Healthcare',
-      author: 'Джон Хопкинс',
-      image: cover,
-      locked: true,
-    },
-    {
-      title:
-        'Nuclear Medicine in Cardiovascular Diagnostics: Techniques and Benefits',
-      author: 'Эмили Чен',
-      image: cover,
-      locked: false,
-    },
-    {
-      title: 'Advancements in PET Imaging: A Review of Recent Innovations',
-      author: 'Сара Браун',
-      image: cover,
-      locked: true,
-    },
-    {
-      title: 'The Role of Nuclear Medicine in Modern Healthcare',
-      author: 'Джон Хопкинс',
-      image: cover,
-      locked: false,
-    },
-  ];
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const initialPage = parseInt(searchParams.get('page') || '1', 10);
+  const initialSearch = searchParams.get('search') || '';
+
+  const [page, setPage] = useState(initialPage);
+  const pageSize = 10;
+  const [search, setSearch] = useState<string>(initialSearch);
+  const [debouncedSearch, setDebouncedSearch] = useState<string>(initialSearch);
+
+  const { data, isLoading } = useArticles(page, pageSize, debouncedSearch);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(search);
+      setPage(1);
+
+      const newParams: { page: string; search?: string } = { page: '1' };
+      if (search.trim()) {
+        newParams.search = search;
+      }
+      setSearchParams(newParams);
+    }, 300);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [search, setSearchParams]);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
+  const handlePageChange = (pageNumber: number) => {
+    setPage(pageNumber);
+
+    const newParams: { page: string; search?: string } = {
+      page: pageNumber.toString(),
+    };
+    if (search) {
+      newParams.search = search;
+    }
+    setSearchParams(newParams);
+  };
 
   return (
     <div className={styles.container}>
@@ -55,32 +72,50 @@ const ArticlePage = () => {
         className={styles.searchInput}
         placeholder="Введите название автора или статьи"
         prefix={<SearchOutlined />}
+        value={search}
+        onChange={handleSearchChange}
         bordered={false}
       />
 
       <ul className={styles.articleList}>
-        {articles.map((article, index) => (
-          <li key={index}>
-            <Link to="1" className={styles.articleItem}>
-              <img
-                src={article.image}
-                alt={article.title}
-                className={styles.articleImage}
-              />
+        {isLoading && (
+          <Flex className={styles.spinner} justify="center" align="center">
+            <Spin indicator={<LoadingOutlined spin />} size="large" />
+          </Flex>
+        )}
 
-              <div className={styles.articleDetails}>
-                <h3>{article.title}</h3>
+        {!isLoading &&
+          data?.items.map((article) => (
+            <li key={article.id}>
+              <Link
+                to={`/articles/${article.id}`}
+                className={styles.articleItem}
+              >
+                <img
+                  src={`https://cybernexvpn-stage.ru/${article.coverUrl}`}
+                  alt={article.name}
+                  className={styles.articleImage}
+                />
 
-                <p>{article.author}</p>
-              </div>
-
-              <div className={styles.lockedCheckbox}>
-                <Checkbox checked={article.locked} />
-              </div>
-            </Link>
-          </li>
-        ))}
+                <div className={styles.articleDetails}>
+                  <h3>{article.name}</h3>
+                  <p>{article.author}</p>
+                </div>
+              </Link>
+            </li>
+          ))}
       </ul>
+
+      {data && data?.totalItems > pageSize && (
+        <Pagination
+          align="center"
+          current={page}
+          pageSize={pageSize}
+          total={data?.totalItems || 0}
+          onChange={handlePageChange}
+          showSizeChanger={false}
+        />
+      )}
 
       <RegistrationBlock />
     </div>
