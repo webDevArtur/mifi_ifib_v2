@@ -7,7 +7,7 @@ interface LoginData {
 }
 
 export const loginUser = (data: LoginData) => 
-    api<AuthResponse>('http://cybernexvpn-stage.ru:8000/api/v1/auth/login', {
+    api<AuthResponse>('https://cybernexvpn-stage.ru/api/v1/auth/login', {
         method: 'POST',
         data,
 });

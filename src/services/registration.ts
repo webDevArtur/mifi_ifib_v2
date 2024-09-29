@@ -16,13 +16,13 @@ interface RegisterData {
   }
 
 export const registerUser = (data: RegisterData) => 
-    api<RegistrationResponse>('http://cybernexvpn-stage.ru:8000/api/v1/auth/register', {
+    api<RegistrationResponse>('https://cybernexvpn-stage.ru/api/v1/auth/register', {
         method: 'POST',
         data,
 });
 
 export const confirmRegistration = async (data: { confirmationCode?: string; registerToken?: string }) => {
-    return api<ConfirmRegistrationResponse>('http://cybernexvpn-stage.ru:8000/api/v1/auth/register/confirm', {
+    return api<ConfirmRegistrationResponse>('https://cybernexvpn-stage.ru/api/v1/auth/register/confirm', {
         method: 'POST',
         data,
     });
@@ -30,7 +30,7 @@ export const confirmRegistration = async (data: { confirmationCode?: string; reg
 
 
 export const resendConfirmationCode = (data: { registerToken?: string }) => 
-    api('http://cybernexvpn-stage.ru:8000/api/v1/auth/update-confirmation-code', {
+    api('https://cybernexvpn-stage.ru/api/v1/auth/update-confirmation-code', {
         method: 'POST',
         data,
 });
