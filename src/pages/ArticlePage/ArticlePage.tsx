@@ -1,7 +1,7 @@
 import Input from 'antd/es/input/Input';
 import { Checkbox } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import RegistrationBlock from '../../components/RegistrationBlock/RegistrationBlock';
+import RegistrationBlock from 'components/RegistrationBlock/RegistrationBlock';
 import cover from './assets/cover.png';
 import styles from './ArticlePage.module.scss';
 import { Link } from 'react-router-dom';

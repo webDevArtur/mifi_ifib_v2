@@ -6,6 +6,7 @@
     align-items: center;
     background: url('../../assets/background.png') no-repeat center center;
     background-size: cover;
+    background-attachment: fixed;
     position: relative;
   }
   
@@ -36,6 +37,11 @@
 
   .inputItem {
     margin: 15px 0;
+
+    span {
+      font-family: 'Helvetica Neue';
+      font-weight: 400;
+    }
   }
 
   .requiredStar {

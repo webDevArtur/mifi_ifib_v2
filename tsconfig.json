@@ -1,5 +1,15 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "components/*": ["src/components/*"],
+      "pages/*": ["src/pages/*"],
+      "entities/*": ["src/entities/*"],
+      "hooks/*": ["src/hooks/*"],
+      "services/*": ["src/services/*"],
+      "catalog/*": ["src/catalog/*"],
+      "*": ["src/*"]
+    },
     "target": "esnext",
     "module": "commonjs",
     "strict": true,
@@ -8,10 +18,8 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist",
-    "skipLibCheck": true
+    "outDir": "./dist"
   },
-  "include": ["src/**/*"],
   "include": ["src", "vite.config.ts"],
   "exclude": ["node_modules", "dist"]
 }

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import RegistraionBlock from '../../components/RegistrationBlock/RegistrationBlock';
+import RegistraionBlock from 'components/RegistrationBlock/RegistrationBlock';
 import styles from './VideoLecturesPage.module.scss';
 
 const VideoLecturesPage = () => {

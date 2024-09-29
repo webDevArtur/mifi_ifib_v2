@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import RegistrationBlock from '../../components/RegistrationBlock/RegistrationBlock';
+import RegistrationBlock from 'components/RegistrationBlock/RegistrationBlock';
 import styles from './IntroPage.module.scss';
 
 const IntroPage = () => {

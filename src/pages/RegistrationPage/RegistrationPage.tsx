@@ -1,21 +1,48 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input, Button, Checkbox, Select, DatePicker } from 'antd';
+import { useRegister } from 'hooks/useRegistration';
+import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
 import styles from './RegistrationPage.module.scss';
 
 const { Option } = Select;
 
 const RegistrationPage = () => {
-  const [status, setStatus] = useState('');
+  const navigate = useNavigate();
+  const [form] = Form.useForm();
+  const [educationalStatus, setEducationalStatus] = useState<string | null>(null);
+  const { mutate: register, isPending } = useRegister();
 
-  const handleStatusChange = (value: string) => {
-    setStatus(value);
+  const handleSubmit = async (values: any) => {
+    const registerData = {
+      lastName: values.lastName,
+      firstName: values.firstName,
+      middleName: values.middleName || null,
+      birthDate: values.birthdate.format('DD.MM.YYYY'),
+      email: values.email,
+      socialNetwork: values.social,
+      educationalStatus: values.educationalStatus,
+      educationalFacility: values.workplace || null,
+      sphereOfInterest: values.interests,
+      password: values.password,
+      passwordConfirmation: values.passwordConfirmation,
+    };
+
+    register(registerData, {
+      onSuccess: (data) => {
+        if (data.token) {
+          navigate(`confirmation/${data.token}`);
+        } 
+      },
+      onError: (error) => {
+        console.error('Registration failed:', error);
+      },
+    });
   };
 
-  const [form] = Form.useForm();
-
-  const handleSubmit = (values: any) => {
-    console.log('Form Submitted:', values);
+  const handleEducationalStatusChange = (value: string) => {
+    setEducationalStatus(value);
   };
 
   return (
@@ -51,8 +78,8 @@ const RegistrationPage = () => {
                 Фамилия<span className={styles.requiredStar}>*</span>
               </span>
             }
-            name="surname"
-            rules={[{ message: 'Введите вашу фамилию' }]}
+            name="lastName"
+            rules={[{ validator: (_, value) => value ? Promise.resolve() : Promise.reject('Поле "Фамилия" обязательно для заполнения') }]}
             className={styles.inputItem}
           >
             <Input placeholder="Введите вашу фамилию" />
@@ -64,8 +91,8 @@ const RegistrationPage = () => {
                 Имя<span className={styles.requiredStar}>*</span>
               </span>
             }
-            name="name"
-            rules={[{ message: 'Введите ваше имя' }]}
+            name="firstName"
+            rules={[{ validator: (_, value) => value ? Promise.resolve() : Promise.reject('Поле "Имя" обязательно для заполнения') }]}
             className={styles.inputItem}
           >
             <Input placeholder="Введите ваше имя" />
@@ -74,11 +101,10 @@ const RegistrationPage = () => {
           <Form.Item
             label={
               <span>
-                Отчество<span className={styles.requiredStar}>*</span>
+                Отчество
               </span>
             }
-            name="patronymic"
-            rules={[{ message: 'Введите ваше отчество' }]}
+            name="middleName"
             className={styles.inputItem}
           >
             <Input placeholder="Введите ваше отчество" />
@@ -92,6 +118,24 @@ const RegistrationPage = () => {
             }
             name="birthdate"
             className={styles.inputItem}
+            rules={[
+              {
+                validator: (_, value) => {
+                  if (!value) {
+                    return Promise.reject('Поле "Дата рождения" обязательно для заполнения');
+                  }
+          
+                  const today = dayjs();
+                  const sixYearsAgo = today.subtract(6, 'year');
+          
+                  if (value.isAfter(today) || value.isAfter(sixYearsAgo)) {
+                    return Promise.reject('Вы должны быть старше 6 лет');
+                  }
+          
+                  return Promise.resolve();
+                }
+              }
+            ]}
           >
             <DatePicker
               placeholder="__.__.____"
@@ -101,18 +145,7 @@ const RegistrationPage = () => {
             />
           </Form.Item>
 
-          <Form.Item
-            label={
-              <span>
-                Номер телефона<span className={styles.requiredStar}>*</span>
-              </span>
-            }
-            name="phone"
-            rules={[{ message: 'Введите номер телефона' }]}
-            className={styles.inputItem}
-          >
-            <Input placeholder="+7(999)99-99-99" />
-          </Form.Item>
+          <hr style={{ border: '1px solid #E3E3E3' }} />
 
           <Form.Item
             label={
@@ -121,7 +154,10 @@ const RegistrationPage = () => {
               </span>
             }
             name="email"
-            rules={[{ message: 'Введите почту' }]}
+            rules={[
+              { validator: (_, value) => value ? Promise.resolve() : Promise.reject('Поле "Почта" обязательно для заполнения') },
+              { type: 'email', message: 'Некорректный формат почты' }
+            ]}
             className={styles.inputItem}
           >
             <Input placeholder="example@email.com" />
@@ -134,7 +170,7 @@ const RegistrationPage = () => {
               </span>
             }
             name="social"
-            rules={[{ message: 'Введите ссылку на VK/Telegram' }]}
+            rules={[{ validator: (_, value) => value ? Promise.resolve() : Promise.reject('Поле "VK/Telegram" обязательно для заполнения') }]}
             className={styles.inputItem}
           >
             <Input placeholder="Вставьте ссылку на ваш VK/Telegram" />
@@ -143,53 +179,35 @@ const RegistrationPage = () => {
           <Form.Item
             label={
               <span>
-                Место учёбы/работы<span className={styles.requiredStar}>*</span>
+                Чем вы занимаетесь по жизни<span className={styles.requiredStar}>*</span>
               </span>
             }
-            name="workplace"
-            rules={[{ message: 'Введите место учёбы/работы' }]}
+            name="educationalStatus"
+            rules={[{ validator: (_, value) => value ? Promise.resolve() : Promise.reject('Поле "Чем вы занимаетесь по жизни" обязательно для заполнения') }]}
             className={styles.inputItem}
           >
-            <Input placeholder="Введите ваше место учёбы/работы" />
-          </Form.Item>
+            <Select
+              placeholder="Выберите ваш статус"
+              onChange={handleEducationalStatusChange}
+            >
+              <Option value="school_student">Учусь в школе</Option>
 
-          <Form.Item
-            label={
-              <span>
-                Статус на платформе
-                <span className={styles.requiredStar}>*</span>
-              </span>
-            }
-            name="status"
-            rules={[{ message: 'Выберите статус на платформе' }]}
-            className={styles.inputItem}
-          >
-            <Select placeholder="Выберите статус" onChange={handleStatusChange}>
-              <Option value="schoolboy">Школьник</Option>
-              <Option value="teacher">Преподаватель</Option>
-              <Option value="student">Студент</Option>
+              <Option value="university_student">Учусь в вузе</Option>
             </Select>
           </Form.Item>
 
-          {status && (
+          {(educationalStatus === 'school_student' || educationalStatus === 'university_student') && (
             <Form.Item
               label={
                 <span>
-                  {status === 'schoolboy'
-                    ? 'Класс'
-                    : status === 'teacher'
-                      ? 'Должность'
-                      : 'Курс'}
-                  <span className={styles.requiredStar}>*</span>
+                  Место учёбы<span className={styles.requiredStar}>*</span>
                 </span>
               }
-              name="class"
-              rules={[{ message: 'Введите информацию' }]}
+              name="workplace"
+              rules={[{ validator: (_, value) => value ? Promise.resolve() : Promise.reject('Поле "Место учёбы" обязательно для заполнения') }]}
               className={styles.inputItem}
             >
-              <Input
-                placeholder={`Введите ваш(у) ${status === 'schoolboy' ? 'класс' : status === 'teacher' ? 'должность' : 'курс'}`}
-              />
+              <Input placeholder="Введите ваше место учебы" />
             </Form.Item>
           )}
 
@@ -200,13 +218,54 @@ const RegistrationPage = () => {
               </span>
             }
             name="interests"
-            rules={[{ message: 'Выберите сферу интересов' }]}
+            rules={[{ validator: (_, value) => value ? Promise.resolve() : Promise.reject('Поле "Сфера интересов" обязательно для заполнения') }]}
             className={styles.inputItem}
           >
             <Select placeholder="Выберите сферу интересов">
               <Option value="science">Наука</Option>
-              <Option value="technology">Технологии</Option>
+              <Option value="it">Программирование</Option>
             </Select>
+          </Form.Item>
+
+          <hr style={{ border: '1px solid #E3E3E3'}} />
+
+          <Form.Item
+            label={
+              <span>
+                Пароль<span className={styles.requiredStar}>*</span>
+              </span>
+            }
+            name="password"
+            rules={[
+              { validator: (_, value) => value ? Promise.resolve() : Promise.reject('Поле "Пароль" обязательно для заполнения') },
+              { min: 6, message: 'Пароль должен содержать минимум 6 символов' }
+            ]}
+            className={styles.inputItem}
+          >
+            <Input.Password placeholder="Введите ваш пароль" />
+          </Form.Item>
+
+          <Form.Item
+            label={
+              <span>
+                Подтверждение пароля<span className={styles.requiredStar}>*</span>
+              </span>
+            }
+            name="passwordConfirmation"
+            rules={[
+              { validator: (_, value) => value ? Promise.resolve() : Promise.reject('Поле "Подтверждение пароля" обязательно для заполнения') },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error('Пароли не совпадают'));
+                },
+              }),
+            ]}
+            className={styles.inputItem}
+          >
+            <Input.Password placeholder="Подтвердите ваш пароль" />
           </Form.Item>
 
           <Form.Item
@@ -214,14 +273,15 @@ const RegistrationPage = () => {
             valuePropName="checked"
             className={styles.inputItem}
           >
-            <Checkbox required>
-              <div className={styles.checkboxBlock}>
-                Нажимая кнопку «Зарегистрироваться», я даю согласие на{' '}
-                <span className={styles.dataAllow}>
-                  обработку, передачу и хранение персональных данных
-                </span>
-              </div>
-            </Checkbox>
+            <div className={styles.checkboxBlock}>
+              <Checkbox required/>
+                <div className={styles.checkboxTextBlock}>
+                  Нажимая кнопку «Зарегистрироваться», я даю согласие на{' '}
+                  <span className={styles.dataAllow}>
+                    обработку, передачу и хранение персональных данных
+                  </span>
+                </div>
+            </div>
           </Form.Item>
 
           <Form.Item className={styles.inputItem}>
@@ -229,6 +289,7 @@ const RegistrationPage = () => {
               type="primary"
               htmlType="submit"
               className={styles.submitButton}
+              loading={isPending}
             >
               Зарегистрироваться
             </Button>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Spin, Flex } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import RegistraionBlock from '../../components/RegistrationBlock/RegistrationBlock';
+import RegistraionBlock from 'components/RegistrationBlock/RegistrationBlock';
 import styles from './VideoLecturePage.module.scss';
 
 const VideoLecturePage = () => {

@@ -1,0 +1,52 @@
+import { useMutation } from '@tanstack/react-query';
+import { registerUser, resendConfirmationCode, confirmRegistration } from 'services/registration';
+import { RegistrationResponse, ConfirmRegistrationResponse } from 'entities/index';
+
+interface RegisterData {
+    lastName: string;
+    firstName: string;
+    middleName?: string | null;
+    birthDate: string;
+    email: string;
+    socialNetwork: string;
+    educationalStatus?: string | null;
+    educationalFacility?: string | null;
+    sphereOfInterest?: string | null;
+    password: string;
+    passwordConfirmation: string;
+}
+
+
+export const useRegister = () => {
+    return useMutation<RegistrationResponse, Error, RegisterData>({
+        mutationFn: async (data) => {
+            return await registerUser(data);
+        },
+        onError: (error) => {
+            console.error('Registration error:', error);
+        },
+    });
+};
+
+export const useConfirmRegistration = () => {
+    return useMutation<ConfirmRegistrationResponse, Error, { confirmationCode: string; registerToken: string }>({
+        mutationFn: async (data) => {
+            return await confirmRegistration(data);
+        },
+        onError: (error) => {
+            console.error('Confirmation error:', error);
+        },
+    });
+};
+
+// For resending confirmation code
+export const useResendConfirmationCode = () => {
+    return useMutation<void, Error, { registerToken: string }>({
+        mutationFn: async (data) => {
+            await resendConfirmationCode(data);
+        },
+        onError: (error) => {
+            console.error('Resend confirmation code error:', error);
+        },
+    });
+};

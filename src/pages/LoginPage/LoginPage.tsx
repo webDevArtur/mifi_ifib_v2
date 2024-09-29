@@ -1,14 +1,27 @@
-import { Form, Input, Button } from 'antd';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Form, Input, Button, Alert } from 'antd';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from 'hooks/AuthProvider';
+import { useLogin } from 'hooks/useLogin';
 import styles from './LoginPage.module.scss';
 
 const LoginPage = () => {
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
-  };
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const [errorMessage, setErrorMessage] = useState('');
+  const { mutate: loginMutation, isPending } = useLogin();
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+  const handleSubmit = (values: any) => {
+    loginMutation(values, {
+      onSuccess: (data) => {
+        login(data.token);
+        navigate('/');
+      },
+      onError: (error) => {
+        setErrorMessage('Неверный логин или пароль');
+        console.error("Login failed", error);
+      },
+    });
   };
 
   return (
@@ -31,12 +44,14 @@ const LoginPage = () => {
 
       <div className={styles.loginCard}>
         <h2 className={styles.loginTitle}>Вход в личный кабинет</h2>
+
+        {errorMessage && <Alert message={errorMessage} type="error" showIcon closable onClose={() => setErrorMessage('')} />}
+
         <Form
           name="login"
           layout="vertical"
           initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
+          onFinish={handleSubmit}
         >
           <Form.Item
             label={
@@ -44,8 +59,8 @@ const LoginPage = () => {
                 Почта<span className={styles.requiredStar}>*</span>
               </span>
             }
-            name="email"
-            rules={[{ message: 'Введите вашу почту!' }]}
+            name="username"
+            rules={[{ validator: (_, value) => value ? Promise.resolve() : Promise.reject('Введите вашу почту!') }]}
             className={styles.inputItem}
           >
             <Input placeholder="example@email.com" />
@@ -58,7 +73,7 @@ const LoginPage = () => {
               </span>
             }
             name="password"
-            rules={[{ message: 'Введите ваш пароль!' }]}
+            rules={[{ validator: (_, value) => value ? Promise.resolve() : Promise.reject('Введите пароль') }]}
             className={styles.inputItem}
           >
             <Input.Password placeholder="Введите пароль" />
@@ -74,6 +89,7 @@ const LoginPage = () => {
             <Button
               type="primary"
               htmlType="submit"
+              loading={isPending}
               className={styles.loginButton}
             >
               Войти

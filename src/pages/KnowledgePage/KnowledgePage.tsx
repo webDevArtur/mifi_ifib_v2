@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Spin, Flex } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import RegistrationBlock from '../../components/RegistrationBlock/RegistrationBlock';
+import RegistrationBlock from 'components/RegistrationBlock/RegistrationBlock';
 import styles from './KnowledgePage.module.scss';
 
 const KnowledgePage = () => {

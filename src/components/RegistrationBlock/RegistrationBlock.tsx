@@ -1,7 +1,14 @@
 import { Link } from 'react-router-dom';
+import { useAuth } from 'hooks/AuthProvider';
 import styles from './RegistrationBlock.module.scss';
 
 const Button = () => {
+  const { isAuthenticated } = useAuth();
+
+  if (isAuthenticated) {
+    return null;
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.box}>

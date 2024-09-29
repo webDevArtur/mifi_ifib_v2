@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import RegistrationBlock from '../../components/RegistrationBlock/RegistrationBlock';
+import RegistrationBlock from 'components/RegistrationBlock/RegistrationBlock';
 import styles from './DiagnosticsPage.module.scss';
 
 const alphabetTerms: Record<string, { term: string; description: string }[]> = {
