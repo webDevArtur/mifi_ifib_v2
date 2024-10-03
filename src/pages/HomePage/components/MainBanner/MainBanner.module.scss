@@ -71,10 +71,17 @@
     border-color: #2b5329 !important;
   }
 
+  .atomContainer {
+    width: 50%;
+    height: 150px;
+  }
+
   .atom {
-    opacity: 0.9;
-    width: 370px;
-    height: 200px;
+    position: relative;
+    rotate: -3deg;
+    bottom: 50%;
+    left: 20%;
+    width: 350px;
   }
   
   .registerBtn {

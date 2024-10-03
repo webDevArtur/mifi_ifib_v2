@@ -51,7 +51,9 @@ const MainBanner = () => {
               </div>
             </div>
 
-            <img className={styles.atom} src={atom} alt="Preview" />
+            <div className={styles.atomContainer}>
+              <img className={styles.atom} src={atom} alt="Preview" />
+            </div>
           </div>
         </div>
 
