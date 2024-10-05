@@ -1,0 +1,46 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #333;
+  }
+  
+  .breadcrumb {
+    font-size: 16px;
+    color: #7D7D7D;
+    margin-bottom: 40px;
+  }
+  
+  .breadcrumb a {
+    text-decoration: none;
+    color: #666;
+  }
+  
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+  
+  h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  
+  .subtitle {
+    font-size: 18px;
+    color: #6c757d;
+    margin-bottom: 20px;
+  }
+
+  .spinner {
+    width: 100%;
+    min-height: 300px;
+  }
+  
+  .video {
+    min-width: 100%;
+    min-height: 500px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 0;
+    margin-bottom: 50px;
+}

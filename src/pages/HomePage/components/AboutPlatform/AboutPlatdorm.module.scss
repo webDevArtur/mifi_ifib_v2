@@ -1,0 +1,47 @@
+.platformInfo {
+    padding: 20px;
+  }
+  
+  .platformInfoTitle {
+    display: flex;
+    justify-content: start;
+    width: 100%;
+    color: #25492A;
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 36px;
+  }
+  
+  .platformInfoDescription {
+    font-size: 20px;
+    margin: 10px 0;
+  }
+  
+  .platformInfoFeatures {
+    width: 100%;
+    gap: 5px;
+    margin-top: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .platformInfoFeature {
+    width: 21%;
+    color: #2A6F2B;
+    background-color: #F4F7D3;
+    margin-bottom: 20px;
+    padding: 16px;
+    border: 1px solid #2A6F2B;
+    border-radius: 8px;
+  }
+  
+  .platformInfoFeatureTitle {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .platformInfoFeatureDescription {
+    font-size: 16px;
+    margin: 10px 0;
+  }

@@ -1,0 +1,14 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "indentation": 2,
+    "number-leading-zero": "always",
+    "color-no-invalid-hex": true,
+    "declaration-colon-space-after": "always",
+    "declaration-colon-space-before": "never",
+    "block-no-empty": true,
+    "selector-list-comma-space-before": "never",
+    "max-empty-lines": 1,
+    "no-extra-semicolons": true
+  }
+}
