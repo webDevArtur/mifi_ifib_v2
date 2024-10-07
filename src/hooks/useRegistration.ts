@@ -8,6 +8,7 @@ import {
   RegistrationResponse,
   ConfirmRegistrationResponse,
 } from 'entities/index';
+import { AxiosError } from 'axios';
 
 interface RegisterData {
   lastName: string;
@@ -24,7 +25,7 @@ interface RegisterData {
 }
 
 export const useRegister = () => {
-  return useMutation<RegistrationResponse, Error, RegisterData>({
+  return useMutation<RegistrationResponse, AxiosError, RegisterData>({
     mutationFn: async (data) => {
       return registerUser(data);
     },
@@ -49,7 +50,6 @@ export const useConfirmRegistration = () => {
   });
 };
 
-// For resending confirmation code
 export const useResendConfirmationCode = () => {
   return useMutation<void, Error, { registerToken: string }>({
     mutationFn: async (data) => {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import RegistrationBlock from 'components/RegistrationBlock/RegistrationBlock';
-import styles from './DiagnosticsPage.module.scss';
+import styles from './TherapyPage.module.scss';
 
 const alphabetTerms: Record<string, { term: string; description: string }[]> = {
   А: [
@@ -174,7 +174,7 @@ const alphabetTerms: Record<string, { term: string; description: string }[]> = {
   ],
 };
 
-const DiagnosticsPage = () => {
+const TherapyPage = () => {
   const [activeTab, setActiveTab] = useState('terms');
   const [selectedLetter, setSelectedLetter] = useState('А');
 
@@ -184,7 +184,7 @@ const DiagnosticsPage = () => {
         <Link to="/">Главная</Link> / <Link to="/knowledge">База знаний</Link> /
       </div>
 
-      <h1>Диагностика</h1>
+      <h1>Лучевая терапия</h1>
       <p className={styles.description}>
         Рекомендуется проходить материалы в указанной последовательности для
         лучшего усвоения темы. Все видеолекции и подкасты должны быть прослушаны
@@ -259,4 +259,4 @@ const DiagnosticsPage = () => {
   );
 };
 
-export default DiagnosticsPage;
+export default TherapyPage;

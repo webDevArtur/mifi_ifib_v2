@@ -14,8 +14,7 @@
   
   .teamContainer {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    align-items: start;
     gap: 20px;
     overflow-y: auto;
     scrollbar-width: thin;
@@ -23,15 +22,15 @@
   }
   
   .teamMember {
+    max-width: 300px;
     flex: 1;
-    text-align: center;
+    text-align: start;
     margin-bottom: 15px;
   }
   
   .teamMemberImage {
-    width: 100%;
-    width: 260px;
-    height: auto;
+    max-width: 260px;
+    height: 280px;
     border-radius: 10px;
     object-fit: cover;
     margin-bottom: 10px;
@@ -42,5 +41,11 @@
     font-size: 20px;
     color: #2b5329;
     font-weight: bold;
+  }
+
+  .teamMemberDescription {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #2b5329;
   }
   

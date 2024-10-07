@@ -37,7 +37,7 @@ const Footer = () => {
 
             <ul>
               <li>
-                <Link to="/diagnostics">Диагностика</Link>
+                <Link to="/therapy">Диагностика</Link>
               </li>
 
               <li>Терапия</li>
