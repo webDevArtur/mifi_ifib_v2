@@ -48,7 +48,7 @@ const KnowledgePage = () => {
       </div>
 
       <div className={styles.cardsContainer}>
-        <Link to="/diagnostics" className={styles.card}>
+        <Link to="/therapy" className={styles.card}>
           <h3>Диагностика</h3>
 
           <ul>

@@ -2,11 +2,14 @@ import { useState } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Button, Spin, Flex } from 'antd';
 import { Link } from 'react-router-dom';
+import { useMainVideo } from 'hooks/useMainVideo';
 import atom from './assets/atom.png';
 import styles from './MainBanner.module.scss';
 
 const MainBanner = () => {
   const [loading, setLoading] = useState(true);
+
+  // const { data } = useMainVideo();
 
   const handleLoad = () => {
     setLoading(false);

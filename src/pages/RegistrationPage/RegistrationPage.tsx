@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Form, Input, Button, Checkbox, Select, DatePicker } from 'antd';
+import { Form, Input, Button, Checkbox, Select, DatePicker, Alert } from 'antd';
 import { useRegister } from 'hooks/useRegistration';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -14,6 +14,7 @@ const RegistrationPage = () => {
   const [educationalStatus, setEducationalStatus] = useState<string | null>(
     null
   );
+  const [errorMessage, setErrorMessage] = useState('');
   const { mutate: register, isPending } = useRegister();
 
   const handleSubmit = async (values: any) => {
@@ -31,14 +32,30 @@ const RegistrationPage = () => {
       passwordConfirmation: values.passwordConfirmation,
     };
 
+    setErrorMessage('');
+
     register(registerData, {
       onSuccess: (data) => {
         if (data.token) {
           navigate(`confirmation/${data.token}`);
         }
       },
-      onError: (error) => {
-        console.error('Registration failed:', error);
+      onError: (message) => {
+        const errorData = message?.response?.data;
+      
+        if (errorData && typeof errorData === 'object') {
+          const errorMessages = Object.entries(errorData).map(([field, errors]) => {
+            if (Array.isArray(errors)) {
+              return `${field}: ${errors.join(', ')}`;
+            } else {
+              return `${field}: ${errors}`;
+            }
+          }).join('\n');
+      
+          setErrorMessage('Произошла ошибка при отправке обращения:' + '\n' + errorMessages);
+        } else {
+          setErrorMessage('Произошла ошибка при отправке обращения.');
+        }
       },
     });
   };
@@ -67,6 +84,8 @@ const RegistrationPage = () => {
         </Link>
 
         <h2 className={styles.registrationTitle}>Регистрация</h2>
+
+        {errorMessage && <Alert style={{ marginTop: 20, whiteSpace: 'pre-wrap' }} message={errorMessage} type="error" showIcon />}
 
         <Form
           form={form}
@@ -200,6 +219,10 @@ const RegistrationPage = () => {
                         'Поле "VK/Telegram" обязательно для заполнения'
                       ),
               },
+              // {
+              //   type: 'url',
+              //   message: 'Некорректный формат ссылки',
+              // },
             ]}
             className={styles.inputItem}
           >

@@ -5,6 +5,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { useArticles } from 'hooks/useArticles';
 import RegistrationBlock from 'components/RegistrationBlock/RegistrationBlock';
 import styles from './ArticlePage.module.scss';
+import {NoData} from 'components/NoData/NoData';
 
 const ArticlePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -104,6 +105,10 @@ const ArticlePage = () => {
               </Link>
             </li>
           ))}
+
+        {!isLoading && data?.totalItems === 0 && (
+          <NoData/>
+        )}
       </ul>
 
       {data && data?.totalItems > pageSize && (

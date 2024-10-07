@@ -12,10 +12,14 @@ import LoginPage from 'pages/LoginPage/LoginPage';
 import ErrorPage from 'pages/ErrorPage/ErrorPage';
 import VideoLecturesPage from 'pages/VideoLecturesPage/VideoLecturesPage';
 import VideoLecturePage from 'pages/VideoLecturePage/VideoLecturePage';
-import DiagnosticsPage from 'pages/DiagnosticsPage/DiagnosticsPage';
+import TherapyPage from 'pages/TherapyPage/TherapyPage';
 import ArticlePage from 'pages/ArticlePage/ArticlePage';
 import ArticleDetailsPage from 'pages/ArticleDetailsPage/ArticleDetailsPage';
 import ConfirmationPage from 'pages/ConfirmationPage/ConfirmationPage';
+import ProfilePage from 'pages/ProfilePage/ProfilePage';
+import EquipmentPage from 'pages/EquipmentPage/EquipmentPage';
+import EquipmentDetailsPage from 'pages/EquipmentDetailsPage/EquipmentDetailsPage';
+import PodcastsPage from 'pages/PodcastsPage/PodcastsPage';
 import ScrollToTop from 'hooks/ScrollToTop';
 import { AuthProvider } from 'hooks/AuthProvider';
 import App from 'app/App';
@@ -52,6 +56,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
               <Route path="/" element={<App />}>
                 <Route index element={<HomePage />} />
 
+                <Route path="/profile" element={<ProfilePage />} />
+
                 <Route path="/introduction" element={<IntroPage />} />
 
                 <Route path="/knowledge" element={<KnowledgePage />} />
@@ -63,11 +69,17 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                   element={<VideoLecturePage />}
                 />
 
-                <Route path="/diagnostics" element={<DiagnosticsPage />} />
+                <Route path="/podcasts" element={<PodcastsPage />} />
+
+                <Route path="/therapy" element={<TherapyPage />} />
 
                 <Route path="/articles" element={<ArticlePage />} />
 
                 <Route path="/articles/:id" element={<ArticleDetailsPage />} />
+
+                <Route path="/equipment" element={<EquipmentPage />} />
+                
+                <Route path="/equipment/:id" element={<EquipmentDetailsPage />} />
               </Route>
             </Routes>
           </Router>
