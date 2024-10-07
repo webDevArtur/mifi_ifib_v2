@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getMainVideo } from 'services/mainvideo';
+import { getMainVideo } from 'services/mainVideo';
 import { MainVideoResponse } from 'entities';
 
 import { techObjectsKeys } from './keys';
