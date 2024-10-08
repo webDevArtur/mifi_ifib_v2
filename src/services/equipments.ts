@@ -5,7 +5,7 @@ export const getEquipments = (page?: number, size?: number, search?: string) => 
   const searchQuery = search ? `&searchName=${search}` : '';
 
   return api<ArticleResponse>(
-    `https://cybernexvpn-stage.ru/api/v1/quipment?pageNumber=${page}&pageSize=${size}${searchQuery}`,
+    `https://cybernexvpn-stage.ru/api/v1/equipment?pageNumber=${page}&pageSize=${size}${searchQuery}`,
     {
       method: 'GET',
     }
