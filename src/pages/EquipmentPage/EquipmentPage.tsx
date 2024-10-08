@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Input, Pagination, Spin, Flex } from 'antd';
+import { Input, Spin, Flex } from 'antd';
 import { SearchOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Link, useSearchParams } from 'react-router-dom';
-import { useEquipments } from 'hooks/useEquipments';
+// import { useEquipments } from 'hooks/useEquipments';
 import RegistrationBlock from 'components/RegistrationBlock/RegistrationBlock';
 import styles from './EquipmentPage.module.scss';
-import {NoData} from 'components/NoData/NoData';
+// import {NoData} from 'components/NoData/NoData';
 
 const equipments = [
     { id: 1, name: 'Сцинтиграфия', objectsCount: 10 },
@@ -27,7 +27,7 @@ const EquipmentPage = () => {
   const [search, setSearch] = useState<string>(initialSearch);
   const [debouncedSearch, setDebouncedSearch] = useState<string>(initialSearch);
 
-  const { data, isLoading } = useEquipments(page, pageSize, debouncedSearch);
+  // const { data, isLoading } = useEquipments(page, pageSize, debouncedSearch);
 
   useEffect(() => {
     const handler = setTimeout(() => {
