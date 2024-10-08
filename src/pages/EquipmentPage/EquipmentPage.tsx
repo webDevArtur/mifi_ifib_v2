@@ -108,12 +108,12 @@ const EquipmentPage = () => {
             </Link>
           ))}
 
-        {!isLoading && data?.totalItems === 0 && (
+{/*         {!isLoading && data?.totalItems === 0 && (
           <NoData/>
-        )}
+        )} */}
       </ul>
 
-      {data && data?.totalItems > pageSize && (
+{/*       {data && data?.totalItems > pageSize && (
         <Pagination
           align="center"
           current={page}
@@ -122,7 +122,7 @@ const EquipmentPage = () => {
           onChange={handlePageChange}
           showSizeChanger={false}
         />
-      )}
+      )} */}
 
       <RegistrationBlock/>
     </div>
