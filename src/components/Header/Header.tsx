@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button, Input, Menu, Dropdown, Drawer } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { SearchOutlined, MenuOutlined } from '@ant-design/icons';
 import mifiLogo from './assets/mifiLogo.png';
 import { useAuth } from 'hooks/AuthProvider';
@@ -10,6 +10,7 @@ import styles from './Header.module.scss';
 
 const Header = () => {
   const { isAuthenticated, logout } = useAuth();
+  const location = useLocation();
   const [drawerVisible, setDrawerVisible] = useState(false);
 
   const showDrawer = () => {
@@ -179,73 +180,73 @@ const Header = () => {
       </div>
 
       <Drawer title="Меню" placement="right" onClose={closeDrawer} visible={drawerVisible}>
-        <Menu mode="inline">
-          <Menu.Item key="0" style={{ fontWeight: 'bold', paddingLeft: '5' }}>
+        <Menu mode="inline" selectedKeys={[location.pathname]}>
+          <Menu.Item key="/" style={{ fontWeight: 'bold', paddingLeft: '5' }}>
             <Link to="/" onClick={handleLinkClick}>Главная</Link>
           </Menu.Item>
           
-          <Menu.Item key="1" style={{ fontWeight: 'bold', paddingLeft: '5' }}>
+          <Menu.Item key="/introduction" style={{ fontWeight: 'bold', paddingLeft: '5' }}>
             <Link to="/introduction" onClick={handleLinkClick}>Введение в медицинскую физику</Link>
           </Menu.Item>
           
-          <Menu.Item key="2">
+          <Menu.Item key="/articles">
             <Link to="/articles" onClick={handleLinkClick}>Научно-популярные статьи</Link>
           </Menu.Item>
-          <Menu.Item key="3">
+          <Menu.Item key="/video-lectures">
             <Link to="/video-lectures" onClick={handleLinkClick}>Видеолекции</Link>
           </Menu.Item>
-          <Menu.Item key="4">
+          <Menu.Item key="/podcasts">
             <Link to="/podcasts" onClick={handleLinkClick}>Подкасты</Link>
           </Menu.Item>
-          <Menu.Item key="5">
+          <Menu.Item key="/equipment">
             <Link to="/equipment" onClick={handleLinkClick}>Оборудование ядерной медицины</Link>
           </Menu.Item>
 
-          <Menu.Item key="6" style={{ fontWeight: 'bold', paddingLeft: '5' }}>
+          <Menu.Item key="/knowledge" style={{ fontWeight: 'bold', paddingLeft: '5' }}>
             <Link to="/knowledge" onClick={handleLinkClick}>База знаний</Link>
           </Menu.Item>
-          <Menu.Item key="7">
+          <Menu.Item key="/knowledge/radionuclidesDiagnosis">
             <Link to="/knowledge/radionuclidesDiagnosis" onClick={handleLinkClick}>Радионуклидная диагностика и терапия</Link>
           </Menu.Item>
-          <Menu.Item key="8">
+          <Menu.Item key="/knowledge/radiationTherapy">
             <Link to="/knowledge/radiationTherapy" onClick={handleLinkClick}>Лучевая терапия</Link>
           </Menu.Item>
-          <Menu.Item key="9">
+          <Menu.Item key="/knowledge/ultraSoundDiagnosis">
             <Link to="/knowledge/ultraSoundDiagnosis" onClick={handleLinkClick}>УЗИ</Link>
           </Menu.Item>
-          <Menu.Item key="10">
+          <Menu.Item key="/knowledge/mriDiagnosis">
             <Link to="/knowledge/mriDiagnosis" onClick={handleLinkClick}>МРТ</Link>
           </Menu.Item>
-          <Menu.Item key="11">
+          <Menu.Item key="/knowledge/safety">
             <Link to="/knowledge/safety" onClick={handleLinkClick}>Техника безопасности</Link>
           </Menu.Item>
-          <Menu.Item key="12">
+          <Menu.Item key="/knowledge/regulatoryDocuments">
             <Link to="/knowledge/regulatoryDocuments" onClick={handleLinkClick}>Нормативно-правовые документы</Link>
           </Menu.Item>
 
-          <Menu.Item key="13" style={{ fontWeight: 'bold', paddingLeft: '5' }}>
+          <Menu.Item key="/practicum" style={{ fontWeight: 'bold', paddingLeft: '5' }}>
             <Link to="/practicum" onClick={handleLinkClick}>Практикум</Link>
           </Menu.Item>
-          <Menu.Item key="14">
+          <Menu.Item key="/virt-simulators">
             <Link to="/virt-simulators" onClick={handleLinkClick}>VERT</Link>
           </Menu.Item>
-          <Menu.Item key="15">
+          <Menu.Item key="/virtual-simulators">
             <Link to="/virtual-simulators" onClick={handleLinkClick}>Виртуальные тренажеры ИФИБ</Link>
           </Menu.Item>
-          <Menu.Item key="16">
+          <Menu.Item key="/planning-systems">
             <Link to="/planning-systems" onClick={handleLinkClick}>Система планирования</Link>
           </Menu.Item>
-          <Menu.Item key="17">
+          <Menu.Item key="/ultrasound">
             <Link to="/ultrasound" onClick={handleLinkClick}>УЗИ</Link>
           </Menu.Item>
 
-          <Menu.Item key="20" style={{ fontWeight: 'bold', paddingLeft: '5' }}>
+          <Menu.Item key="/quest" style={{ fontWeight: 'bold', paddingLeft: '5' }}>
             <Link to="/quest" onClick={handleLinkClick}>Квест</Link>
           </Menu.Item>
-          <Menu.Item key="18">
+          <Menu.Item key="/quest/select">
             <Link to="/quest" onClick={handleLinkClick}>Выбрать квест</Link>
           </Menu.Item>
-          <Menu.Item key="19">
+          <Menu.Item key="/user_rating">
             <Link to="/user_rating" onClick={handleLinkClick}>Рейтинг пользователей</Link>
           </Menu.Item>
         </Menu>

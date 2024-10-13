@@ -44,3 +44,15 @@
     border: 0;
     margin-bottom: 50px;
 }
+
+  @media (max-width: 768px) {
+    .video {
+      min-height: 300px;
+    }
+
+    .breadcrumb {
+      font-size: 14px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+  }
+  }
