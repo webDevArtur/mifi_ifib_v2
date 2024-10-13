@@ -1,6 +1,7 @@
-import { Carousel } from 'antd';
+import { Button, Carousel } from 'antd';
 import styles from './AboutSection.module.scss';
 import aboutIfib1 from './assets/aboutIFIB1.png';
+import aboutIfib2 from './assets/aboutIFIB2.png';
 
 const AboutSection = () => {
   return (
@@ -9,6 +10,7 @@ const AboutSection = () => {
       <div className={styles.content}>
         <div className={styles.imageContainer}>
           <Carousel
+            adaptiveHeight
             autoplay
             dots
             dotPosition="bottom"
@@ -17,23 +19,15 @@ const AboutSection = () => {
             <div>
               <img
                 src={aboutIfib1}
-                alt="Students at the Institute"
+                alt="Students at the Institute 1"
                 className={styles.image}
               />
             </div>
 
             <div>
               <img
-                src={aboutIfib1}
-                alt="Another description"
-                className={styles.image}
-              />
-            </div>
-
-            <div>
-              <img
-                src={aboutIfib1}
-                alt="Another description"
+                src={aboutIfib2}
+                alt="Students at the Institute 2"
                 className={styles.image}
               />
             </div>
@@ -53,14 +47,16 @@ const AboutSection = () => {
             которые сочетают фундаментальные знания с практическими навыками.
           </p>
 
-          <a
-            href="https://physbio.mephi.ru/"
-            target="_blank"
-            className={styles.button}
-            rel="noreferrer"
-          >
-            Перейти на сайт ИФИБ
-          </a>
+          <div className={styles.buttonContainer}>
+            <a
+              href="https://physbio.mephi.ru/"
+              target="_blank"
+              className={styles.button}
+              rel="noreferrer"
+            >
+              Перейти на сайт ИФИБ
+            </a>
+          </div>
         </div>
       </div>
     </div>

@@ -68,4 +68,43 @@
   .registerButton:hover {
     background-color: #25492A !important;
   }
+
+  @media (max-width: 1080px) {
+    .imageContainer {
+      height: 40vh;
+    }
+    
+    .image {
+      height: 100%;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .content {
+      flex-direction: column;
+    }
+
+    .textContainer {
+      width: 100%;
+      padding: 0;
+    }
+
+    .chipContainer {
+      padding: 20px;
+    }
+
+    .chip {
+      font-size: 14px;
+    }
+
+    .heading {
+      padding: 20px;
+      font-size: 20px;
+      margin: 0;
+    }
+
+    .imageContainer {
+      order: 2;
+    }
+  }
   

@@ -13,5 +13,5 @@ const articlesQuery = (page: number, size: number, search?: string) => ({
 export const useArticles = (page: number, size: number, search?: string) =>
   useQuery<ArticleResponse>({
     ...articlesQuery(page, size, search),
-    throwOnError: true,
+    throwOnError: false,
   });

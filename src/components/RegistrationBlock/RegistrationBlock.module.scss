@@ -7,7 +7,7 @@
     border: 1px solid #25492A;
     background-color: #F4F7D3;
     box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
-    margin-top: 40px;
+    margin: 40px 0;
   }
 
   .box {
@@ -28,11 +28,16 @@
     color: #25492A;
     margin-right: 16px;
   }
+
+  .buttonBox {
+    display: flex;
+    width: 40%;
+  }
   
   .button {
     display: flex;
     justify-content: center;
-    width: 40%;
+    width: 100%;
     background-color: #2b5329;
     color: white;
     padding: 10px 20px;
@@ -47,3 +52,29 @@
   .button:hover {
     background-color: #25492A;
   }
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .text {
+    font-size: 16px;
+  }
+
+  .buttonBox {
+    display: flex;
+    width: 100%;
+  }
+
+  .button {
+    margin-top: 20px;
+    width: 100%;
+    font-size: 14px;
+  }
+}

@@ -128,4 +128,17 @@
       }
     }
   }
+
+  @media (max-width: 440px) {
+    .videoGrid {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .videoCard {
+      width: 100%;
+    }
+  }
   

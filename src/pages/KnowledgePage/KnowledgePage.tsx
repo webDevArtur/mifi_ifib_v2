@@ -4,6 +4,13 @@ import { Spin, Flex } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import RegistrationBlock from 'components/RegistrationBlock/RegistrationBlock';
 import styles from './KnowledgePage.module.scss';
+import cardImage1 from './assets/radionuclide-diagnostics.png'; // Image paths
+import cardImage2 from './assets/radiation-therapy.png';
+import cardImage3 from './assets/ultrasound.png';
+import cardImage4 from './assets/mri.png';
+import cardImage5 from './assets/safety.png';
+import cardImage6 from './assets/documents.png';
+import arrowIcon from './assets/arrow-icon.png';
 
 const KnowledgePage = () => {
   const [loading, setLoading] = useState(true);
@@ -22,87 +29,78 @@ const KnowledgePage = () => {
         <h2>Правила работы с блоком</h2>
 
         <p>
-          Цель блока: <br /> Ознакомить студентов с основами медицинской физики
-          и её роль в диагностике и лечении заболеваний с использованием ядерной
-          медицины.
+        Этот блок - настоящий кладезь знаний для медицинского физика, иными словами, справочник
+        медицинского физика. Если вы зарегистрированы на платформе, то вам открывается доступ к
+        справочным материалам по таким темам как:
+        </p>
+
+        <ul>
+          <li>Лучевая терапия</li>
+          <li>Радионуклидная диагностика и терапия</li>
+          <li>УЗИ</li>
+          <li>МРТ</li>
+        </ul>
+
+        <p>
+        Также мы собрали для вас в одном месте все важные нормативные документы, регулирующие работу
+        медицинского физика, уделили особое внимание технике безопасности.
         </p>
 
         <p>
-          Структура материала: <br /> Блок включает научно-популярные статьи,
-          видеолекции, подкасты и информацию об оборудовании ядерной медицины.
+        Для выполнения тестовых заданий по темам вам необходимо быть зарегистрированным на платформе
+        Stepik.
         </p>
 
         <p>
-          Изучение материалов:
-          <br /> Рекомендуется проходить материалы в указанной
-          последовательности для лучшего усвоения темы.
-          <br />
-          Все видеолекции и подкасты должны быть прослушаны до выполнения
-          практических заданий.
+        Внутри справочника медицинского физика есть множество гиперссылок, поэтому вы сможете
+        проследить связь между темами.
         </p>
 
         <p>
-          Следование этим правилам поможет обеспечить эффективное и продуктивное
-          обучение в области медицинской физики. Удачи в учебе!
+        В конце каждой темы есть список литературных источников, если вам нужно будет узнать еще больше
+        деталей.
+        </p>
+
+        <p>
+        Вы всегда можете обращаться к этому блоку как к справочнику и как к глоссарию.
         </p>
       </div>
 
       <div className={styles.cardsContainer}>
-        <Link to="/therapy" className={styles.card}>
-          <h3>Диагностика</h3>
-
-          <ul>
-            <li>Обзор актуальных тем в медицинской физике</li>
-
-            <li>Доступное объяснение сложных понятий и технологий</li>
-
-            <li>Исторические факты и достижения в области ядерной медицины</li>
-          </ul>
+        <Link to="/knowledge/radionuclidesDiagnosis" className={styles.card}>
+          <img src={cardImage1} alt="Радионуклидная диагностика и терапия" className="cardImage" />
+          <h3>Радионуклидная диагностика и терапия</h3>
+          <img src={arrowIcon} alt="arrow" className={styles.arrowIcon} />
         </Link>
 
-        <Link to="/therapy" className={styles.card}>
-          <h3>Терапия</h3>
-
-          <ul>
-            <li>
-              Визуальное представление теоретических основ медицинской физики.
-            </li>
-
-            <li>Примеры применения ядерной медицины в практике.</li>
-
-            <li>Интервью с экспертами и практиками в области.</li>
-          </ul>
+        <Link to="/knowledge/radiationTherapy" className={styles.card}>
+          <img src={cardImage2} alt="Лучевая терапия" className={styles.cardImage} />
+          <h3>Лучевая терапия</h3>
+          <img src={arrowIcon} alt="arrow" className={styles.arrowIcon} />
         </Link>
 
-        <Link to="/radianuclides" className={styles.card}>
-          <h3>Радионуклиды</h3>
-
-          <ul>
-            <li>
-              Обсуждение актуальных вопросов и новостей в медицинской физике.
-            </li>
-
-            <li>Интерактивные беседы с учеными и врачами.</li>
-
-            <li>
-              Удобный формат для изучения во время поездок или тренировок.
-            </li>
-          </ul>
+        <Link to="/knowledge/ultraSoundDiagnosis" className={styles.card}>
+          <img src={cardImage3} alt="УЗИ" className={styles.cardImage} />
+          <h3>УЗИ</h3>
+          <img src={arrowIcon} alt="arrow" className={styles.arrowIcon} />
         </Link>
 
-        <Link to="/documents" className={styles.card}>
+        <Link to="/knowledge/mriDiagnosis" className={styles.card}>
+          <img src={cardImage4} alt="МРТ" className={styles.cardImage} />
+          <h3>МРТ</h3>
+          <img src={arrowIcon} alt="arrow" className={styles.arrowIcon} />
+        </Link>
+
+        <Link to="/knowledge/safety" className={styles.card}>
+          <img src={cardImage5} alt="Техника безопасности" className={styles.cardImage} />
+          <h3>Техника безопасности</h3>
+          <img src={arrowIcon} alt="arrow" className={styles.arrowIcon} />
+        </Link>
+
+        <Link to="/knowledge/regulatoryDocuments" className={styles.card}>
+          <img src={cardImage6} alt="Нормативно-правовые документы" className={styles.cardImage} />
           <h3>Нормативно-правовые документы</h3>
-
-          <ul>
-            <li>
-              Описание основных устройств и технологий, используемых в ядерной
-              медицине.
-            </li>
-
-            <li>Принципы работы и области применения оборудования.</li>
-
-            <li>Информация о новых разработках и инновациях в данной сфере.</li>
-          </ul>
+          <img src={arrowIcon} alt="arrow" className={styles.arrowIcon} />
         </Link>
       </div>
 

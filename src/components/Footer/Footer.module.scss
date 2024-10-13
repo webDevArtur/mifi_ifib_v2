@@ -89,3 +89,23 @@
   font-size: 12px;
   line-height: 1.4;
 }
+
+@media (max-width: 768px) {
+  .contentContainer {
+    flex-direction: column;
+  }
+
+  .columns {
+    width: 100%;
+  }
+
+  .footerBottom {
+    width: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+  .columns {
+    flex-direction: column;
+  }
+}

@@ -37,16 +37,31 @@ const Footer = () => {
 
             <ul>
               <li>
-                <Link to="/therapy">Диагностика</Link>
+                <Link to="/knowledge/radionuclidesDiagnosis">Радионуклидная диагностика и терапия</Link>
               </li>
 
-              <li>Терапия</li>
+              <li>
+                <Link to="/knowledge/radiationTherapy">Лучевая терапия</Link>
+              </li>
 
-              <li>Радионуклиды</li>
+              <li>
+                <Link to="/knowledge/ultraSoundDiagnosis">УЗИ</Link>
+              </li>
 
-              <li>Нормативные документы</li>
+              <li>
+                <Link to="/knowledge/mriDiagnosis">МРТ</Link>
+              </li>
+
+              <li>
+                <Link to="/knowledge/safety">Техника безопасности</Link>
+              </li>
+
+              <li>
+                <Link to="/knowledge/regulatoryDocuments">Нормативно-правовые документы</Link>
+              </li>
             </ul>
           </div>
+
 
           <div className={styles.column}>
             <h2>Практикум</h2>

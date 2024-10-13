@@ -19,9 +19,11 @@ const Button = () => {
         </div>
       </div>
 
-      <Link to="/registration" className={styles.button}>
-        Зарегистрироваться
-      </Link>
+      <div className={styles.buttonBox}>
+        <Link to="/registration" className={styles.button}>
+          Зарегистрироваться
+        </Link>
+      </div>
     </div>
   );
 };

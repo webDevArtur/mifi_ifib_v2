@@ -52,9 +52,9 @@ const RegistrationPage = () => {
             }
           }).join('\n');
       
-          setErrorMessage('Произошла ошибка при отправке обращения:' + '\n' + errorMessages);
+          setErrorMessage('Произошла ошибка авторизации:' + '\n' + errorMessages);
         } else {
-          setErrorMessage('Произошла ошибка при отправке обращения.');
+          setErrorMessage('Произошла ошибка авторизации.');
         }
       },
     });

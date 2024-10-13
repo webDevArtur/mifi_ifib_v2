@@ -28,27 +28,37 @@ const MainBanner = () => {
               </p>
 
               <div className={styles.buttonGroup}>
-                <Button className={styles.button} type="default">
-                  Видеолекции
-                </Button>
+                <Link to="/video-lectures">
+                  <Button className={styles.button} type="default">
+                    Видеолекции
+                  </Button>
+                </Link>
 
-                <Button className={styles.button} type="default">
-                  Статьи
-                </Button>
+                <Link to="/articles">
+                  <Button className={styles.button} type="default">
+                    Статьи
+                  </Button>
+                </Link>
 
-                <Button className={styles.button} type="default">
-                  Подкасты
-                </Button>
+                <Link to="/podcasts">
+                  <Button className={styles.button} type="default">
+                    Подкасты
+                  </Button>
+                </Link>
 
-                <Button className={styles.button} type="default">
-                  VR тренажеры
-                </Button>
+                <Link to="/">
+                  <Button className={styles.button} type="default">
+                    VR тренажеры
+                  </Button>
+                </Link>
 
-                <Button className={styles.button} type="default">
-                  Практика
-                </Button>
+                <Link to="/">
+                  <Button className={styles.button} type="default">
+                    Практика
+                  </Button>
+                </Link>
 
-                <Button className={styles.button} type="default">
+                <Button href="https://physbio.mephi.ru/" target="_blank" rel="noopener noreferrer" className={styles.button} type="default">
                   ИФИБ
                 </Button>
               </div>

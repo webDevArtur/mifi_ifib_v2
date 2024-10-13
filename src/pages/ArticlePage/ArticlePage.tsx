@@ -30,7 +30,7 @@ const ArticlePage = () => {
         newParams.search = search;
       }
       setSearchParams(newParams);
-    }, 300);
+    }, 800);
 
     return () => {
       clearTimeout(handler);
@@ -106,7 +106,7 @@ const ArticlePage = () => {
             </li>
           ))}
 
-        {!isLoading && data?.totalItems === 0 && (
+        {!isLoading && !data && (
           <NoData/>
         )}
       </ul>

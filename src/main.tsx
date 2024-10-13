@@ -12,7 +12,7 @@ import LoginPage from 'pages/LoginPage/LoginPage';
 import ErrorPage from 'pages/ErrorPage/ErrorPage';
 import VideoLecturesPage from 'pages/VideoLecturesPage/VideoLecturesPage';
 import VideoLecturePage from 'pages/VideoLecturePage/VideoLecturePage';
-import TherapyPage from 'pages/TherapyPage/TherapyPage';
+import TermsPage from 'pages/TermsPage/TermsPage';
 import ArticlePage from 'pages/ArticlePage/ArticlePage';
 import ArticleDetailsPage from 'pages/ArticleDetailsPage/ArticleDetailsPage';
 import ConfirmationPage from 'pages/ConfirmationPage/ConfirmationPage';
@@ -42,36 +42,30 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <ScrollToTop />
 
             <Routes>
+              
               <Route path="*" element={<ErrorPage />} />
 
               <Route path="registration" element={<RegistrationPage />} />
 
-              <Route
-                path="registration/confirmation/:token"
-                element={<ConfirmationPage />}
-              />
+              <Route path="registration/confirmation/:token" element={<ConfirmationPage />} />
 
               <Route path="login" element={<LoginPage />} />
 
               <Route path="/" element={<App />}>
+
                 <Route index element={<HomePage />} />
 
                 <Route path="/profile" element={<ProfilePage />} />
 
-                <Route path="/introduction" element={<IntroPage />} />
+                {/* Введение в медицинскую физику */}
 
-                <Route path="/knowledge" element={<KnowledgePage />} />
+                <Route path="/introduction" element={<IntroPage />} />
 
                 <Route path="/video-lectures" element={<VideoLecturesPage />} />
 
-                <Route
-                  path="/video-lectures/:id"
-                  element={<VideoLecturePage />}
-                />
+                <Route path="/video-lectures/:id" element={<VideoLecturePage />}/>
 
                 <Route path="/podcasts" element={<PodcastsPage />} />
-
-                <Route path="/therapy" element={<TherapyPage />} />
 
                 <Route path="/articles" element={<ArticlePage />} />
 
@@ -80,6 +74,13 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                 <Route path="/equipment" element={<EquipmentPage />} />
                 
                 <Route path="/equipment/:id" element={<EquipmentDetailsPage />} />
+
+                {/* База знаний */}
+
+                <Route path="/knowledge" element={<KnowledgePage />} />
+
+                <Route path="/knowledge/:type" element={<TermsPage />} />
+
               </Route>
             </Routes>
           </Router>
