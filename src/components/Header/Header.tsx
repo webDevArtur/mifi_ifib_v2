@@ -179,73 +179,77 @@ const Header = () => {
       </div>
 
       <Drawer title="Меню" placement="right" onClose={closeDrawer} visible={drawerVisible}>
-  <Menu mode="inline">
-    <Menu.Item key="1" style={{ fontWeight: 'bold', paddingLeft: '5' }}>
-      <Link to="/introduction" onClick={handleLinkClick}>Введение в медицинскую физику</Link>
-    </Menu.Item>
-    
-    <Menu.Item key="2" >
-      <Link to="/articles" onClick={handleLinkClick}>Научно-популярные статьи</Link>
-    </Menu.Item>
-    <Menu.Item key="3">
-      <Link to="/video-lectures" onClick={handleLinkClick}>Видеолекции</Link>
-    </Menu.Item>
-    <Menu.Item key="4">
-      <Link to="/podcasts" onClick={handleLinkClick}>Подкасты</Link>
-    </Menu.Item>
-    <Menu.Item key="5">
-      <Link to="/equipment" onClick={handleLinkClick}>Оборудование ядерной медицины</Link>
-    </Menu.Item>
+        <Menu mode="inline">
+          <Menu.Item key="0" style={{ fontWeight: 'bold', paddingLeft: '5' }}>
+            <Link to="/" onClick={handleLinkClick}>Главная</Link>
+          </Menu.Item>
+          
+          <Menu.Item key="1" style={{ fontWeight: 'bold', paddingLeft: '5' }}>
+            <Link to="/introduction" onClick={handleLinkClick}>Введение в медицинскую физику</Link>
+          </Menu.Item>
+          
+          <Menu.Item key="2">
+            <Link to="/articles" onClick={handleLinkClick}>Научно-популярные статьи</Link>
+          </Menu.Item>
+          <Menu.Item key="3">
+            <Link to="/video-lectures" onClick={handleLinkClick}>Видеолекции</Link>
+          </Menu.Item>
+          <Menu.Item key="4">
+            <Link to="/podcasts" onClick={handleLinkClick}>Подкасты</Link>
+          </Menu.Item>
+          <Menu.Item key="5">
+            <Link to="/equipment" onClick={handleLinkClick}>Оборудование ядерной медицины</Link>
+          </Menu.Item>
 
-    <Menu.Item key="6" style={{ fontWeight: 'bold', paddingLeft: '5' }}>
-      <Link to="/knowledge" onClick={handleLinkClick}>База знаний</Link>
-    </Menu.Item>
-    <Menu.Item key="7">
-      <Link to="/knowledge/radionuclidesDiagnosis" onClick={handleLinkClick}>Радионуклидная диагностика и терапия</Link>
-    </Menu.Item>
-    <Menu.Item key="8">
-      <Link to="/knowledge/radiationTherapy" onClick={handleLinkClick}>Лучевая терапия</Link>
-    </Menu.Item>
-    <Menu.Item key="9">
-      <Link to="/knowledge/ultraSoundDiagnosis" onClick={handleLinkClick}>УЗИ</Link>
-    </Menu.Item>
-    <Menu.Item key="10">
-      <Link to="/knowledge/mriDiagnosis" onClick={handleLinkClick}>МРТ</Link>
-    </Menu.Item>
-    <Menu.Item key="11">
-      <Link to="/knowledge/safety" onClick={handleLinkClick}>Техника безопасности</Link>
-    </Menu.Item>
-    <Menu.Item key="12">
-      <Link to="/knowledge/regulatoryDocuments" onClick={handleLinkClick}>Нормативно-правовые документы</Link>
-    </Menu.Item>
+          <Menu.Item key="6" style={{ fontWeight: 'bold', paddingLeft: '5' }}>
+            <Link to="/knowledge" onClick={handleLinkClick}>База знаний</Link>
+          </Menu.Item>
+          <Menu.Item key="7">
+            <Link to="/knowledge/radionuclidesDiagnosis" onClick={handleLinkClick}>Радионуклидная диагностика и терапия</Link>
+          </Menu.Item>
+          <Menu.Item key="8">
+            <Link to="/knowledge/radiationTherapy" onClick={handleLinkClick}>Лучевая терапия</Link>
+          </Menu.Item>
+          <Menu.Item key="9">
+            <Link to="/knowledge/ultraSoundDiagnosis" onClick={handleLinkClick}>УЗИ</Link>
+          </Menu.Item>
+          <Menu.Item key="10">
+            <Link to="/knowledge/mriDiagnosis" onClick={handleLinkClick}>МРТ</Link>
+          </Menu.Item>
+          <Menu.Item key="11">
+            <Link to="/knowledge/safety" onClick={handleLinkClick}>Техника безопасности</Link>
+          </Menu.Item>
+          <Menu.Item key="12">
+            <Link to="/knowledge/regulatoryDocuments" onClick={handleLinkClick}>Нормативно-правовые документы</Link>
+          </Menu.Item>
 
-    <Menu.Item key="13"style={{ fontWeight: 'bold', paddingLeft: '5' }}>
-      <Link to="/practicum" onClick={handleLinkClick}>Практикум</Link>
-    </Menu.Item>
-    <Menu.Item key="14">
-      <Link to="/virt-simulators" onClick={handleLinkClick}>VERT</Link>
-    </Menu.Item>
-    <Menu.Item key="15">
-      <Link to="/virtual-simulators" onClick={handleLinkClick}>Виртуальные тренажеры ИФИБ</Link>
-    </Menu.Item>
-    <Menu.Item key="16">
-      <Link to="/planning-systems" onClick={handleLinkClick}>Система планирования</Link>
-    </Menu.Item>
-    <Menu.Item key="17">
-      <Link to="/ultrasound" onClick={handleLinkClick}>УЗИ</Link>
-    </Menu.Item>
+          <Menu.Item key="13" style={{ fontWeight: 'bold', paddingLeft: '5' }}>
+            <Link to="/practicum" onClick={handleLinkClick}>Практикум</Link>
+          </Menu.Item>
+          <Menu.Item key="14">
+            <Link to="/virt-simulators" onClick={handleLinkClick}>VERT</Link>
+          </Menu.Item>
+          <Menu.Item key="15">
+            <Link to="/virtual-simulators" onClick={handleLinkClick}>Виртуальные тренажеры ИФИБ</Link>
+          </Menu.Item>
+          <Menu.Item key="16">
+            <Link to="/planning-systems" onClick={handleLinkClick}>Система планирования</Link>
+          </Menu.Item>
+          <Menu.Item key="17">
+            <Link to="/ultrasound" onClick={handleLinkClick}>УЗИ</Link>
+          </Menu.Item>
 
-    <Menu.Item key="20" style={{ fontWeight: 'bold', paddingLeft: '5' }}>
-      <Link to="/quest" onClick={handleLinkClick}>Квест</Link>
-    </Menu.Item>
-    <Menu.Item key="18">
-      <Link to="/quest" onClick={handleLinkClick}>Выбрать квест</Link>
-    </Menu.Item>
-    <Menu.Item key="19">
-      <Link to="/user_rating" onClick={handleLinkClick}>Рейтинг пользователей</Link>
-    </Menu.Item>
-  </Menu>
-</Drawer>
+          <Menu.Item key="20" style={{ fontWeight: 'bold', paddingLeft: '5' }}>
+            <Link to="/quest" onClick={handleLinkClick}>Квест</Link>
+          </Menu.Item>
+          <Menu.Item key="18">
+            <Link to="/quest" onClick={handleLinkClick}>Выбрать квест</Link>
+          </Menu.Item>
+          <Menu.Item key="19">
+            <Link to="/user_rating" onClick={handleLinkClick}>Рейтинг пользователей</Link>
+          </Menu.Item>
+        </Menu>
+      </Drawer>
 
     </header>
   );
