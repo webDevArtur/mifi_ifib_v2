@@ -92,3 +92,13 @@
     }
   }
   
+  @media (max-width: 768px) {
+    .registrationCard {
+      width: 80%;
+    }
+
+    .backLink {
+      top: 20px;
+      left: 20px;
+    }
+  }
