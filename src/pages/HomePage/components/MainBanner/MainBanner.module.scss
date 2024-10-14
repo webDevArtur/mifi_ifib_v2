@@ -9,11 +9,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     width: 60%;
   }
   
   .leftContainer {
+    height: 100%;
     background-color: #DBF0DD;
     display: flex;
     flex-direction: column;
@@ -107,16 +107,35 @@
   .spinner {
     width: 50%;
   }
-  
-  .videoPreview {
-    position: relative;
+
+  .videoContainer {
+    width: 50%;
   }
 
-  .video {
-    margin-left: 5px;
-    width: 50%;
-    height: auto;
-    border-radius: 16px;
+@media (min-width: 1900px) {
+  .title {
+    font-size: 60px;
+  }
+
+  .subtitle {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+
+  .button {
+    font-size: 24px;
+    padding: 20px;
+  }
+
+  .atomContainer {
+    width: 30%;
+  }
+
+  .atom {
+    left: 0;
+    bottom: 70%;
+    width: 450px;
+  }
 }
 
 @media (max-width: 1280px) {
@@ -133,9 +152,8 @@
     order: 2;
   }
 
-  .video {
+  .videoContainer {
     width: 100%;
-    height: 400px;
     order: 1;
   }
 

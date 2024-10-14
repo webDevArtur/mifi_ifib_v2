@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Spin, Flex } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import VideoPlayer from 'components/VideoPlayer/VideoPlayer';
 import RegistrationBlock from 'components/RegistrationBlock/RegistrationBlock';
 import styles from './KnowledgePage.module.scss';
 import cardImage1 from './assets/radionuclide-diagnostics.png'; // Image paths
@@ -13,11 +12,7 @@ import cardImage6 from './assets/documents.png';
 import arrowIcon from './assets/arrow-icon.png';
 
 const KnowledgePage = () => {
-  const [loading, setLoading] = useState(true);
-
-  const handleLoad = () => {
-    setLoading(false);
-  };
+  const [loading, setLoading] = useState(false);
 
   return (
     <div className={styles.introPage}>
@@ -104,21 +99,10 @@ const KnowledgePage = () => {
         </Link>
       </div>
 
-      {loading && (
-        <Flex className={styles.spinner} justify="center" align="center">
-          <Spin indicator={<LoadingOutlined spin />} size="large" />
-        </Flex>
-      )}
+      <div className={styles.videoContainer}>
+        <VideoPlayer src="https://vk.com/video_ext.php?oid=-142173315&id=456239350&hd=2&autoplay=1" loading={loading}></VideoPlayer>
+      </div>
 
-      <iframe
-        src="https://www.youtube.com/embed/iSjvnUn27EU"
-        title="YouTube video player"
-        frameBorder="0"
-        allowFullScreen
-        className={styles.video}
-        onLoad={handleLoad}
-        style={loading ? { display: 'none' } : { display: 'block' }}
-      />
       <RegistrationBlock />
     </div>
   );

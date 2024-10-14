@@ -97,19 +97,12 @@
     min-height: 500px;
   }
 
-  .video {
-    min-width: 100%;
-    min-height: 500px;
-    object-fit: cover;
-    border-radius: 15px;
-    border: 0;
-    margin: 50px 0;
+.videoContainer {
+  width: 100%;
+  margin-top: 40px;
 }
 
   @media (max-width: 650px) {
-    .video {
-      min-height: 200px;
-    }
 
     .breadcrumb {
       font-size: 14px;

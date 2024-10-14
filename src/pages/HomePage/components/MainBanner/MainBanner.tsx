@@ -1,19 +1,15 @@
 import { useState } from 'react';
-import { LoadingOutlined } from '@ant-design/icons';
-import { Button, Spin, Flex } from 'antd';
+import { Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { useMainVideo } from 'hooks/useMainVideo';
+import VideoPlayer from 'components/VideoPlayer/VideoPlayer';
 import atom from './assets/atom.png';
 import styles from './MainBanner.module.scss';
 
 const MainBanner = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   // const { data } = useMainVideo();
-
-  const handleLoad = () => {
-    setLoading(false);
-  };
 
   return (
     <section className={styles.bannerContainer}>
@@ -77,21 +73,11 @@ const MainBanner = () => {
         </Link>
       </div>
 
-      {loading && (
-        <Flex className={styles.spinner} justify="center" align="center">
-          <Spin indicator={<LoadingOutlined spin />} size="large" />
-        </Flex>
-      )}
 
-      <iframe
-        src="https://vk.com/video_ext.php?oid=-142173315&id=456239350&hd=2&autoplay=1"
-        title="Video"
-        frameBorder="0"
-        allowFullScreen
-        className={styles.video}
-        onLoad={handleLoad}
-        style={loading ? { display: 'none' } : { display: 'block' }}
-      />
+
+      <div className={styles.videoContainer}>
+        <VideoPlayer src="https://vk.com/video_ext.php?oid=-142173315&id=456239350&hd=2&autoplay=1" loading={loading}></VideoPlayer>
+      </div>
     </section>
   );
 };
