@@ -1,8 +1,8 @@
-import { api } from './index';
+import { api } from "./index";
 import {
   RegistrationResponse,
   ConfirmRegistrationResponse,
-} from 'entities/index';
+} from "entities/index";
 
 interface RegisterData {
   lastName: string;
@@ -20,11 +20,11 @@ interface RegisterData {
 
 export const registerUser = (data: RegisterData) =>
   api<RegistrationResponse>(
-    'https://cybernexvpn-stage.ru/api/v1/auth/register',
+    "https://cybernexvpn-stage.ru/api/v1/auth/register",
     {
-      method: 'POST',
+      method: "POST",
       data,
-    }
+    },
   );
 
 export const confirmRegistration = async (data: {
@@ -32,16 +32,16 @@ export const confirmRegistration = async (data: {
   registerToken?: string;
 }) => {
   return api<ConfirmRegistrationResponse>(
-    'https://cybernexvpn-stage.ru/api/v1/auth/register/confirm',
+    "https://cybernexvpn-stage.ru/api/v1/auth/register/confirm",
     {
-      method: 'POST',
+      method: "POST",
       data,
-    }
+    },
   );
 };
 
 export const resendConfirmationCode = (data: { registerToken?: string }) =>
-  api('https://cybernexvpn-stage.ru/api/v1/auth/update-confirmation-code', {
-    method: 'POST',
+  api("https://cybernexvpn-stage.ru/api/v1/auth/update-confirmation-code", {
+    method: "POST",
     data,
   });

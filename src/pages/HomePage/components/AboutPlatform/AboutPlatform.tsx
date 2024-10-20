@@ -1,4 +1,4 @@
-import styles from './AboutPlatdorm.module.scss';
+import styles from "./AboutPlatdorm.module.scss";
 
 const AboutPlatform = () => {
   return (

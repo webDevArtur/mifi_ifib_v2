@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 const TermSchema = z.object({
   id: z.number(),

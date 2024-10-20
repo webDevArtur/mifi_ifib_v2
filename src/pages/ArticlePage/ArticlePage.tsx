@@ -1,17 +1,19 @@
-import { useState, useEffect } from 'react';
-import { Input, Pagination, Spin, Flex } from 'antd';
-import { SearchOutlined, LoadingOutlined } from '@ant-design/icons';
-import { Link, useSearchParams } from 'react-router-dom';
-import { useArticles } from 'hooks/useArticles';
-import RegistrationBlock from 'components/RegistrationBlock/RegistrationBlock';
-import styles from './ArticlePage.module.scss';
-import {NoData} from 'components/NoData/NoData';
+import { useState, useEffect } from "react";
+import { Input, Pagination, Spin, Flex } from "antd";
+import { SearchOutlined, LoadingOutlined } from "@ant-design/icons";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useArticles } from "hooks/useArticles";
+import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
+import styles from "./ArticlePage.module.scss";
+import { NoData } from "components/NoData/NoData";
 
 const ArticlePage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation(); // Получение текущего местоположения
+  const navigate = useNavigate(); // Для навигации
 
-  const initialPage = parseInt(searchParams.get('page') || '1', 10);
-  const initialSearch = searchParams.get('search') || '';
+  const queryParams = new URLSearchParams(location.search); // Используем URLSearchParams
+  const initialPage = parseInt(queryParams.get("page") || "1", 10);
+  const initialSearch = queryParams.get("search") || "";
 
   const [page, setPage] = useState(initialPage);
   const pageSize = 10;
@@ -25,17 +27,20 @@ const ArticlePage = () => {
       setDebouncedSearch(search);
       setPage(1);
 
-      const newParams: { page: string; search?: string } = { page: '1' };
+      const newParams = new URLSearchParams();
+      newParams.set("page", "1");
       if (search.trim()) {
-        newParams.search = search;
+        newParams.set("search", search);
       }
-      setSearchParams(newParams);
+
+      // Используем navigate для обновления URL
+      navigate(`/articles?${newParams.toString()}`, { replace: true });
     }, 800);
 
     return () => {
       clearTimeout(handler);
     };
-  }, [search, setSearchParams]);
+  }, [search, navigate]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -44,19 +49,20 @@ const ArticlePage = () => {
   const handlePageChange = (pageNumber: number) => {
     setPage(pageNumber);
 
-    const newParams: { page: string; search?: string } = {
-      page: pageNumber.toString(),
-    };
+    const newParams = new URLSearchParams();
+    newParams.set("page", pageNumber.toString());
     if (search) {
-      newParams.search = search;
+      newParams.set("search", search);
     }
-    setSearchParams(newParams);
+
+    // Используем navigate для обновления URL
+    navigate(`/articles?${newParams.toString()}`, { replace: true });
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.breadcrumb}>
-        <Link to="/">Главная</Link> /{' '}
+        <Link to="/">Главная</Link> /{" "}
         <Link to="/introduction">Введение в медицинскую физику</Link> /
         Научно-популярные статьи
       </div>
@@ -106,9 +112,7 @@ const ArticlePage = () => {
             </li>
           ))}
 
-        {!isLoading && !data && (
-          <NoData/>
-        )}
+        {!isLoading && !data?.items?.length && <NoData />}
       </ul>
 
       {data && data?.totalItems > pageSize && (

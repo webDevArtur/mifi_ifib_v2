@@ -1,15 +1,54 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import VideoPlayer from 'components/VideoPlayer/VideoPlayer';
-import RegistrationBlock from 'components/RegistrationBlock/RegistrationBlock';
-import styles from './KnowledgePage.module.scss';
-import cardImage1 from './assets/radionuclide-diagnostics.png'; // Image paths
-import cardImage2 from './assets/radiation-therapy.png';
-import cardImage3 from './assets/ultrasound.png';
-import cardImage4 from './assets/mri.png';
-import cardImage5 from './assets/safety.png';
-import cardImage6 from './assets/documents.png';
-import arrowIcon from './assets/arrow-icon.png';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import VideoPlayer from "components/VideoPlayer/VideoPlayer";
+import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
+import styles from "./KnowledgePage.module.scss";
+import arrowIcon from "./assets/arrow-icon.png";
+import cardImage1 from "./assets/radionuclide-diagnostics.png";
+import cardImage2 from "./assets/radiation-therapy.png";
+import cardImage3 from "./assets/ultrasound.png";
+import cardImage4 from "./assets/mri.png";
+import cardImage5 from "./assets/safety.png";
+import cardImage6 from "./assets/documents.png";
+
+const cardsData = [
+  {
+    to: "/knowledge/radionuclidesDiagnosis",
+    image: cardImage1,
+    alt: "Радионуклидная диагностика и терапия",
+    title: "Радионуклидная диагностика и терапия",
+  },
+  {
+    to: "/knowledge/radiationTherapy",
+    image: cardImage2,
+    alt: "Лучевая терапия",
+    title: "Лучевая терапия",
+  },
+  {
+    to: "/knowledge/ultraSoundDiagnosis",
+    image: cardImage3,
+    alt: "УЗИ",
+    title: "УЗИ",
+  },
+  {
+    to: "/knowledge/mriDiagnosis",
+    image: cardImage4,
+    alt: "МРТ",
+    title: "МРТ",
+  },
+  {
+    to: "/knowledge/safety",
+    image: cardImage5,
+    alt: "Техника безопасности",
+    title: "Техника безопасности",
+  },
+  {
+    to: "/knowledge/regulatoryDocuments",
+    image: cardImage6,
+    alt: "Нормативно-правовые документы",
+    title: "Нормативно-правовые документы",
+  },
+];
 
 const KnowledgePage = () => {
   const [loading, setLoading] = useState(false);
@@ -22,85 +61,49 @@ const KnowledgePage = () => {
 
       <div className={styles.contentBlock}>
         <h2>Правила работы с блоком</h2>
-
         <p>
-        Этот блок - настоящий кладезь знаний для медицинского физика, иными словами, справочник
-        медицинского физика. Если вы зарегистрированы на платформе, то вам открывается доступ к
-        справочным материалам по таким темам как:
+          Этот блок - настоящий кладезь знаний для медицинского физика, иными
+          словами, справочник медицинского физика. Если вы зарегистрированы на
+          платформе, то вам открывается доступ к справочным материалам по таким
+          темам как:
         </p>
-
         <ul>
           <li>Лучевая терапия</li>
           <li>Радионуклидная диагностика и терапия</li>
           <li>УЗИ</li>
           <li>МРТ</li>
         </ul>
-
         <p>
-        Также мы собрали для вас в одном месте все важные нормативные документы, регулирующие работу
-        медицинского физика, уделили особое внимание технике безопасности.
+          Также мы собрали для вас в одном месте все важные нормативные
+          документы, регулирующие работу медицинского физика, уделили особое
+          внимание технике безопасности.
         </p>
-
         <p>
-        Для выполнения тестовых заданий по темам вам необходимо быть зарегистрированным на платформе
-        Stepik.
+          Для выполнения тестовых заданий по темам вам необходимо быть
+          зарегистрированным на платформе Stepik.
         </p>
-
         <p>
-        Внутри справочника медицинского физика есть множество гиперссылок, поэтому вы сможете
-        проследить связь между темами.
+          Внутри справочника медицинского физика есть множество гиперссылок,
+          поэтому вы сможете проследить связь между темами.
         </p>
-
         <p>
-        В конце каждой темы есть список литературных источников, если вам нужно будет узнать еще больше
-        деталей.
+          В конце каждой темы есть список литературных источников, если вам
+          нужно будет узнать еще больше деталей.
         </p>
-
         <p>
-        Вы всегда можете обращаться к этому блоку как к справочнику и как к глоссарию.
+          Вы всегда можете обращаться к этому блоку как к справочнику и как к
+          глоссарию.
         </p>
       </div>
 
       <div className={styles.cardsContainer}>
-        <Link to="/knowledge/radionuclidesDiagnosis" className={styles.card}>
-          <img src={cardImage1} alt="Радионуклидная диагностика и терапия" className="cardImage" />
-          <h3>Радионуклидная диагностика и терапия</h3>
-          <img src={arrowIcon} alt="arrow" className={styles.arrowIcon} />
-        </Link>
-
-        <Link to="/knowledge/radiationTherapy" className={styles.card}>
-          <img src={cardImage2} alt="Лучевая терапия" className={styles.cardImage} />
-          <h3>Лучевая терапия</h3>
-          <img src={arrowIcon} alt="arrow" className={styles.arrowIcon} />
-        </Link>
-
-        <Link to="/knowledge/ultraSoundDiagnosis" className={styles.card}>
-          <img src={cardImage3} alt="УЗИ" className={styles.cardImage} />
-          <h3>УЗИ</h3>
-          <img src={arrowIcon} alt="arrow" className={styles.arrowIcon} />
-        </Link>
-
-        <Link to="/knowledge/mriDiagnosis" className={styles.card}>
-          <img src={cardImage4} alt="МРТ" className={styles.cardImage} />
-          <h3>МРТ</h3>
-          <img src={arrowIcon} alt="arrow" className={styles.arrowIcon} />
-        </Link>
-
-        <Link to="/knowledge/safety" className={styles.card}>
-          <img src={cardImage5} alt="Техника безопасности" className={styles.cardImage} />
-          <h3>Техника безопасности</h3>
-          <img src={arrowIcon} alt="arrow" className={styles.arrowIcon} />
-        </Link>
-
-        <Link to="/knowledge/regulatoryDocuments" className={styles.card}>
-          <img src={cardImage6} alt="Нормативно-правовые документы" className={styles.cardImage} />
-          <h3>Нормативно-правовые документы</h3>
-          <img src={arrowIcon} alt="arrow" className={styles.arrowIcon} />
-        </Link>
-      </div>
-
-      <div className={styles.videoContainer}>
-        <VideoPlayer src="https://vk.com/video_ext.php?oid=-142173315&id=456239350&hd=2&autoplay=1" loading={loading}></VideoPlayer>
+        {cardsData.map((card, index) => (
+          <Link key={index} to={card.to} className={styles.card}>
+            <img src={card.image} alt={card.alt} className={styles.cardImage} />
+            <h3>{card.title}</h3>
+            <img src={arrowIcon} alt="arrow" className={styles.arrowIcon} />
+          </Link>
+        ))}
       </div>
 
       <RegistrationBlock />

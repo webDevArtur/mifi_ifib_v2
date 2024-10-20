@@ -1,9 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
-import { getMainVideo } from 'services/mainVideo';
-import { MainVideoResponse } from 'entities';
+import { getMainVideo } from "services/mainVideo";
+import { MainVideoResponse } from "entities";
 
-import { techObjectsKeys } from './keys';
+import { techObjectsKeys } from "./keys";
 
 const mainVideoQuery = () => ({
   queryKey: [techObjectsKeys.mainVideo],

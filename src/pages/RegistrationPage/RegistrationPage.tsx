@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Form, Input, Button, Checkbox, Select, DatePicker, Alert } from 'antd';
-import { useRegister } from 'hooks/useRegistration';
-import { useNavigate } from 'react-router-dom';
-import dayjs from 'dayjs';
-import styles from './RegistrationPage.module.scss';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Form, Input, Button, Checkbox, Select, DatePicker, Alert } from "antd";
+import { useRegister } from "hooks/useRegistration";
+import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
+import styles from "./RegistrationPage.module.scss";
 
 const { Option } = Select;
 
@@ -12,9 +12,9 @@ const RegistrationPage = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [educationalStatus, setEducationalStatus] = useState<string | null>(
-    null
+    null,
   );
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const { mutate: register, isPending } = useRegister();
 
   const handleSubmit = async (values: any) => {
@@ -22,7 +22,7 @@ const RegistrationPage = () => {
       lastName: values.lastName,
       firstName: values.firstName,
       middleName: values.middleName || null,
-      birthDate: values.birthdate.format('DD.MM.YYYY'),
+      birthDate: values.birthdate.format("DD.MM.YYYY"),
       email: values.email,
       socialNetwork: values.social,
       educationalStatus: values.educationalStatus,
@@ -32,7 +32,7 @@ const RegistrationPage = () => {
       passwordConfirmation: values.passwordConfirmation,
     };
 
-    setErrorMessage('');
+    setErrorMessage("");
 
     register(registerData, {
       onSuccess: (data) => {
@@ -42,19 +42,23 @@ const RegistrationPage = () => {
       },
       onError: (message) => {
         const errorData = message?.response?.data;
-      
-        if (errorData && typeof errorData === 'object') {
-          const errorMessages = Object.entries(errorData).map(([field, errors]) => {
-            if (Array.isArray(errors)) {
-              return `${field}: ${errors.join(', ')}`;
-            } else {
-              return `${field}: ${errors}`;
-            }
-          }).join('\n');
-      
-          setErrorMessage('Произошла ошибка авторизации:' + '\n' + errorMessages);
+
+        if (errorData && typeof errorData === "object") {
+          const errorMessages = Object.entries(errorData)
+            .map(([field, errors]) => {
+              if (Array.isArray(errors)) {
+                return `${field}: ${errors.join(", ")}`;
+              } else {
+                return `${field}: ${errors}`;
+              }
+            })
+            .join("\n");
+
+          setErrorMessage(
+            "Произошла ошибка авторизации:" + "\n" + errorMessages,
+          );
         } else {
-          setErrorMessage('Произошла ошибка авторизации.');
+          setErrorMessage("Произошла ошибка авторизации.");
         }
       },
     });
@@ -85,7 +89,14 @@ const RegistrationPage = () => {
 
         <h2 className={styles.registrationTitle}>Регистрация</h2>
 
-        {errorMessage && <Alert style={{ marginTop: 20, whiteSpace: 'pre-wrap' }} message={errorMessage} type="error" showIcon />}
+        {errorMessage && (
+          <Alert
+            style={{ marginTop: 20, whiteSpace: "pre-wrap" }}
+            message={errorMessage}
+            type="error"
+            showIcon
+          />
+        )}
 
         <Form
           form={form}
@@ -106,7 +117,7 @@ const RegistrationPage = () => {
                   value
                     ? Promise.resolve()
                     : Promise.reject(
-                        'Поле "Фамилия" обязательно для заполнения'
+                        'Поле "Фамилия" обязательно для заполнения',
                       ),
               },
             ]}
@@ -156,15 +167,15 @@ const RegistrationPage = () => {
                 validator: (_, value) => {
                   if (!value) {
                     return Promise.reject(
-                      'Поле "Дата рождения" обязательно для заполнения'
+                      'Поле "Дата рождения" обязательно для заполнения',
                     );
                   }
 
                   const today = dayjs();
-                  const sixYearsAgo = today.subtract(6, 'year');
+                  const sixYearsAgo = today.subtract(6, "year");
 
                   if (value.isAfter(today) || value.isAfter(sixYearsAgo)) {
-                    return Promise.reject('Вы должны быть старше 6 лет');
+                    return Promise.reject("Вы должны быть старше 6 лет");
                   }
 
                   return Promise.resolve();
@@ -176,11 +187,11 @@ const RegistrationPage = () => {
               placeholder="__.__.____"
               format="DD.MM.YYYY"
               showToday={false}
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
             />
           </Form.Item>
 
-          <hr style={{ border: '1px solid #E3E3E3' }} />
+          <hr style={{ border: "1px solid #E3E3E3" }} />
 
           <Form.Item
             label={
@@ -196,7 +207,7 @@ const RegistrationPage = () => {
                     ? Promise.resolve()
                     : Promise.reject('Поле "Почта" обязательно для заполнения'),
               },
-              { type: 'email', message: 'Некорректный формат почты' },
+              { type: "email", message: "Некорректный формат почты" },
             ]}
             className={styles.inputItem}
           >
@@ -216,13 +227,13 @@ const RegistrationPage = () => {
                   value
                     ? Promise.resolve()
                     : Promise.reject(
-                        'Поле "VK/Telegram" обязательно для заполнения'
+                        'Поле "VK/Telegram" обязательно для заполнения',
                       ),
               },
-              // {
-              //   type: 'url',
-              //   message: 'Некорректный формат ссылки',
-              // },
+              {
+                type: "url",
+                message: "Некорректный формат ссылки",
+              },
             ]}
             className={styles.inputItem}
           >
@@ -232,7 +243,7 @@ const RegistrationPage = () => {
           <Form.Item
             label={
               <span>
-                Чем вы занимаетесь по жизни
+                Чем вы занимаетесь?
                 <span className={styles.requiredStar}>*</span>
               </span>
             }
@@ -243,7 +254,7 @@ const RegistrationPage = () => {
                   value
                     ? Promise.resolve()
                     : Promise.reject(
-                        'Поле "Чем вы занимаетесь по жизни" обязательно для заполнения'
+                        'Поле "Чем вы занимаетесь?" обязательно для заполнения',
                       ),
               },
             ]}
@@ -259,8 +270,8 @@ const RegistrationPage = () => {
             </Select>
           </Form.Item>
 
-          {(educationalStatus === 'school_student' ||
-            educationalStatus === 'university_student') && (
+          {(educationalStatus === "school_student" ||
+            educationalStatus === "university_student") && (
             <Form.Item
               label={
                 <span>
@@ -274,7 +285,7 @@ const RegistrationPage = () => {
                     value
                       ? Promise.resolve()
                       : Promise.reject(
-                          'Поле "Место учёбы" обязательно для заполнения'
+                          'Поле "Место учёбы" обязательно для заполнения',
                         ),
                 },
               ]}
@@ -297,7 +308,7 @@ const RegistrationPage = () => {
                   value
                     ? Promise.resolve()
                     : Promise.reject(
-                        'Поле "Сфера интересов" обязательно для заполнения'
+                        'Поле "Сфера интересов" обязательно для заполнения',
                       ),
               },
             ]}
@@ -309,7 +320,7 @@ const RegistrationPage = () => {
             </Select>
           </Form.Item>
 
-          <hr style={{ border: '1px solid #E3E3E3' }} />
+          <hr style={{ border: "1px solid #E3E3E3" }} />
 
           <Form.Item
             label={
@@ -324,10 +335,10 @@ const RegistrationPage = () => {
                   value
                     ? Promise.resolve()
                     : Promise.reject(
-                        'Поле "Пароль" обязательно для заполнения'
+                        'Поле "Пароль" обязательно для заполнения',
                       ),
               },
-              { min: 6, message: 'Пароль должен содержать минимум 6 символов' },
+              { min: 6, message: "Пароль должен содержать минимум 6 символов" },
             ]}
             className={styles.inputItem}
           >
@@ -348,15 +359,15 @@ const RegistrationPage = () => {
                   value
                     ? Promise.resolve()
                     : Promise.reject(
-                        'Поле "Подтверждение пароля" обязательно для заполнения'
+                        'Поле "Подтверждение пароля" обязательно для заполнения',
                       ),
               },
               ({ getFieldValue }) => ({
                 validator(_, value) {
-                  if (!value || getFieldValue('password') === value) {
+                  if (!value || getFieldValue("password") === value) {
                     return Promise.resolve();
                   }
-                  return Promise.reject(new Error('Пароли не совпадают'));
+                  return Promise.reject(new Error("Пароли не совпадают"));
                 },
               }),
             ]}
@@ -373,7 +384,7 @@ const RegistrationPage = () => {
             <div className={styles.checkboxBlock}>
               <Checkbox required />
               <div className={styles.checkboxTextBlock}>
-                Нажимая кнопку «Зарегистрироваться», я даю согласие на{' '}
+                Нажимая кнопку «Зарегистрироваться», я даю согласие на{" "}
                 <span className={styles.dataAllow}>
                   обработку, передачу и хранение персональных данных
                 </span>

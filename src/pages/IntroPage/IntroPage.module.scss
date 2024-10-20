@@ -1,86 +1,163 @@
-  .introPage {
-    padding: 20px 50px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
+.introPage {
+  padding: 20px 50px; 
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.breadcrumb {
+  font-size: 16px;
+  color: #7D7D7D;
+  margin-bottom: 40px;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: #666;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.contentBlock {
+  margin-bottom: 40px;
+
+ul li {
+  line-height: 1.5;
+}
+}
+
+.contentBlock h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.contentBlock p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.cardsContainer {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+gap: 15px;
+}
+
+.card {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  height: 220px;
+  width: 100%;
+  color: white;
+  background-color: #25492A;
+  transition: background-color 0.6s ease, transform 0.6s ease, box-shadow 0.6s ease;
+}
+
+.cardImage {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.card:hover {
+  background-color: #282B2F;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover .cardImage {
+  transform: scale(1.1);
+}
+
+
+.card ul {
+  position: absolute;
+  top: 40px;
+  left: 28px;
+  width: 65%;
+  padding-left: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #f0f0f0;
+}
+
+.card ul li {
+  margin-bottom: 5px;
+}
+
+.arrowIcon {
+position: absolute;
+bottom: 15px;
+right: 15px;
+width: 30px;
+height: 30px;
+}
+
+.card h3 {
+width: 80%;
+text-align: start;
+font-size: 20px;
+font-weight: bold;
+margin: 0;
+position: absolute;
+top: 15px;
+left: 20px;
+z-index: 2;
+color: #fff;
+text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.spinner {
+  width: 100%;
+  min-height: 500px;
+}
+
+.videoContainer {
+width: 100%;
+margin-top: 40px;
+}
+
+@media (max-width: 692px) {
   .breadcrumb {
-    font-size: 16px;
-    color: #7D7D7D;
-    margin-bottom: 40px;
-  }
-  
-  .breadcrumb a {
-    text-decoration: none;
-    color: #666;
-  }
-  
-  .breadcrumb a:hover {
-    text-decoration: underline;
-  }
-  
-  h1 {
-    font-size: 32px;
-    font-weight: bold;
+    font-size: 14px;
     margin-bottom: 20px;
-  }
-  
-  .contentBlock {
-    margin-bottom: 40px;
-  }
-  
-  .contentBlock h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .contentBlock p {
-    font-size: 16px;
     line-height: 1.5;
-    margin-bottom: 15px;
   }
-  
+}
+
+@media (max-width: 570px) {
+  .card {
+    height: 330px;
+  }
+
+  .card ul {
+    top: 55px;
+    width: 70%;
+    font-size: 14px;
+  }
+
   .cardsContainer {
     display: grid;
-    justify-items: center;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px 40px;
-    margin-bottom: 40px;
-  }
-  
-  .card {
-    text-decoration: none;
-    justify-content: center;
-    align-items: center;
-    width: 95%;
-    min-height: 150px;
-    background-image: url('./assets/science-article.png');
-    background-size: 100% 100%;
-    color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
-  }
-  
-  .card h3 {
-    font-size: 25px;
-    margin: 0 15px;
-  }
-  
-  .card ul li {
-    width: 60%;
-    font-size: 14px;
-    margin-bottom: 5px;
-  }
-
-  @media (max-width: 767px) {
-    .cardsContainer {
-        grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    gap: 15px;
     }
+    
 
-    .breadcrumb {
-        font-size: 14px;
-        margin-bottom: 20px;
-        line-height: 1.5;
-    }
+  .cardImage {
+    width: 50%;
+    height: 50%;
+  }
 }

@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { AxiosError } from 'axios';
-import { Form, Input, Button, Checkbox, Alert } from 'antd';
-import { useFeedback } from 'hooks/useFeedback';
-import feedback from './assets/feedback.png';
-import styles from './FeedbackSection.module.scss';
+import { useState } from "react";
+import { AxiosError } from "axios";
+import { Form, Input, Button, Checkbox, Alert } from "antd";
+import { useFeedback } from "hooks/useFeedback";
+import feedback from "./assets/feedback.png";
+import styles from "./FeedbackSection.module.scss";
 
 const { TextArea } = Input;
 
@@ -16,8 +16,8 @@ interface FeedbackData {
 }
 
 const FeedbackSection = () => {
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [form] = Form.useForm();
 
   const { mutate: feedbackMutation, isPending } = useFeedback();
@@ -26,27 +26,31 @@ const FeedbackSection = () => {
     feedbackMutation(values, {
       onSuccess: () => {
         form.resetFields();
-        setErrorMessage('');
-        setSuccessMessage('Ваше обращение успешно отправлено!');
+        setErrorMessage("");
+        setSuccessMessage("Ваше обращение успешно отправлено!");
       },
       onError: (message) => {
         const errorData = message?.response?.data;
-      
-        if (errorData && typeof errorData === 'object') {
-          const errorMessages = Object.entries(errorData).map(([field, errors]) => {
-            if (Array.isArray(errors)) {
-              return `${field}: ${errors.join(', ')}`;
-            } else {
-              return `${field}: ${errors}`;
-            }
-          }).join('\n');
-      
-          setErrorMessage('Произошла ошибка при отправке обращения:' + '\n' + errorMessages);
+
+        if (errorData && typeof errorData === "object") {
+          const errorMessages = Object.entries(errorData)
+            .map(([field, errors]) => {
+              if (Array.isArray(errors)) {
+                return `${field}: ${errors.join(", ")}`;
+              } else {
+                return `${field}: ${errors}`;
+              }
+            })
+            .join("\n");
+
+          setErrorMessage(
+            "Произошла ошибка при отправке обращения:" + "\n" + errorMessages,
+          );
         } else {
-          setErrorMessage('Произошла ошибка при отправке обращения.');
+          setErrorMessage("Произошла ошибка при отправке обращения.");
         }
-      
-        setSuccessMessage('');
+
+        setSuccessMessage("");
       },
     });
   };
@@ -69,33 +73,40 @@ const FeedbackSection = () => {
 
         {successMessage && (
           <Alert
-            style={{ marginTop: '20px', width: '94%' }}
+            style={{ marginTop: "20px", width: "94%" }}
             message={successMessage}
             type="success"
             showIcon
             closable
-            onClose={() => setSuccessMessage('')}
+            onClose={() => setSuccessMessage("")}
           />
         )}
 
         {errorMessage && (
           <Alert
-            style={{ marginTop: '20px', width: '94%', whiteSpace: 'pre-wrap' }}
+            style={{ marginTop: "20px", width: "94%", whiteSpace: "pre-wrap" }}
             message={errorMessage}
             type="error"
             showIcon
             closable
-            onClose={() => setErrorMessage('')}
+            onClose={() => setErrorMessage("")}
           />
         )}
 
-        <Form form={form} name="feedback" layout="vertical" onFinish={handleSubmit}>
+        <Form
+          form={form}
+          name="feedback"
+          layout="vertical"
+          onFinish={handleSubmit}
+        >
           <div className={styles.inputGroup}>
             <Form.Item
               className={styles.inputField}
               label="Имя"
               name="name"
-              rules={[{ required: true, message: 'Пожалуйста, введите своё имя!' }]}
+              rules={[
+                { required: true, message: "Пожалуйста, введите своё имя!" },
+              ]}
             >
               <Input placeholder="Напишите своё имя" />
             </Form.Item>
@@ -105,10 +116,14 @@ const FeedbackSection = () => {
               label="Телефон"
               name="phoneNumber"
               rules={[
-                { required: true, message: 'Пожалуйста, введите номер телефона!' },
+                {
+                  required: true,
+                  message: "Пожалуйста, введите номер телефона!",
+                },
                 {
                   pattern: /^\d{10}$/,
-                  message: 'Введите номер телефона - 10 цифр без пробелов и символов',
+                  message:
+                    "Введите номер телефона - 10 цифр без пробелов и символов",
                 },
               ]}
             >
@@ -120,8 +135,8 @@ const FeedbackSection = () => {
               label="E-mail"
               name="email"
               rules={[
-                { required: true, message: 'Пожалуйста, введите ваш e-mail!' },
-                { type: 'email', message: 'Введите корректный e-mail' },
+                { required: true, message: "Пожалуйста, введите ваш e-mail!" },
+                { type: "email", message: "Введите корректный e-mail" },
               ]}
             >
               <Input placeholder="example@email.com" />
@@ -131,10 +146,19 @@ const FeedbackSection = () => {
           <Form.Item
             label="Текст обращения"
             name="text"
-            style={{ marginBottom: '30px' }}
-            rules={[{ required: true, message: 'Пожалуйста, введите текст обращения!' }]}
+            style={{ marginBottom: "30px" }}
+            rules={[
+              {
+                required: true,
+                message: "Пожалуйста, введите текст обращения!",
+              },
+            ]}
           >
-            <TextArea className={styles.textArea} rows={4} placeholder="Напишите текст обращения/вопрос" />
+            <TextArea
+              className={styles.textArea}
+              rows={4}
+              placeholder="Напишите текст обращения/вопрос"
+            />
           </Form.Item>
 
           <Form.Item
@@ -144,20 +168,30 @@ const FeedbackSection = () => {
             rules={[
               {
                 validator: (_, value) =>
-                  value ? Promise.resolve() : Promise.reject('Вы должны согласиться с условиями!'),
+                  value
+                    ? Promise.resolve()
+                    : Promise.reject("Вы должны согласиться с условиями!"),
               },
             ]}
           >
-            <div style={{ display: 'flex', alignItems: 'center', width: '80%' }}>
+            <div
+              style={{ display: "flex", alignItems: "center", width: "80%" }}
+            >
               <Checkbox />
-              <span style={{ marginLeft: '8px' }}>
-                Нажимая кнопку «Отправить», я даю согласие на обработку, передачу и хранение персональных данных
+              <span style={{ marginLeft: "8px" }}>
+                Нажимая кнопку «Отправить», я даю согласие на обработку,
+                передачу и хранение персональных данных
               </span>
             </div>
           </Form.Item>
 
           <Form.Item>
-            <Button loading={isPending} type="primary" htmlType="submit" className={styles.submitButton}>
+            <Button
+              loading={isPending}
+              type="primary"
+              htmlType="submit"
+              className={styles.submitButton}
+            >
               Отправить
             </Button>
           </Form.Item>

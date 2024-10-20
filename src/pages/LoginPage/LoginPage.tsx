@@ -1,25 +1,25 @@
-import { useState } from 'react';
-import { Form, Input, Button, Alert } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from 'hooks/AuthProvider';
-import { useLogin } from 'hooks/useLogin';
-import styles from './LoginPage.module.scss';
+import { useState } from "react";
+import { Form, Input, Button, Alert } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "hooks/AuthProvider";
+import { useLogin } from "hooks/useLogin";
+import styles from "./LoginPage.module.scss";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const { mutate: loginMutation, isPending } = useLogin();
 
   const handleSubmit = (values: any) => {
     loginMutation(values, {
       onSuccess: (data) => {
         login(data.token);
-        navigate('/');
+        navigate("/");
       },
       onError: (error) => {
-        setErrorMessage('Неверный логин или пароль');
-        console.error('Login failed', error);
+        setErrorMessage("Неверный логин или пароль");
+        console.error("Login failed", error);
       },
     });
   };
@@ -51,7 +51,7 @@ const LoginPage = () => {
             type="error"
             showIcon
             closable
-            onClose={() => setErrorMessage('')}
+            onClose={() => setErrorMessage("")}
           />
         )}
 
@@ -73,7 +73,7 @@ const LoginPage = () => {
                 validator: (_, value) =>
                   value
                     ? Promise.resolve()
-                    : Promise.reject('Введите вашу почту!'),
+                    : Promise.reject("Введите вашу почту!"),
               },
             ]}
             className={styles.inputItem}
@@ -91,7 +91,7 @@ const LoginPage = () => {
             rules={[
               {
                 validator: (_, value) =>
-                  value ? Promise.resolve() : Promise.reject('Введите пароль'),
+                  value ? Promise.resolve() : Promise.reject("Введите пароль"),
               },
             ]}
             className={styles.inputItem}

@@ -1,12 +1,12 @@
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import { Typography, Button, Input, Alert } from 'antd';
-import { useEffect, useState } from 'react';
-import { useAuth } from 'hooks/AuthProvider';
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { Typography, Button, Input, Alert } from "antd";
+import { useEffect, useState } from "react";
+import { useAuth } from "hooks/AuthProvider";
 import {
   useConfirmRegistration,
   useResendConfirmationCode,
-} from 'hooks/useRegistration';
-import styles from './ConfirmationPage.module.scss';
+} from "hooks/useRegistration";
+import styles from "./ConfirmationPage.module.scss";
 
 const { Title, Paragraph } = Typography;
 
@@ -14,10 +14,10 @@ const ConfirmationPage = () => {
   const { token } = useParams();
   const navigate = useNavigate();
   const { login } = useAuth();
-  const [confirmationCode, setConfirmationCode] = useState('');
+  const [confirmationCode, setConfirmationCode] = useState("");
   const [countdown, setCountdown] = useState(30);
   const [isTimerActive, setIsTimerActive] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const { mutate: confirm, isPending } = useConfirmRegistration();
   const { mutate: resend } = useResendConfirmationCode();
 
@@ -34,7 +34,7 @@ const ConfirmationPage = () => {
 
   const handleResend = async () => {
     if (!token) {
-      setErrorMessage('Token is missing. Please try again.');
+      setErrorMessage("Token is missing. Please try again.");
       return;
     }
 
@@ -45,7 +45,7 @@ const ConfirmationPage = () => {
 
   const handleConfirm = async () => {
     if (!token) {
-      setErrorMessage('Token is missing. Please try again.');
+      setErrorMessage("Token is missing. Please try again.");
       return;
     }
 
@@ -55,15 +55,15 @@ const ConfirmationPage = () => {
         onSuccess: (data) => {
           if (data.token) {
             login(data.token);
-            navigate('/');
+            navigate("/");
           }
         },
         onError: () => {
           setErrorMessage(
-            'Неправильный код подтверждения. Пожалуйста, попробуйте снова.'
+            "Неправильный код подтверждения. Пожалуйста, попробуйте снова.",
           );
         },
-      }
+      },
     );
   };
 
@@ -125,7 +125,7 @@ const ConfirmationPage = () => {
         >
           {isTimerActive
             ? `Повторно отправить письмо (${countdown}s)`
-            : 'Повторно отправить письмо'}
+            : "Повторно отправить письмо"}
         </Button>
       </div>
     </div>

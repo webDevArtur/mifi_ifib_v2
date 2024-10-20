@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import { useAuth } from 'hooks/AuthProvider';
-import styles from './RegistrationBlock.module.scss';
+import { Link } from "react-router-dom";
+import { useAuth } from "hooks/AuthProvider";
+import styles from "./RegistrationBlock.module.scss";
 
 const Button = () => {
   const { isAuthenticated } = useAuth();

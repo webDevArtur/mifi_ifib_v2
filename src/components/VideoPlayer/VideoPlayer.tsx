@@ -1,7 +1,7 @@
-import React from 'react';
-import { Spin, Flex } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
-import styles from './VideoPlayer.module.scss';
+import React from "react";
+import { Spin, Flex } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
+import styles from "./VideoPlayer.module.scss";
 
 interface VideoPlayerProps {
   src: string;
@@ -24,7 +24,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src, loading = false }) => {
       frameBorder="0"
       allowFullScreen
       className={styles.video}
-      style={loading ? { display: 'none' } : { display: 'block' }}
+      style={loading ? { display: "none" } : { display: "block" }}
     />
   );
 };

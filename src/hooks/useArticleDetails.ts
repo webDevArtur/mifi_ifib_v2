@@ -1,7 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
-import { getArticleById } from 'services/articles';
-import { ArticleDetailsResponse } from 'entities';
-import { techObjectsKeys } from './keys';
+import { useQuery } from "@tanstack/react-query";
+import { getArticleById } from "services/articles";
+import { ArticleDetailsResponse } from "entities";
+import { techObjectsKeys } from "./keys";
 
 const articleDetailsQuery = (articleId: number) => ({
   queryKey: [techObjectsKeys.articles, { articleId }],

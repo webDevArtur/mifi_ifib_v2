@@ -1,0 +1,112 @@
+.introPage {
+    padding: 20px 50px; 
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .breadcrumb {
+    font-size: 16px;
+    color: #7D7D7D;
+    margin-bottom: 40px;
+  }
+  
+  .breadcrumb a {
+    text-decoration: none;
+    color: #666;
+  }
+  
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+  
+  h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .contentBlock {
+    margin-bottom: 40px;
+
+  ul li {
+    line-height: 1.5;
+  }
+  }
+  
+  .contentBlock h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .contentBlock p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+  }
+
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  height: 185px;
+  width: 100%;
+  color: white;
+  background-color: #f0f0f0;
+  transition: transform 0.3s ease-in-out;
+}
+.cardImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.arrowIcon {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
+}
+
+.card h3 {
+  width: 70%;
+  text-align: start;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+  .spinner {
+    width: 100%;
+    min-height: 500px;
+  }
+
+  @media (max-width: 650px) {
+
+    .breadcrumb {
+      font-size: 14px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+  }
+}

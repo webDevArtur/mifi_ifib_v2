@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import styles from './Footer.module.scss';
+import { Link } from "react-router-dom";
+import styles from "./Footer.module.scss";
 
 const Footer = () => {
   return (
@@ -37,7 +37,9 @@ const Footer = () => {
 
             <ul>
               <li>
-                <Link to="/knowledge/radionuclidesDiagnosis">Радионуклидная диагностика и терапия</Link>
+                <Link to="/knowledge/radionuclidesDiagnosis">
+                  Радионуклидная диагностика и терапия
+                </Link>
               </li>
 
               <li>
@@ -57,37 +59,76 @@ const Footer = () => {
               </li>
 
               <li>
-                <Link to="/knowledge/regulatoryDocuments">Нормативно-правовые документы</Link>
+                <Link to="/knowledge/regulatoryDocuments">
+                  Нормативно-правовые документы
+                </Link>
               </li>
             </ul>
           </div>
 
-
           <div className={styles.column}>
-            <h2>Практикум</h2>
+            <h2>
+              <Link to="/practicum">Практикум</Link>
+            </h2>
 
             <ul>
-              <li>VR тренажеры ИФИБ</li>
+              <li>
+                <Link to="/practicum/vert">VERT</Link>
+              </li>
 
-              <li>GATE</li>
+              <li>
+                <Link to="/practicum/virtualSimulators">
+                  Виртуальные тренажеры ИФИБ
+                </Link>
+              </li>
 
-              <li>Системы планирования</li>
+              <li>
+                <Link to="/practicum/planningSystem">Системы планирования</Link>
+              </li>
 
-              <li>БиоПлак</li>
+              <li>
+                <Link to="/practicum/ultrasound">УЗИ</Link>
+              </li>
 
-              <li>Анализ снимков</li>
+              <li>
+                <Link to="/practicum/mri">МРТ</Link>
+              </li>
 
-              <li>Реанимационный монитор</li>
+              <li>
+                <Link to="/practicum/gamma">Гамма-спектрометр</Link>
+              </li>
+
+              <li>
+                <Link to="/practicum/biopac">Biopac</Link>
+              </li>
+
+              <li>
+                <Link to="/practicum/gate">GATE</Link>
+              </li>
+
+              <li>
+                <Link to="/practicum/monitor">Monitor</Link>
+              </li>
+
+              <li>
+                <Link to="/practicum/lingwaves">Lingwaves</Link>
+              </li>
             </ul>
           </div>
 
           <div className={styles.column}>
-            <h2>Квесты</h2>
+            <h2>
+              <Link to="/quests">Квесты</Link>
+            </h2>
 
             <ul>
-              <li>Выбрать квест</li>
+              <li>
+                <Link to="/quests/quest">Квест</Link>
+              </li>
 
-              <li>Рейтинг пользователей</li>
+              <li>
+                <Link to="/quests/userRating">Рейтинг пользователей</Link>
+              </li>
             </ul>
           </div>
         </div>

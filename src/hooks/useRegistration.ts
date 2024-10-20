@@ -1,14 +1,14 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation } from "@tanstack/react-query";
 import {
   registerUser,
   resendConfirmationCode,
   confirmRegistration,
-} from 'services/registration';
+} from "services/registration";
 import {
   RegistrationResponse,
   ConfirmRegistrationResponse,
-} from 'entities/index';
-import { AxiosError } from 'axios';
+} from "entities/index";
+import { AxiosError } from "axios";
 
 interface RegisterData {
   lastName: string;
@@ -30,7 +30,7 @@ export const useRegister = () => {
       return registerUser(data);
     },
     onError: (error) => {
-      console.error('Registration error:', error);
+      console.error("Registration error:", error);
     },
   });
 };
@@ -45,7 +45,7 @@ export const useConfirmRegistration = () => {
       return confirmRegistration(data);
     },
     onError: (error) => {
-      console.error('Confirmation error:', error);
+      console.error("Confirmation error:", error);
     },
   });
 };
@@ -56,7 +56,7 @@ export const useResendConfirmationCode = () => {
       await resendConfirmationCode(data);
     },
     onError: (error) => {
-      console.error('Resend confirmation code error:', error);
+      console.error("Resend confirmation code error:", error);
     },
   });
 };

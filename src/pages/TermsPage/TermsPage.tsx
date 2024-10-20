@@ -1,15 +1,21 @@
-import { useState, useEffect } from 'react';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
-import { useTermsIdByType, useTerms } from 'hooks/useTerms';
-import RegistrationBlock from 'components/RegistrationBlock/RegistrationBlock';
-import { Input, Button, Skeleton } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
-import { NoData } from 'components/NoData/NoData';
-import styles from './TermsPage.module.scss';
+import { useState, useEffect } from "react";
+import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
+import { useTermsIdByType, useTerms } from "hooks/useTerms";
+import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
+import { Input, Button, Skeleton } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import { NoData } from "components/NoData/NoData";
+import styles from "./TermsPage.module.scss";
 
-const alphabet = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'.split('');
+const alphabet = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ".split("");
 
-type TermKeys = "radionuclidesDiagnosis" | "radiationTherapy" | "ultraSoundDiagnosis" | "mriDiagnosis" | "safety" | "regulatoryDocuments";
+type TermKeys =
+  | "radionuclidesDiagnosis"
+  | "radiationTherapy"
+  | "ultraSoundDiagnosis"
+  | "mriDiagnosis"
+  | "safety"
+  | "regulatoryDocuments";
 
 const termTitles: Record<TermKeys, string> = {
   radionuclidesDiagnosis: "Радионуклидная диагностика и терапия",
@@ -24,55 +30,65 @@ const DEBOUNCE_DELAY = 800;
 
 const TermsPage = () => {
   const { type } = useParams<{ type: TermKeys }>();
-  const [activeTab, setActiveTab] = useState('terms');
-  const [searchParams, setSearchParams] = useSearchParams();
-  const initialSearch = searchParams.get('search') || '';
-  const initialLetter = searchParams.get('letter') || 'А';
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const [selectedLetter, setSelectedLetter] = useState<string>(initialSearch ? '' : initialLetter);
+  const initialSearch =
+    new URLSearchParams(location.search).get("search") || "";
+  const initialLetter =
+    new URLSearchParams(location.search).get("letter") || "А";
+
+  const [selectedLetter, setSelectedLetter] = useState<string>(
+    initialSearch ? "" : initialLetter,
+  );
   const [currentPage, setCurrentPage] = useState<number>(1);
   const pageSize = 10;
   const [search, setSearch] = useState<string>(initialSearch);
   const [allTerms, setAllTerms] = useState<any[]>([]);
-  const { data: termsId } = useTermsIdByType(type);
 
+  const { data: termsId } = useTermsIdByType(type);
   const [debouncedSearch, setDebouncedSearch] = useState<string>(search);
+
   const { data: terms, isLoading: isLoadingTerms } = useTerms(
     termsId?.id,
     selectedLetter,
     debouncedSearch,
     pageSize,
-    currentPage
+    currentPage,
   );
 
   const [totalPages, setTotalPages] = useState<number>(0);
 
   useEffect(() => {
     if (terms?.items) {
-      setAllTerms(prev => (currentPage === 1 ? terms.items : [...prev, ...terms.items]));
+      setAllTerms((prev) =>
+        currentPage === 1 ? terms.items : [...prev, ...terms.items],
+      );
       setTotalPages(terms.totalPages);
     }
   }, [terms, currentPage]);
 
   useEffect(() => {
-    if (debouncedSearch.trim() === '') {
-      searchParams.delete('search');
+    const newParams = new URLSearchParams(location.search);
+
+    if (debouncedSearch.trim() === "") {
+      newParams.delete("search");
     } else {
-      searchParams.set('search', debouncedSearch);
+      newParams.set("search", debouncedSearch);
     }
 
-    if (selectedLetter === 'А' || selectedLetter === '') {
-      searchParams.delete('letter');
+    if (selectedLetter === "А" || selectedLetter === "") {
+      newParams.delete("letter");
     } else {
-      searchParams.set('letter', selectedLetter);
+      newParams.set("letter", selectedLetter);
     }
 
-    setSearchParams(searchParams);
-  }, [debouncedSearch, selectedLetter, setSearchParams, searchParams]);
+    navigate(`?${newParams.toString()}`, { replace: true });
+  }, [debouncedSearch, selectedLetter, navigate]);
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      setSelectedLetter(search.trim() === '' ? 'А' : '');
+      setSelectedLetter(search.trim() === "" ? "А" : "");
       setDebouncedSearch(search);
     }, DEBOUNCE_DELAY);
 
@@ -88,7 +104,7 @@ const TermsPage = () => {
   };
 
   const handleLetterClick = (letter: string) => {
-    if (letter !== selectedLetter && search.trim() === '') {
+    if (letter !== selectedLetter && search.trim() === "") {
       setSelectedLetter(letter);
       setCurrentPage(1);
     }
@@ -100,21 +116,17 @@ const TermsPage = () => {
         <Link to="/">Главная</Link> / <Link to="/knowledge">База знаний</Link> /
       </div>
 
-      <h1>{termTitles[type as TermKeys] || ''}</h1>
+      <h1>{termTitles[type as TermKeys] || ""}</h1>
       <p className={styles.description}>
-        Рекомендуется проходить материалы в указанной последовательности для лучшего усвоения темы.
+        Рекомендуется проходить материалы в указанной последовательности для
+        лучшего усвоения темы. Все видеолекции и подкасты должны быть прослушаны
+        до выполнения практических заданий.
       </p>
 
       <div className={styles.tabs}>
-        {['terms', 'equipment', 'materials', 'tasks'].map(tab => (
-          <button
-            key={tab}
-            className={activeTab === tab ? styles.activeTab : ''}
-            onClick={() => setActiveTab(tab)}
-          >
-            {tab === 'terms' ? 'Термины' : tab === 'equipment' ? 'Используемое оборудование' : tab === 'materials' ? 'Учебные материалы' : 'Задания'}
-          </button>
-        ))}
+        <Link to="/equipment">Используемое оборудование</Link>
+        <Link to="/">Учебные материалы</Link>
+        <Link to="/">Задания</Link>
       </div>
 
       <Input
@@ -126,14 +138,14 @@ const TermsPage = () => {
         bordered={false}
       />
 
-      {debouncedSearch.trim() === '' && (
+      {debouncedSearch.trim() === "" && (
         <div className={styles.alphabet}>
-          {alphabet.map(letter => (
+          {alphabet.map((letter) => (
             <span
               key={letter}
               onClick={() => handleLetterClick(letter)}
-              className={selectedLetter === letter ? styles.activeLetter : ''}
-              style={{ cursor: 'pointer', marginRight: '5px' }}
+              className={selectedLetter === letter ? styles.activeLetter : ""}
+              style={{ cursor: "pointer", marginRight: "5px" }}
             >
               {letter}
             </span>
@@ -143,7 +155,12 @@ const TermsPage = () => {
 
       <div className={styles.termsList}>
         {isLoadingTerms && currentPage === 1 ? (
-          <Skeleton active paragraph={{ rows: 18 }} title={false} className={styles.skeleton} />
+          <Skeleton
+            active
+            paragraph={{ rows: 18 }}
+            title={false}
+            className={styles.skeleton}
+          />
         ) : allTerms.length > 0 ? (
           allTerms.map(({ name, definition, id }) => (
             <div className={styles.term} key={id}>
@@ -161,7 +178,7 @@ const TermsPage = () => {
           <Button
             className={styles.button}
             type="primary"
-            onClick={() => setCurrentPage(prev => prev + 1)}
+            onClick={() => setCurrentPage((prev) => prev + 1)}
             loading={isLoadingTerms}
           >
             Показать ещё

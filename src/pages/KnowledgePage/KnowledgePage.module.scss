@@ -59,6 +59,7 @@
   width: 100%;
   color: white;
   background-color: #f0f0f0;
+  transition: transform 0.3s ease-in-out;
 }
 .cardImage {
   position: absolute;
@@ -100,11 +101,6 @@
     width: 100%;
     min-height: 500px;
   }
-
-.videoContainer {
-  width: 100%;
-  margin-top: 40px;
-}
 
   @media (max-width: 650px) {
 

@@ -1,13 +1,13 @@
-import { useMutation } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
-import { sendFeedback } from 'services/feedbackForm';
+import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+import { sendFeedback } from "services/feedbackForm";
 
 interface FeedbackData {
-    name: string;
-    phoneNumber: string;
-    email: string;
-    text: string;
-    allowPersonalDataProcessing: boolean;
+  name: string;
+  phoneNumber: string;
+  email: string;
+  text: string;
+  allowPersonalDataProcessing: boolean;
 }
 
 export const useFeedback = () => {
@@ -16,7 +16,7 @@ export const useFeedback = () => {
       return sendFeedback(data);
     },
     onError: (error) => {
-      console.error('Registration error:', error);
+      console.error("Registration error:", error);
     },
   });
 };

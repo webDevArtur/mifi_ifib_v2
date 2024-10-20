@@ -1,10 +1,10 @@
-import PDFViewer from './components/PdfViewer/PdfViewer';
-import { Link, useParams } from 'react-router-dom';
-import { Spin, Flex } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
-import { useArticleDetails } from 'hooks/useArticleDetails';
-import styles from './ArticleDetailsPage.module.scss';
-import cover from './assets/cover.png';
+import PDFViewer from "./components/PdfViewer/PdfViewer";
+import { Link, useParams } from "react-router-dom";
+import { Spin, Flex } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
+import { useArticleDetails } from "hooks/useArticleDetails";
+import styles from "./ArticleDetailsPage.module.scss";
+import cover from "./assets/cover.png";
 
 const ArticleDetailsPage = () => {
   const { id } = useParams();
@@ -13,8 +13,8 @@ const ArticleDetailsPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.breadcrumb}>
-        <Link to="/">Главная</Link> /{' '}
-        <Link to="/introduction">Введение в медицинскую физику</Link> /{' '}
+        <Link to="/">Главная</Link> /{" "}
+        <Link to="/introduction">Введение в медицинскую физику</Link> /{" "}
         <Link to="/articles">Научно-популярные статьи</Link> /
       </div>
 
@@ -29,7 +29,7 @@ const ArticleDetailsPage = () => {
           <>
             <img
               src={`https://cybernexvpn-stage.ru/${article?.coverUrl}` || cover}
-              alt={article?.name || 'Статья'}
+              alt={article?.name || "Статья"}
               className={styles.articleImage}
             />
 

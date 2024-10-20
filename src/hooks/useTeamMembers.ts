@@ -1,9 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
-import { getTeamMembers } from 'services/teamMembers';
-import { TeamMembersResponse } from 'entities';
+import { getTeamMembers } from "services/teamMembers";
+import { TeamMembersResponse } from "entities";
 
-import { techObjectsKeys } from './keys';
+import { techObjectsKeys } from "./keys";
 
 const teamMembersQuery = () => ({
   queryKey: [techObjectsKeys.mainVideo],

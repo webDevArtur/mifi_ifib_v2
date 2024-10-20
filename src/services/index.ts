@@ -1,6 +1,6 @@
-import axios, { AxiosError, AxiosHeaders, AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosHeaders, AxiosRequestConfig } from "axios";
 
-const key = 'auth_token';
+const key = "auth_token";
 
 const getAccessToken = () => {
   const localStorageData = localStorage.getItem(key);
@@ -10,18 +10,18 @@ const getAccessToken = () => {
     return parsedData.access_token;
   }
 
-  throw new Error('Токен просрочен или отсутствует');
+  throw new Error("Токен просрочен или отсутствует");
 };
 
 export const configureAxios = () => {
-  axios.defaults.baseURL = '/api';
+  axios.defaults.baseURL = "/api";
   axios.defaults.timeout = Infinity;
-  axios.defaults.responseType = 'json';
+  axios.defaults.responseType = "json";
 
   axios.interceptors.request.use((config) => {
     (config.headers as AxiosHeaders).set(
-      'Authorization',
-      `Bearer ${getAccessToken()}`
+      "Authorization",
+      `Bearer ${getAccessToken()}`,
     );
     return config;
   });
@@ -30,7 +30,7 @@ export const configureAxios = () => {
 export const api = <T>(
   url: string,
   params: Partial<AxiosRequestConfig> = {},
-  skipErrorHandling = false
+  skipErrorHandling = false,
 ): Promise<T> =>
   axios(url, params)
     .catch((error) => {
@@ -39,13 +39,13 @@ export const api = <T>(
       if (axiosError.response && !skipErrorHandling) {
         switch (axiosError.response.status) {
           case 401:
-            throw new Error('Необходимо авторизоваться');
+            throw new Error("Необходимо авторизоваться");
           case 403:
-            throw new Error('У вас нет доступа к этой странице');
+            throw new Error("У вас нет доступа к этой странице");
           case 404:
-            throw new Error('Страница не найдена');
+            throw new Error("Страница не найдена");
           case 500:
-            throw new Error('Ошибка подключения к серверу');
+            throw new Error("Ошибка подключения к серверу");
           default:
             throw error;
         }

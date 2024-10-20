@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { Button } from 'antd';
-import { Link } from 'react-router-dom';
-import { useMainVideo } from 'hooks/useMainVideo';
-import VideoPlayer from 'components/VideoPlayer/VideoPlayer';
-import atom from './assets/atom.png';
-import styles from './MainBanner.module.scss';
+import { useState } from "react";
+import { Button } from "antd";
+import { Link } from "react-router-dom";
+import { useMainVideo } from "hooks/useMainVideo";
+import VideoPlayer from "components/VideoPlayer/VideoPlayer";
+import atom from "./assets/atom.png";
+import styles from "./MainBanner.module.scss";
 
 const MainBanner = () => {
   const [loading, setLoading] = useState(false);
@@ -54,7 +54,13 @@ const MainBanner = () => {
                   </Button>
                 </Link>
 
-                <Button href="https://physbio.mephi.ru/" target="_blank" rel="noopener noreferrer" className={styles.button} type="default">
+                <Button
+                  href="https://physbio.mephi.ru/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.button}
+                  type="default"
+                >
                   ИФИБ
                 </Button>
               </div>
@@ -66,17 +72,18 @@ const MainBanner = () => {
           </div>
         </div>
 
-        <Link style={{ width: '100%' }} to="/registration">
+        <Link style={{ width: "100%" }} to="/registration">
           <Button className={styles.registerBtn} type="primary">
             Зарегистрироваться
           </Button>
         </Link>
       </div>
 
-
-
       <div className={styles.videoContainer}>
-        <VideoPlayer src="https://vk.com/video_ext.php?oid=-142173315&id=456239350&hd=2&autoplay=1" loading={loading}></VideoPlayer>
+        <VideoPlayer
+          src="https://vk.com/video_ext.php?oid=-142173315&id=456239350&hd=2&autoplay=1"
+          loading={loading}
+        ></VideoPlayer>
       </div>
     </section>
   );

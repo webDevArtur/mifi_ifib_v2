@@ -1,5 +1,5 @@
-import { api } from './index';
-import { AuthResponse } from 'entities/index';
+import { api } from "./index";
+import { AuthResponse } from "entities/index";
 
 interface LoginData {
   username: string;
@@ -7,7 +7,7 @@ interface LoginData {
 }
 
 export const loginUser = (data: LoginData) =>
-  api<AuthResponse>('https://cybernexvpn-stage.ru/api/v1/auth/login', {
-    method: 'POST',
+  api<AuthResponse>("https://cybernexvpn-stage.ru/api/v1/auth/login", {
+    method: "POST",
     data,
   });

@@ -1,16 +1,20 @@
-import React from 'react';
-import style from './PdfViewer.module.css';
+import React from "react";
+import style from "./PdfViewer.module.scss";
 
 interface PDFViewerProps {
   file: string;
 }
 
 const PDFViewer: React.FC<PDFViewerProps> = ({ file }) => {
-
   return (
-    <object className={style.viewContainer}>
-      <embed src={file} type="application/pdf" className={style.pdfViewer} />
-    </object>
+    <div className={style.container}>
+      <iframe
+        src={file}
+        width="800"
+        height="500"
+        className={style.pdfViewer}
+      ></iframe>
+    </div>
   );
 };
 

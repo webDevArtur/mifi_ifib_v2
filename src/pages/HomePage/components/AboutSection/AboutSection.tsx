@@ -1,7 +1,7 @@
-import { Button, Carousel } from 'antd';
-import styles from './AboutSection.module.scss';
-import aboutIfib1 from './assets/aboutIFIB1.png';
-import aboutIfib2 from './assets/aboutIFIB2.png';
+import { Button, Carousel } from "antd";
+import styles from "./AboutSection.module.scss";
+import aboutIfib1 from "./assets/aboutIFIB1.png";
+import aboutIfib2 from "./assets/aboutIFIB2.png";
 
 const AboutSection = () => {
   return (
@@ -36,14 +36,14 @@ const AboutSection = () => {
 
         <div className={styles.textContainer}>
           <p>
-            Факультет ИФИБ (Институт физики и инженерии биомедицинских систем)
-            НИЯУ МИФИ — ведущий образовательный и научный центр, готовящий
-            специалистов в области медицинской физики, биоинженерии и
-            информационных технологий в медицине.
+            ИФИБ (Инженерно - физический институт биомедицины) НИЯУ МИФИ —
+            ведущий образовательный и научный центр, готовящий специалистов в
+            области медицинской физики, биоинженерии и информационных технологий
+            в медицине.
           </p>
 
           <p>
-            На факультете реализуются современные образовательные программы,
+            В институте реализуются современные образовательные программы,
             которые сочетают фундаментальные знания с практическими навыками.
           </p>
 
