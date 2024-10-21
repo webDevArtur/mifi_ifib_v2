@@ -123,11 +123,11 @@ const FeedbackSection = () => {
                 {
                   pattern: /^\d{10}$/,
                   message:
-                    "Введите номер телефона - 10 цифр без пробелов и символов",
+                    "Введите номер телефона без кода страны (10 цифр)",
                 },
               ]}
             >
-              <Input placeholder="+7 (999) 999-99-99" />
+              <Input placeholder="(999) 999-99-99" />
             </Form.Item>
 
             <Form.Item
