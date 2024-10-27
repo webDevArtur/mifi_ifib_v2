@@ -28,7 +28,7 @@ const TasksPage = () => {
 
       <iframe 
         src="https://stepik.org/course/67/syllabus" 
-        style={{ width: '100%', maxHeight: '600px', border: 'none', marginBottom: '50px' }} 
+        style={{ width: '100%', height: '90vh', border: 'none', marginBottom: '50px' }} 
         title="Stepik Course"
       ></iframe>
 
