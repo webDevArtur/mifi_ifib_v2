@@ -4,9 +4,8 @@
     gap: 20px;
     padding: 40px;
     padding-bottom: 64px;
-    background: url('../../assets/background.png') no-repeat center center;
-    background-size: cover;
-    background-attachment: fixed;
+    background-color: #282B2F;
+    margin-bottom: -15px;
   
     .profileCard {
         display: flex;
@@ -40,12 +39,28 @@
                 flex-direction: column;
                 justify-content: space-around;
 
-                .teamMemberImage {
+                .avatarContainer {
+                  position: relative;
+                  display: inline-block;
+
+                  .teamMemberImage {
                     max-width: 260px;
                     height: 280px;
                     border-radius: 10px;
                     object-fit: cover;
                     margin-bottom: 10px;
+                  }
+
+                  .avatarEditBtn {
+                    position: absolute;
+                    top: 8px;
+                    right: 8px;
+                    background-color: white;
+                    color: #2A6F2B;
+                    border: none;
+                    z-index: 1;
+                    cursor: pointer;
+                  }
                 }
             }
 
@@ -86,10 +101,12 @@
       flex-direction: row;
 
       .notesCard {
+        padding: 0;
         flex: 1;
       }
 
       .questsCard {
+        padding: 0;
         flex: 3;
       }
     }
@@ -126,12 +143,143 @@
     }
   
     .statistics {
+      width: 100%;
       display: flex;
       justify-content: space-between;
   
-      .materials, .tasks, .quests, .points {
-        width: 23%;
+      .materials {
+        width: 30%;
+      }
+
+      .graphs {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 70%;
+
+        .tasks, .quests, .points {
+          width: 23%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }  
       }
     }
   }
+
+  h2 {
+    margin: 10px 0;
+  }
+
+  h3 {
+    margin: 10px 0;
+    color: #1F832E;
+    font-size: 18px;
+  }
+
+  @media (max-width: 895px) {
+    .profilePage {
+      .profileCard {
+        .profileContainer {
+          .teamMember {
+            justify-content: start;
+          }
+
+          .form {
+            .formItem {
+              flex: 100%;
+            }
+          }
+        }
+      }
+
+      .statistics {
+        flex-direction: column;
+
+        .graphs {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+
+            .tasks, .quests, .points {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                margin-bottom: 30px;
+            }  
+        } 
+    }
+  }
+}
+
   
+
+@media (max-width: 635px) {
+  .profilePage {
+    .profileCard {
+      .profileHeader {
+        flex-direction: column;
+        align-items: start;
+        margin-bottom: 10px;
+        padding: 0;
+      }
+
+      .profileContainer {
+        flex-direction: column;
+
+        .teamMember {
+          align-items: center;
+          margin-bottom: 30px;
+
+          .editBtn {
+            width: 260px;
+          }
+        }
+
+        .form {
+          padding: 0;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          .formItem {
+            width: 100%;
+            flex: 1 1 100%;
+            box-sizing: border-box;
+          }
+        }
+      }
+    }
+
+    .achievementsCard {
+      flex-direction: column;
+    }
+  
+    .statistics {
+      flex-direction: column;
+  
+      .graphs {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+  
+        .tasks, .quests, .points {
+          width: 80%;
+          padding: 20px;
+          margin-bottom: 10px;
+        }
+      }
+        
+      .materials {
+        width: 100%;
+        margin-bottom: 30px;
+      }
+  
+    }
+  }
+}

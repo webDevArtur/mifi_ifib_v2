@@ -4,6 +4,7 @@ import styles from "./ProfilePage.module.scss";
 import avatar from "./assets/avatar.png";
 
 const ProfilePage = () => {
+
   return (
     <div className={styles.profilePage}>
       <div className={styles.profileCard}>
@@ -16,7 +17,10 @@ const ProfilePage = () => {
 
         <div className={styles.profileContainer}>
           <div className={styles.teamMember}>
-            <img src={avatar} className={styles.teamMemberImage} />
+            <div className={styles.avatarContainer}>
+              <img src={avatar} alt="Avatar" className={styles.teamMemberImage} />
+              <Button className={styles.avatarEditBtn} icon={<EditOutlined />} />
+            </div>
 
             <Button className={styles.editBtn}>
               Студент
@@ -95,21 +99,21 @@ const ProfilePage = () => {
 
       <div className={styles.achievementsCard}>
         <Card className={styles.notesCard}>
-          <h3>Мои заметки</h3>
+          <h2>Мои заметки</h2>
           <List>
             <List.Item className={styles.listItem}>
               Научно-популярные статьи
             </List.Item>
             <List.Item className={styles.listItem}>Подкасты</List.Item>
-            <List.Item className={styles.listItem}>Видеолекции</List.Item>
+            <List.Item className={styles.listItem}>Видео</List.Item>
           </List>
         </Card>
 
         <Card className={styles.questsCard}>
-          <h3>Мои квесты</h3>
+          <h2>Мои квесты</h2>
           <div className={styles.questsColumns}>
             <div className={styles.activeQuests}>
-              <h4>Активные</h4>
+              <h3>Активные</h3>
               <List>
                 <List.Item className={styles.listItem}>Квест 1</List.Item>
                 <List.Item className={styles.listItem}>Квест 2</List.Item>
@@ -117,7 +121,7 @@ const ProfilePage = () => {
               </List>
             </div>
             <div className={styles.completedQuests}>
-              <h4>Архив (пройденные)</h4>
+              <h3>Архив (пройденные)</h3>
               <List>
                 <List.Item className={styles.listItem}>Квест 1</List.Item>
                 <List.Item className={styles.listItem}>Квест 2</List.Item>
@@ -129,27 +133,41 @@ const ProfilePage = () => {
       </div>
 
       <Card className={styles.statisticsCard}>
-        <h3 className={styles.statisticsTitle}>Моя статистика</h3>
+        <h2 className={styles.statisticsTitle}>Моя статистика</h2>
         <div className={styles.statistics}>
           <div className={styles.materials}>
-            <h4>Материалы</h4>
+            <h3>Материалы</h3>
             <List>
               <List.Item>Научно-популярные статьи: 33</List.Item>
               <List.Item>Подкасты: 24</List.Item>
-              <List.Item>Видеолекции: 9</List.Item>
+              <List.Item>Видео: 9</List.Item>
             </List>
           </div>
+
+          <div className={styles.graphs}>
           <div className={styles.tasks}>
-            <Statistic title="Задачи" value={53} suffix="/ 100" />
-            <Progress type="circle" percent={50}></Progress>
+            <h3 className={styles.taskTitle}>Задачи</h3>
+
+            <Progress type="circle" percent={50} strokeColor="#4CAF50" />
+
+            <Statistic value={50} suffix="/ 100" valueStyle={{ fontSize: '16px', color: '#000', marginTop: '10px' }}/>
           </div>
+
           <div className={styles.quests}>
-            <Statistic title="Квесты" value={5} suffix="/ 10" />
-            <Progress type="circle" percent={20}></Progress>
+            <h3 className={styles.questTitle}>Квесты</h3>
+
+            <Progress type="circle" percent={50} strokeColor="#4CAF50" />
+
+            <Statistic value={5} suffix="/ 10" valueStyle={{ fontSize: '16px', color: '#000', marginTop: '10px' }}/>
           </div>
+
           <div className={styles.points}>
-            <Statistic title="Баллы" value={154} suffix="/ 345" />
-            <Progress type="circle" percent={20}></Progress>
+            <h3 className={styles.pointsTitle}>Баллы</h3>
+
+            <Progress type="circle" percent={50} strokeColor="#4CAF50" />
+
+            <Statistic value={154} suffix="/ 345" valueStyle={{ fontSize: '16px', color: '#000', marginTop: '10px' }}/>
+          </div>
           </div>
         </div>
       </Card>

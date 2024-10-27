@@ -17,7 +17,7 @@ const Footer = () => {
               </li>
 
               <li>
-                <Link to="/video-lectures">Видеолекции</Link>
+                <Link to="/video-lectures">Видео</Link>
               </li>
 
               <li>

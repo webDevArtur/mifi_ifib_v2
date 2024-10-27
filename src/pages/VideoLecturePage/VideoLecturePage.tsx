@@ -12,7 +12,7 @@ const VideoLecturePage = () => {
       <div className={styles.breadcrumb}>
         <Link to="/">Главная</Link> /{" "}
         <Link to="/introduction">Введение в медицинскую физику</Link> /{" "}
-        <Link to="/video-lectures">Видеолекции</Link> /
+        <Link to="/video-lectures">Видео</Link> /
       </div>
 
       <h1>

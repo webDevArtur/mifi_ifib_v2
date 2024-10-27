@@ -39,19 +39,19 @@ const VideoLecturesPage = () => {
       <div className={styles.breadcrumb}>
         <Link to="/">Главная</Link> /{" "}
         <Link to="/introduction">Введение в медицинскую физику</Link> /
-        Видеолекции
+        Видео
       </div>
 
-      <h1>Видеолекции</h1>
+      <h1>Видео</h1>
       <p className={styles.description}>
         Рекомендуется проходить материалы в указанной последовательности для
-        лучшего усвоения темы. Все видеолекции и подкасты должны быть прослушаны
+        лучшего усвоения темы. Все видео и подкасты должны быть прослушаны
         до выполнения практических заданий.
       </p>
 
       <Input
         className={styles.searchInput}
-        placeholder="Введите название видеолекции"
+        placeholder="Введите название видео"
         prefix={<SearchOutlined />}
         bordered={false}
       />

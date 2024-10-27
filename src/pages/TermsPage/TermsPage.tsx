@@ -1,3 +1,4 @@
+// TermsPage.tsx
 import { useState, useEffect } from "react";
 import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
 import { useTermsIdByType, useTerms } from "hooks/useTerms";
@@ -5,26 +6,10 @@ import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
 import { Input, Button, Skeleton } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { NoData } from "components/NoData/NoData";
+import { TermKeys, termTitles } from "catalogs/terms";
 import styles from "./TermsPage.module.scss";
 
 const alphabet = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ".split("");
-
-type TermKeys =
-  | "radionuclidesDiagnosis"
-  | "radiationTherapy"
-  | "ultraSoundDiagnosis"
-  | "mriDiagnosis"
-  | "safety"
-  | "regulatoryDocuments";
-
-const termTitles: Record<TermKeys, string> = {
-  radionuclidesDiagnosis: "Радионуклидная диагностика и терапия",
-  radiationTherapy: "Лучевая терапия",
-  ultraSoundDiagnosis: "УЗИ",
-  mriDiagnosis: "МРТ",
-  safety: "Техника безопасности",
-  regulatoryDocuments: "Нормативно-правовые документы",
-};
 
 const DEBOUNCE_DELAY = 800;
 
@@ -119,14 +104,17 @@ const TermsPage = () => {
       <h1>{termTitles[type as TermKeys] || ""}</h1>
       <p className={styles.description}>
         Рекомендуется проходить материалы в указанной последовательности для
-        лучшего усвоения темы. Все видеолекции и подкасты должны быть прослушаны
+        лучшего усвоения темы. Все видео и подкасты должны быть прослушаны
         до выполнения практических заданий.
       </p>
 
       <div className={styles.tabs}>
+        <Link to="">Термины</Link>
         <Link to="/equipment">Используемое оборудование</Link>
-        <Link to="/">Учебные материалы</Link>
-        <Link to="/">Задания</Link>
+        <a href="https://info.cern.ch/hypertext/WWW/TheProject.html" target="_blank" rel="noopener noreferrer">
+          Учебные материалы
+        </a>
+        <Link to={`/knowledge/${type}/tasks`}>Задания</Link>
       </div>
 
       <Input

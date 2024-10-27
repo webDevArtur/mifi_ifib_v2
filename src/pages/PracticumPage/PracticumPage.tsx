@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import VideoPlayer from "components/VideoPlayer/VideoPlayer";
 import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
 import styles from "./PracticumPage.module.scss";
 import arrowIcon from "./assets/arrow-icon.png";

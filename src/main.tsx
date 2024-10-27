@@ -21,6 +21,7 @@ import EquipmentPage from "pages/EquipmentPage/EquipmentPage";
 import EquipmentDetailsPage from "pages/EquipmentDetailsPage/EquipmentDetailsPage";
 import PodcastsPage from "pages/PodcastsPage/PodcastsPage";
 import PracticumPage from "pages/PracticumPage/PracticumPage";
+import TasksPage from "pages/TasksPage/TasksPage";
 import ScrollToTop from "hooks/ScrollToTop";
 import { AuthProvider } from "hooks/AuthProvider";
 import App from "app/App";
@@ -88,6 +89,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                 <Route path="/knowledge" element={<KnowledgePage />} />
 
                 <Route path="/knowledge/:type" element={<TermsPage />} />
+
+                <Route path="/knowledge/:type/tasks" element={<TasksPage />} />
 
                 {/* Практикум */}
 

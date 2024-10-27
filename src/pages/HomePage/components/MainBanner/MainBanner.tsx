@@ -26,7 +26,7 @@ const MainBanner = () => {
               <div className={styles.buttonGroup}>
                 <Link to="/video-lectures">
                   <Button className={styles.button} type="default">
-                    Видеолекции
+                    Видео
                   </Button>
                 </Link>
 

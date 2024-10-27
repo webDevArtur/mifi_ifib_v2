@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { AxiosError } from "axios";
 import { Form, Input, Button, Checkbox, Alert } from "antd";
 import { useFeedback } from "hooks/useFeedback";
 import feedback from "./assets/feedback.png";
@@ -16,18 +15,27 @@ interface FeedbackData {
 }
 
 const FeedbackSection = () => {
-  const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [form] = Form.useForm();
+  const [submitted, setSubmitted] = useState(false);
 
   const { mutate: feedbackMutation, isPending } = useFeedback();
 
   const handleSubmit = (values: FeedbackData) => {
-    feedbackMutation(values, {
+    setSubmitted(true);
+
+    const phoneNumberWithoutPrefix = values.phoneNumber.slice(2);
+
+    const submissionData = {
+      ...values,
+      phoneNumber: phoneNumberWithoutPrefix,
+    };
+
+    feedbackMutation(submissionData, {
       onSuccess: () => {
         form.resetFields();
-        setErrorMessage("");
         setSuccessMessage("Ваше обращение успешно отправлено!");
+        setSubmitted(false);
       },
       onError: (message) => {
         const errorData = message?.response?.data;
@@ -43,14 +51,12 @@ const FeedbackSection = () => {
             })
             .join("\n");
 
-          setErrorMessage(
-            "Произошла ошибка при отправке обращения:" + "\n" + errorMessages,
-          );
+          setSuccessMessage("");
         } else {
-          setErrorMessage("Произошла ошибка при отправке обращения.");
+          setSuccessMessage("Произошла ошибка при отправке обращения.");
         }
 
-        setSuccessMessage("");
+        setSubmitted(false);
       },
     });
   };
@@ -82,17 +88,6 @@ const FeedbackSection = () => {
           />
         )}
 
-        {errorMessage && (
-          <Alert
-            style={{ marginTop: "20px", width: "94%", whiteSpace: "pre-wrap" }}
-            message={errorMessage}
-            type="error"
-            showIcon
-            closable
-            onClose={() => setErrorMessage("")}
-          />
-        )}
-
         <Form
           form={form}
           name="feedback"
@@ -105,7 +100,18 @@ const FeedbackSection = () => {
               label="Имя"
               name="name"
               rules={[
-                { required: true, message: "Пожалуйста, введите своё имя!" },
+                {
+                  validator: (_, value) => {
+                    if (submitted) {
+                      if (!value) {
+                        return Promise.reject("Поле обязательно для заполнения");
+                      } else if (!/^[А-Яа-яЁёA-Za-z\s-]+$/.test(value)) {
+                        return Promise.reject("Введите корректное имя (только буквы, пробелы и дефисы)");
+                      }
+                    }
+                    return Promise.resolve();
+                  },
+                },
               ]}
             >
               <Input placeholder="Напишите своё имя" />
@@ -115,19 +121,46 @@ const FeedbackSection = () => {
               className={styles.inputField}
               label="Телефон"
               name="phoneNumber"
+              initialValue="+7"
               rules={[
                 {
-                  required: true,
-                  message: "Пожалуйста, введите номер телефона!",
-                },
-                {
-                  pattern: /^\d{10}$/,
-                  message:
-                    "Введите номер телефона без кода страны (10 цифр)",
+
+                  validator: (_, value) => {
+                    if (submitted) {
+                      if (!value || value.length < 12 || !/^\+7\d{10}$/.test(value)) {
+                        return Promise.reject("Поле обязательно для заполнения");
+                      }
+                    }
+                    return Promise.resolve();
+                  },
                 },
               ]}
             >
-              <Input placeholder="(999) 999-99-99" />
+              <Input
+                maxLength={12}
+                onChange={(e) => {
+                  const inputValue = e.target.value;
+
+                  if (inputValue.startsWith('+7')) {
+                    const digitsOnly = inputValue.slice(2).replace(/\D/g, '');
+                    
+                    if (digitsOnly.length <= 10) {
+                      form.setFieldsValue({ phoneNumber: `+7${digitsOnly}` });
+                    }
+                  } else {
+                    form.setFieldsValue({ phoneNumber: '+7' });
+                  }
+                }}
+                value={form.getFieldValue('phoneNumber') || '+7'}
+                onFocus={(e) => {
+                  const value = e.target.value;
+                  if (value === '+7') {
+                    e.target.setSelectionRange(2, 2);
+                  } else if (value.startsWith('+7')) {
+                    e.target.setSelectionRange(2, value.length);
+                  }
+                }}
+              />
             </Form.Item>
 
             <Form.Item
@@ -135,8 +168,16 @@ const FeedbackSection = () => {
               label="E-mail"
               name="email"
               rules={[
-                { required: true, message: "Пожалуйста, введите ваш e-mail!" },
-                { type: "email", message: "Введите корректный e-mail" },
+                {
+                  validator: (_, value) => {
+                    if (submitted && !value) {
+                      return Promise.reject("Поле обязательно для заполнения");
+                    } else if (submitted && value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
+                      return Promise.reject("Введите e-mail в формате example@email.com");
+                    }
+                    return Promise.resolve();
+                  },
+                },
               ]}
             >
               <Input placeholder="example@email.com" />
@@ -149,8 +190,8 @@ const FeedbackSection = () => {
             style={{ marginBottom: "30px" }}
             rules={[
               {
-                required: true,
-                message: "Пожалуйста, введите текст обращения!",
+                required: submitted,
+                message: "Поле обязательно для заполнения",
               },
             ]}
           >
@@ -168,9 +209,9 @@ const FeedbackSection = () => {
             rules={[
               {
                 validator: (_, value) =>
-                  value
-                    ? Promise.resolve()
-                    : Promise.reject("Вы должны согласиться с условиями!"),
+                  submitted && !value
+                    ? Promise.reject("Вы должны согласиться с условиями обработки персональных данных!")
+                    : Promise.resolve(),
               },
             ]}
           >
@@ -191,6 +232,7 @@ const FeedbackSection = () => {
               type="primary"
               htmlType="submit"
               className={styles.submitButton}
+              onClick={() => setSubmitted(true)}
             >
               Отправить
             </Button>

@@ -31,7 +31,7 @@ const Header = () => {
         <Link to="/articles">Научно-популярные статьи</Link>
       </Menu.Item>
       <Menu.Item key="2">
-        <Link to="/video-lectures">Видеолекции</Link>
+        <Link to="/video-lectures">Видео</Link>
       </Menu.Item>
       <Menu.Item key="3">
         <Link to="/podcasts">Подкасты</Link>
@@ -219,7 +219,7 @@ const Header = () => {
           </Menu.Item>
           <Menu.Item key="/video-lectures">
             <Link to="/video-lectures" onClick={handleLinkClick}>
-              Видеолекции
+              Видеоматериалы
             </Link>
           </Menu.Item>
           <Menu.Item key="/podcasts">

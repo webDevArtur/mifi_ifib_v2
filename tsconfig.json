@@ -18,7 +18,8 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "resolveJsonModule": true,
   },
   "include": ["src", "vite.config.ts"],
   "exclude": ["node_modules", "dist"]
