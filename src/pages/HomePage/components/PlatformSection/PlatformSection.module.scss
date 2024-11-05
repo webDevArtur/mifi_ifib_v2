@@ -1,110 +1,132 @@
 .platformSection {
-    margin: 20px;
-  }
-  
-  .content {
-    background-color: #f0f9f6;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 10px;
-  }
-  
+  margin: 20px;
+}
+
+.content {
+  background-color: #f0f9f6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.imageContainer {
+  flex: 1;
+}
+
+.image {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.textContainer {
+  width: 50%;
+  padding-left: 20px;
+}
+
+.heading {
+  font-size: 35px;
+  color: #2b5329;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.chipContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.list {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.listItem {
+  padding: 10px 0;
+  color: #2b5329;
+  font-size: 22px;
+}
+
+.registerButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  background-color: #2b5329;
+  border: none;
+  color: white;
+  width: 100%;
+  height: 50px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 100px;
+}
+
+.registerButton:hover {
+  background-color: #25492a !important;
+}
+
+@media (max-width: 1080px) {
   .imageContainer {
-    flex: 1;
+    height: 40vh;
   }
-  
+
   .image {
-    width: 100%;
-    object-fit: cover;
-    border-radius: 10px;
+    height: 100%;
   }
-  
-  .textContainer {
-    width: 50%;
-    padding-left: 20px;
-  }
-  
+
   .heading {
-    font-size: 28px;
-    color: #2b5329;
-    font-weight: bold;
-    margin-bottom: 20px;
+    font-size: 24px;
   }
-  
-  .chipContainer {
-    display: flex;
+
+  .listItem {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 720px) {
+  .content {
     flex-direction: column;
-    gap: 10px;
   }
-  
-  .chip {
-    width: max-content;
-    padding: 10px 15px;
-    background-color: #CCE8CF;
-    border: 2px solid #2b5329;
-    border-radius: 25px;
-    color: #2b5329;
-    font-weight: 500;
-    font-size: 16px;
-    display: inline-block;
-  }
-  
-  .registerButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    background-color: #2b5329;
-    border: none;
-    color: white;
+
+  .textContainer {
     width: 100%;
-    height: 50px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 100px;
-  }
-  
-  .registerButton:hover {
-    background-color: #25492A !important;
+    padding: 0;
   }
 
-  @media (max-width: 1080px) {
-    .imageContainer {
-      height: 40vh;
-    }
-    
-    .image {
-      height: 100%;
-    }
+  .listItem {
+    font-size: 20px;
   }
 
-  @media (max-width: 720px) {
-    .content {
-      flex-direction: column;
-    }
-
-    .textContainer {
-      width: 100%;
-      padding: 0;
-    }
-
-    .chipContainer {
-      padding: 20px;
-    }
-
-    .chip {
-      font-size: 14px;
-    }
-
-    .heading {
-      padding: 20px;
-      font-size: 20px;
-      margin: 0;
-    }
-
-    .imageContainer {
-      order: 2;
-    }
+  .list {
+    margin-left: 20px;
   }
-  
+
+  .heading {
+    padding: 20px;
+    font-size: 24px;
+    margin: 0;
+  }
+
+  .imageContainer {
+    order: 2;
+  }
+}
+
+@media (max-width: 540px) {
+  .list {
+    margin-left: 10px;
+  }
+
+  .listItem {
+    font-size: 16px;
+  }
+
+  .heading {
+    padding: 10px;
+    font-size: 20px;
+    margin: 0;
+  }
+}

@@ -1,10 +1,9 @@
-// TermsPage.tsx
 import { useState, useEffect } from "react";
 import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
 import { useTermsIdByType, useTerms } from "hooks/useTerms";
 import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
 import { Input, Button, Skeleton } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import { FileFilled, SearchOutlined } from "@ant-design/icons";
 import { NoData } from "components/NoData/NoData";
 import { TermKeys, termTitles } from "catalogs/terms";
 import styles from "./TermsPage.module.scss";
@@ -101,20 +100,56 @@ const TermsPage = () => {
         <Link to="/">Главная</Link> / <Link to="/knowledge">База знаний</Link> /
       </div>
 
-      <h1>{termTitles[type as TermKeys] || ""}</h1>
+      <h1 className={styles.h1}>{termTitles[type as TermKeys] || ""}</h1>
+
       <p className={styles.description}>
-        Рекомендуется проходить материалы в указанной последовательности для
-        лучшего усвоения темы. Все видео и подкасты должны быть прослушаны
-        до выполнения практических заданий.
+        Предлагаем тебе следующий план для работы с разделом:
+      </p>
+
+      <p className={styles.description}>
+        Просмотри термины для дальнейшего изучения раздела. После этого можешь
+        переходить к учебным материалам.
+      </p>
+
+      <a
+        className={styles.materialLink}
+        href="https://info.cern.ch/hypertext/WWW/TheProject.html"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <FileFilled className={styles.materialIcon} />
+        Учебные материалы
+      </a>
+
+      <p className={styles.description}>
+        В учебных материалах находится справочник медицинских физиков с краткой
+        теорией по темам и перекрестными ссылками внутри, чтобы сразу убрать
+        возникающие вопросы.
+      </p>
+
+      <p className={styles.description}>
+        После изучения материалов предлагаем ответить на тестовые задания в
+        соответствующей вкладке.
+      </p>
+
+      <p className={styles.description}>
+        Если материал, представленный в справочнике медицинского физика кажется
+        вам сложным и непонятным, ознакомься с видеоматериалами, научно –
+        популярными статьями и
+        <Link className={styles.textLink} to="/equipment">
+          {" "}
+          3Д моделями используемого оборудования{" "}
+        </Link>{" "}
+        с описательными карточками.
       </p>
 
       <div className={styles.tabs}>
-        <Link to="">Термины</Link>
-        <Link to="/equipment">Используемое оборудование</Link>
-        <a href="https://info.cern.ch/hypertext/WWW/TheProject.html" target="_blank" rel="noopener noreferrer">
-          Учебные материалы
-        </a>
-        <Link to={`/knowledge/${type}/tasks`}>Задания</Link>
+        <Link to="" className={styles.activeTab}>
+          Термины
+        </Link>
+        <Link to={`/knowledge/${type}/tasks`} className={styles.tab}>
+          Задания
+        </Link>
       </div>
 
       <Input

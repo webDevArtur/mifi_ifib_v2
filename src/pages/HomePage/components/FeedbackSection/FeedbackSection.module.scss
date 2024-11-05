@@ -1,146 +1,146 @@
 .feedbackContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #e9f7eb;
-    margin: 20px;
-    border-radius: 16px;
-    box-shadow: 0 10px 20px rgb(0 0 0 / 10%);
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e9f7eb;
+  margin: 20px;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgb(0 0 0 / 10%);
+}
+
+.imageContainer {
+  width: 45%;
+}
+
+.imageContainer img {
+  border-radius: 16px;
+  width: 100%;
+}
+
+.formContainer {
+  flex: 1;
+  width: 55%;
+}
+
+.title {
+  font-size: 50px;
+  color: #3b6e33;
+  margin: 30px 0;
+}
+
+.description {
+  margin: 0;
+  font-size: 16px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+}
+
+.inputGroup {
+  margin: 15px 0;
+  display: flex;
+  gap: 20px;
+}
+
+.inputField {
+  flex: 1;
+  margin: 0;
+}
+
+.inputField label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
+
+.inputField input {
+  width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.textAreaField label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
+
+.textArea {
+  width: 94%;
+  resize: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  height: 120px;
+}
+
+.submitButton {
+  width: 94%;
+  background-color: #3b6e33;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #29521f !important;
+}
+
+.checkbox {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.footerText {
+  width: 100%;
+  font-size: 16px;
+  color: #263238;
+  margin: 5px 0;
+}
+
+@media (max-width: 1024px) {
   .imageContainer {
-    width: 45%;
+    display: none;
   }
-  
-  .imageContainer img {
-    border-radius: 16px;
-    width: 100%;
+
+  .inputGroup {
+    flex-direction: column;
   }
-  
-  .formContainer {
-    flex: 1;
-    width: 55%;
-  }
-  
+
   .title {
     font-size: 50px;
-    color: #3b6e33;
-    margin: 30px 0;
   }
-  
-  .description {
-    margin: 0;
-    font-size: 16px;
-  }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-    margin-top: 24px;
-  }
-  
-  .inputGroup {
-    margin: 15px 0;
-    display: flex;
-    gap: 20px;
-  }
-  
-  .inputField {
-    flex: 1;
-    margin: 0;
-  }
-  
-  .inputField label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 0.9rem;
-  }
-  
+
   .inputField input {
-    width: 80%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  
-  .textAreaField label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 0.9rem;
-  }
-  
-  .textArea  {
-    width: 94%;
-    resize: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-    height: 120px;
-  }
-  
-  .submitButton {
-    width: 94%;
-    background-color: #3b6e33;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  
-  .submitButton:hover {
-    background-color: #29521f !important;
+    width: 100%;
   }
 
-  .checkbox {
+  .textArea {
     width: 100%;
-    display: flex;
-    flex-direction: row;
   }
-  
-  .footerText {
-    width: 100%;
+
+  .description {
     font-size: 16px;
-    color: #263238;
-    margin: 5px 0;
+    margin: 10px 0;
   }
 
-  @media (max-width: 1024px) {
-    .imageContainer {
-      display: none;
-    }
-
-    .inputGroup {
-      flex-direction: column;
-    }
-
-    .title {
-      font-size: 50px;
-    }
-
-    .inputField input {
-      width: 100%;
-    }
-
-    .textArea {
-      width: 100%;
-    }
-
-    .description {
-      font-size: 16px;
-      margin: 10px 0;
-    }
-
-    .formContainer {
-      padding: 20px;
-      width: 100%;
-    }
-
-    .submitButton {
-      width: 100%;
-    }
+  .formContainer {
+    padding: 20px;
+    width: 100%;
   }
+
+  .submitButton {
+    width: 100%;
+  }
+}
 
 @media (max-width: 720px) {
   .title {

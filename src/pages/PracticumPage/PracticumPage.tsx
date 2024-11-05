@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
 import styles from "./PracticumPage.module.scss";
@@ -53,12 +52,10 @@ const cardData = [
 ];
 
 const PracticumPage = () => {
-  const [loading, setLoading] = useState(false);
-
   return (
     <div className={styles.introPage}>
       <nav className={styles.breadcrumb}>
-        <Link to="/">Главная</Link> / База знаний
+        <Link to="/">Главная</Link> / Практикум
       </nav>
 
       <div className={styles.contentBlock}>

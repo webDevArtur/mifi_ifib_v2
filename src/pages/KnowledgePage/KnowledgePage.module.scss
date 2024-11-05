@@ -1,49 +1,49 @@
 .introPage {
-    padding: 20px 50px; 
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-bottom: 50px;
-  }
-  
-  .breadcrumb {
-    font-size: 16px;
-    color: #7D7D7D;
-    margin-bottom: 40px;
-  }
-  
-  .breadcrumb a {
-    text-decoration: none;
-    color: #666;
-  }
-  
-  .breadcrumb a:hover {
-    text-decoration: underline;
-  }
-  
-  h1 {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .contentBlock {
-    margin-bottom: 40px;
+  padding: 20px 50px;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+.breadcrumb {
+  font-size: 16px;
+  color: #7d7d7d;
+  margin-bottom: 40px;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: #666;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.contentBlock {
+  margin-bottom: 40px;
 
   ul li {
     line-height: 1.5;
   }
-  }
-  
-  .contentBlock h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .contentBlock p {
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 15px;
-  }
+}
+
+.contentBlock h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.contentBlock p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
 
 .cardsContainer {
   display: grid;
@@ -98,16 +98,15 @@
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
-  .spinner {
-    width: 100%;
-    min-height: 500px;
-  }
+.spinner {
+  width: 100%;
+  min-height: 500px;
+}
 
-  @media (max-width: 650px) {
-
-    .breadcrumb {
-      font-size: 14px;
-      margin-bottom: 20px;
-      line-height: 1.5;
+@media (max-width: 650px) {
+  .breadcrumb {
+    font-size: 14px;
+    margin-bottom: 20px;
+    line-height: 1.5;
   }
 }

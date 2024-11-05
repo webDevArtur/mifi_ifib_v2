@@ -55,8 +55,6 @@ const FeedbackSection = () => {
         } else {
           setSuccessMessage("Произошла ошибка при отправке обращения.");
         }
-
-        setSubmitted(false);
       },
     });
   };
@@ -104,9 +102,13 @@ const FeedbackSection = () => {
                   validator: (_, value) => {
                     if (submitted) {
                       if (!value) {
-                        return Promise.reject("Поле обязательно для заполнения");
+                        return Promise.reject(
+                          "Поле обязательно для заполнения",
+                        );
                       } else if (!/^[А-Яа-яЁёA-Za-z\s-]+$/.test(value)) {
-                        return Promise.reject("Введите корректное имя (только буквы, пробелы и дефисы)");
+                        return Promise.reject(
+                          "Введите корректное имя (только буквы, пробелы и дефисы)",
+                        );
                       }
                     }
                     return Promise.resolve();
@@ -124,11 +126,16 @@ const FeedbackSection = () => {
               initialValue="+7"
               rules={[
                 {
-
                   validator: (_, value) => {
                     if (submitted) {
-                      if (!value || value.length < 12 || !/^\+7\d{10}$/.test(value)) {
-                        return Promise.reject("Поле обязательно для заполнения");
+                      if (
+                        !value ||
+                        value.length < 12 ||
+                        !/^\+7\d{10}$/.test(value)
+                      ) {
+                        return Promise.reject(
+                          "Поле обязательно для заполнения",
+                        );
                       }
                     }
                     return Promise.resolve();
@@ -141,22 +148,22 @@ const FeedbackSection = () => {
                 onChange={(e) => {
                   const inputValue = e.target.value;
 
-                  if (inputValue.startsWith('+7')) {
-                    const digitsOnly = inputValue.slice(2).replace(/\D/g, '');
-                    
+                  if (inputValue.startsWith("+7")) {
+                    const digitsOnly = inputValue.slice(2).replace(/\D/g, "");
+
                     if (digitsOnly.length <= 10) {
                       form.setFieldsValue({ phoneNumber: `+7${digitsOnly}` });
                     }
                   } else {
-                    form.setFieldsValue({ phoneNumber: '+7' });
+                    form.setFieldsValue({ phoneNumber: "+7" });
                   }
                 }}
-                value={form.getFieldValue('phoneNumber') || '+7'}
+                value={form.getFieldValue("phoneNumber") || "+7"}
                 onFocus={(e) => {
                   const value = e.target.value;
-                  if (value === '+7') {
+                  if (value === "+7") {
                     e.target.setSelectionRange(2, 2);
-                  } else if (value.startsWith('+7')) {
+                  } else if (value.startsWith("+7")) {
                     e.target.setSelectionRange(2, value.length);
                   }
                 }}
@@ -172,8 +179,14 @@ const FeedbackSection = () => {
                   validator: (_, value) => {
                     if (submitted && !value) {
                       return Promise.reject("Поле обязательно для заполнения");
-                    } else if (submitted && value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
-                      return Promise.reject("Введите e-mail в формате example@email.com");
+                    } else if (
+                      submitted &&
+                      value &&
+                      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)
+                    ) {
+                      return Promise.reject(
+                        "Введите e-mail в формате example@email.com",
+                      );
                     }
                     return Promise.resolve();
                   },
@@ -190,8 +203,12 @@ const FeedbackSection = () => {
             style={{ marginBottom: "30px" }}
             rules={[
               {
-                required: submitted,
-                message: "Поле обязательно для заполнения",
+                validator: (_, value) => {
+                  if (submitted && !value) {
+                    return Promise.reject("Поле обязательно для заполнения");
+                  }
+                  return Promise.resolve();
+                },
               },
             ]}
           >
@@ -210,7 +227,9 @@ const FeedbackSection = () => {
               {
                 validator: (_, value) =>
                   submitted && !value
-                    ? Promise.reject("Вы должны согласиться с условиями обработки персональных данных!")
+                    ? Promise.reject(
+                        "Вы должны согласиться с условиями обработки персональных данных!",
+                      )
                     : Promise.resolve(),
               },
             ]}

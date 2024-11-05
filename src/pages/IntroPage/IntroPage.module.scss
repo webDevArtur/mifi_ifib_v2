@@ -1,12 +1,12 @@
 .introPage {
-  padding: 20px 50px; 
+  padding: 20px 50px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .breadcrumb {
   font-size: 16px;
-  color: #7D7D7D;
+  color: #7d7d7d;
   margin-bottom: 40px;
 }
 
@@ -28,9 +28,9 @@ h1 {
 .contentBlock {
   margin-bottom: 40px;
 
-ul li {
-  line-height: 1.5;
-}
+  ul li {
+    line-height: 1.5;
+  }
 }
 
 .contentBlock h2 {
@@ -45,9 +45,9 @@ ul li {
 }
 
 .cardsContainer {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-gap: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+  gap: 15px;
 }
 
 .card {
@@ -58,8 +58,11 @@ gap: 15px;
   height: 220px;
   width: 100%;
   color: white;
-  background-color: #25492A;
-  transition: background-color 0.6s ease, transform 0.6s ease, box-shadow 0.6s ease;
+  background-color: #25492a;
+  transition:
+    background-color 0.6s ease,
+    transform 0.6s ease,
+    box-shadow 0.6s ease;
 }
 
 .cardImage {
@@ -73,7 +76,7 @@ gap: 15px;
 }
 
 .card:hover {
-  background-color: #282B2F;
+  background-color: #282b2f;
   transform: translateY(-2px);
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
@@ -81,7 +84,6 @@ gap: 15px;
 .card:hover .cardImage {
   transform: scale(1.1);
 }
-
 
 .card ul {
   position: absolute;
@@ -99,25 +101,25 @@ gap: 15px;
 }
 
 .arrowIcon {
-position: absolute;
-bottom: 15px;
-right: 15px;
-width: 30px;
-height: 30px;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
 }
 
 .card h3 {
-width: 80%;
-text-align: start;
-font-size: 20px;
-font-weight: bold;
-margin: 0;
-position: absolute;
-top: 15px;
-left: 20px;
-z-index: 2;
-color: #fff;
-text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  width: 80%;
+  text-align: start;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  z-index: 2;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
 .spinner {
@@ -126,8 +128,8 @@ text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
 .videoContainer {
-width: 100%;
-margin-top: 40px;
+  width: 100%;
+  margin-top: 40px;
 }
 
 @media (max-width: 692px) {
@@ -153,8 +155,7 @@ margin-top: 40px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
     gap: 15px;
-    }
-    
+  }
 
   .cardImage {
     width: 50%;

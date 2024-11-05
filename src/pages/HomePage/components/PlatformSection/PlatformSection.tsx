@@ -14,11 +14,11 @@ const PlatformSection = () => {
           <h2 className={styles.heading}>Для кого эта платформа?</h2>
 
           <div className={styles.chipContainer}>
-            <span className={styles.chip}>Школьники старших классов</span>
-
-            <span className={styles.chip}>Студенты – медицинские физики</span>
-
-            <span className={styles.chip}>Практикующие специалисты</span>
+            <ul className={styles.list}>
+              <li className={styles.listItem}>Школьники старших классов</li>
+              <li className={styles.listItem}>Студенты – медицинские физики</li>
+              <li className={styles.listItem}>Практикующие специалисты</li>
+            </ul>
           </div>
         </div>
       </div>

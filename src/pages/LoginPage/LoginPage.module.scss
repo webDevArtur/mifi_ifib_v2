@@ -1,110 +1,108 @@
 .loginContainer {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: url('../../assets/background.png') no-repeat center center;
-    background-size: cover;
-    background-attachment: fixed;
-    background-color: #282B2F;
-    position: relative;
-  }
-  
-  .backLink {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    justify-content: space-between;
-    position: absolute;
-    top: 40px;
-    left: 40px;
-    color: white;
-    font-size: 16px;
-    text-decoration: none;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../../assets/background.png") no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: #282b2f;
+  position: relative;
+}
 
-    svg {
-      margin-right: 5px;
-    }
+.backLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+
+  svg {
+    margin-right: 5px;
   }
-  
+}
+
+.loginCard {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 16px;
+  width: 40%;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
+}
+
+.inputItem {
+  margin: 15px 0;
+
+  span {
+    font-family: "Helvetica Neue";
+    font-weight: 400;
+  }
+}
+
+.requiredStar {
+  color: green;
+  margin-left: 3px;
+}
+
+.loginTitle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.loginButton {
+  width: 100%;
+  background-color: #282b2f;
+  color: white;
+}
+
+.loginButton:hover {
+  background-color: #000 !important;
+}
+
+.forgotPasswordLink {
+  display: inline;
+  justify-content: start;
+  color: #2a6f2b;
+}
+
+.forgotPasswordLink:hover {
+  color: #205421;
+}
+
+.registerLink {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  color: #2a6f2b;
+  font-weight: bold;
+}
+
+.registerLink a {
+  color: #2a6f2b;
+  margin-left: 5px;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
   .loginCard {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 16px;
-    width: 40%;
-    box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
+    width: 80%;
   }
 
-  .inputItem {
-    margin: 15px 0;
-
-    span {
-      font-family: 'Helvetica Neue';
-      font-weight: 400;
-    }
+  .backLink {
+    top: 20px;
+    left: 20px;
   }
 
-  .requiredStar {
-    color: green;
-    margin-left: 3px;
-  }
-  
-  
-  .loginTitle {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .loginButton {
-    width: 100%;
-    background-color: #282B2F;
-    color: white;
-  }
-  
-  .loginButton:hover {
-    background-color: #000 !important;
-  }
-  
-  .forgotPasswordLink {
-    display: inline;
-    justify-content: start;
-    color: #2A6F2B;
-  }
-  
-  .forgotPasswordLink:hover {
-    color: #205421;
-  }
-  
   .registerLink {
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
-    color: #2A6F2B;
-    font-weight: bold;
+    font-size: 14px;
   }
-  
-  .registerLink a {
-    color: #2A6F2B;
-    margin-left: 5px;
-    text-decoration: underline;
-  }
-
-  @media (max-width: 768px) {
-    .loginCard {
-      width: 80%;
-    }
-
-    .backLink {
-      top: 20px;
-      left: 20px;
-    }
-
-    .registerLink {
-      font-size: 14px;
-    }
-  }
-  
+}

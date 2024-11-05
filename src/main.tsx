@@ -21,6 +21,10 @@ import EquipmentPage from "pages/EquipmentPage/EquipmentPage";
 import EquipmentDetailsPage from "pages/EquipmentDetailsPage/EquipmentDetailsPage";
 import PodcastsPage from "pages/PodcastsPage/PodcastsPage";
 import PracticumPage from "pages/PracticumPage/PracticumPage";
+import PracticumDetailsPage from "pages/PracticumDetailsPage/PracticumDetailsPage";
+import QuestsPage from "pages/QuestsPage/QuestsPage";
+import QuestsDetailsPage from "pages/QuestsDetailsPage/QuestsDetailsPage";
+import QuestDetailsPage from "pages/QuestDetailsPage/QuestDetailsPage";
 import TasksPage from "pages/TasksPage/TasksPage";
 import ScrollToTop from "hooks/ScrollToTop";
 import { AuthProvider } from "hooks/AuthProvider";
@@ -95,6 +99,22 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                 {/* Практикум */}
 
                 <Route path="/practicum" element={<PracticumPage />} />
+
+                <Route
+                  path="/practicum/:id"
+                  element={<PracticumDetailsPage />}
+                />
+
+                {/* Квесты */}
+
+                <Route path="/quests" element={<QuestsPage />} />
+
+                <Route path="/quests/:name" element={<QuestsDetailsPage />} />
+
+                <Route
+                  path="/quests/:name/:id"
+                  element={<QuestDetailsPage />}
+                />
               </Route>
             </Routes>
           </Router>

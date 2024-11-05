@@ -4,7 +4,6 @@ import styles from "./ProfilePage.module.scss";
 import avatar from "./assets/avatar.png";
 
 const ProfilePage = () => {
-
   return (
     <div className={styles.profilePage}>
       <div className={styles.profileCard}>
@@ -18,8 +17,15 @@ const ProfilePage = () => {
         <div className={styles.profileContainer}>
           <div className={styles.teamMember}>
             <div className={styles.avatarContainer}>
-              <img src={avatar} alt="Avatar" className={styles.teamMemberImage} />
-              <Button className={styles.avatarEditBtn} icon={<EditOutlined />} />
+              <img
+                src={avatar}
+                alt="Avatar"
+                className={styles.teamMemberImage}
+              />
+              <Button
+                className={styles.avatarEditBtn}
+                icon={<EditOutlined />}
+              />
             </div>
 
             <Button className={styles.editBtn}>
@@ -145,29 +151,53 @@ const ProfilePage = () => {
           </div>
 
           <div className={styles.graphs}>
-          <div className={styles.tasks}>
-            <h3 className={styles.taskTitle}>Задачи</h3>
+            <div className={styles.tasks}>
+              <h3 className={styles.taskTitle}>Задачи</h3>
 
-            <Progress type="circle" percent={50} strokeColor="#4CAF50" />
+              <Progress type="circle" percent={50} strokeColor="#4CAF50" />
 
-            <Statistic value={50} suffix="/ 100" valueStyle={{ fontSize: '16px', color: '#000', marginTop: '10px' }}/>
-          </div>
+              <Statistic
+                value={50}
+                suffix="/ 100"
+                valueStyle={{
+                  fontSize: "16px",
+                  color: "#000",
+                  marginTop: "10px",
+                }}
+              />
+            </div>
 
-          <div className={styles.quests}>
-            <h3 className={styles.questTitle}>Квесты</h3>
+            <div className={styles.quests}>
+              <h3 className={styles.questTitle}>Квесты</h3>
 
-            <Progress type="circle" percent={50} strokeColor="#4CAF50" />
+              <Progress type="circle" percent={50} strokeColor="#4CAF50" />
 
-            <Statistic value={5} suffix="/ 10" valueStyle={{ fontSize: '16px', color: '#000', marginTop: '10px' }}/>
-          </div>
+              <Statistic
+                value={5}
+                suffix="/ 10"
+                valueStyle={{
+                  fontSize: "16px",
+                  color: "#000",
+                  marginTop: "10px",
+                }}
+              />
+            </div>
 
-          <div className={styles.points}>
-            <h3 className={styles.pointsTitle}>Баллы</h3>
+            <div className={styles.points}>
+              <h3 className={styles.pointsTitle}>Баллы</h3>
 
-            <Progress type="circle" percent={50} strokeColor="#4CAF50" />
+              <Progress type="circle" percent={50} strokeColor="#4CAF50" />
 
-            <Statistic value={154} suffix="/ 345" valueStyle={{ fontSize: '16px', color: '#000', marginTop: '10px' }}/>
-          </div>
+              <Statistic
+                value={154}
+                suffix="/ 345"
+                valueStyle={{
+                  fontSize: "16px",
+                  color: "#000",
+                  marginTop: "10px",
+                }}
+              />
+            </div>
           </div>
         </div>
       </Card>

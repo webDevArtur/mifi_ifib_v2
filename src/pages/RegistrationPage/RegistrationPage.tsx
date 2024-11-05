@@ -15,9 +15,12 @@ const RegistrationPage = () => {
     null,
   );
   const [errorMessage, setErrorMessage] = useState("");
+  const [submitted, setSubmitted] = useState(false);
   const { mutate: register, isPending } = useRegister();
 
   const handleSubmit = async (values: any) => {
+    setSubmitted(true);
+
     const registerData = {
       lastName: values.lastName,
       firstName: values.firstName,
@@ -113,12 +116,20 @@ const RegistrationPage = () => {
             name="lastName"
             rules={[
               {
-                validator: (_, value) =>
-                  value
-                    ? Promise.resolve()
-                    : Promise.reject(
+                validator: (_, value) => {
+                  if (submitted) {
+                    if (!value) {
+                      return Promise.reject(
                         'Поле "Фамилия" обязательно для заполнения',
-                      ),
+                      );
+                    } else if (!/^[А-Яа-яЁёA-Za-z\s-]+$/.test(value)) {
+                      return Promise.reject(
+                        "Введите корректную фамилию (только буквы, пробелы и дефисы)",
+                      );
+                    }
+                  }
+                  return Promise.resolve();
+                },
               },
             ]}
             className={styles.inputItem}
@@ -135,10 +146,20 @@ const RegistrationPage = () => {
             name="firstName"
             rules={[
               {
-                validator: (_, value) =>
-                  value
-                    ? Promise.resolve()
-                    : Promise.reject('Поле "Имя" обязательно для заполнения'),
+                validator: (_, value) => {
+                  if (submitted) {
+                    if (!value) {
+                      return Promise.reject(
+                        'Поле "Имя" обязательно для заполнения',
+                      );
+                    } else if (!/^[А-Яа-яЁёA-Za-z\s-]+$/.test(value)) {
+                      return Promise.reject(
+                        "Введите корректное имя (только буквы, пробелы и дефисы)",
+                      );
+                    }
+                  }
+                  return Promise.resolve();
+                },
               },
             ]}
             className={styles.inputItem}
@@ -149,6 +170,20 @@ const RegistrationPage = () => {
           <Form.Item
             label={<span>Отчество</span>}
             name="middleName"
+            rules={[
+              {
+                validator: (_, value) => {
+                  if (submitted) {
+                    if (value && !/^[А-Яа-яЁёA-Za-z\s-]*$/.test(value)) {
+                      return Promise.reject(
+                        "Введите корректное отчество (только буквы, пробелы и дефисы)",
+                      );
+                    }
+                  }
+                  return Promise.resolve();
+                },
+              },
+            ]}
             className={styles.inputItem}
           >
             <Input placeholder="Введите ваше отчество" />
@@ -165,19 +200,20 @@ const RegistrationPage = () => {
             rules={[
               {
                 validator: (_, value) => {
-                  if (!value) {
-                    return Promise.reject(
-                      'Поле "Дата рождения" обязательно для заполнения',
-                    );
+                  if (submitted) {
+                    if (!value) {
+                      return Promise.reject(
+                        'Поле "Дата рождения" обязательно для заполнения',
+                      );
+                    }
+
+                    const today = dayjs();
+                    const sixYearsAgo = today.subtract(6, "year");
+
+                    if (value.isAfter(today) || value.isAfter(sixYearsAgo)) {
+                      return Promise.reject("Вы должны быть старше 6 лет");
+                    }
                   }
-
-                  const today = dayjs();
-                  const sixYearsAgo = today.subtract(6, "year");
-
-                  if (value.isAfter(today) || value.isAfter(sixYearsAgo)) {
-                    return Promise.reject("Вы должны быть старше 6 лет");
-                  }
-
                   return Promise.resolve();
                 },
               },
@@ -202,12 +238,26 @@ const RegistrationPage = () => {
             name="email"
             rules={[
               {
-                validator: (_, value) =>
-                  value
-                    ? Promise.resolve()
-                    : Promise.reject('Поле "Почта" обязательно для заполнения'),
+                validator: (_, value) => {
+                  if (submitted) {
+                    if (!value) {
+                      return Promise.reject(
+                        'Поле "Почта" обязательно для заполнения',
+                      );
+                    }
+                    if (
+                      !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/.test(
+                        value,
+                      )
+                    ) {
+                      return Promise.reject(
+                        "Введите e-mail в формате example@email.com",
+                      );
+                    }
+                  }
+                  return Promise.resolve();
+                },
               },
-              { type: "email", message: "Некорректный формат почты" },
             ]}
             className={styles.inputItem}
           >
@@ -223,16 +273,23 @@ const RegistrationPage = () => {
             name="social"
             rules={[
               {
-                validator: (_, value) =>
-                  value
-                    ? Promise.resolve()
-                    : Promise.reject(
+                validator: (_, value) => {
+                  if (submitted) {
+                    if (!value) {
+                      return Promise.reject(
                         'Поле "VK/Telegram" обязательно для заполнения',
-                      ),
-              },
-              {
-                type: "url",
-                message: "Некорректный формат ссылки",
+                      );
+                    }
+                    if (
+                      !/^https?:\/\/.+\.(com|ru|net|org|info|biz|gov|edu|mil|co|io|me)/i.test(
+                        value,
+                      )
+                    ) {
+                      return Promise.reject("Некорректный формат ссылки");
+                    }
+                  }
+                  return Promise.resolve();
+                },
               },
             ]}
             className={styles.inputItem}
@@ -281,12 +338,16 @@ const RegistrationPage = () => {
               name="workplace"
               rules={[
                 {
-                  validator: (_, value) =>
-                    value
-                      ? Promise.resolve()
-                      : Promise.reject(
-                          'Поле "Место учёбы" обязательно для заполнения',
-                        ),
+                  validator: (_, value) => {
+                    if (submitted) {
+                      return value
+                        ? Promise.resolve()
+                        : Promise.reject(
+                            'Поле "Место учёбы" обязательно для заполнения',
+                          );
+                    }
+                    return Promise.resolve();
+                  },
                 },
               ]}
               className={styles.inputItem}
@@ -331,14 +392,61 @@ const RegistrationPage = () => {
             name="password"
             rules={[
               {
-                validator: (_, value) =>
-                  value
-                    ? Promise.resolve()
-                    : Promise.reject(
-                        'Поле "Пароль" обязательно для заполнения',
-                      ),
+                validator: (_, value) => {
+                  if (submitted && !value) {
+                    return Promise.reject(
+                      new Error('Поле "Пароль" обязательно для заполнения'),
+                    );
+                  }
+                  return Promise.resolve();
+                },
               },
-              { min: 6, message: "Пароль должен содержать минимум 6 символов" },
+              {
+                validator: (_, value) => {
+                  if (submitted && value && value.length < 6) {
+                    return Promise.reject(
+                      new Error("Пароль должен содержать минимум 6 символов"),
+                    );
+                  }
+                  return Promise.resolve();
+                },
+              },
+              {
+                validator: (_, value) => {
+                  if (submitted && value && !/[A-Za-z]/.test(value)) {
+                    return Promise.reject(
+                      new Error("Пароль должен содержать хотя бы одну букву"),
+                    );
+                  }
+                  return Promise.resolve();
+                },
+              },
+              {
+                validator: (_, value) => {
+                  if (submitted && value && !/[0-9]/.test(value)) {
+                    return Promise.reject(
+                      new Error("Пароль должен содержать хотя бы одну цифру"),
+                    );
+                  }
+                  return Promise.resolve();
+                },
+              },
+              {
+                validator: (_, value) => {
+                  if (
+                    submitted &&
+                    value &&
+                    !/[!@#$%^&*(),.?":{}|<>]/.test(value)
+                  ) {
+                    return Promise.reject(
+                      new Error(
+                        "Пароль должен содержать хотя бы один специальный символ",
+                      ),
+                    );
+                  }
+                  return Promise.resolve();
+                },
+              },
             ]}
             className={styles.inputItem}
           >
@@ -355,19 +463,26 @@ const RegistrationPage = () => {
             name="passwordConfirmation"
             rules={[
               {
-                validator: (_, value) =>
-                  value
-                    ? Promise.resolve()
-                    : Promise.reject(
+                validator: (_, value) => {
+                  if (submitted && !value) {
+                    return Promise.reject(
+                      new Error(
                         'Поле "Подтверждение пароля" обязательно для заполнения',
                       ),
+                    );
+                  }
+                  return Promise.resolve();
+                },
               },
               ({ getFieldValue }) => ({
                 validator(_, value) {
-                  if (!value || getFieldValue("password") === value) {
-                    return Promise.resolve();
+                  if (submitted) {
+                    if (!value || getFieldValue("password") === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(new Error("Пароли не совпадают"));
                   }
-                  return Promise.reject(new Error("Пароли не совпадают"));
+                  return Promise.resolve();
                 },
               }),
             ]}
@@ -380,9 +495,19 @@ const RegistrationPage = () => {
             name="agreement"
             valuePropName="checked"
             className={styles.inputItem}
+            rules={[
+              {
+                validator: (_, value) =>
+                  submitted && !value
+                    ? Promise.reject(
+                        "Вы должны согласиться с условиями обработки персональных данных!",
+                      )
+                    : Promise.resolve(),
+              },
+            ]}
           >
             <div className={styles.checkboxBlock}>
-              <Checkbox required />
+              <Checkbox />
               <div className={styles.checkboxTextBlock}>
                 Нажимая кнопку «Зарегистрироваться», я даю согласие на{" "}
                 <span className={styles.dataAllow}>
@@ -398,6 +523,7 @@ const RegistrationPage = () => {
               htmlType="submit"
               className={styles.submitButton}
               loading={isPending}
+              onClick={() => setSubmitted(true)}
             >
               Зарегистрироваться
             </Button>

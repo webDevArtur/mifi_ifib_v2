@@ -1,115 +1,115 @@
 .registrationContainer {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: url('../../assets/background.png') no-repeat center center;
-    background-size: cover;
-    background-attachment: fixed;
-    background-color: #282B2F;
-    padding: 2rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../../assets/background.png") no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: #282b2f;
+  padding: 2rem;
+}
+
+.registrationCard {
+  background: rgb(255 255 255);
+  padding: 2rem;
+  border-radius: 10px;
+  width: 45%;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+}
+
+.registrationTitle {
+  text-align: center;
+  margin: 0;
+}
+
+.backLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+
+  svg {
+    margin-right: 5px;
   }
-  
+}
+
+.registrationForm .antFormItem {
+  margin-bottom: 1rem;
+}
+
+.requiredStar {
+  color: green;
+  margin-left: 3px;
+}
+
+.inputItem {
+  margin: 25px 0;
+
+  span {
+    font-family: "Helvetica Neue";
+    font-weight: 400;
+  }
+}
+
+.checkboxBlock {
+  display: flex;
+  flex-direction: row;
+}
+
+.checkboxTextBlock {
+  font-size: 12px;
+  line-height: 13px;
+  margin-left: 20px;
+}
+
+.dataAllow {
+  text-decoration: underline;
+}
+
+.submitButton {
+  margin-top: 15px;
+  width: 100%;
+  background-color: #282b2f;
+  color: white;
+}
+
+.submitButton:hover {
+  background-color: #000 !important;
+}
+
+.loginLink {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  color: #2a6f2b;
+  font-weight: bold;
+}
+
+.loginLink a {
+  color: #2a6f2b;
+  margin-left: 5px;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
   .registrationCard {
-    background: rgb(255 255 255);
-    padding: 2rem;
-    border-radius: 10px;
-    width: 45%;
-    box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+    margin-top: 50px;
+    width: 80%;
   }
-  
-  .registrationTitle {
-    text-align: center;
-    margin: 0;
-  }
-  
+
   .backLink {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    justify-content: space-between;
-    position: absolute;
-    top: 40px;
-    left: 40px;
-    color: white;
-    font-size: 16px;
-    text-decoration: none;
-
-    svg {
-      margin-right: 5px;
-    }
-  }
-  
-  .registrationForm .antFormItem {
-    margin-bottom: 1rem;
+    top: 20px;
+    left: 20px;
   }
 
-  .requiredStar {
-    color: green;
-    margin-left: 3px;
+  .registerLink {
+    font-size: 14px;
   }
-
-  .inputItem {
-    margin: 25px 0;
-
-    span {
-      font-family: 'Helvetica Neue';
-      font-weight: 400;
-    }
-  }
-
-  .checkboxBlock {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .checkboxTextBlock {
-    font-size: 12px;
-    line-height: 13px;
-    margin-left: 20px;
-  }
-
-  .dataAllow {
-    text-decoration: underline;
-  }
-  
-  .submitButton {
-    width: 100%;
-    background-color: #282B2F;
-    color: white;
-  }
-
-  .submitButton:hover {
-    background-color: #000 !important;
-  }
-  
-  .loginLink {
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
-    color: #2A6F2B;
-    font-weight: bold;
-  }
-  
-  .loginLink a {
-    color: #2A6F2B;
-    margin-left: 5px;
-    text-decoration: underline;
-  }
-  
-  @media (max-width: 768px) {
-    .registrationCard {
-      margin-top: 50px;
-      width: 80%;
-    }
-
-    .backLink {
-      top: 20px;
-      left: 20px;
-    }
-
-    .registerLink {
-      font-size: 14px;
-    }
-  }
+}

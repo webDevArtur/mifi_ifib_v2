@@ -68,14 +68,6 @@ const LoginPage = () => {
               </span>
             }
             name="username"
-            rules={[
-              {
-                validator: (_, value) =>
-                  value
-                    ? Promise.resolve()
-                    : Promise.reject("Введите вашу почту!"),
-              },
-            ]}
             className={styles.inputItem}
           >
             <Input placeholder="example@email.com" />
@@ -88,12 +80,6 @@ const LoginPage = () => {
               </span>
             }
             name="password"
-            rules={[
-              {
-                validator: (_, value) =>
-                  value ? Promise.resolve() : Promise.reject("Введите пароль"),
-              },
-            ]}
             className={styles.inputItem}
           >
             <Input.Password placeholder="Введите пароль" />

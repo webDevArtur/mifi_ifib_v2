@@ -1,222 +1,226 @@
 .profilePage {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 40px;
+  padding-bottom: 64px;
+  background-color: #282b2f;
+  margin-bottom: -15px;
+
+  .profileCard {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 40px;
-    padding-bottom: 64px;
-    background-color: #282B2F;
-    margin-bottom: -15px;
-  
-    .profileCard {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        padding: 16px;
-        background-color: white;
-        border-radius: 20px;
+    gap: 10px;
+    padding: 16px;
+    background-color: white;
+    border-radius: 20px;
 
-        .profileHeader {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-        }
-
-        .profileContainer {
-            display: flex;
-            justify-content: space-between;
-            flex-direction: row;
-
-            .profileTitle {
-                font-size: 24px;
-                font-weight: bold;
-            }
-
-            .teamMember {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-
-                .avatarContainer {
-                  position: relative;
-                  display: inline-block;
-
-                  .teamMemberImage {
-                    max-width: 260px;
-                    height: 280px;
-                    border-radius: 10px;
-                    object-fit: cover;
-                    margin-bottom: 10px;
-                  }
-
-                  .avatarEditBtn {
-                    position: absolute;
-                    top: 8px;
-                    right: 8px;
-                    background-color: white;
-                    color: #2A6F2B;
-                    border: none;
-                    z-index: 1;
-                    cursor: pointer;
-                  }
-                }
-            }
-
-            .form {
-                padding: 0 50px;
-                display: flex;
-                flex-wrap: wrap;
-                gap: 10px 50px;
-            
-                .formItem {
-                    width: 100px;
-                    display: flex;
-                    flex-direction: column;
-                    flex: calc(100% / 3);
-                    box-sizing: border-box;
-                }
-            }
-        }
-    }
-  
-    .editBtn {
-        display: flex;
-        justify-content: center;
-        background-color: #2A6F2B;
-        color: white;
-        border: none;
-    }
-  
-    .editBtn:hover {
-        color: white !important;
-        background-color: #040 !important;
-    }
-  
-
-    .achievementsCard {
+    .profileHeader {
       display: flex;
-      gap: 20px;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .profileContainer {
+      display: flex;
+      justify-content: space-between;
       flex-direction: row;
 
-      .notesCard {
-        padding: 0;
-        flex: 1;
+      .profileTitle {
+        font-size: 24px;
+        font-weight: bold;
       }
 
-      .questsCard {
-        padding: 0;
-        flex: 3;
-      }
-    }
-
-    .listItem {
-      padding: 10px;
-      cursor: pointer;
-      border-radius: 10px;
-    }
-
-    .listItem:hover {
-      background-color: #f5f5f5;
-    }
-
-    .notesCard, .questsCard, .statisticsCard {
-      padding: 20px;
-      border-radius: 16px;
-      background-color: white;
-    }
-  
-    .questsColumns {
-      display: flex;
-      justify-content: space-between;
-  
-      .activeQuests, .completedQuests {
-        width: 48%;
-      }
-    }
-
-    .statisticsTitle {
-      font-size: 24px;
-      font-weight: bold;
-      margin: 0;
-    }
-  
-    .statistics {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-  
-      .materials {
-        width: 30%;
-      }
-
-      .graphs {
+      .teamMember {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 70%;
+        flex-direction: column;
+        justify-content: space-around;
 
-        .tasks, .quests, .points {
-          width: 23%;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }  
-      }
-    }
-  }
+        .avatarContainer {
+          position: relative;
+          display: inline-block;
 
-  h2 {
-    margin: 10px 0;
-  }
-
-  h3 {
-    margin: 10px 0;
-    color: #1F832E;
-    font-size: 18px;
-  }
-
-  @media (max-width: 895px) {
-    .profilePage {
-      .profileCard {
-        .profileContainer {
-          .teamMember {
-            justify-content: start;
+          .teamMemberImage {
+            max-width: 260px;
+            height: 280px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-bottom: 10px;
           }
 
-          .form {
-            .formItem {
-              flex: 100%;
-            }
+          .avatarEditBtn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: white;
+            color: #2a6f2b;
+            border: none;
+            z-index: 1;
+            cursor: pointer;
           }
         }
       }
 
-      .statistics {
+      .form {
+        padding: 0 50px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 50px;
+
+        .formItem {
+          width: 100px;
+          display: flex;
+          flex-direction: column;
+          flex: calc(100% / 3);
+          box-sizing: border-box;
+        }
+      }
+    }
+  }
+
+  .editBtn {
+    display: flex;
+    justify-content: center;
+    background-color: #2a6f2b;
+    color: white;
+    border: none;
+  }
+
+  .editBtn:hover {
+    color: white !important;
+    background-color: #040 !important;
+  }
+
+  .achievementsCard {
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+
+    .notesCard {
+      padding: 0;
+      flex: 1;
+    }
+
+    .questsCard {
+      padding: 0;
+      flex: 3;
+    }
+  }
+
+  .listItem {
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+
+  .listItem:hover {
+    background-color: #f5f5f5;
+  }
+
+  .notesCard,
+  .questsCard,
+  .statisticsCard {
+    padding: 20px;
+    border-radius: 16px;
+    background-color: white;
+  }
+
+  .questsColumns {
+    display: flex;
+    justify-content: space-between;
+
+    .activeQuests,
+    .completedQuests {
+      width: 48%;
+    }
+  }
+
+  .statisticsTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .statistics {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .materials {
+      width: 30%;
+    }
+
+    .graphs {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 70%;
+
+      .tasks,
+      .quests,
+      .points {
+        width: 23%;
+        display: flex;
         flex-direction: column;
-
-        .graphs {
-            margin-top: 30px;
-            display: flex;
-            flex-direction: row;
-            width: 100%;
-
-            .tasks, .quests, .points {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-                margin-bottom: 30px;
-            }  
-        } 
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
 }
 
-  
+h2 {
+  margin: 10px 0;
+}
+
+h3 {
+  margin: 10px 0;
+  color: #1f832e;
+  font-size: 18px;
+}
+
+@media (max-width: 895px) {
+  .profilePage {
+    .profileCard {
+      .profileContainer {
+        .teamMember {
+          justify-content: start;
+        }
+
+        .form {
+          .formItem {
+            flex: 100%;
+          }
+        }
+      }
+    }
+
+    .statistics {
+      flex-direction: column;
+
+      .graphs {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        .tasks,
+        .quests,
+        .points {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          margin-bottom: 30px;
+        }
+      }
+    }
+  }
+}
 
 @media (max-width: 635px) {
   .profilePage {
@@ -259,27 +263,28 @@
     .achievementsCard {
       flex-direction: column;
     }
-  
+
     .statistics {
       flex-direction: column;
-  
+
       .graphs {
         width: 100%;
         flex-direction: column;
         align-items: center;
-  
-        .tasks, .quests, .points {
+
+        .tasks,
+        .quests,
+        .points {
           width: 80%;
           padding: 20px;
           margin-bottom: 10px;
         }
       }
-        
+
       .materials {
         width: 100%;
         margin-bottom: 30px;
       }
-  
     }
   }
 }
