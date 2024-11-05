@@ -109,7 +109,7 @@ const Header = () => {
   const menuItems4 = (
     <Menu>
       <Menu.Item key="1">
-        <Link to="/quests/quest">Выбрать квест</Link>
+        <Link to="/quests">Выбрать квест</Link>
       </Menu.Item>
       <Menu.Item key="2">
         <Link to="/quests/userRating">Рейтинг пользователей</Link>
@@ -342,8 +342,8 @@ const Header = () => {
               Квест
             </Link>
           </Menu.Item>
-          <Menu.Item key="/quests/quest">
-            <Link to="/quests/quest" onClick={handleLinkClick}>
+          <Menu.Item key="/quests">
+            <Link to="/quests" onClick={handleLinkClick}>
               Выбрать квест
             </Link>
           </Menu.Item>

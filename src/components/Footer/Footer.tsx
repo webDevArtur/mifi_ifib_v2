@@ -123,7 +123,7 @@ const Footer = () => {
 
             <ul>
               <li>
-                <Link to="/quests/quest">Квест</Link>
+                <Link to="/quests">Квест</Link>
               </li>
 
               <li>
