@@ -120,3 +120,20 @@
     margin-bottom: 20px;
   }
 }
+
+@media (pointer: coarse) {
+  .breadcrumb a:hover {
+    text-decoration: none !important;
+  }
+
+  .tabs a:hover {
+    background-color: inherit !important;
+    color: inherit !important;
+  }
+
+  .materialLink:hover,
+  .textLink:hover {
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+}

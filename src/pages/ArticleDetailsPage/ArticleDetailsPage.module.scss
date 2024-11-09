@@ -67,3 +67,9 @@
     line-height: 1.5;
   }
 }
+
+@media (pointer: coarse) {
+  .breadcrumb a:hover {
+    text-decoration: none;
+  }
+}

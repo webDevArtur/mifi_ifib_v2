@@ -53,3 +53,9 @@
     margin-bottom: 20px;
   }
 }
+
+@media (pointer: coarse){
+  .breadcrumb a:hover {
+    text-decoration: none;
+  }
+}

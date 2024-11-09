@@ -288,3 +288,13 @@ h3 {
     }
   }
 }
+
+@media (pointer: coarse) {
+  .editBtn:hover {
+    background-color: #2a6f2b !important;
+  }
+
+  .listItem:hover {
+    background-color: transparent;
+  }
+}

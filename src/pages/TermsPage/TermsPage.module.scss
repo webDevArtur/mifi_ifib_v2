@@ -218,3 +218,18 @@
     }
   }
 }
+
+@media (pointer: coarse) {
+  .breadcrumb a:hover {
+    text-decoration: none !important;
+  }
+
+  .registerButton:hover {
+    background-color: #006400 !important;
+  }
+
+  .button:hover {
+    background-color: #006400 !important;
+  }
+}
+

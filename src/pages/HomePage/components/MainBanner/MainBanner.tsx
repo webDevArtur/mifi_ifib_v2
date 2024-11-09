@@ -42,13 +42,13 @@ const MainBanner = () => {
                   </Button>
                 </Link>
 
-                <Link to="/">
+                <Link to="/practicum/virtualSimulators">
                   <Button className={styles.button} type="default">
                     VR тренажеры
                   </Button>
                 </Link>
 
-                <Link to="/">
+                <Link to="/practicum">
                   <Button className={styles.button} type="default">
                     Практика
                   </Button>

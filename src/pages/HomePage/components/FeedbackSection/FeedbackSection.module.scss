@@ -152,3 +152,9 @@
     margin: 10px 0;
   }
 }
+
+@media (pointer: coarse) {
+  .submitButton:hover {
+    background-color: #3b6e33 !important;
+  }
+}

@@ -100,3 +100,13 @@
     display: none;
   }
 }
+
+@media (pointer: coarse) {
+  li:hover {
+    background-color: #fff !important;
+  }
+
+  .loginButton:hover {
+    background-color: #040 !important;
+  }
+}

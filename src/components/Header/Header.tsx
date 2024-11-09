@@ -157,6 +157,7 @@ const Header = () => {
           placeholder="Поиск"
           prefix={<SearchOutlined />}
           bordered={false}
+          disabled
         />
 
         {isAuthenticated ? (

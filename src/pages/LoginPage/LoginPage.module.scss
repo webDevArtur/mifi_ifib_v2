@@ -106,3 +106,17 @@
     font-size: 14px;
   }
 }
+
+@media (pointer: coarse) {
+  .loginButton:hover {
+    background-color: #282b2f !important;
+  }
+
+  .forgotPasswordLink:hover {
+    color: #2a6f2b;
+  }
+
+  .registerLink a:hover {
+    text-decoration: none;
+  }
+}

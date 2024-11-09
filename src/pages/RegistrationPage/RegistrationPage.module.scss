@@ -113,3 +113,9 @@
     font-size: 14px;
   }
 }
+
+@media (pointer: coarse), (hover: none) {
+  .submitButton:hover {
+    background-color: #282b2f !important;
+  }
+}

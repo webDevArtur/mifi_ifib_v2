@@ -248,3 +248,15 @@
     display: none;
   }
 }
+
+@media (pointer: coarse) {
+  .button:hover {
+    background-color: #cce8cf !important;
+    color: #2b5329 !important;
+    border-color: #2b5329 !important;
+  }
+
+  .registerBtn:hover {
+    background-color: #2e2e2e !important;
+  }
+}

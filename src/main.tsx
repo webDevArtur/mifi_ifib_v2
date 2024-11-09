@@ -19,6 +19,7 @@ import ConfirmationPage from "pages/ConfirmationPage/ConfirmationPage";
 import ProfilePage from "pages/ProfilePage/ProfilePage";
 import EquipmentPage from "pages/EquipmentPage/EquipmentPage";
 import EquipmentDetailsPage from "pages/EquipmentDetailsPage/EquipmentDetailsPage";
+import EquipmentModelPage from "pages/EquipmentModelPage/EquipmentModelPage";
 import PodcastsPage from "pages/PodcastsPage/PodcastsPage";
 import PracticumPage from "pages/PracticumPage/PracticumPage";
 import PracticumDetailsPage from "pages/PracticumDetailsPage/PracticumDetailsPage";
@@ -87,6 +88,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                   path="/equipment/:id"
                   element={<EquipmentDetailsPage />}
                 />
+        
+                <Route path="/equipment/:id/:modelId" element={<EquipmentModelPage />} />
 
                 {/* База знаний */}
 

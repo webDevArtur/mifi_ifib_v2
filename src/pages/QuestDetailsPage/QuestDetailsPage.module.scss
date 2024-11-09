@@ -140,3 +140,23 @@
     margin-bottom: 20px;
   }
 }
+
+@media (pointer: coarse) {
+  .breadcrumb a:hover {
+    text-decoration: none;
+  }
+
+  .tabs a:hover {
+    background-color: transparent;
+  }
+
+  .tabs .activeTab {
+    background-color: #25492a;
+  }
+
+  .tab {
+    background-color: #f5f5f5;
+    color: #25492a;
+    border: 1px solid #000;
+  }
+}

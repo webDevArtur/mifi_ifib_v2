@@ -103,3 +103,15 @@
     left: 20px;
   }
 }
+
+@media (pointer: coarse) {
+  .submitButton:hover {
+    background-color: #282b2f;
+  }
+
+  .resendButton:hover {
+    background-color: transparent;
+    color: #25492a;
+    border: 1px solid #25492a;
+  }
+}

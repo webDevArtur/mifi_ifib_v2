@@ -130,3 +130,9 @@
     margin: 0;
   }
 }
+
+@media (pointer: coarse) {
+  .registerButton:hover {
+    background-color: #2b5329 !important;
+  }
+}

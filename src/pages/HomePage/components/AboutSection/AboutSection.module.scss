@@ -123,3 +123,9 @@
     width: 100%;
   }
 }
+
+@media (pointer: coarse) {
+  .button:hover {
+    background-color: #1f832e !important;
+  }
+}

@@ -13,3 +13,9 @@
 .loginButtonIcon {
   padding-top: 2px;
 }
+
+@media (pointer: coarse) {
+  .loginButton:hover {
+    background-color: #040 !important;
+  }
+}

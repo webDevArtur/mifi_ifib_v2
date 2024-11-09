@@ -110,3 +110,13 @@ h1 {
     line-height: 1.5;
   }
 }
+
+@media (pointer: coarse) {
+  .card:hover .cardImage {
+    transform: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: none;
+  }
+}

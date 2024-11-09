@@ -162,3 +162,19 @@ h1 {
     height: 50%;
   }
 }
+
+@media (pointer: coarse) {
+  .card:hover {
+    background-color: #25492a;
+    transform: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .card:hover .cardImage {
+    transform: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: none;
+  }
+}
