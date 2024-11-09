@@ -112,7 +112,7 @@ const Header = () => {
         <Link to="/quests">Выбрать квест</Link>
       </Menu.Item>
       <Menu.Item key="2">
-        <Link to="/quests/userRating">Рейтинг пользователей</Link>
+        <Link to="/userRating">Рейтинг пользователей</Link>
       </Menu.Item>
     </Menu>
   );
@@ -348,8 +348,8 @@ const Header = () => {
               Выбрать квест
             </Link>
           </Menu.Item>
-          <Menu.Item key="/quests/userRating">
-            <Link to="/quests/userRating" onClick={handleLinkClick}>
+          <Menu.Item key="/userRating">
+            <Link to="/userRating" onClick={handleLinkClick}>
               Рейтинг пользователей
             </Link>
           </Menu.Item>

@@ -127,7 +127,7 @@ const Footer = () => {
               </li>
 
               <li>
-                <Link to="/quests/userRating">Рейтинг пользователей</Link>
+                <Link to="/userRating">Рейтинг пользователей</Link>
               </li>
             </ul>
           </div>
