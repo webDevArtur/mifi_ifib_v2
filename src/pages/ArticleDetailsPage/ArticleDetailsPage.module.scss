@@ -24,6 +24,11 @@
   min-height: 500px;
 }
 
+.articleContainer {
+  display: flex;
+  flex-direction: row;
+}
+
 .articleHeader {
   display: flex;
   align-items: flex-start;
@@ -31,7 +36,7 @@
 }
 
 .articleImage {
-  width: 150px;
+  max-width: 350px;
   height: auto;
   margin-right: 20px;
 }
@@ -40,7 +45,6 @@
   overflow-wrap: anywhere;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   flex-grow: 1;
 
   h1 {
@@ -65,6 +69,18 @@
     font-size: 14px;
     margin-bottom: 20px;
     line-height: 1.5;
+  }
+
+  .articleContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .articleImage {
+    width: 100%;
+    height: auto;
+    margin-right: 0;
+    margin-bottom: 40px;
   }
 }
 

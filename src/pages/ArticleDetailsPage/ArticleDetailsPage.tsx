@@ -5,6 +5,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { useArticleDetails } from "hooks/useArticleDetails";
 import styles from "./ArticleDetailsPage.module.scss";
 import cover from "./assets/cover.png";
+import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
 
 const ArticleDetailsPage = () => {
   const { id } = useParams();
@@ -26,7 +27,7 @@ const ArticleDetailsPage = () => {
         )}
 
         {article && (
-          <>
+          <div className={styles.articleContainer}>
             <img
               src={`https://cybernexvpn-stage.ru/${article?.coverUrl}` || cover}
               alt={article?.name || "Статья"}
@@ -38,7 +39,7 @@ const ArticleDetailsPage = () => {
               <p className={styles.author}>{article?.author}</p>
               <p className={styles.description}>{article?.description}</p>
             </div>
-          </>
+          </div>
         )}
       </div>
 
@@ -47,6 +48,8 @@ const ArticleDetailsPage = () => {
           file={`https://cybernexvpn-stage.ru/${article?.documentUrl}`}
         />
       )}
+
+      <RegistrationBlock />
     </div>
   );
 };

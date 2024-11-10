@@ -8,10 +8,10 @@ import styles from "./ArticlePage.module.scss";
 import { NoData } from "components/NoData/NoData";
 
 const ArticlePage = () => {
-  const location = useLocation(); // Получение текущего местоположения
-  const navigate = useNavigate(); // Для навигации
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const queryParams = new URLSearchParams(location.search); // Используем URLSearchParams
+  const queryParams = new URLSearchParams(location.search);
   const initialPage = parseInt(queryParams.get("page") || "1", 10);
   const initialSearch = queryParams.get("search") || "";
 
@@ -105,8 +105,8 @@ const ArticlePage = () => {
                 />
 
                 <div className={styles.articleDetails}>
-                  <h3>{article.name}</h3>
-                  <p>{article.author}</p>
+                  <h3 className={styles.articleTitle} >{article.name}</h3>
+                  <p className={styles.articleAuthor} >{article.author}</p>
                 </div>
               </Link>
             </li>
