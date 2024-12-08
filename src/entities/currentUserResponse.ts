@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const CurrentUserSchema = z.object({
+export const CurrentUserDetailsSchema = z.object({
   lastName: z.string(),
   firstName: z.string(),
   middleName: z.string().nullable(),
@@ -12,4 +12,8 @@ export const CurrentUserSchema = z.object({
   sphereOfInterest: z.string(),
   role: z.number(),
   isActive: z.boolean(),
+});
+
+export const CurrentUserSchema = z.object({
+  user: CurrentUserDetailsSchema,
 });

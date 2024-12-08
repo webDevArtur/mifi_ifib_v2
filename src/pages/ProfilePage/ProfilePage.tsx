@@ -10,6 +10,7 @@ const { Option } = Select;
 
 const ProfilePage = () => {
   const { data, isLoading } = useCurrentUser();
+  console.log(data);
   const { mutateAsync: editUser } = useEditUser();
 
   const [isEditing, setIsEditing] = useState(false);
