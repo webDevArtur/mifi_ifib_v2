@@ -1,50 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Input } from "antd";
+import { Input, Skeleton } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import RegistraionBlock from "components/RegistrationBlock/RegistrationBlock";
+import { NoData } from "components/NoData/NoData";
 import ReactPlayer from "react-player";
 import styles from "./PodcastsPage.module.scss";
+import { usePodcasts } from "hooks/usePodcasts";
 
 const PodcastsPage = () => {
   const [currentPodcastUrl, setCurrentPodcastUrl] = useState("");
+  const [search, setSearch] = useState<string>("");
+  const [debouncedSearch, setDebouncedSearch] = useState<string>("");
 
-  const lectures = [
-    {
-      id: 1,
-      title:
-        "Основы позитронно-эмиссионной томографии (ПЭТ): Принципы и Применение",
-      teacher: "Банникова Ирина, медицинская физика",
-      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-      locked: false,
-    },
-    {
-      id: 2,
-      title: "Радионуклидная терапия: Технологии и Клинические Применения",
-      teacher: "Банникова Ирина, медицинская физика",
-      url: "https://zaycev.pegasus.zerocdn.com/db298bebc555a1c349c5a62834396b5a:2024100702/track/24891858.mp3",
-      locked: false,
-    },
-    {
-      id: 3,
-      title: "Радионуклидная терапия: Технологии и Клинические Применения",
-      teacher: "Банникова Ирина, медицинская физика",
-      url: "https://zaycev.aureolin.zerocdn.com/374d4f0c2ce4a4d4babd46f6602b1fbf:2024100702/track/6717104.mp3",
-      locked: false,
-    },
-    {
-      id: 4,
-      title:
-        "Основы позитронно-эмиссионной томографии (ПЭТ): Принципы и Применение",
-      teacher: "Банникова Ирина, медицинская физика",
-      url: "https://zaycev.pe.zerocdn.com/95a487c128ecbc7cd01bca4c343615e6:2024100702/track/24679285.mp3",
-      locked: false,
-    },
-  ];
+  const { data: podcastsData, isLoading, error } = usePodcasts(1, 20, debouncedSearch);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 800);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [search]);
 
   const handleCardClick = (url: string) => {
     setCurrentPodcastUrl(url);
   };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
+  const podcasts = podcastsData?.items || [];
 
   return (
     <div className={styles.container}>
@@ -55,35 +44,55 @@ const PodcastsPage = () => {
 
       <h1>Подкасты</h1>
       <p className={styles.description}>
-        Рекомендуется проходить материалы в указанной последовательности для
-        лучшего усвоения темы. Все видео и подкасты должны быть прослушаны до
-        выполнения практических заданий.
+        Новости медицинской физики, диалоги с практикующими медицинскими физиками о карьерном пути, локальные шуточки медицинских физиков – все это вы можете услышать в наших подкастах.
       </p>
+
+      <a className={styles.textLink} href="https://music.yandex.ru/album/24891803" target="_blank">
+        Яндекс.Музыка
+      </a>
 
       <Input
         className={styles.searchInput}
         placeholder="Введите название подкаста или автора"
         prefix={<SearchOutlined />}
         bordered={false}
+        value={search}
+        onChange={handleSearchChange}
       />
 
+      {isLoading && (
+        <div className={styles.podcastGrid}>
+          {Array(4)
+            .fill(null)
+            .map((_, index) => (
+              <div key={index} className={styles.podcastCard}>
+                <Skeleton.Button className={styles.skeleton} active />
+              </div>
+            ))}
+        </div>
+      )}
+
+      {!isLoading && podcasts.length === 0 && <NoData />}
+
       <div className={styles.podcastGrid}>
-        {lectures.map((lecture) => (
+        {podcasts.map((podcast) => (
           <div
-            key={lecture.id}
+            key={podcast.id}
             className={styles.podcastCard}
-            onClick={() => handleCardClick(lecture.url)}
+            onClick={() => handleCardClick(podcast.link)}
           >
             <div className={styles.thumbnail}>
               <div className={styles.overlay}>
-                <div className={styles.playButton}></div>
-                {lecture.locked && <div className={styles.locked}></div>}
+                <img
+                  src={podcast.cover || "./assets/cover.png"}
+                  alt={podcast.name}
+                  className={styles.coverImage}
+                />
               </div>
             </div>
-
             <div className={styles.lectureInfo}>
-              <h3>{lecture.title}</h3>
-              <p>{lecture.teacher}</p>
+              <h3>{podcast.name}</h3>
+              <p>{podcast.description}</p>
             </div>
           </div>
         ))}

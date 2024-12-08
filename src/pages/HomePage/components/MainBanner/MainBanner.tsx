@@ -82,7 +82,6 @@ const MainBanner = () => {
       <div className={styles.videoContainer}>
         <VideoPlayer
           src="https://vk.com/video_ext.php?oid=-142173315&id=456239350&hd=2&autoplay=1"
-          loading={loading}
         ></VideoPlayer>
       </div>
     </section>

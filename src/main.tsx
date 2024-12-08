@@ -30,6 +30,10 @@ import TasksPage from "pages/TasksPage/TasksPage";
 import ScrollToTop from "hooks/ScrollToTop";
 import { AuthProvider } from "hooks/AuthProvider";
 import App from "app/App";
+import ProtectedApp from "app/ProtectedApp";
+import {configureAxios} from "services/index";
+
+configureAxios();
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -63,8 +67,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
               <Route path="/" element={<App />}>
                 <Route index element={<HomePage />} />
 
-                <Route path="/profile" element={<ProfilePage />} />
-
                 {/* Введение в медицинскую физику */}
 
                 <Route path="/introduction" element={<IntroPage />} />
@@ -90,6 +92,12 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                 />
         
                 <Route path="/equipment/:id/:modelId" element={<EquipmentModelPage />} />
+
+              </Route>
+
+              <Route path="/" element={<ProtectedApp />}>
+
+                <Route path="/profile" element={<ProfilePage />} />
 
                 {/* База знаний */}
 

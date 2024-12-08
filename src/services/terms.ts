@@ -2,8 +2,8 @@ import { api } from "./index";
 import { TermIdResponse, TermResponse } from "entities/index";
 
 export const getTermsIdByType = (type?: string) =>
-  api<TermIdResponse>(
-    `https://cybernexvpn-stage.ru/api/v1/knowledge-base?name=${type}`,
+  api<TermIdResponse[]>(
+    `https://medphysicists.mephi.ru/api/v1/knowledge-base?name=${type}`,
   );
 
 export const getTerms = (
@@ -13,12 +13,13 @@ export const getTerms = (
   pageSize?: number,
   pageNumber?: number,
 ) => {
+  console.log(id);
   const startsWithQuery = startsWith ? `&startsWith=${startsWith}` : "";
   const nameQuery = name ? `&name=${name}` : "";
   const pageSizeQuery = pageSize ? `&pageSize=${pageSize}` : "";
   const pageNumberQuery = pageNumber ? `&pageNumber=${pageNumber}` : "";
 
   return api<TermResponse>(
-    `https://cybernexvpn-stage.ru/api/v1/knowledge-base/${id}/terms?${startsWithQuery}${nameQuery}${pageSizeQuery}${pageNumberQuery}`,
+    `https://medphysicists.mephi.ru/api/v1/knowledge-base/${id}/terms?${startsWithQuery}${nameQuery}${pageSizeQuery}${pageNumberQuery}`,
   );
 };

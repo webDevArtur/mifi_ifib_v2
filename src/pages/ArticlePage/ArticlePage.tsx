@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { Input, Pagination, Spin, Flex } from "antd";
-import { SearchOutlined, LoadingOutlined } from "@ant-design/icons";
+import { Input, Pagination, Skeleton } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useArticles } from "hooks/useArticles";
 import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
 import styles from "./ArticlePage.module.scss";
 import { NoData } from "components/NoData/NoData";
+import cover from "./assets/cover.png";
 
 const ArticlePage = () => {
   const location = useLocation();
@@ -20,7 +21,7 @@ const ArticlePage = () => {
   const [search, setSearch] = useState<string>(initialSearch);
   const [debouncedSearch, setDebouncedSearch] = useState<string>(initialSearch);
 
-  const { data, isLoading } = useArticles(page, pageSize, debouncedSearch);
+  const { data, isLoading } = useArticles(undefined, page, pageSize, debouncedSearch);
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -33,7 +34,6 @@ const ArticlePage = () => {
         newParams.set("search", search);
       }
 
-      // Используем navigate для обновления URL
       navigate(`/articles?${newParams.toString()}`, { replace: true });
     }, 800);
 
@@ -55,7 +55,6 @@ const ArticlePage = () => {
       newParams.set("search", search);
     }
 
-    // Используем navigate для обновления URL
     navigate(`/articles?${newParams.toString()}`, { replace: true });
   };
 
@@ -70,9 +69,11 @@ const ArticlePage = () => {
       <h1>Научно-популярные статьи</h1>
 
       <p>
-        Рекомендуется проходить материалы в указанной последовательности для
-        лучшего усвоения темы. Все видео и подкасты должны быть прослушаны до
-        выполнения практических заданий.
+      Как посчитать траекторию движения вашей кошки? Как работает МРТ? Какие виды опухоли бывают? Ответы на эти и другие вопросы вы сможете найти в статьях в данном разделе. 
+      </p>
+
+      <p>
+      Если какая-то статья зацепила, но нет времени дочитать прям сейчас, вы можете сохранить ее в личном кабинете и вернуться к ней позже.
       </p>
 
       <Input
@@ -85,11 +86,21 @@ const ArticlePage = () => {
       />
 
       <ul className={styles.articleList}>
-        {isLoading && (
-          <Flex className={styles.spinner} justify="center" align="center">
-            <Spin indicator={<LoadingOutlined spin />} size="large" />
-          </Flex>
-        )}
+      {isLoading && (
+        <div className={styles.loading}>
+          {Array(3)
+            .fill(null)
+            .map((_, index) => (
+              <Skeleton.Button
+                key={index}
+                className={styles.skeletonButton}
+                active
+                size="large"
+              />
+            ))}
+        </div>
+      )}
+
 
         {!isLoading &&
           data?.items.map((article) => (
@@ -99,9 +110,12 @@ const ArticlePage = () => {
                 className={styles.articleItem}
               >
                 <img
-                  src={`https://cybernexvpn-stage.ru/${article.coverUrl}`}
+                  src={`${article.cover}`}
                   alt={article.name}
                   className={styles.articleImage}
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = cover;
+                  }}
                 />
 
                 <div className={styles.articleDetails}>

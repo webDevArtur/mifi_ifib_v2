@@ -43,11 +43,6 @@ p {
   margin: 0;
 }
 
-.spinner {
-  width: 100%;
-  min-height: 500px;
-}
-
 .articleItem {
   display: flex;
   align-items: center;
@@ -86,6 +81,18 @@ p {
   object-fit: cover;
   margin-right: 20px;
 }
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skeletonButton {
+  width: 100% !important;
+  height: 150px !important;
+}
+
 
 @media (max-width: 768px) {
   .breadcrumb {

@@ -1,33 +1,70 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import VideoPlayer from "components/VideoPlayer/VideoPlayer";
-import RegistraionBlock from "components/RegistrationBlock/RegistrationBlock";
+import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
+import { Skeleton } from "antd";
+import { useVideos } from "hooks/useVideos";
 import styles from "./VideoLecturePage.module.scss";
 
 const VideoLecturePage = () => {
-  const [loading, setLoading] = useState(false);
+  const { id } = useParams<{ id: string }>();
+  const videoId = id ? parseInt(id, 10) : undefined;
+
+  const { data: videos, isLoading, error } = useVideos(
+    [videoId as number],
+    undefined,
+    undefined,
+    undefined
+  );
+
+  const video = videos?.items[0];
+
+  if (isLoading) {
+    return (
+      <div className={styles.container}>
+        <nav className={styles.breadcrumb}>
+          <Link to="/">Главная</Link> /{" "}
+          <Link to="/introduction">Введение в медицинскую физику</Link> /{" "}
+          <Link to="/video-lectures">Видео</Link> /{" "}
+          <Skeleton.Button className={styles.skeletonBreadcrumb} active />
+        </nav>
+
+        <h1 className={styles.h1}>
+          <Skeleton.Button active size="large" className={styles.skeletonTitle} />
+        </h1>
+
+        <p className={styles.subtitle}>
+          <Skeleton.Button active size="large" className={styles.skeletonSubtitle} />
+        </p>
+        
+        <div className={styles.videoContainer}>
+          <Skeleton.Button active className={styles.skeletonVideo} />
+        </div>
+
+        <RegistrationBlock />
+      </div>
+    );
+  }
+
+  if (error || !video) {
+    return <div>Видео не найдено или произошла ошибка при загрузке.</div>;
+  }
 
   return (
     <div className={styles.container}>
-      <div className={styles.breadcrumb}>
+      <nav className={styles.breadcrumb}>
         <Link to="/">Главная</Link> /{" "}
         <Link to="/introduction">Введение в медицинскую физику</Link> /{" "}
-        <Link to="/video-lectures">Видео</Link> /
-      </div>
+        <Link to="/video-lectures">Видео</Link> / {video.name}
+      </nav>
 
-      <h1>
-        Основы позитронно-эмиссионной томографии (ПЭТ): Принципы и Применение
-      </h1>
-      <p className={styles.subtitle}>#томография</p>
+      <h1>{video.name}</h1>
+      <p className={styles.subtitle}>{video.theme}</p>
 
       <div className={styles.videoContainer}>
-        <VideoPlayer
-          src="https://vk.com/video_ext.php?oid=-142173315&id=456239350&hd=2&autoplay=1"
-          loading={loading}
-        ></VideoPlayer>
+        <VideoPlayer src={video.link} />
       </div>
 
-      <RegistraionBlock />
+      <RegistrationBlock />
     </div>
   );
 };

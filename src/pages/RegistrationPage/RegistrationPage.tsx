@@ -294,7 +294,7 @@ const RegistrationPage = () => {
             ]}
             className={styles.inputItem}
           >
-            <Input placeholder="Вставьте ссылку на ваш VK/Telegram" />
+            <Input placeholder="Введите ссылку на VK или Telegram (например, https://t.me/username или https://vk.com/id)" />
           </Form.Item>
 
           <Form.Item
@@ -318,7 +318,7 @@ const RegistrationPage = () => {
             className={styles.inputItem}
           >
             <Select
-              placeholder="Выберите ваш статус"
+              placeholder="Выберите Ваш статус"
               onChange={handleEducationalStatusChange}
             >
               <Option value="school_student">Учусь в школе</Option>

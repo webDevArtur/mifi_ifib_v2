@@ -3,6 +3,10 @@ export const techObjectsKeys = {
   equipments: ["equipments"] as const,
   mainVideo: ["mainVideo"] as const,
   terms: ["terms"] as const,
+  currentUser: ["currentUser"] as const,
+  videos: ["videos"] as const,
+  podcasts: ["podcasts"] as const,
+  practices: ["practices"] as const,
 };
 
 export const articleDetailsKeys = {

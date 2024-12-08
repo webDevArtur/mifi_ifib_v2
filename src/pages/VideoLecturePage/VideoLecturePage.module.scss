@@ -31,14 +31,30 @@ h1 {
   margin-bottom: 20px;
 }
 
-.spinner {
-  width: 100%;
-  min-height: 300px;
-}
-
 .videoContainer {
   width: 100%;
   margin-top: 40px;
+}
+
+.skeletonBreadcrumb {
+  height: 14px !important;
+  margin-left: 2px !important;
+  margin-top: 4px !important;
+}
+
+.skeletonTitle {
+  height: 25px !important;
+}
+
+.skeletonSubtitle {
+  height: 14px !important;
+}
+
+.skeletonVideo {
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: 16 / 9 !important;
+  border-radius: 15px !important;
 }
 
 @media (max-width: 768px) {

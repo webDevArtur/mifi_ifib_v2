@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
 import styles from "./PracticumPage.module.scss";
 import arrowIcon from "./assets/arrow-icon.png";
 import cardImage1 from "./assets/VERT.png";
@@ -16,13 +15,13 @@ import cardImage10 from "./assets/LingWaves.jpg";
 const cardData = [
   { to: "/practicum/vert", src: cardImage1, alt: "VERT", title: "VERT" },
   {
-    to: "/practicum/virtualSimulators",
+    to: "/practicum/ifib_virtual_trainers",
     src: cardImage2,
     alt: "Виртуальные тренажеры ИФИБ",
     title: "Виртуальные тренажеры ИФИБ",
   },
   {
-    to: "/practicum/planningSystem",
+    to: "/practicum/planning_system",
     src: cardImage3,
     alt: "Система планирования",
     title: "Система планирования",
@@ -30,7 +29,7 @@ const cardData = [
   { to: "/practicum/ultrasound", src: cardImage4, alt: "УЗИ", title: "УЗИ" },
   { to: "/practicum/mri", src: cardImage5, alt: "МРТ", title: "МРТ" },
   {
-    to: "/practicum/gamma",
+    to: "/practicum/gamma_spectrometer",
     src: cardImage6,
     alt: "Гамма-спектрометр",
     title: "Гамма-спектрометр",
@@ -91,8 +90,6 @@ const PracticumPage = () => {
           </Link>
         ))}
       </div>
-
-      <RegistrationBlock />
     </div>
   );
 };

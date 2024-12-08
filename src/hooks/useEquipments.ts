@@ -1,17 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-
 import { getEquipments } from "services/equipments";
-import { ArticleResponse } from "entities";
-
+import { EquipmentResponse } from "entities";
 import { techObjectsKeys } from "./keys";
 
-const equipmentsQuery = (page: number, size: number, search?: string) => ({
-  queryKey: [techObjectsKeys.articles, { page, size, search }],
-  queryFn: async () => getEquipments(page, size, search),
+const equipmentsQuery = (page: number, size: number, search?: string, equipmentGroup?: string, ids?: number[]) => ({
+  queryKey: [techObjectsKeys.articles, { page, size, search, equipmentGroup, ids }],
+  queryFn: async () => getEquipments(page, size, search, equipmentGroup, ids),
 });
 
-export const useEquipments = (page: number, size: number, search?: string) =>
-  useQuery<ArticleResponse>({
-    ...equipmentsQuery(page, size, search),
+export const useEquipments = (page: number, size: number, search?: string, equipmentGroup?: string, ids?: number[]) =>
+  useQuery<EquipmentResponse>({
+    ...equipmentsQuery(page, size, search, equipmentGroup, ids),
     throwOnError: false,
   });

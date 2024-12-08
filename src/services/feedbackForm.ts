@@ -9,7 +9,7 @@ interface FeedbackData {
 }
 
 export const sendFeedback = (data: FeedbackData): Promise<void> =>
-  api("https://cybernexvpn-stage.ru/api/v1/home/feedback-form", {
+  api("https://medphysicists.mephi.ru/api/v1/home/feedback-form", {
     method: "POST",
     data,
   });

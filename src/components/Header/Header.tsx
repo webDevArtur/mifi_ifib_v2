@@ -75,21 +75,23 @@ const Header = () => {
         <Link to="/practicum/vert">VERT</Link>
       </Menu.Item>
       <Menu.Item key="2">
-        <Link to="/practicum/virtualSimulators">
+        <Link to="/practicum/ifib_virtual_trainers">
           Виртуальные тренажеры ИФИБ
         </Link>
       </Menu.Item>
       <Menu.Item key="3">
-        <Link to="/practicum/planningSystems">Система планирования</Link>
+        <Link to="/practicum/planning_system">Система планирования</Link>
       </Menu.Item>
       <Menu.Item key="4">
         <Link to="/practicum/ultrasound">УЗИ</Link>
       </Menu.Item>
       <Menu.Item key="5">
-        <Link to="/practicum/mri">MPT</Link>
+        <Link to="/practicum/mri">МРТ</Link>
       </Menu.Item>
       <Menu.Item key="6">
-        <Link to="/practicum/gamma">Гамма-спектрометр</Link>
+        <Link to="/practicum/gamma_spectrometer">
+          Гамма-спектрометр
+        </Link>
       </Menu.Item>
       <Menu.Item key="7">
         <Link to="/practicum/biopac">Biopac</Link>
@@ -277,63 +279,63 @@ const Header = () => {
           </Menu.Item>
 
           <Menu.Item
-            key="/practicum"
-            style={{ fontWeight: "bold", paddingLeft: "5" }}
-          >
-            <Link to="/practicum" onClick={handleLinkClick}>
-              Практикум
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/practicum/vert">
-            <Link to="/practicum/vert" onClick={handleLinkClick}>
-              VERT
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/practicum/virtualSimulators">
-            <Link to="/practicum/virtualSimulators" onClick={handleLinkClick}>
-              Виртуальные тренажеры ИФИБ
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/practicum/planningSystem">
-            <Link to="/practicum/planningSystem" onClick={handleLinkClick}>
-              Система планирования
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/practicum/ultrasound">
-            <Link to="/practicum/ultrasound" onClick={handleLinkClick}>
-              УЗИ
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/practicum/mri">
-            <Link to="/practicum/mri" onClick={handleLinkClick}>
-              МРТ
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/practicum/gamma">
-            <Link to="/practicum/gamma" onClick={handleLinkClick}>
-              Гамма-спектрометр
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/practicum/biopac">
-            <Link to="/practicum/biopac" onClick={handleLinkClick}>
-              Biopac
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/practicum/gate">
-            <Link to="/practicum/gate" onClick={handleLinkClick}>
-              GATE
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/practicum/monitor">
-            <Link to="/practicum/monitor" onClick={handleLinkClick}>
-              Monitor
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/practicum/lingwaves">
-            <Link to="/practicum/lingwaves" onClick={handleLinkClick}>
-              Lingwaves
-            </Link>
-          </Menu.Item>
+              key="/practicum"
+              style={{ fontWeight: "bold", paddingLeft: "5" }}
+            >
+              <Link to="/practicum" onClick={handleLinkClick}>
+                Практикум
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="/practicum/vert">
+              <Link to="/practicum/vert" onClick={handleLinkClick}>
+                VERT
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="/practicum/ifib_virtual_trainers">
+              <Link to="/practicum/ifib_virtual_trainers" onClick={handleLinkClick}>
+                Виртуальные тренажеры ИФИБ
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="/practicum/planning_system">
+              <Link to="/practicum/planning_system" onClick={handleLinkClick}>
+                Система планирования
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="/practicum/ultrasound">
+              <Link to="/practicum/ultrasound" onClick={handleLinkClick}>
+                УЗИ
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="/practicum/mri">
+              <Link to="/practicum/mri" onClick={handleLinkClick}>
+                МРТ
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="/practicum/gamma_spectrometer">
+              <Link to="/practicum/gamma_spectrometer" onClick={handleLinkClick}>
+                Гамма-спектрометр
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="/practicum/biopac">
+              <Link to="/practicum/biopac" onClick={handleLinkClick}>
+                Biopac
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="/practicum/gate">
+              <Link to="/practicum/gate" onClick={handleLinkClick}>
+                GATE
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="/practicum/monitor">
+              <Link to="/practicum/monitor" onClick={handleLinkClick}>
+                Monitor
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="/practicum/lingwaves">
+              <Link to="/practicum/lingwaves" onClick={handleLinkClick}>
+                Lingwaves
+              </Link>
+            </Menu.Item>
 
           <Menu.Item
             key="/quests"

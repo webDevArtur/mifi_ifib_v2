@@ -64,6 +64,21 @@
   }
 }
 
+.skeletonImage {
+  width: 300px !important;
+  height: 300px !important;
+  margin-right: 20px;
+}
+
+.skeletonTitle {
+  height: 25px !important;
+}
+
+.skeletonPdf {
+  width: 100% !important;
+  height: 400px !important;
+}
+
 @media (max-width: 768px) {
   .breadcrumb {
     font-size: 14px;
@@ -81,6 +96,22 @@
     height: auto;
     margin-right: 0;
     margin-bottom: 40px;
+  }
+
+  .skeletonImage {
+    width: 270px !important;
+    height: 150px !important;
+    margin-right: 0;
+    margin-bottom: 20px !important;
+  }
+
+  .skeletonTitle {
+    height: 25px !important;
+  }
+
+  .skeletonPdf {
+    width: 100% !important;
+    height: 400px !important;
   }
 }
 

@@ -29,6 +29,19 @@ h1 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 25px;
+  margin-bottom: 50px;
+}
+
+.skeletonItem {
+  width: 100% !important;
+  height: 250px !important;
+  border-radius: 8px !important;
+}
+
+.skeletonText {
+  height: 25px !important;
+  width: 200px !important;
+  margin-top: 5px !important;
 }
 
 .gridItem {

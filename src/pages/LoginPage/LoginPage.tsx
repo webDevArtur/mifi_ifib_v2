@@ -15,7 +15,10 @@ const LoginPage = () => {
     loginMutation(values, {
       onSuccess: (data) => {
         login(data.token);
-        navigate("/");
+        
+        const redirectPath = localStorage.getItem("redirectPath") || "/";
+        localStorage.removeItem("redirectPath");
+        navigate(redirectPath);
       },
       onError: (error) => {
         setErrorMessage("Неверный логин или пароль");
@@ -23,10 +26,14 @@ const LoginPage = () => {
       },
     });
   };
+  
+  const handleGoHome = () => {
+    localStorage.removeItem("redirectPath");
+  };
 
   return (
     <div className={styles.loginContainer}>
-      <Link to="/" className={styles.backLink}>
+      <Link to="/" className={styles.backLink} onClick={handleGoHome}>
         <svg
           width="16"
           height="16"

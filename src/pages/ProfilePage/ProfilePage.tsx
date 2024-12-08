@@ -1,21 +1,78 @@
-import { Card, Form, Input, Button, List, Statistic, Progress } from "antd";
+import { useState, useEffect } from "react";
+import { Card, Form, Input, Button, List, Statistic, Progress, Select, Spin } from "antd";
 import { EditOutlined } from "@ant-design/icons";
+import { useCurrentUser } from "hooks/useCurrentUser";
+import { useEditUser } from "hooks/useEditUser";
 import styles from "./ProfilePage.module.scss";
 import avatar from "./assets/avatar.png";
 
+const { Option } = Select;
+
 const ProfilePage = () => {
+  const { data, isLoading } = useCurrentUser();
+  const { mutateAsync: editUser } = useEditUser();
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [form] = Form.useForm();
+
+  const user = data?.user;
+
+  useEffect(() => {
+    if (user) {
+      form.setFieldsValue({
+        lastName: user.lastName || "",
+        firstName: user.firstName || "",
+        middleName: user.middleName || "",
+        birthDate: user.birthDate || "",
+        socialNetwork: user.socialNetwork || "",
+        educationalStatus: user.educationalStatus || "",
+        educationalFacility: user.educationalFacility || "",
+        sphereOfInterest: user.sphereOfInterest || "",
+      });
+    }
+  }, [user, form]);
+
+  const handleEditClick = () => {
+    if (isEditing) {
+      form
+        .validateFields()
+        .then((values) => {
+          editUser(values)
+            .then(() => {
+              setIsEditing(false);
+            })
+            .catch((error) => {
+              console.error("Ошибка при редактировании:", error);
+            });
+        })
+        .catch((errorInfo) => {
+          console.error("Ошибка валидации:", errorInfo);
+        });
+    } else {
+      setIsEditing(true);
+    }
+  };
+
+  if (!user && !isLoading) {
+    return <div>Данные пользователя не найдены.</div>;
+  }
+
   return (
     <div className={styles.profilePage}>
       <div className={styles.profileCard}>
         <div className={styles.profileHeader}>
           <h2 className={styles.profileTitle}>Мой профиль</h2>
-          <Button className={styles.editBtn} icon={<EditOutlined />}>
-            Редактировать профиль
+          <Button
+            className={styles.editBtn}
+            icon={<EditOutlined />}
+            onClick={handleEditClick}
+          >
+            {isEditing ? "Сохранить" : "Редактировать профиль"}
           </Button>
         </div>
 
         <div className={styles.profileContainer}>
-          <div className={styles.teamMember}>
+          {/* <div className={styles.teamMember}>
             <div className={styles.avatarContainer}>
               <img
                 src={avatar}
@@ -27,77 +84,46 @@ const ProfilePage = () => {
                 icon={<EditOutlined />}
               />
             </div>
+          </div> */}
 
-            <Button className={styles.editBtn}>
-              Студент
-              <svg
-                width="16"
-                height="12"
-                viewBox="0 0 16 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <mask
-                  id="mask0_1414_5571"
-                  maskUnits="userSpaceOnUse"
-                  x="-1"
-                  y="0"
-                  width="17"
-                  height="12"
-                >
-                  <path
-                    d="M0.666504 3.8L7.67384 1L14.6812 3.8L7.67384 6.6L0.666504 3.8Z"
-                    fill="#555555"
-                    stroke="white"
-                    stroke-width="1.5"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M14.6814 3.83667V6.911M3.85205 5.275V9.42234C3.85205 9.42234 5.45538 11 7.67405 11C9.89305 11 11.4964 9.42234 11.4964 9.42234V5.275"
-                    stroke="white"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </mask>
-                <g mask="url(#mask0_1414_5571)">
-                  <path d="M0 -2H16V14H0V-2Z" fill="white" />
-                </g>
-              </svg>
-            </Button>
-          </div>
-
-          <Form layout="vertical" className={styles.form}>
-            <Form.Item className={styles.formItem} label="Фамилия">
-              <Input value="Иванов" />
+          <Form
+            form={form}
+            layout="vertical"
+            className={styles.form}
+          >
+            <Form.Item className={styles.formItem} label="Фамилия" name="lastName">
+              <Input disabled={!isEditing || isLoading} />
             </Form.Item>
 
-            <Form.Item className={styles.formItem} label="Имя">
-              <Input value="Иван" />
+            <Form.Item className={styles.formItem} label="Имя" name="firstName">
+              <Input disabled={!isEditing || isLoading} />
             </Form.Item>
 
-            <Form.Item className={styles.formItem} label="Отчество">
-              <Input value="Иванович" />
+            <Form.Item className={styles.formItem} label="Отчество" name="middleName">
+              <Input disabled={!isEditing || isLoading} />
             </Form.Item>
 
-            <Form.Item className={styles.formItem} label="Дата рождения">
-              <Input value="24.07.2004" />
+            <Form.Item className={styles.formItem} label="Дата рождения" name="birthDate">
+              <Input disabled={!isEditing || isLoading} />
             </Form.Item>
 
-            <Form.Item className={styles.formItem} label="Почта">
-              <Input value="example@email.com" />
+            <Form.Item className={styles.formItem} label="VK/Telegram" name="socialNetwork">
+              <Input disabled={!isEditing || isLoading} />
             </Form.Item>
 
-            <Form.Item className={styles.formItem} label="VK/Telegram">
-              <Input value="@iwanow" />
+            <Form.Item className={styles.formItem} label="Выберите Ваш статус" name="educationalStatus">
+              <Select disabled={!isEditing || isLoading}>
+                <Option value="school_student">Учусь в школе</Option>
+                <Option value="university_student">Учусь в вузе</Option>
+              </Select>
             </Form.Item>
 
-            <Form.Item className={styles.formItem} label="Место учёбы/работы">
-              <Input value="НИЯУ МИФИ" />
+            <Form.Item className={styles.formItem} label="Место учёбы" name="educationalFacility">
+              <Input disabled={!isEditing || isLoading} />
             </Form.Item>
 
-            <Form.Item className={styles.formItem} label="Сфера интересов">
-              <Input value="Биомедицина" />
+            <Form.Item className={styles.formItem} label="Сфера интересов" name="sphereOfInterest">
+              <Input disabled={!isEditing || isLoading} />
             </Form.Item>
           </Form>
         </div>

@@ -1,14 +1,21 @@
-import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
+import { useState, useEffect } from "react";
+import { Link, useParams, useSearchParams } from "react-router-dom";
+import IframeWithLoader from "components/IframeWithLoader/IframeWithLoader";
 import styles from "./QuestDetailsPage.module.scss";
 
 const QuestDetailsPage = () => {
   const { name } = useParams();
-  const [activeTab, setActiveTab] = useState("online");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeTabFromURL = searchParams.get("tab") || "online";
+  const [activeTab, setActiveTab] = useState(activeTabFromURL);
+
+  useEffect(() => {
+    setActiveTab(activeTabFromURL);
+  }, [activeTabFromURL]);
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
+    setSearchParams({ tab });
   };
 
   return (
@@ -48,21 +55,17 @@ const QuestDetailsPage = () => {
           </button>
         </div>
 
-        <div className={styles.tabContent}>
+        <div>
           {activeTab === "online" && (
-            <iframe
-              src="https://stepik.org/course/67/syllabus"
-              title="Stepik Course"
-              className={styles.iframe}
-            ></iframe>
+            <IframeWithLoader src="https://stepik.org/course/67/syllabus" />
           )}
           {activeTab === "offline" && (
-            <p>Здесь будет информация о оффлайн заданиях и материалах.</p>
+            <p className={styles.description}>
+              Здесь будет информация о оффлайн заданиях и материалах.
+            </p>
           )}
         </div>
       </div>
-
-      <RegistrationBlock />
     </div>
   );
 };

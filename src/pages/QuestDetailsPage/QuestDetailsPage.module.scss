@@ -25,33 +25,6 @@
   margin: 20px 0;
 }
 
-.tabs {
-  display: flex;
-  justify-content: start;
-  margin-bottom: 30px;
-
-  a {
-    padding: 10px 20px;
-    margin: 5px 5px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 20px;
-    cursor: pointer;
-  }
-
-  .activeTab {
-    background-color: #25492a;
-    color: white;
-    border: none;
-  }
-
-  .tab {
-    background-color: #f5f5f5;
-    color: #25492a;
-    border: 1px solid #000;
-  }
-}
-
 .headerContainer {
   display: flex;
   justify-content: space-between;
@@ -64,13 +37,6 @@
   font-size: 24px;
   color: #2b5329;
   margin-bottom: 10px;
-}
-
-.iframe {
-  width: 100%;
-  height: 60vh;
-  border: none;
-  margin: 50px 0;
 }
 
 .materialLink {
@@ -97,8 +63,14 @@
   background: none;
   border: none;
   padding: 10px 20px;
-  cursor: pointer;
   font-size: 16px;
+  cursor: pointer;
+}
+
+.description {
+  font-size: 16px;
+  color: #333;
+  margin: 50px 0;
 }
 
 .active {
@@ -125,15 +97,6 @@
     button {
       margin-bottom: 10px;
     }
-  }
-}
-
-@media (max-width: 480px) {
-  .iframe {
-    width: calc(100% + 100px);
-    height: 70vh;
-    margin-left: -50px;
-    margin-bottom: 20px;
   }
 }
 

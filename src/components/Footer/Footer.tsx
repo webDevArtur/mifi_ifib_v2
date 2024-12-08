@@ -77,13 +77,13 @@ const Footer = () => {
               </li>
 
               <li>
-                <Link to="/practicum/virtualSimulators">
+                <Link to="/practicum/ifib_virtual_trainers">
                   Виртуальные тренажеры ИФИБ
                 </Link>
               </li>
 
               <li>
-                <Link to="/practicum/planningSystem">Системы планирования</Link>
+                <Link to="/practicum/planning_system">Система планирования</Link>
               </li>
 
               <li>
@@ -95,7 +95,9 @@ const Footer = () => {
               </li>
 
               <li>
-                <Link to="/practicum/gamma">Гамма-спектрометр</Link>
+                <Link to="/practicum/gamma_spectrometer">
+                  Гамма-спектрометр
+                </Link>
               </li>
 
               <li>

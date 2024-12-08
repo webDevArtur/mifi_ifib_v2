@@ -1,15 +1,46 @@
 import PDFViewer from "./components/PdfViewer/PdfViewer";
 import { Link, useParams } from "react-router-dom";
-import { Spin, Flex } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
-import { useArticleDetails } from "hooks/useArticleDetails";
+import { Skeleton } from "antd";
+import { useArticles } from "hooks/useArticles";
 import styles from "./ArticleDetailsPage.module.scss";
 import cover from "./assets/cover.png";
 import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
 
 const ArticleDetailsPage = () => {
   const { id } = useParams();
-  const { data: article, isLoading } = useArticleDetails(Number(id));
+  const { data, isLoading, error } = useArticles([Number(id)]);
+
+  const article = data?.items.find((item) => item.id === Number(id));
+
+  if (isLoading) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.breadcrumb}>
+          <Link to="/">Главная</Link> /{" "}
+          <Link to="/introduction">Введение в медицинскую физику</Link> /{" "}
+          <Link to="/articles">Научно-популярные статьи</Link> /
+         </div>
+
+          <div className={styles.articleHeader}>
+            <div className={styles.articleContainer}>
+              <Skeleton.Button className={styles.skeletonImage} />
+              <div className={styles.articleInfo}>
+                <Skeleton.Input className={styles.skeletonTitle} active />
+                <Skeleton active paragraph={{ rows: 2 }} className={styles.skeletonText} />
+              </div>
+            </div>
+          </div>
+
+          <Skeleton.Button active className={styles.skeletonPdf} />
+
+          <RegistrationBlock />
+      </div>
+    );
+  }
+
+  if (error || !article) {
+    return <div>Статья не найдена или произошла ошибка загрузки.</div>;
+  }
 
   return (
     <div className={styles.container}>
@@ -20,33 +51,26 @@ const ArticleDetailsPage = () => {
       </div>
 
       <div className={styles.articleHeader}>
-        {isLoading && (
-          <Flex className={styles.spinner} justify="center" align="center">
-            <Spin indicator={<LoadingOutlined spin />} size="large" />
-          </Flex>
-        )}
+        <div className={styles.articleContainer}>
+          <img
+            src={article.cover || cover}
+            alt={article.name || "Статья"}
+            className={styles.articleImage}
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = cover; 
+            }}
+          />
 
-        {article && (
-          <div className={styles.articleContainer}>
-            <img
-              src={`https://cybernexvpn-stage.ru/${article?.coverUrl}` || cover}
-              alt={article?.name || "Статья"}
-              className={styles.articleImage}
-            />
-
-            <div className={styles.articleInfo}>
-              <h1>{article?.name}</h1>
-              <p className={styles.author}>{article?.author}</p>
-              <p className={styles.description}>{article?.description}</p>
-            </div>
+          <div className={styles.articleInfo}>
+            <h1>{article.name}</h1>
+            <p className={styles.author}>{article.author}</p>
+            <p className={styles.description}>{article.description}</p>
           </div>
-        )}
+        </div>
       </div>
 
-      {article?.documentUrl && (
-        <PDFViewer
-          file={`https://cybernexvpn-stage.ru/${article?.documentUrl}`}
-        />
+      {article.document && (
+        <PDFViewer file={article.document} />
       )}
 
       <RegistrationBlock />

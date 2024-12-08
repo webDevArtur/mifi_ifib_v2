@@ -7,10 +7,13 @@ import styles from "./EquipmentPage.module.scss";
 import { NoData } from "components/NoData/NoData";
 
 const equipments = [
-  { id: 1, name: "Компьютерная томография", objectsCount: 4 },
-  { id: 2, name: "Дистанционная лучевая терапия", objectsCount: 2 },
-  { id: 3, name: "УЗИ", objectsCount: 1 },
-  { id: 4, name: "МРТ", objectsCount: 1 },
+  { id: "computed_tomography", name: "Компьютерная томография", objectsCount: 4 },
+  { id: "radiation_therapy", name: "Дистанционная лучевая терапия", objectsCount: 2 },
+  { id: "uzi", name: "УЗИ", objectsCount: 1 },
+  { id: "mri", name: "МРТ", objectsCount: 1 },
+  { id: "scintigraphy", name: "Сцинтиграфия", objectsCount: 0 },
+  { id: "single_photon_emission_tomography", name: "Однофотонная эмиссионная томография", objectsCount: 0 },
+  { id: "positron_emission_tomography", name: "Позитронная эмиссионная томография", objectsCount: 0 },
 ];
 
 const EquipmentPage = () => {
@@ -61,7 +64,6 @@ const EquipmentPage = () => {
     navigate(`/equipment?${newParams.toString()}`, { replace: true });
   };
 
-  // Фильтруем оборудование по запросу
   const filteredEquipments = equipments.filter((equipment) =>
     equipment.name.toLowerCase().includes(debouncedSearch.toLowerCase())
   );
@@ -77,9 +79,11 @@ const EquipmentPage = () => {
       <h1>Оборудование ядерной медицины</h1>
 
       <p>
-        Рекомендуется проходить материалы в указанной последовательности для
-        лучшего усвоения темы. Все видео и подкасты должны быть прослушаны до
-        выполнения практических заданий.
+      В это разделе вы сможете подробнее ознакомиться с оборудованием, которое применяется в ядерной медицине. С помощью описательных карточек узнаете названия деталей и их функционал. Если нужно будет еще больше информации, в карточках есть ссылки на соответствующие материалы из Базы знаний.
+      </p>
+
+      <p>
+      Внимание! Некоторые модели могут прогружаться довольно долго.
       </p>
 
       <Input

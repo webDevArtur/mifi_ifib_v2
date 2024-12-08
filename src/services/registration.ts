@@ -20,7 +20,7 @@ interface RegisterData {
 
 export const registerUser = (data: RegisterData) =>
   api<RegistrationResponse>(
-    "https://cybernexvpn-stage.ru/api/v1/auth/register",
+    "https://medphysicists.mephi.ru/api/v1/user/auth/register",
     {
       method: "POST",
       data,
@@ -32,7 +32,7 @@ export const confirmRegistration = async (data: {
   registerToken?: string;
 }) => {
   return api<ConfirmRegistrationResponse>(
-    "https://cybernexvpn-stage.ru/api/v1/auth/register/confirm",
+    "https://medphysicists.mephi.ru/api/v1/user/auth/register/confirm",
     {
       method: "POST",
       data,
@@ -41,7 +41,7 @@ export const confirmRegistration = async (data: {
 };
 
 export const resendConfirmationCode = (data: { registerToken?: string }) =>
-  api("https://cybernexvpn-stage.ru/api/v1/auth/update-confirmation-code", {
+  api("https://medphysicists.mephi.ru/api/v1/user/auth/update-confirmation-code", {
     method: "POST",
     data,
   });

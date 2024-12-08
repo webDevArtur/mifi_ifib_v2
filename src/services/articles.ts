@@ -1,22 +1,24 @@
 import { api } from "./index";
-import { ArticleResponse, ArticleDetailsResponse } from "entities/index";
+import { ArticleResponse } from "entities/index";
 
-export const getArticles = (page?: number, size?: number, search?: string) => {
-  const searchQuery = search ? `&searchName=${search}` : "";
+export const getArticles = (
+  id?: number[],
+  page?: number, 
+  pageSize?: number, 
+  search?: string
+) => {
+  const params = new URLSearchParams();
 
-  return api<ArticleResponse>(
-    `https://cybernexvpn-stage.ru/api/v1/article?pageNumber=${page}&pageSize=${size}${searchQuery}`,
-    {
-      method: "GET",
-    },
-  );
-};
+  if (id && id.length > 0) {
+    id.forEach((idValue) => params.append("id", idValue.toString()));
+  }
+  if (page !== undefined) params.append("page", page.toString());
+  if (pageSize !== undefined) params.append("pageSize", pageSize.toString());
+  if (search) params.append("search", search);
 
-export const getArticleById = (articleId: number) => {
-  return api<ArticleDetailsResponse>(
-    `https://cybernexvpn-stage.ru/api/v1/article/${articleId}`,
-    {
-      method: "GET",
-    },
-  );
+  const url = `https://medphysicists.mephi.ru/api/v1/nuclear-medicine-intro/article/?${params.toString()}`;
+
+  return api<ArticleResponse>(url, {
+    method: "GET",
+  });
 };

@@ -13,7 +13,7 @@ const TeamSection = () => {
           teamMembers.map((member, index) => (
             <div className={styles.teamMember} key={index}>
               <img
-                src={`https://cybernexvpn-stage.ru/${member.imageUrl}`}
+                src={member.image}
                 alt={member.name}
                 className={styles.teamMemberImage}
               />

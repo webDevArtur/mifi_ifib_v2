@@ -55,6 +55,18 @@
   .materialIcon {
     margin-right: 5px;
   }
+
+  .skeletonIframe {
+    width: 100% !important;
+    height: 80vh !important;
+    margin-bottom: 40px !important;
+    border-radius: 8px;
+  }  
+
+  .skeletonDescription {
+    width: 100% !important;
+    height: 24px !important;
+  }
   
   @media (max-width: 825px) {
     .h1 {
@@ -63,6 +75,10 @@
   
     .iframe {
       height: 50vh;
+    }
+
+    .skeletonIframe {
+      height: 50vh !important;
     }
   
     .breadcrumb {

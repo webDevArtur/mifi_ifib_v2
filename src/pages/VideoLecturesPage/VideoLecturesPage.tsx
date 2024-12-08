@@ -1,38 +1,52 @@
-import { Link } from "react-router-dom";
-import { Input } from "antd";
+import { useState, useEffect } from "react";
+import { Input, Skeleton } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import RegistraionBlock from "components/RegistrationBlock/RegistrationBlock";
+import { useVideos } from "hooks/useVideos";
+import { NoData } from "components/NoData/NoData";
 import styles from "./VideoLecturesPage.module.scss";
 
 const VideoLecturesPage = () => {
-  const lectures = [
-    {
-      id: 1,
-      title:
-        "Основы позитронно-эмиссионной томографии (ПЭТ): Принципы и Применение",
-      teacher: "Банникова Ирина, медицинская физика",
-      locked: true,
-    },
-    {
-      id: 2,
-      title: "Радионуклидная терапия: Технологии и Клинические Применения",
-      teacher: "Банникова Ирина, медицинская физика",
-      locked: true,
-    },
-    {
-      id: 3,
-      title: "Радионуклидная терапия: Технологии и Клинические Применения",
-      teacher: "Банникова Ирина, медицинская физика",
-      locked: true,
-    },
-    {
-      id: 4,
-      title:
-        "Основы позитронно-эмиссионной томографии (ПЭТ): Принципы и Применение",
-      teacher: "Банникова Ирина, медицинская физика",
-      locked: true,
-    },
-  ];
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const queryParams = new URLSearchParams(location.search);
+  const initialSearch = queryParams.get("search") || "";
+  const initialPage = Number(queryParams.get("page")) || 1;
+  const initialPageSize = Number(queryParams.get("pageSize")) || 20;
+
+  const [search, setSearch] = useState<string>(initialSearch);
+  const [page, setPage] = useState<number>(initialPage);
+  const [pageSize, setPageSize] = useState<number>(initialPageSize);
+  const [debouncedSearch, setDebouncedSearch] = useState<string>(initialSearch);
+
+  const { data: videos, isLoading } = useVideos(
+    undefined,
+    debouncedSearch,
+    page,
+    pageSize
+  );
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setDebouncedSearch(search);
+
+      const params = new URLSearchParams();
+      if (search.trim()) {
+        params.set("search", search);
+      }
+      if (page !== 1) {
+        params.set("page", String(page));
+      }
+      if (pageSize !== 20) {
+        params.set("pageSize", String(pageSize));
+      }
+      navigate(`?${params.toString()}`, { replace: true });
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
+  }, [search, page, pageSize, navigate]);
 
   return (
     <div className={styles.container}>
@@ -42,38 +56,70 @@ const VideoLecturesPage = () => {
       </div>
 
       <h1>Видео</h1>
+
       <p className={styles.description}>
-        Рекомендуется проходить материалы в указанной последовательности для
-        лучшего усвоения темы. Все видео и подкасты должны быть прослушаны до
-        выполнения практических заданий.
+      Кто такие медицинские физики? Мы не стали брать информацию из википедии, а напрямую спросили это у практикующих специалистов. Смотрите видео ниже и погружайтесь в сферу! 
+      </p>
+
+      <p className={styles.description}>
+      Помимо интервью со специалистами вы можете найти и научно – популярные ролики, в которых покажут, как работает циклотрон, что такое линейный ускоритель и как делать МРТ лошади. 
+      </p>
+
+      <p className={styles.description}>
+      Внимание! Некоторые видео на английском языке.
       </p>
 
       <Input
         className={styles.searchInput}
-        placeholder="Введите название видео"
+        placeholder="Введите название или тему видео"
         prefix={<SearchOutlined />}
         bordered={false}
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
       />
 
-      <div className={styles.videoGrid}>
-        {lectures.map((lecture) => (
-          <div key={lecture.id} className={styles.videoCard}>
-            <Link to="1">
-              <div className={styles.thumbnail}>
-                <div className={styles.overlay}>
-                  <div className={styles.playButton}></div>
-                  {lecture.locked && <div className={styles.locked}></div>}
-                </div>
+      {isLoading && (
+        <div className={styles.videoGrid}>
+          {Array(4)
+            .fill(null)
+            .map((_, index) => (
+              <div key={index} className={styles.videoCard}>
+                  <Skeleton.Button className={styles.skeleton} active />
               </div>
+            ))}
+        </div>
+      )}
 
-              <div className={styles.lectureInfo}>
-                <h3>{lecture.title}</h3>
-                <p>{lecture.teacher}</p>
-              </div>
-            </Link>
-          </div>
-        ))}
-      </div>
+
+      {!isLoading && videos?.items && (
+        <div className={styles.videoGrid}>
+          {videos.items.map((video) => (
+            <div key={video.id} className={styles.videoCard}>
+              <Link to={`/video-lectures/${video.id}`}>
+                <div className={styles.thumbnail}>
+                  <div className={styles.overlay}>
+                    <img
+                      className={styles.cover}
+                      src={video.cover}
+                      alt="Обложка"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = "/fallback-cover.png";
+                      }}
+                    />
+                  </div>
+                </div>
+
+                <div className={styles.lectureInfo}>
+                  <h3>{video.name}</h3>
+                  <p>{video.theme}</p>
+                </div>
+              </Link>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {!isLoading && (!videos || videos.items.length === 0) && <NoData />}
 
       <RegistraionBlock />
     </div>

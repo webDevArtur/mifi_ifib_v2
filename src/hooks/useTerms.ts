@@ -11,7 +11,7 @@ const termsIdQuery = (type?: string) => ({
 });
 
 export const useTermsIdByType = (type?: string) =>
-  useQuery<TermIdResponse>({
+  useQuery<TermIdResponse[]>({
     ...termsIdQuery(type),
     throwOnError: false,
   });

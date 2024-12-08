@@ -1,50 +1,19 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import { Skeleton } from "antd";
+import { useEquipments } from "hooks/useEquipments";
 import styles from "./EquipmentDetailsPage.module.scss";
 import RegistraionBlock from "components/RegistrationBlock/RegistrationBlock";
-import image1 from "./assets/image1.png";
-import image2 from "./assets/image2.png";
-import image3 from "./assets/image3.png";
-import image4 from "./assets/image4.png";
-import image5 from "./assets/image5.png";
-import image6 from "./assets/image6.png";
-import image7 from "./assets/image7.png";
-import image8 from "./assets/image8.png";
+import { NoData } from "components/NoData/NoData";
 
-const equipmentData = [
-  { 
-    id: 1, 
-    name: "Компьютерная томография", 
-    items: [
-      { modelId: 1, title: "Рентгеновская трубка", imgSrc: image1},
-      { modelId: 2, title: "Помещение с компьютерным томографом", imgSrc: image2},
-      { modelId: 3, title: "Компьютерный томограф", imgSrc: image3},
-      { modelId: 4, title: "Портативный рентген - сканер", imgSrc: image4},
-    ]
-  },
-  { 
-    id: 2, 
-    name: "Лучевая терапия", 
-    items: [
-      { modelId: 1, title: "Линейный ускоритель Elekta", imgSrc: image5},
-      { modelId: 2, title: "Линейный ускоритель Varian", imgSrc: image6},
-    ]
-  },
-  { 
-    id: 3, 
-    name: "УЗИ", 
-    items: [
-      { modelId: 1, title: "УЗИ - аппарат", imgSrc: image7},
-    ]
-  },
-  { 
-    id: 4, 
-    name: "МРТ", 
-    items: [
-      { modelId: 1, title: "Магнитно - резонансный томограф", imgSrc: image8},
-    ]
-  },
-];
-
+const equipmentNames = {
+  computed_tomography: "Компьютерная томография",
+  radiation_therapy: "Дистанционная лучевая терапия",
+  uzi: "УЗИ",
+  mri: "МРТ",
+  scintigraphy: "Сцинтиграфия",
+  single_photon_emission_tomография: "Однофотонная эмиссионная томография",
+  positron_emission_tomography: "Позитронная эмиссионная томография",
+};
 
 const EquipmentDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -53,16 +22,9 @@ const EquipmentDetailsPage = () => {
     return <div>Ошибка: id оборудования не найден</div>;
   }
 
-  const equipment = equipmentData.find((item) => item.id === parseInt(id, 10));
+  const { data, isLoading, isError } = useEquipments(1, 20, undefined, id);
 
-  if (!equipment) {
-    return (
-      <div className={styles.container}>
-        <p>Оборудование не найдено</p>
-        <RegistraionBlock />
-      </div>
-    );
-  }
+  const equipmentName = equipmentNames[id as keyof typeof equipmentNames];
 
   return (
     <div className={styles.container}>
@@ -70,23 +32,38 @@ const EquipmentDetailsPage = () => {
         <Link to="/">Главная</Link> /{" "}
         <Link to="/introduction">Введение в медицинскую физику</Link> /{" "}
         <Link to="/equipment">Оборудование ядерной медицины</Link> /{" "}
-        {equipment.name}
+        {equipmentName}
       </nav>
 
-      <h1>{equipment.name}</h1>
+      <h1>{equipmentName}</h1>
 
-      <div className={styles.grid}>
-        {equipment.items.map((item) => (
-          <Link
-            key={item.modelId}
-            to={`/equipment/${equipment.id}/${item.modelId}`}
-            className={styles.gridItem}
-          >
-            <img src={item.imgSrc} alt={item.title}  />
-            <p>{item.title}</p>
-          </Link>
-        ))}
-      </div>
+      {isLoading ? (
+        <div className={styles.grid}>
+          {Array(6)
+            .fill(null)
+            .map((_, index) => (
+              <div key={index} className={styles.gridItem}>
+                <Skeleton.Button active className={styles.skeletonItem} />
+                <Skeleton.Button active className={styles.skeletonText} />
+              </div>
+            ))}
+        </div>
+      ) : isError || !data || data.items.length === 0 ? (
+        <NoData />
+      ) : (
+        <div className={styles.grid}>
+          {data.items.map((item) => (
+            <Link
+              key={item.id}
+              to={`/equipment/${id}/${item.id}`}
+              className={styles.gridItem}
+            >
+              <img src={item.cover} alt={item.name} />
+              <p>{item.name}</p>
+            </Link>
+          ))}
+        </div>
+      )}
 
       <RegistraionBlock />
     </div>

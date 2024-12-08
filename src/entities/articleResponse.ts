@@ -3,14 +3,16 @@ import { z } from "zod";
 const ArticleSchema = z.object({
   id: z.number(),
   name: z.string(),
+  description: z.string(),
   author: z.string(),
-  coverUrl: z.string().url(),
+  cover: z.string(),
+  document: z.string().optional(),
 });
 
 export const ArticleResponseSchema = z.object({
   totalItems: z.number(),
+  pageNumber: z.number(),
   pageSize: z.number(),
   totalPages: z.number(),
-  pageNumber: z.number(),
   items: z.array(ArticleSchema),
 });

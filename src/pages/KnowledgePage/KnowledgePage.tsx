@@ -104,8 +104,6 @@ const KnowledgePage = () => {
           </Link>
         ))}
       </div>
-
-      <RegistrationBlock />
     </div>
   );
 };

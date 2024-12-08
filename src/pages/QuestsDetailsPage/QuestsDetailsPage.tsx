@@ -1,5 +1,4 @@
 import { Link, useParams } from "react-router-dom";
-import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
 import styles from "./QuestsDetailsPage.module.scss";
 import arrowIcon from "./assets/arrow-icon.png";
 import cardImage1 from "./assets/radionuclide-diagnostics.png";
@@ -69,8 +68,6 @@ const QuestsDetailsPage = () => {
           </Link>
         ))}
       </div>
-
-      <RegistrationBlock />
     </div>
   );
 };

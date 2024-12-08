@@ -1,17 +1,20 @@
 import { api } from "./index";
-import { ArticleResponse } from "entities/index";
+import { EquipmentResponse } from "entities/index";
 
 export const getEquipments = (
   page?: number,
   size?: number,
   search?: string,
+  equipmentGroup?: string,
+  ids?: number[]
 ) => {
-  const searchQuery = search ? `&searchName=${search}` : "";
+  const searchQuery = search ? `&name=${search}` : "";
+  const equipmentGroupQuery = equipmentGroup ? `&equipment_group=${equipmentGroup}` : "";
+  const idsQuery = ids && ids.length > 0 ? `&id=${ids.join(',')}` : "";
 
-  return api<ArticleResponse>(
-    `https://cybernexvpn-stage.ru/api/v1/equipment?pageNumber=${page}&pageSize=${size}${searchQuery}`,
-    {
-      method: "GET",
-    },
-  );
+  const url = `https://medphysicists.mephi.ru/api/v1/nuclear-medicine-intro/equipment?page=${page}&pageSize=${size}${searchQuery}${equipmentGroupQuery}${idsQuery}`;
+
+  return api<EquipmentResponse>(url, {
+    method: "GET",
+  });
 };

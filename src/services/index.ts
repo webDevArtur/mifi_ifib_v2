@@ -1,13 +1,12 @@
 import axios, { AxiosError, AxiosHeaders, AxiosRequestConfig } from "axios";
 
-const key = "auth_token";
+const key = "authToken";
 
 const getAccessToken = () => {
   const localStorageData = localStorage.getItem(key);
 
   if (localStorageData) {
-    const parsedData = JSON.parse(localStorageData);
-    return parsedData.access_token;
+    return localStorageData;
   }
 
   throw new Error("Токен просрочен или отсутствует");
@@ -18,14 +17,27 @@ export const configureAxios = () => {
   axios.defaults.timeout = Infinity;
   axios.defaults.responseType = "json";
 
+  const publicAPIRoutes = [
+    "/nuclear-medicine-intro/article/",
+    "/nuclear-medicine-intro/equipment",
+    "/nuclear-medicine-intro/films",
+    "/nuclear-medicine-intro/podcasts",
+  ];
+
+
   axios.interceptors.request.use((config) => {
-    (config.headers as AxiosHeaders).set(
-      "Authorization",
-      `Bearer ${getAccessToken()}`,
-    );
+    if (
+      !config.url?.includes("login") &&
+      !config.url?.includes("registration") &&
+      !publicAPIRoutes.some((route) => config.url?.includes(route))
+    ) {
+      const token = getAccessToken();
+      (config.headers as AxiosHeaders).set("Authorization", `Token ${token}`);
+    }
     return config;
   });
 };
+
 
 export const api = <T>(
   url: string,

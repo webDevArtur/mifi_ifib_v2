@@ -1,6 +1,5 @@
-import React from "react";
-import { Spin, Flex } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
+import React, { useState } from "react";
+import { Skeleton } from "antd";
 import styles from "./VideoPlayer.module.scss";
 
 interface VideoPlayerProps {
@@ -8,24 +7,26 @@ interface VideoPlayerProps {
   loading?: boolean;
 }
 
-const VideoPlayer: React.FC<VideoPlayerProps> = ({ src, loading = false }) => {
-  if (loading) {
-    return (
-      <Flex className={styles.spinner} justify="center" align="center">
-        <Spin indicator={<LoadingOutlined spin />} size="large" />
-      </Flex>
-    );
-  }
+const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleIframeLoad = () => {
+    setIsLoading(false);
+  };
 
   return (
-    <iframe
-      src={src}
-      title="Video"
-      frameBorder="0"
-      allowFullScreen
-      className={styles.video}
-      style={loading ? { display: "none" } : { display: "block" }}
-    />
+    <>
+      {isLoading && <Skeleton.Button active className={styles.skeleton} />}
+      <iframe
+        src={src}
+        title="Video"
+        frameBorder="0"
+        allowFullScreen
+        onLoad={handleIframeLoad}
+        className={styles.video}
+        style={{ display: isLoading ? "none" : "block" }}
+      />
+    </>
   );
 };
 

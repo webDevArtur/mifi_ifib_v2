@@ -5,8 +5,18 @@
   justify-content: center;
   flex-direction: column;
   font-size: 24px;
+  padding-bottom: 50px;
 }
 
 .noDataImage {
-  height: 150px;
+  height: 300px;
+  rotate: 8deg;
+}
+
+.noDataText {
+  font-size: 24px;
+  color: #2b5329;
+  position: relative;
+  top: -40px;
+  left: 10px;
 }

@@ -1,6 +1,4 @@
-// src/pages/QuestsPage.js
 import { Link } from "react-router-dom";
-import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
 import QuestCard from "components/QuestCard/QuestCard";
 import styles from "./QuestsPage.module.scss";
 import image1 from "./assets/image1.png";
@@ -79,7 +77,6 @@ const QuestsPage = () => {
         ))}
       </div>
 
-      <RegistrationBlock />
     </div>
   );
 };
