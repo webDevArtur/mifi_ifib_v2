@@ -28,7 +28,7 @@ export const configureAxios = () => {
   axios.interceptors.request.use((config) => {
     if (
       !config.url?.includes("login") &&
-      !config.url?.includes("registration") &&
+      !config.url?.includes("register") &&
       !publicAPIRoutes.some((route) => config.url?.includes(route))
     ) {
       const token = getAccessToken();
