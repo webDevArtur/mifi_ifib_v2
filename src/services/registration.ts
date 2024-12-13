@@ -32,7 +32,7 @@ export const confirmRegistration = async (data: {
   registerToken?: string;
 }) => {
   return api<ConfirmRegistrationResponse>(
-    "https://medphysicists.mephi.ru/api/v1/user/auth/register/confirm",
+    "https://medphysicists.mephi.ru/api/v1/user/auth/confirm",
     {
       method: "POST",
       data,
