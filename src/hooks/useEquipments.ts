@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { getEquipments } from "services/equipments";
-import { EquipmentResponse } from "entities";
+import { getEquipments, getEquipmentGroups } from "services/equipments";
+import { EquipmentResponse, EquipmentGroupsResponse } from "entities";
 import { techObjectsKeys } from "./keys";
 
 const equipmentsQuery = (page: number, size: number, search?: string, equipmentGroup?: string, ids?: number[]) => ({
@@ -13,3 +13,15 @@ export const useEquipments = (page: number, size: number, search?: string, equip
     ...equipmentsQuery(page, size, search, equipmentGroup, ids),
     throwOnError: false,
   });
+
+const equipmentGroupsQuery = () => ({
+  queryKey: [techObjectsKeys.equipmentGroups],
+  queryFn: getEquipmentGroups,
+});
+
+export const useEquipmentGroups = () =>
+  useQuery<EquipmentGroupsResponse[]>({
+    ...equipmentGroupsQuery(),
+    throwOnError: false,
+  });
+

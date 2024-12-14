@@ -10,7 +10,7 @@ const { Option } = Select;
 
 const ProfilePage = () => {
   const { data, isLoading } = useCurrentUser();
-  console.log(data);
+
   const { mutateAsync: editUser } = useEditUser();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -53,10 +53,6 @@ const ProfilePage = () => {
       setIsEditing(true);
     }
   };
-
-  if (!user && !isLoading) {
-    return <div>Данные пользователя не найдены.</div>;
-  }
 
   return (
     <div className={styles.profilePage}>

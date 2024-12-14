@@ -39,7 +39,7 @@ const PodcastsPage = () => {
     <div className={styles.container}>
       <div className={styles.breadcrumb}>
         <Link to="/">Главная</Link> /{" "}
-        <Link to="/introduction">Введение в медицинскую физику</Link> /
+        <Link to="/introduction">Введение в медицинскую физику</Link> / Подкасты
       </div>
 
       <h1>Подкасты</h1>

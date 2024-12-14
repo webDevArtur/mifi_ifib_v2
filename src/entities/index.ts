@@ -13,6 +13,7 @@ import { VideoResponseSchema } from "./videoResponse";
 import { EquipmentResponseSchema } from "./equipmentResponse";
 import { PodcastResponseSchema } from "./podcastResponse";
 import { PracticeResponseSchema } from "./practiceResponse";
+import { EquipmentGroupsResponse } from "./equipmentGroupsResponse";
 
 export type RegistrationResponse = z.infer<typeof RegistrationResponseSchema>;
 export type ConfirmRegistrationResponse = z.infer<
@@ -29,3 +30,6 @@ export type VideoResponse = z.infer<typeof VideoResponseSchema>;
 export type EquipmentResponse = z.infer<typeof EquipmentResponseSchema>;
 export type PodcastResponse = z.infer<typeof PodcastResponseSchema>;
 export type PracticeResponse = z.infer<typeof PracticeResponseSchema>;
+export type EquipmentGroupsResponse = z.infer<
+  typeof EquipmentGroupsResponse
+>;

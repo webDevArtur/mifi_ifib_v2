@@ -22,6 +22,7 @@ export const configureAxios = () => {
     "/nuclear-medicine-intro/equipment",
     "/nuclear-medicine-intro/films",
     "/nuclear-medicine-intro/podcasts",
+    "/team-members",
   ];
 
 
@@ -50,6 +51,10 @@ export const api = <T>(
       if (axiosError.response && !skipErrorHandling) {
         switch (axiosError.response.status) {
           case 401:
+            window.location.href = "/login";
+
+            localStorage.removeItem(key);
+
             throw new Error("Необходимо авторизоваться");
           case 403:
             throw new Error("У вас нет доступа к этой странице");

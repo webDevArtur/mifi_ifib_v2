@@ -1,5 +1,5 @@
 import { api } from "./index";
-import { EquipmentResponse } from "entities/index";
+import { EquipmentResponse, EquipmentGroupsResponse } from "entities/index";
 
 export const getEquipments = (
   page?: number,
@@ -15,6 +15,14 @@ export const getEquipments = (
   const url = `https://medphysicists.mephi.ru/api/v1/nuclear-medicine-intro/equipment?page=${page}&pageSize=${size}${searchQuery}${equipmentGroupQuery}${idsQuery}`;
 
   return api<EquipmentResponse>(url, {
+    method: "GET",
+  });
+};
+
+export const getEquipmentGroups = () => {
+  const url = 'https://medphysicists.mephi.ru/api/v1/nuclear-medicine-intro/equipment/groups/';
+
+  return api<EquipmentGroupsResponse[]>(url, {
     method: "GET",
   });
 };

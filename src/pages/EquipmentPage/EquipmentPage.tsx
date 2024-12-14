@@ -1,20 +1,21 @@
 import { useState, useEffect } from "react";
-import { Input, Pagination, Spin, Flex } from "antd";
-import { SearchOutlined, LoadingOutlined } from "@ant-design/icons";
+import { Input, Pagination, Skeleton } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEquipmentGroups } from "hooks/useEquipments";
 import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
 import styles from "./EquipmentPage.module.scss";
 import { NoData } from "components/NoData/NoData";
 
-const equipments = [
-  { id: "computed_tomography", name: "Компьютерная томография", objectsCount: 4 },
-  { id: "radiation_therapy", name: "Дистанционная лучевая терапия", objectsCount: 2 },
-  { id: "uzi", name: "УЗИ", objectsCount: 1 },
-  { id: "mri", name: "МРТ", objectsCount: 1 },
-  { id: "scintigraphy", name: "Сцинтиграфия", objectsCount: 0 },
-  { id: "single_photon_emission_tomography", name: "Однофотонная эмиссионная томография", objectsCount: 0 },
-  { id: "positron_emission_tomography", name: "Позитронная эмиссионная томография", objectsCount: 0 },
-];
+const equipmentNamesMap: { [key: string]: string } = {
+  computed_tomography: "Компьютерная томография",
+  radiation_therapy: "Дистанционная лучевая терапия",
+  uzi: "УЗИ",
+  mri: "МРТ",
+  scintigraphy: "Сцинтиграфия",
+  single_photon_emission_tomography: "Однофотонная эмиссионная томография",
+  positron_emission_tomography: "Позитронная эмиссионная томография",
+};
 
 const EquipmentPage = () => {
   const location = useLocation();
@@ -28,6 +29,8 @@ const EquipmentPage = () => {
   const pageSize = 10;
   const [search, setSearch] = useState<string>(initialSearch);
   const [debouncedSearch, setDebouncedSearch] = useState<string>(initialSearch);
+
+  const { isLoading, data } = useEquipmentGroups();
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -64,8 +67,17 @@ const EquipmentPage = () => {
     navigate(`/equipment?${newParams.toString()}`, { replace: true });
   };
 
-  const filteredEquipments = equipments.filter((equipment) =>
-    equipment.name.toLowerCase().includes(debouncedSearch.toLowerCase())
+  const filteredEquipments =
+    Array.isArray(data)
+      ? data.filter((equipment) => {
+          const equipmentName = equipmentNamesMap[equipment.equipmentGroup] || "";
+          return equipmentName.toLowerCase().includes(debouncedSearch.toLowerCase());
+        })
+      : [];
+
+  const paginatedEquipments = filteredEquipments.slice(
+    (page - 1) * pageSize,
+    page * pageSize
   );
 
   return (
@@ -79,12 +91,13 @@ const EquipmentPage = () => {
       <h1>Оборудование ядерной медицины</h1>
 
       <p>
-      В это разделе вы сможете подробнее ознакомиться с оборудованием, которое применяется в ядерной медицине. С помощью описательных карточек узнаете названия деталей и их функционал. Если нужно будет еще больше информации, в карточках есть ссылки на соответствующие материалы из Базы знаний.
+        В это разделе вы сможете подробнее ознакомиться с оборудованием, которое
+        применяется в ядерной медицине. С помощью описательных карточек узнаете
+        названия деталей и их функционал. Если нужно будет еще больше информации,
+        в карточках есть ссылки на соответствующие материалы из Базы знаний.
       </p>
 
-      <p>
-      Внимание! Некоторые модели могут прогружаться довольно долго.
-      </p>
+      <p>Внимание! Некоторые модели могут прогружаться довольно долго.</p>
 
       <Input
         className={styles.searchInput}
@@ -95,49 +108,41 @@ const EquipmentPage = () => {
         bordered={false}
       />
 
-      <ul className={styles.articleList}>
-        {false && (
-          <Flex className={styles.spinner} justify="center" align="center">
-            <Spin indicator={<LoadingOutlined spin />} size="large" />
-          </Flex>
-        )}
-
-        {filteredEquipments.length > 0 ? (
-          filteredEquipments.map((equipment) => (
-            <Link
-              to={`/equipment/${equipment.id}`}
-              key={equipment.id}
-              className={styles.articleItem}
-            >
-              <li>
-                <div className={styles.articleTitle}>
-                  <h3>{equipment.name}</h3>
-                </div>
-                <p className={styles.articleAmount}>
-                  Количество объектов: {equipment.objectsCount}
-                </p>
-              </li>
-
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className={styles.arrowIcon}
+      {isLoading ? (
+        <ul className={styles.articleList}>
+          {Array.from({ length: 5 }).map((_, index) => (
+            <li key={index} className={styles.articleItem}>
+              <Skeleton active  paragraph={{ rows: 1 }} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <ul className={styles.articleList}>
+          {paginatedEquipments.length > 0 ? (
+            paginatedEquipments.map((equipment, index) => (
+              <Link
+                to={`/equipment/${equipment.equipmentGroup}`}
+                key={index}
+                className={styles.articleItem}
               >
-                <path
-                  className={styles.arrow}
-                  d="M31.834 15.9987C31.834 20.198 30.1658 24.2252 27.1965 27.1946C24.2272 30.1639 20.1999 31.832 16.0007 31.832C13.9214 31.832 11.8625 31.4225 9.9415 30.6268C8.02051 29.8311 6.27505 28.6648 4.80479 27.1946C3.33453 25.7243 2.16826 23.9788 1.37256 22.0579C0.576859 20.1369 0.16732 18.078 0.16732 15.9987C0.16732 11.7994 1.83547 7.77217 4.80479 4.80284C7.77412 1.83352 11.8014 0.165367 16.0007 0.165367C18.0799 0.165367 20.1388 0.574905 22.0598 1.37061C23.9808 2.16631 25.7262 3.33258 27.1965 4.80284C30.1658 7.77217 31.834 11.7994 31.834 15.9987ZM6.50065 17.582L19.1673 17.582L13.6257 23.1237L15.874 25.372L25.2473 15.9987L15.874 6.62537L13.6257 8.8737L19.1673 14.4154L6.50065 14.4154L6.50065 17.582Z"
-                  fill="#B0B0B0"
-                />
-              </svg>
-            </Link>
-          ))
-        ) : (
-          <NoData />
-        )}
-      </ul>
+                <li>
+                  <div className={styles.articleTitle}>
+                    <h3>
+                      {equipmentNamesMap[equipment.equipmentGroup] ||
+                        "Неизвестное оборудование"}
+                    </h3>
+                  </div>
+                  <p className={styles.articleAmount}>
+                    Количество объектов: {equipment.size}
+                  </p>
+                </li>
+              </Link>
+            ))
+          ) : (
+            <NoData />
+          )}
+        </ul>
+      )}
 
       {filteredEquipments.length > pageSize && (
         <Pagination

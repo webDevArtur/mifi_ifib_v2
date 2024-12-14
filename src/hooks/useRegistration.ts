@@ -39,7 +39,7 @@ export const useConfirmRegistration = () => {
   return useMutation<
     ConfirmRegistrationResponse,
     Error,
-    { confirmationCode: string; registerToken: string }
+    { confirmation_сode: string; register_token: string }
   >({
     mutationFn: async (data) => {
       return confirmRegistration(data);
@@ -51,7 +51,7 @@ export const useConfirmRegistration = () => {
 };
 
 export const useResendConfirmationCode = () => {
-  return useMutation<void, Error, { registerToken: string }>({
+  return useMutation<void, Error, { register_token: string }>({
     mutationFn: async (data) => {
       await resendConfirmationCode(data);
     },

@@ -39,12 +39,21 @@
 }
 
 .list {
-  list-style-type: disc;
+  list-style-type: none;
   padding-left: 20px;
 }
 
 .listItem {
   padding: 10px 0;
+  color: #2b5329;
+  font-size: 22px;
+  position: relative;
+}
+
+.listItem::before {
+  content: "-";
+  position: absolute;
+  left: -20px;
   color: #2b5329;
   font-size: 22px;
 }

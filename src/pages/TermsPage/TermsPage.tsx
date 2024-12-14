@@ -98,7 +98,7 @@ const TermsPage = () => {
   return (
     <div className={styles.container}>
         <div className={styles.breadcrumb}>
-            <Link to="/">Главная</Link> / <Link to="/knowledge">База знаний</Link> /
+            <Link to="/">Главная</Link> / <Link to="/knowledge">База знаний</Link> / {termTitles[type as TermKeys] || ""}
         </div>
 
       <div className={styles.containerHeader} >

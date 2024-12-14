@@ -28,8 +28,8 @@ export const registerUser = (data: RegisterData) =>
   );
 
 export const confirmRegistration = async (data: {
-  confirmationCode?: string;
-  registerToken?: string;
+  confirmation_сode?: string;
+  register_token?: string;
 }) => {
   return api<ConfirmRegistrationResponse>(
     "https://medphysicists.mephi.ru/api/v1/user/auth/register/confirm",
@@ -40,7 +40,7 @@ export const confirmRegistration = async (data: {
   );
 };
 
-export const resendConfirmationCode = (data: { registerToken?: string }) =>
+export const resendConfirmationCode = (data: { register_token?: string }) =>
   api("https://medphysicists.mephi.ru/api/v1/user/auth/update-confirmation-code", {
     method: "POST",
     data,

@@ -15,7 +15,7 @@ const ConfirmationPage = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [confirmationCode, setConfirmationCode] = useState("");
-  const [countdown, setCountdown] = useState(30);
+  const [countdown, setCountdown] = useState(60);
   const [isTimerActive, setIsTimerActive] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const { mutate: confirm, isPending } = useConfirmRegistration();
@@ -38,8 +38,8 @@ const ConfirmationPage = () => {
       return;
     }
 
-    await resend({ registerToken: token });
-    setCountdown(30);
+    await resend({ register_token: token });
+    setCountdown(60);
     setIsTimerActive(true);
   };
 
@@ -50,7 +50,7 @@ const ConfirmationPage = () => {
     }
 
     confirm(
-      { confirmationCode, registerToken: token },
+      { confirmation_сode: confirmationCode, register_token: token },
       {
         onSuccess: (data) => {
           if (data.token) {
