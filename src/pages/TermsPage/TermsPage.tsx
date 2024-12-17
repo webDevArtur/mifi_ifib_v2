@@ -9,7 +9,6 @@ import termsImage from "./assets/terms.png";
 import styles from "./TermsPage.module.scss";
 
 const alphabet = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ".split("");
-
 const DEBOUNCE_DELAY = 800;
 
 const TermsPage = () => {
@@ -17,23 +16,22 @@ const TermsPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const initialSearch =
-    new URLSearchParams(location.search).get("search") || "";
-  const initialLetter =
-    new URLSearchParams(location.search).get("letter") || "А";
+  const params = new URLSearchParams(location.search);
+  const initialSearch = params.get("search") || "";
+  const initialLetter = params.get("letter") || "А";
 
+  const [search, setSearch] = useState<string>(initialSearch);
+  const [debouncedSearch, setDebouncedSearch] = useState<string>(initialSearch);
   const [selectedLetter, setSelectedLetter] = useState<string>(
     initialSearch ? "" : initialLetter,
   );
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const pageSize = 10;
-  const [search, setSearch] = useState<string>(initialSearch);
   const [allTerms, setAllTerms] = useState<any[]>([]);
+  const [totalPages, setTotalPages] = useState<number>(0);
+
+  const pageSize = 10;
 
   const { data: termsId } = useTermsIdByType(type);
-
-  const [debouncedSearch, setDebouncedSearch] = useState<string>(search);
-
   const { data: terms, isLoading: isLoadingTerms } = useTerms(
     termsId?.[0]?.id,
     selectedLetter,
@@ -41,8 +39,6 @@ const TermsPage = () => {
     pageSize,
     currentPage,
   );
-
-  const [totalPages, setTotalPages] = useState<number>(0);
 
   useEffect(() => {
     if (terms?.items) {
@@ -54,17 +50,13 @@ const TermsPage = () => {
   }, [terms, currentPage]);
 
   useEffect(() => {
-    const newParams = new URLSearchParams(location.search);
+    const newParams = new URLSearchParams();
 
-    if (debouncedSearch.trim() === "") {
-      newParams.delete("search");
-    } else {
+    if (debouncedSearch.trim()) {
       newParams.set("search", debouncedSearch);
     }
 
-    if (selectedLetter === "А" || selectedLetter === "") {
-      newParams.delete("letter");
-    } else {
+    if (!debouncedSearch.trim() && selectedLetter) {
       newParams.set("letter", selectedLetter);
     }
 
@@ -73,23 +65,26 @@ const TermsPage = () => {
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      setSelectedLetter(search.trim() === "" ? "А" : "");
       setDebouncedSearch(search);
+      if (!search.trim()) {
+        setSelectedLetter(initialLetter || "А");
+      } else {
+        setSelectedLetter("");
+      }
     }, DEBOUNCE_DELAY);
 
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [search]);
+    return () => clearTimeout(handler);
+  }, [search, initialLetter]);
 
+  // Обработчик изменения поиска
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newSearch = e.target.value;
-    setSearch(newSearch);
+    setSearch(e.target.value);
     setCurrentPage(1);
   };
 
+  // Обработчик клика по букве
   const handleLetterClick = (letter: string) => {
-    if (letter !== selectedLetter && search.trim() === "") {
+    if (letter !== selectedLetter && !search.trim()) {
       setSelectedLetter(letter);
       setCurrentPage(1);
     }
