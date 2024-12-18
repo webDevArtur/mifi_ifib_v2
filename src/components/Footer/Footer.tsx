@@ -213,7 +213,9 @@ const Footer = () => {
           </div>
 
           <div className={styles.companyImages}>
-            <img className={styles.rosMolod} src={rosMolod} alt="rosMolod" />
+            <a href="https://fadm.gov.ru/" target="_blank">
+              <img className={styles.rosMolod} src={rosMolod} alt="rosMolod" />
+            </a>
           </div>
         </div>
       </div>
