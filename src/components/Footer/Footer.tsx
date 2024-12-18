@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import rosMolod from "./assets/rosMolod.png";
 import styles from "./Footer.module.scss";
 
 const Footer = () => {
@@ -209,6 +210,10 @@ const Footer = () => {
             <p>Политика конфиденциальности и обработки персональных данных</p>
 
             <p>© 2024 — ИФИБ НИЯУ МИФИ</p>
+          </div>
+
+          <div className={styles.companyImages}>
+            <img className={styles.rosMolod} src={rosMolod} alt="rosMolod" />
           </div>
         </div>
       </div>

@@ -90,6 +90,19 @@
   line-height: 1.4;
 }
 
+.companyImages {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  gap: 20px;
+}
+
+.rosMolod {
+  width: 170px;
+  display: flex;
+  justify-content: center;
+}
+
 @media (max-width: 768px) {
   .contentContainer {
     flex-direction: column;
