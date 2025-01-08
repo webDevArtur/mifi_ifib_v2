@@ -5,6 +5,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { NoData } from "components/NoData/NoData";
 import { useQuestTasks, useSubmitQuestTask } from "hooks/useQuestTasks";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { QuestTask } from "entities";
 import styles from "./QuestDetailsPage.module.scss";
 
 const questTypeTranslations = {
@@ -31,7 +32,7 @@ const QuestDetailsPage = () => {
   const [submittingQuestId, setSubmittingQuestId] = useState<number | null>(null);
 
   const title = questTypeTranslations[questType] || "Неизвестный квест";
-  const questArray = questId ? [parseInt(questId, 10)] : undefined;
+  const questArray = questId ? [parseInt(questId, 10)] : [];
 
   const { data, isLoading, error } = useQuestTasks(questArray, undefined, page, pageSize);
   const { mutate: submitTask, isPending } = useSubmitQuestTask();
@@ -67,6 +68,10 @@ const QuestDetailsPage = () => {
   }
 
   const handleSubmit = (questId: number) => {
+    if (!questId) {
+      return;
+    }
+    
     setSubmittingQuestId(questId);
   
     const questType = quests.find((q) => q.id === questId)?.type;
@@ -210,7 +215,7 @@ const QuestDetailsPage = () => {
                 <NoData text="Данный квест пуст." />
               ) : (
                 <div className={styles.cardsContainer}>
-                  {quests.map((quest) => (
+                  {quests.map((quest: QuestTask) => (
                     <div key={quest.id} className={styles.card}>
                       <h3 className={styles.cardTitle}>{quest.body}</h3>
 

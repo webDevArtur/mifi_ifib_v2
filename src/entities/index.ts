@@ -13,8 +13,8 @@ import { EquipmentResponseSchema } from "./equipmentResponse";
 import { PodcastResponseSchema } from "./podcastResponse";
 import { PracticeResponseSchema } from "./practiceResponse";
 import { EquipmentGroupsResponse } from "./equipmentGroupsResponse";
-import { QuestResponseSchema } from "./QuestResponse";
-import { QuestTasksResponseSchema } from "./questTasksResponse";
+import { QuestResponseSchema } from "./questResponse";
+import { QuestTasksResponseSchema, QuestTaskSchema } from "./questTasksResponse";
 
 export type RegistrationResponse = z.infer<typeof RegistrationResponseSchema>;
 export type ConfirmRegistrationResponse = z.infer<
@@ -35,3 +35,4 @@ export type EquipmentGroupsResponse = z.infer<
 >;
 export type QuestResponse = z.infer<typeof QuestResponseSchema>;
 export type QuestTasksResponse = z.infer<typeof QuestTasksResponseSchema>;
+export type QuestTask = z.infer<typeof QuestTaskSchema>;
