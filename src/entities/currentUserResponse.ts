@@ -11,7 +11,8 @@ export const CurrentUserDetailsSchema = z.object({
   educationalFacility: z.string(),
   sphereOfInterest: z.string(),
   role: z.number(),
-  isActive: z.boolean(),
+  isVerified: z.boolean(),
+  questsScore: z.number(),
 });
 
 export const CurrentUserSchema = z.object({

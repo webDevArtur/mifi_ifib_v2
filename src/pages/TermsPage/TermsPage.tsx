@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
-import { useTermsIdByType, useTerms } from "hooks/useTerms";
+import { useTerms } from "hooks/useTerms";
 import { Input, Button, Skeleton } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { NoData } from "components/NoData/NoData";
@@ -31,9 +31,8 @@ const TermsPage = () => {
 
   const pageSize = 10;
 
-  const { data: termsId } = useTermsIdByType(type);
   const { data: terms, isLoading: isLoadingTerms } = useTerms(
-    termsId?.[0]?.id,
+    type,
     selectedLetter,
     debouncedSearch,
     pageSize,
@@ -132,7 +131,7 @@ const TermsPage = () => {
           </p>
         </div>
 
-          <Link to="https://info.cern.ch/hypertext/WWW/TheProject.html" target="_blank" className={styles.card}>
+          <Link to="https://medphysicists.mephi.ru/biowiki/" target="_blank" className={styles.card}>
             <img
               src={termsImage}
               alt='Учебные материалы'

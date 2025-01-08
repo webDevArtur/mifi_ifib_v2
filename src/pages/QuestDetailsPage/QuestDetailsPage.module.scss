@@ -67,14 +67,155 @@
   cursor: pointer;
 }
 
-.description {
-  font-size: 16px;
-  color: #333;
-  margin: 50px 0;
-}
-
 .active {
   background-color: #f0f0f0;
+}
+
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  border-radius: 8px;
+  background-color: #f3f3f3;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.cardImageContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.cardImage {
+  width: 30%;
+  height: auto;
+}
+
+.textTaskContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.optionsTaskContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputField {
+  width: calc(100% - 120px);
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 2px solid #d1d1d1;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.optionsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.optionLabel {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #333;
+}
+
+.optionInput {
+  margin-right: 10px;
+  accent-color: #4caf50;
+}
+
+.cardImageContainer {
+  margin-bottom: 20px;
+}
+
+.cardImage {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.tabHeaders {
+  margin-bottom: 20px;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 400;
+  color: #333;
+}
+
+.submitButton {
+  width: 120px;
+  background-color: #040;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #030;
+}
+
+.submitButton:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: default;
+  opacity: 0.6;
+}
+
+.skeletonCard {
+  width: 70% !important;
+  height: 200px !important;
+}
+
+.feedbackContainer {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f4f4f4;
+  display: flex;
+  align-items: center;
+}
+
+.feedbackText {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.correctIcon {
+  color: green;
+  margin-right: 10px;
+}
+
+.incorrectIcon {
+  color: red;
+  margin-right: 10px;
 }
 
 @media (max-width: 825px) {
@@ -97,6 +238,20 @@
     button {
       margin-bottom: 10px;
     }
+  }
+
+  .cardsContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cardImage {
+    width: 100%;
+  }
+
+  .card {
+    width: calc(100% - 20px);
+    margin-bottom: 20px;
   }
 }
 

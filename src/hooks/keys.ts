@@ -8,6 +8,8 @@ export const techObjectsKeys = {
   podcasts: ["podcasts"] as const,
   practices: ["practices"] as const,
   equipmentGroups: ["equipmentGroups"] as const,
+  quests: ["quests"] as const,
+  questTasks: ["questTasks"] as const,
 };
 
 export const articleDetailsKeys = {

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Form, Input, Button, Checkbox, Select, DatePicker, Alert } from "antd";
 import { useRegister } from "hooks/useRegistration";
 import { useNavigate } from "react-router-dom";
+import { useLogin } from "hooks/useLogin";
+import { useAuth } from "hooks/AuthProvider";
 import dayjs from "dayjs";
 import styles from "./RegistrationPage.module.scss";
 
@@ -16,7 +18,9 @@ const RegistrationPage = () => {
   );
   const [errorMessage, setErrorMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const { login } = useAuth();
   const { mutate: register, isPending } = useRegister();
+  const { mutate: loginMutation, isPending: isLoginPending } = useLogin();
 
   const handleSubmit = async (values: any) => {
     setSubmitted(true);
@@ -39,8 +43,20 @@ const RegistrationPage = () => {
 
     register(registerData, {
       onSuccess: (data) => {
-        if (data.token) {
-          navigate(`confirmation/${data.token}`);
+        if (data.access) {
+          loginMutation({
+            username: values.email,
+            password: values.password,
+          }, {
+            onSuccess: (data) => {
+              login(data.access, data.refresh);
+          
+              navigate(`confirmation/${data.access}`);
+            },
+            onError: (error) => {
+              setErrorMessage("Неверный логин или пароль");
+            },
+          });
         }
       },
       onError: (message) => {
@@ -522,7 +538,7 @@ const RegistrationPage = () => {
               type="primary"
               htmlType="submit"
               className={styles.submitButton}
-              loading={isPending}
+              loading={isPending || isLoginPending}
               onClick={() => setSubmitted(true)}
             >
               Зарегистрироваться

@@ -8,7 +8,7 @@ import styles from "./App.module.css";
 const App = () => {
 
   const { isAuthenticated } = useAuth();
-  console.log(isAuthenticated);
+
   const location = useLocation();
 
   if (!isAuthenticated) {

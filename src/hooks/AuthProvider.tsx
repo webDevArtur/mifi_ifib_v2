@@ -8,7 +8,7 @@ import React, {
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  login: (token: string) => void;
+  login: (accessToken: string, refreshToken: string) => void;
   logout: () => void;
 }
 
@@ -19,20 +19,24 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(localStorage.getItem("authToken") !== null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
+    localStorage.getItem("authToken") !== null
+  );
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     setIsAuthenticated(!!token);
   }, []);
 
-  const login = (token: string) => {
-    localStorage.setItem("authToken", token);
+  const login = (accessToken: string, refreshToken: string) => {
+    localStorage.setItem("authToken", accessToken);
+    localStorage.setItem("refreshToken", refreshToken);
     setIsAuthenticated(true);
   };
 
   const logout = () => {
     localStorage.removeItem("authToken");
+    localStorage.removeItem("refreshToken");
     setIsAuthenticated(false);
   };
 

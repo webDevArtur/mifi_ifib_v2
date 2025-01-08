@@ -5,8 +5,8 @@ import arrowIcon from "./assets/arrow-icon.png";
 
 type QuestCardProps = {
   title: string;
-  isOnline: boolean;
-  rating: number;
+  isOnline?: boolean;
+  rating?: number;
   backgroundImage?: string;
   questCount?: number;
 };
@@ -31,15 +31,19 @@ const QuestCard: React.FC<QuestCardProps> = ({
       <div className={styles.content}>
         <div className={styles.cardHeader}>
           <div className={styles.tags}>
-            <span className={styles.tag}>
-              {isOnline ? "Онлайн" : "Оффлайн"}
-            </span>
+            {isOnline && (
+              <span className={styles.tag}>
+                {isOnline ? "Онлайн" : "Оффлайн"}
+              </span>
+            )}
 
-            <div className={styles.rating}>
-              {[...Array(3)].map((_, i) =>
-                i < rating ? <StarFilled key={i} /> : <StarOutlined key={i} />,
-              )}
-            </div>
+            {rating && (
+              <div className={styles.rating}>
+                {[...Array(3)].map((_, i) =>
+                  i < rating ? <StarFilled key={i} /> : <StarOutlined key={i} />
+                )}
+              </div>
+            )}
           </div>
 
           {questCount && (

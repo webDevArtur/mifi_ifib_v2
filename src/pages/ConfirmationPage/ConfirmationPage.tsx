@@ -1,7 +1,7 @@
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { Typography, Button, Input, Alert } from "antd";
 import { useEffect, useState } from "react";
-import { useAuth } from "hooks/AuthProvider";
+
 import {
   useConfirmRegistration,
   useResendConfirmationCode,
@@ -13,11 +13,11 @@ const { Title, Paragraph } = Typography;
 const ConfirmationPage = () => {
   const { token } = useParams();
   const navigate = useNavigate();
-  const { login } = useAuth();
   const [confirmationCode, setConfirmationCode] = useState("");
   const [countdown, setCountdown] = useState(60);
   const [isTimerActive, setIsTimerActive] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [hasAutoSent, setHasAutoSent] = useState(false);
   const { mutate: confirm, isPending } = useConfirmRegistration();
   const { mutate: resend } = useResendConfirmationCode();
 
@@ -38,10 +38,26 @@ const ConfirmationPage = () => {
       return;
     }
 
-    await resend({ register_token: token });
-    setCountdown(60);
-    setIsTimerActive(true);
+    await resend({ register_token: token }, {
+      onSuccess: () => {
+        setErrorMessage("");
+        setCountdown(60);
+        setIsTimerActive(true);
+      },
+      onError: () => {
+        setErrorMessage("");
+      }
+    });
   };
+
+  useEffect(() => {
+    if (token && !hasAutoSent) {
+      setHasAutoSent(true);
+      handleResend();
+    } else if (!token) {
+      setErrorMessage("Token is missing. Please try again.");
+    }
+  }, [token, hasAutoSent]);
 
   const handleConfirm = async () => {
     if (!token) {
@@ -50,13 +66,11 @@ const ConfirmationPage = () => {
     }
 
     confirm(
-      { confirmation_сode: confirmationCode, register_token: token },
+      { confirmationCode: confirmationCode },
       {
-        onSuccess: (data) => {
-          if (data.token) {
-            login(data.token);
-            navigate("/");
-          }
+        onSuccess: () => {
+          setErrorMessage("");
+          navigate("/");
         },
         onError: () => {
           setErrorMessage(
@@ -96,7 +110,7 @@ const ConfirmationPage = () => {
         </Paragraph>
 
         {errorMessage && (
-          <Alert message="Код подтверждения неверный!" type="error" showIcon />
+          <Alert message={errorMessage} type="error" showIcon />
         )}
 
         <Input

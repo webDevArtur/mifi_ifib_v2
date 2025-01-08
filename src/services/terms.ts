@@ -1,25 +1,22 @@
 import { api } from "./index";
-import { TermIdResponse, TermResponse } from "entities/index";
-
-export const getTermsIdByType = (type?: string) =>
-  api<TermIdResponse[]>(
-    `https://medphysicists.mephi.ru/api/v1/knowledge-base?name=${type}`,
-  );
+import { TermResponse } from "entities/index";
 
 export const getTerms = (
-  id?: number,
+  knowledgeBase?: string,
   startsWith?: string,
   name?: string,
   pageSize?: number,
-  pageNumber?: number,
+  pageNumber?: number
 ) => {
-  console.log(id);
-  const startsWithQuery = startsWith ? `&startsWith=${startsWith}` : "";
-  const nameQuery = name ? `&name=${name}` : "";
-  const pageSizeQuery = pageSize ? `&pageSize=${pageSize}` : "";
-  const pageNumberQuery = pageNumber ? `&pageNumber=${pageNumber}` : "";
+  const params = new URLSearchParams();
+
+  if (knowledgeBase) params.append("knowledge_base", knowledgeBase);
+  if (startsWith) params.append("starts_with", startsWith);
+  if (name) params.append("name", name);
+  if (pageSize) params.append("pageSize", pageSize.toString());
+  if (pageNumber) params.append("page", pageNumber.toString());
 
   return api<TermResponse>(
-    `https://medphysicists.mephi.ru/api/v1/knowledge-base/${id}/terms?${startsWithQuery}${nameQuery}${pageSizeQuery}${pageNumberQuery}`,
+    `https://medphysicists.mephi.ru/api/v1/knowledge-base/terms/?${params.toString()}`
   );
 };

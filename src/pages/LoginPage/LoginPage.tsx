@@ -14,7 +14,7 @@ const LoginPage = () => {
   const handleSubmit = (values: any) => {
     loginMutation(values, {
       onSuccess: (data) => {
-        login(data.token);
+        login(data.access, data.refresh);
         
         const redirectPath = localStorage.getItem("redirectPath") || "/";
         localStorage.removeItem("redirectPath");
