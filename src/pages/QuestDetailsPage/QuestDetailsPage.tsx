@@ -20,7 +20,7 @@ const questTypeTranslations = {
 
 const QuestDetailsPage = () => {
   const { name: questType, id: questId } = useParams<{ name: string; id: string }>();
-  const [searchParams, setSearchParams] = useSearchParams('');
+  const [searchParams, setSearchParams] = useSearchParams();
   const activeTabFromURL = searchParams.get("tab") || "online";
   const [activeTab, setActiveTab] = useState(activeTabFromURL);
   const [page, setPage] = useState(1);
