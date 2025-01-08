@@ -31,7 +31,7 @@ const QuestDetailsPage = () => {
   const [isDirty, setIsDirty] = useState(false);
   const [submittingQuestId, setSubmittingQuestId] = useState<number | null>(null);
 
-  const title = questTypeTranslations[questType as keyof typeof questTypeTranslations] ?? "Неизвестный квест";
+  const title = (questType && questTypeTranslations[questType as keyof typeof questTypeTranslations]) || "Неизвестный квест";
   const questArray = questId ? [parseInt(questId, 10)] : [];
 
   const { data, isLoading, error } = useQuestTasks(questArray, undefined, page, pageSize);

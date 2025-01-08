@@ -16,11 +16,11 @@ const questTypeTranslations = {
 };
 
 const QuestsDetailsPage = () => {
-  const { name: questType } = useParams();
+  const { name: questType } = useParams<{ name: string }>();
   const { data, isLoading, error } = useQuests(questType);
 
   const quests = data?.items || [];
-  const title = questTypeTranslations[questType] || "Неизвестный квест";
+  const title = (questType && questTypeTranslations[questType as keyof typeof questTypeTranslations]) || "Неизвестный квест";
 
   return (
     <div className={styles.introPage}>
