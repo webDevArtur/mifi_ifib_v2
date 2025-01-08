@@ -19,8 +19,8 @@ const questTypeTranslations = {
 };
 
 const QuestDetailsPage = () => {
-  const { name: questType, id: questId } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { name: questType, id: questId } = useParams<{ name: string; id: string }>();
+  const [searchParams, setSearchParams] = useSearchParams('');
   const activeTabFromURL = searchParams.get("tab") || "online";
   const [activeTab, setActiveTab] = useState(activeTabFromURL);
   const [page, setPage] = useState(1);
@@ -31,7 +31,7 @@ const QuestDetailsPage = () => {
   const [isDirty, setIsDirty] = useState(false);
   const [submittingQuestId, setSubmittingQuestId] = useState<number | null>(null);
 
-  const title = questTypeTranslations[questType] || "Неизвестный квест";
+  const title = questType && questTypeTranslations[questType as keyof typeof questTypeTranslations] || "Неизвестный квест";
   const questArray = questId ? [parseInt(questId, 10)] : [];
 
   const { data, isLoading, error } = useQuestTasks(questArray, undefined, page, pageSize);
