@@ -22,13 +22,13 @@ const columns: ColumnsType<User> = [
     dataIndex: "number",
     key: "number",
     className: styles.centeredCell,
-    render: (number: string | null) => (number ? number : "..."),
+    render: (number) => number || "...",
   },
   {
     title: "Фото",
     dataIndex: "photo",
     key: "photo",
-    render: (photo: string | null) =>
+    render: (photo) =>
       photo ? (
         <Avatar src={photo} size={40} />
       ) : (
@@ -66,10 +66,10 @@ const UserRating: React.FC = () => {
   const [activeTab, setActiveTab] = useState("school_student");
   const { data, isLoading, isError, error } = useUserRanks(activeTab);
 
-  const currentUser = data?.currentUser || null;
+  const currentUser = data?.currentUser;
 
   const mapUserToTableData = (user: any, index: number): User => ({
-    key: user.id,
+    key: user.id.toString(),
     number: (index + 1).toString(),
     photo: user.photo || null,
     name: `${user.firstName} ${user.lastName}`,
@@ -81,13 +81,13 @@ const UserRating: React.FC = () => {
 
   const dataSource: User[] = [
     ...usersData,
-    { key: "separator", number: null, photo: null, name: "...", status: "...", points: 0 },
+    { key: "separator", number: "...", photo: null, name: "...", status: "...", points: 0 },
     ...(currentUser
       ? [
           {
-            key: currentUser.id,
+            key: currentUser.id.toString(),
             number: null,
-            photo: currentUser.photo || null,
+            photo: null,
             name: `${currentUser.firstName} ${currentUser.lastName}`,
             status: roleToStatusMap[currentUser.role] || "Неизвестный статус",
             points: currentUser.score,
@@ -113,56 +113,33 @@ const UserRating: React.FC = () => {
         onChange={handleTabChange}
         className={styles.ratingTabs}
       >
-        <TabPane tab="Школьники" key="school_student">
-          {isLoading ? (
-            <div className={styles.loading}>
-              <Spin tip="Загрузка данных..." />
-            </div>
-          ) : isError ? (
-            <Alert
-              message="Ошибка загрузки"
-              description={(error as Error)?.message || "Не удалось загрузить данные."}
-              type="error"
-              showIcon
-            />
-          ) : (
-            <div className={styles.tableWrapper}>
-              <Table
-                dataSource={dataSource}
-                columns={columns}
-                pagination={false}
-                rowClassName={(record) =>
-                  record.key === currentUser?.id ? styles.currentUserRow : ""
-                }
+        {["school_student", "university_student"].map((role) => (
+          <TabPane tab={roleToStatusMap[role]} key={role}>
+            {isLoading ? (
+              <div className={styles.loading}>
+                <Spin tip="Загрузка данных..." />
+              </div>
+            ) : isError ? (
+              <Alert
+                message="Ошибка загрузки"
+                description={(error as Error)?.message || "Не удалось загрузить данные."}
+                type="error"
+                showIcon
               />
-            </div>
-          )}
-        </TabPane>
-        <TabPane tab="Студенты" key="university_student">
-          {isLoading ? (
-            <div className={styles.loading}>
-              <Spin tip="Загрузка данных..." />
-            </div>
-          ) : isError ? (
-            <Alert
-              message="Ошибка загрузки"
-              description={(error as Error)?.message || "Не удалось загрузить данные."}
-              type="error"
-              showIcon
-            />
-          ) : (
-            <div className={styles.tableWrapper}>
-              <Table
-                dataSource={dataSource}
-                columns={columns}
-                pagination={false}
-                rowClassName={(record) =>
-                  record.key === currentUser?.id ? styles.currentUserRow : ""
-                }
-              />
-            </div>
-          )}
-        </TabPane>
+            ) : (
+              <div className={styles.tableWrapper}>
+                <Table
+                  dataSource={dataSource}
+                  columns={columns}
+                  pagination={false}
+                  rowClassName={(record) =>
+                    record.key === currentUser?.id.toString() ? styles.currentUserRow : ""
+                  }
+                />
+              </div>
+            )}
+          </TabPane>
+        ))}
       </Tabs>
     </div>
   );
