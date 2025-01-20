@@ -1,0 +1,88 @@
+.container {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 20px 50px;
+  }
+  
+  .breadcrumb {
+    font-size: 16px;
+    color: #7d7d7d;
+    margin-bottom: 40px;
+  }
+  
+  .breadcrumb a {
+    text-decoration: none;
+    color: #666;
+  }
+  
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 24px;
+  }
+  
+    th {
+      background-color: #DBF0DD !important;
+      color: rgba(40, 43, 47, 0.55) !important;
+      font-weight: 400 !important;
+      text-align: center;
+    }
+
+    td {
+      background-color: #FBFBF9 !important;
+      border-bottom: 1px solid #BADEBE !important;
+    }
+  
+  .nameCell {
+    text-align: left;
+  }
+  
+  .highlightedRow {
+    background-color: #f7ffe4;
+  }
+  
+  .tableWrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .currentUserRow {
+    td {
+      background-color: #F4F7D3 !important;
+    }
+  }  
+  
+  @media (max-width: 825px) {
+    .tableWrapper {
+      overflow-x: scroll;
+    }
+  
+    .ant-table {
+      min-width: 800px;
+    }
+  }
+  
+  @media (max-width: 825px) {
+    .breadcrumb {
+      font-size: 14px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+  
+    .h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+  }
+  
+  @media (pointer: coarse) {
+    .breadcrumb a:hover {
+      text-decoration: none;
+    }
+  }

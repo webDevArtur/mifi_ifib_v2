@@ -27,6 +27,8 @@ import QuestsPage from "pages/QuestsPage/QuestsPage";
 import QuestsDetailsPage from "pages/QuestsDetailsPage/QuestsDetailsPage";
 import QuestDetailsPage from "pages/QuestDetailsPage/QuestDetailsPage";
 import TasksPage from "pages/TasksPage/TasksPage";
+import OfflineQuestDetailsPage from "pages/OfflineQuestDetailsPage/OfflineQuestDetailsPage";
+import UserRatingPage from "pages/UserRatingPage/UserRatingPage";
 import ScrollToTop from "hooks/ScrollToTop";
 import { AuthProvider } from "hooks/AuthProvider";
 import App from "app/App";
@@ -126,6 +128,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                   path="/quests/:name/:id"
                   element={<QuestDetailsPage />}
                 />
+
+                <Route path="/quests/:name/:id/offline" element={<OfflineQuestDetailsPage />} />
+
+                <Route path="/userRating" element={<UserRatingPage />} />
               </Route>
             </Routes>
           </Router>

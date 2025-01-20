@@ -11,6 +11,15 @@ import styles from "./TermsPage.module.scss";
 const alphabet = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ".split("");
 const DEBOUNCE_DELAY = 800;
 
+const termLinks: Record<TermKeys, string> = {
+  radionuclidesDiagnosis: "https://medphysicists.mephi.ru/biowiki/index.html",
+  radiationTherapy: "https://medphysicists.mephi.ru/biowiki/index.html",
+  ultraSoundDiagnosis: "https://medphysicists.mephi.ru/biowiki/index.html",
+  mriDiagnosis: "https://medphysicists.mephi.ru/biowiki/index.html",
+  safety: "https://medphysicists.mephi.ru/biowiki/index.html",
+  regulatoryDocuments: "https://medphysicists.mephi.ru/biowiki/page8.html",
+};
+
 const TermsPage = () => {
   const { type } = useParams<{ type: TermKeys }>();
   const navigate = useNavigate();
@@ -89,6 +98,8 @@ const TermsPage = () => {
     }
   };
 
+  const link = type ? termLinks[type] : "https://medphysicists.mephi.ru/biowiki/index.html";
+
   return (
     <div className={styles.container}>
         <div className={styles.breadcrumb}>
@@ -131,7 +142,7 @@ const TermsPage = () => {
           </p>
         </div>
 
-          <Link to="https://medphysicists.mephi.ru/biowiki/" target="_blank" className={styles.card}>
+          <Link to={link} target="_blank" className={styles.card}>
             <img
               src={termsImage}
               alt='Учебные материалы'

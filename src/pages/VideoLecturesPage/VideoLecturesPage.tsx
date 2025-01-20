@@ -4,12 +4,14 @@ import { SearchOutlined } from "@ant-design/icons";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import RegistraionBlock from "components/RegistrationBlock/RegistrationBlock";
 import { useVideos } from "hooks/useVideos";
+import { useAuth } from "hooks/AuthProvider";
 import { NoData } from "components/NoData/NoData";
 import styles from "./VideoLecturesPage.module.scss";
 
 const VideoLecturesPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
   const queryParams = new URLSearchParams(location.search);
   const initialSearch = queryParams.get("search") || "";
@@ -112,6 +114,14 @@ const VideoLecturesPage = () => {
                 <div className={styles.lectureInfo}>
                   <h3>{video.name}</h3>
                   <p>{video.theme}</p>
+
+                  {isAuthenticated && (
+                      <input
+                        type="checkbox"
+                        className={styles.isCompletedCheckbox}
+                        checked={video.completed}
+                      />
+                  )}
                 </div>
               </Link>
             </div>

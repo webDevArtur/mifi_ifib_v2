@@ -10,6 +10,7 @@ export const techObjectsKeys = {
   equipmentGroups: ["equipmentGroups"] as const,
   quests: ["quests"] as const,
   questTasks: ["questTasks"] as const,
+  userRanks: ["userRanks"] as const,
 };
 
 export const articleDetailsKeys = {

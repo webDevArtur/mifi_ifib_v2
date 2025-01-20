@@ -3,12 +3,8 @@ import axios, { AxiosError, AxiosHeaders, AxiosRequestConfig } from "axios";
 const key = "authToken";
 const refreshKey = "refreshToken";
 
-const getAccessToken = (): string => {
-  const token = localStorage.getItem(key);
-  if (token) {
-    return token;
-  }
-  throw new Error("Токен просрочен или отсутствует");
+const getAccessToken = (): string | null => {
+  return localStorage.getItem(key);
 };
 
 const setAccessToken = (token: string) => {
@@ -53,22 +49,12 @@ export const configureAxios = () => {
   axios.defaults.timeout = Infinity;
   axios.defaults.responseType = "json";
 
-  const publicAPIRoutes = [
-    "/nuclear-medicine-intro/article/",
-    "/nuclear-medicine-intro/equipment",
-    "/nuclear-medicine-intro/films",
-    "/nuclear-medicine-intro/podcasts",
-    "/team-members",
-  ];
-
   axios.interceptors.request.use((config) => {
-    if (
-      !config.url?.includes("login") &&
-      !(config.url?.includes("register") && !(config.url?.includes("confirm") || config.url?.includes("resend"))) &&
-      !publicAPIRoutes.some((route) => config.url?.includes(route))
-    ) {
-      const token = getAccessToken();
+    const token = getAccessToken();
 
+    if (
+      token
+    ) {
       const headers = new AxiosHeaders(config.headers);
       headers.set("Authorization", `Bearer ${token}`);
       config.headers = headers;

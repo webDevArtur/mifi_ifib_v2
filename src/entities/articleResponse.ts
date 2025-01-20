@@ -2,6 +2,8 @@ import { z } from "zod";
 
 const ArticleSchema = z.object({
   id: z.number(),
+  marked: z.boolean(),
+  completed: z.boolean(),
   name: z.string(),
   description: z.string(),
   author: z.string(),

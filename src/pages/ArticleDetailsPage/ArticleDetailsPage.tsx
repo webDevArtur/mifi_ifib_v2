@@ -1,7 +1,10 @@
+import { useEffect } from "react";
 import PDFViewer from "./components/PdfViewer/PdfViewer";
 import { Link, useParams } from "react-router-dom";
 import { Skeleton } from "antd";
 import { useArticles } from "hooks/useArticles";
+import { useArticleAsRead } from "hooks/useArticleAsRead";
+import { useAuth } from "hooks/AuthProvider";
 import styles from "./ArticleDetailsPage.module.scss";
 import cover from "./assets/cover.png";
 import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
@@ -9,6 +12,14 @@ import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
 const ArticleDetailsPage = () => {
   const { id } = useParams();
   const { data, isLoading, error } = useArticles([Number(id)]);
+  const { isAuthenticated } = useAuth();
+  const { mutate: markAsRead } = useArticleAsRead();
+
+  useEffect(() => {
+    if (isAuthenticated && id) {
+      markAsRead(Number(id));
+    }
+  }, [isAuthenticated, id, markAsRead]);
 
   const article = data?.items.find((item) => item.id === Number(id));
 

@@ -15,6 +15,7 @@ import { PracticeResponseSchema } from "./practiceResponse";
 import { EquipmentGroupsResponse } from "./equipmentGroupsResponse";
 import { QuestResponseSchema } from "./questResponse";
 import { QuestTasksResponseSchema, QuestTaskSchema } from "./questTasksResponse";
+import { UserRankResponseSchema } from "./userRankResponse";
 
 export type RegistrationResponse = z.infer<typeof RegistrationResponseSchema>;
 export type ConfirmRegistrationResponse = z.infer<
@@ -36,3 +37,4 @@ export type EquipmentGroupsResponse = z.infer<
 export type QuestResponse = z.infer<typeof QuestResponseSchema>;
 export type QuestTasksResponse = z.infer<typeof QuestTasksResponseSchema>;
 export type QuestTask = z.infer<typeof QuestTaskSchema>;
+export type UserRankResponse = z.infer<typeof UserRankResponseSchema>;

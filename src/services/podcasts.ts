@@ -16,3 +16,8 @@ export const getPodcasts = (
     method: "GET",
   });
 };
+
+export const podcastAsViewed = (podcastId: number) => 
+  api<void>(`https://medphysicists.mephi.ru/api/v1/nuclear-medicine-intro/podcasts/${podcastId}/complete/`, {
+    method: "POST",
+  });

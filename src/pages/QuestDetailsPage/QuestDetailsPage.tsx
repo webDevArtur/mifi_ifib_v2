@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
-import { Skeleton, Spin } from "antd";
+import { Link, useParams } from "react-router-dom";
+import { Skeleton, Spin, Pagination } from "antd";
 import { LoadingOutlined } from '@ant-design/icons';
 import { NoData } from "components/NoData/NoData";
 import { useQuestTasks, useSubmitQuestTask } from "hooks/useQuestTasks";
@@ -20,11 +20,8 @@ const questTypeTranslations = {
 
 const QuestDetailsPage = () => {
   const { name: questType, id: questId } = useParams<{ name: string; id: string }>();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const activeTabFromURL = searchParams.get("tab") || "online";
-  const [activeTab, setActiveTab] = useState(activeTabFromURL);
   const [page, setPage] = useState(1);
-  const pageSize = 10;
+  const pageSize = 1;
 
   const [inputValues, setInputValues] = useState<{ [key: number]: string }>({});
   const [isCorrectValues, setIsCorrectValues] = useState<{ [key: number]: boolean | null }>({});
@@ -36,6 +33,12 @@ const QuestDetailsPage = () => {
 
   const { data, isLoading, error } = useQuestTasks(questArray, undefined, page, pageSize);
   const { mutate: submitTask, isPending } = useSubmitQuestTask();
+
+  const totalItems = data?.totalItems || 0;
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
 
   useEffect(() => {
     if (data?.items) {
@@ -108,11 +111,6 @@ const QuestDetailsPage = () => {
         },
       }
     );
-  };  
-
-  const handleTabChange = (tab: string) => {
-    setActiveTab(tab);
-    setSearchParams({ tab });
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, questId: number) => {
@@ -185,25 +183,18 @@ const QuestDetailsPage = () => {
 
       <div className={styles.tabsContainer}>
         <div className={styles.tabHeaders}>
-          <button
-            className={`${styles.tab} ${activeTab === "online" ? styles.active : ""}`}
-            onClick={() => handleTabChange("online")}
-          >
+          <Link to={`/quests/${questType}/${questId}`} className={`${styles.tab} ${styles.active}`}>
             Онлайн
-          </button>
-          <button
-            className={`${styles.tab} ${activeTab === "offline" ? styles.active : ""}`}
-            onClick={() => handleTabChange("offline")}
-          >
+          </Link>
+          <Link to={`/quests/${questType}/${questId}/offline`} className={`${styles.tab}`}>
             Оффлайн
-          </button>
+          </Link>
         </div>
 
         <div>
-          {activeTab === "online" && (
             <div>
               {isLoading ? (
-                Array(6)
+                Array(1)
                   .fill(null)
                   .map((_, index) => (
                     <div key={index} className={styles.card}>
@@ -298,13 +289,14 @@ const QuestDetailsPage = () => {
                 </div>
               )}
             </div>
-          )}
 
-          {activeTab === "offline" && (
-            <p className={styles.description}>
-              Здесь будет информация о оффлайн заданиях и материалах.
-            </p>
-          )}
+            <Pagination
+              current={page}
+              pageSize={pageSize}
+              total={totalItems}
+              onChange={handlePageChange}
+              className={styles.pagination}
+            />
         </div>
       </div>
     </div>

@@ -6,6 +6,8 @@ const PodcastSchema = z.object({
   description: z.string(),
   cover: z.string(),
   link: z.string(),
+  marked: z.boolean(),
+  completed: z.boolean(),
 });
 
 export const PodcastResponseSchema = z.object({

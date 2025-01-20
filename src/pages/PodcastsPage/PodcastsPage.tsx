@@ -7,13 +7,20 @@ import { NoData } from "components/NoData/NoData";
 import ReactPlayer from "react-player";
 import styles from "./PodcastsPage.module.scss";
 import { usePodcasts } from "hooks/usePodcasts";
+import { useAuth } from "hooks/AuthProvider"
+import { usePodcastAsViewed } from "hooks/usePodcastAsViewed";
 
 const PodcastsPage = () => {
   const [currentPodcastUrl, setCurrentPodcastUrl] = useState("");
+  const [currentPodcastId, setCurrentPodcastId] = useState<number | null>(null);
   const [search, setSearch] = useState<string>("");
   const [debouncedSearch, setDebouncedSearch] = useState<string>("");
 
-  const { data: podcastsData, isLoading, error } = usePodcasts(1, 20, debouncedSearch);
+  const { isAuthenticated } = useAuth();
+
+  const { data: podcastsData, isLoading } = usePodcasts(1, 20, debouncedSearch);
+
+  const { mutate: markPodcastAsViewed } = usePodcastAsViewed();
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -25,13 +32,20 @@ const PodcastsPage = () => {
     };
   }, [search]);
 
-  const handleCardClick = (url: string) => {
+  const handleCardClick = (url: string, id: number) => {
     setCurrentPodcastUrl(url);
+    setCurrentPodcastId(id);
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
+
+  useEffect(() => {
+    if (isAuthenticated && currentPodcastId) {
+      markPodcastAsViewed(currentPodcastId);
+    }
+  }, [currentPodcastId, markPodcastAsViewed]);
 
   const podcasts = podcastsData?.items || [];
 
@@ -79,7 +93,7 @@ const PodcastsPage = () => {
           <div
             key={podcast.id}
             className={styles.podcastCard}
-            onClick={() => handleCardClick(podcast.link)}
+            onClick={() => handleCardClick(podcast.link, podcast.id)}
           >
             <div className={styles.thumbnail}>
               <div className={styles.overlay}>
@@ -93,6 +107,14 @@ const PodcastsPage = () => {
             <div className={styles.lectureInfo}>
               <h3>{podcast.name}</h3>
               <p>{podcast.description}</p>
+
+              {isAuthenticated && (
+                <input
+                  type="checkbox"
+                  className={styles.isCompletedCheckbox}
+                  checked={podcast.completed}
+                />
+              )}
             </div>
           </div>
         ))}

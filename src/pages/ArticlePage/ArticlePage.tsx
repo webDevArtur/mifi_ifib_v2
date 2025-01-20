@@ -4,6 +4,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useArticles } from "hooks/useArticles";
 import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
+import { useAuth } from "hooks/AuthProvider";
 import styles from "./ArticlePage.module.scss";
 import { NoData } from "components/NoData/NoData";
 import cover from "./assets/cover.png";
@@ -12,6 +13,7 @@ const ArticlePage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const { isAuthenticated } = useAuth();
   const queryParams = new URLSearchParams(location.search);
   const initialPage = parseInt(queryParams.get("page") || "1", 10);
   const initialSearch = queryParams.get("search") || "";
@@ -119,8 +121,18 @@ const ArticlePage = () => {
                 />
 
                 <div className={styles.articleDetails}>
-                  <h3 className={styles.articleTitle} >{article.name}</h3>
-                  <p className={styles.articleAuthor} >{article.author}</p>
+                  <div className={styles.articleInfo}>
+                    <h3 className={styles.articleTitle}>{article.name}</h3>
+                    <p className={styles.articleAuthor}>{article.author}</p>
+                  </div>
+
+                  {isAuthenticated && (
+                      <input
+                        type="checkbox"
+                        className={styles.isCompletedCheckbox}
+                        checked={article.completed}
+                      />
+                  )}
                 </div>
               </Link>
             </li>

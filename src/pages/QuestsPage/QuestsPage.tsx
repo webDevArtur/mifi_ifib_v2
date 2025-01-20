@@ -1,10 +1,10 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import QuestCard from "components/QuestCard/QuestCard";
 import { useCurrentUser } from "hooks/useCurrentUser";
 import styles from "./QuestsPage.module.scss";
 import image1 from "./assets/image1.png";
 import image2 from "./assets/image2.png";
-import image3 from "./assets/image3.png";
 
 const questTypeTranslations = {
   nuclear_medicine_history: "История ядерной медицины",
@@ -28,21 +28,29 @@ const quests = [
   {
     id: 2,
     title: questTypeTranslations.diagnostics,
-    isOnline: true,
+    isOnline: "all",
     rating: 3,
     questType: "diagnostics",
     backgroundImage: image2,
   },
   {
     id: 3,
-    title: questTypeTranslations.common_quest,
-    isOnline: false,
-    rating: 1,
-    questType: "common_quest",
-    backgroundImage: image3,
+    title: questTypeTranslations.therapy,
+    isOnline: "all",
+    rating: 4,
+    questType: "therapy",
+    backgroundImage: image2,
   },
   {
     id: 4,
+    title: questTypeTranslations.common_quest,
+    isOnline: "all",
+    rating: 1,
+    questType: "common_quest",
+    backgroundImage: image1,
+  },
+  {
+    id: 5,
     title: questTypeTranslations.nuclear_medicine_economics,
     isOnline: true,
     rating: 4,
@@ -50,23 +58,22 @@ const quests = [
     backgroundImage: image1,
   },
   {
-    id: 5,
+    id: 6,
     title: questTypeTranslations.clinical_cases,
     isOnline: true,
     rating: 5,
     questType: "clinical_cases",
-    backgroundImage: image2,
+    backgroundImage: image1,
   },
   {
-    id: 6,
+    id: 7,
     title: questTypeTranslations.emergency_situations,
-    isOnline: false,
+    isOnline: true,
     rating: 3,
     questType: "emergency_situations",
-    backgroundImage: image3,
+    backgroundImage: image1,
   },
 ];
-
 
 const QuestsPage = () => {
   const { data: user, isLoading: isLoadingUser } = useCurrentUser();
@@ -102,16 +109,36 @@ const QuestsPage = () => {
       <p className={styles.assesment}>Количество баллов: {user?.user.questsScore || 0}</p>
 
       <div className={styles.cards}>
-        {quests.map((quest) => (
-          <Link
-            to={`/quests/${quest.questType}`}
-            key={quest.id}
-          >
-            <QuestCard title={quest.title} backgroundImage={quest.backgroundImage} />
-          </Link>
-        ))}
-      </div>
+        {quests.map((quest, index) => {
+          let cardClass = styles.card;
 
+          if (index === 0 || index === 3) {
+            cardClass = `${styles.card} ${styles.large}`;
+          } else if (index === 1 || index === 2) {
+            cardClass = `${styles.card} ${styles.twoInRow}`;
+          } else if (index === 4 || index === 5 || index === 6) {
+            cardClass = `${styles.card} ${styles.threeInRow}`;
+          }
+
+          const isTextAfter4 = index === 3;
+
+          return (
+            <React.Fragment key={quest.id}>
+              <Link to={`/quests/${quest.questType}`} className={cardClass}>
+                <QuestCard title={quest.title} backgroundImage={quest.backgroundImage} isOnline={quest.isOnline} />
+              </Link>
+              {isTextAfter4 && (
+                <div className={styles.textAfter4}>
+                  <h3 className={styles.h3}>Описание следующих квестов</h3>
+                  <p className={styles.description}>
+                    В этом блоке вы узнаете, с чем сталкивается студент – медицинский физик во время обучения в ИФИБ НИЯУ МИФИ.
+                  </p>
+                </div>
+              )}
+            </React.Fragment>
+          );
+        })}
+      </div>
     </div>
   );
 };

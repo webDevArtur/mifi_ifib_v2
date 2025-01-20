@@ -15,3 +15,8 @@ export const getVideos = (id?: number[], name?: string, page: number = 1, pageSi
     method: "GET",
   });
 };
+
+export const videoAsRead = (filmId: number) =>
+  api<void>(`https://medphysicists.mephi.ru/api/v1/nuclear-medicine-intro/films/${filmId}/complete/`, {
+    method: "POST",
+  });

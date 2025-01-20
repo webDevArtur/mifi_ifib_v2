@@ -5,10 +5,16 @@ import arrowIcon from "./assets/arrow-icon.png";
 
 type QuestCardProps = {
   title: string;
-  isOnline?: boolean;
+  isOnline?: boolean | string;
   rating?: number;
   backgroundImage?: string;
   questCount?: number;
+};
+
+const onlineStatusText: Record<string, string> = {
+  true: "Онлайн",
+  false: "Оффлайн",
+  all: "Онлайн и Оффлайн",
 };
 
 const QuestCard: React.FC<QuestCardProps> = ({
@@ -31,11 +37,16 @@ const QuestCard: React.FC<QuestCardProps> = ({
       <div className={styles.content}>
         <div className={styles.cardHeader}>
           <div className={styles.tags}>
-            {isOnline && (
+          {isOnline === "all" ? (
+              <>
+                <span className={styles.tag}>{onlineStatusText["true"]}</span>
+                <span className={styles.tag}>{onlineStatusText["false"]}</span>
+              </>
+            ) : isOnline !== undefined ? (
               <span className={styles.tag}>
-                {isOnline ? "Онлайн" : "Оффлайн"}
+                {onlineStatusText[String(isOnline)]}
               </span>
-            )}
+            ) : null}
 
             {rating && (
               <div className={styles.rating}>

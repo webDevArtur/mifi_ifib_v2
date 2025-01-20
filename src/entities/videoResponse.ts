@@ -7,6 +7,8 @@ export const VideoSchema = z.object({
   description: z.string(),
   cover: z.string().url(),
   link: z.string().url(),
+  marked: z.boolean(),
+  completed: z.boolean(),
 });
 
 export const VideoResponseSchema = z.object({

@@ -154,13 +154,6 @@ const Header = () => {
       </nav>
 
       <div className={styles.headerButtons}>
-        <Input
-          className={styles.headerSearch}
-          placeholder="Поиск"
-          prefix={<SearchOutlined />}
-          bordered={false}
-          disabled
-        />
 
         {isAuthenticated ? (
           <UserMenu isAuthenticated={isAuthenticated} logout={logout} />

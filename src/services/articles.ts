@@ -22,3 +22,8 @@ export const getArticles = (
     method: "GET",
   });
 };
+
+export const articleAsRead = (articleId: number) =>
+  api<void>(`https://medphysicists.mephi.ru/api/v1/nuclear-medicine-intro/article/${articleId}/complete/`, {
+    method: "POST",
+  });

@@ -1,13 +1,19 @@
+import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import VideoPlayer from "components/VideoPlayer/VideoPlayer";
 import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
+import { useAuth } from "hooks/AuthProvider";
 import { Skeleton } from "antd";
 import { useVideos } from "hooks/useVideos";
+import { useVideoAsRead } from "hooks/useVideoAsRead";
 import styles from "./VideoLecturePage.module.scss";
 
 const VideoLecturePage = () => {
   const { id } = useParams<{ id: string }>();
   const videoId = id ? parseInt(id, 10) : undefined;
+
+  const { isAuthenticated } = useAuth();
+  const { mutate: markAsRead } = useVideoAsRead();
 
   const { data: videos, isLoading, error } = useVideos(
     [videoId as number],
@@ -15,6 +21,12 @@ const VideoLecturePage = () => {
     undefined,
     undefined
   );
+
+  useEffect(() => {
+    if (isAuthenticated && id) {
+      markAsRead(Number(id));
+    }
+  }, [isAuthenticated, id, markAsRead]);
 
   const video = videos?.items[0];
 
