@@ -96,8 +96,6 @@ h1 {
     color: #7d7d7d;
   }
 
-  
-
   .isCompletedCheckbox {
     appearance: none;
     -webkit-appearance: none;
@@ -163,6 +161,32 @@ h1 {
 .skeleton {
   width: 100% !important;
   height: 350px !important;
+}
+
+.iconCheckbox {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 4px;
+  left: 8px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.marked,
+.unmarked {
+  width: 20px;
+  height: auto;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.marked:hover,
+.unmarked:hover {
+  opacity: 1;
 }
 
 @media (max-width: 440px) {

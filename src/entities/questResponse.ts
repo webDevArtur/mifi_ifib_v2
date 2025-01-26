@@ -3,6 +3,7 @@ import { z } from "zod";
 export const QuestItemSchema = z.object({
   id: z.number(),
   isStarted: z.boolean(),
+  isCompleted: z.boolean(),
   score: z.number(),
   name: z.string(),
   questType: z.string(),

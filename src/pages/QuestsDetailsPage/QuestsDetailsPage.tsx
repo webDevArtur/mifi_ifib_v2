@@ -1,9 +1,13 @@
 import { Link, useParams } from "react-router-dom";
-import { Skeleton } from "antd"; // Импорт Skeleton из Ant Design
+import { Skeleton, Input, Select, Pagination } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import { useState, useEffect } from "react";
 import { useQuests } from "hooks/useQuests";
 import { NoData } from "components/NoData/NoData";
 import QuestCard from "components/QuestCard/QuestCard";
 import styles from "./QuestsDetailsPage.module.scss";
+
+const { Search } = Input;
 
 const questTypeTranslations = {
   nuclear_medicine_history: "История ядерной медицины",
@@ -17,10 +21,36 @@ const questTypeTranslations = {
 
 const QuestsDetailsPage = () => {
   const { name: questType } = useParams<{ name: string }>();
-  const { data, isLoading, error } = useQuests(questType);
+  const [searchText, setSearchText] = useState("");
+  const [complexity, setComplexity] = useState<number | null>(null);
+  const [hoveredComplexity, setHoveredComplexity] = useState<number | undefined>(undefined);
+  const [isOnline, setIsOnline] = useState<"online" | "offline" | null>(null);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+
+  const { data, isLoading } = useQuests(questType, page, pageSize, complexity || undefined, debouncedSearch, isOnline || undefined);
 
   const quests = data?.items || [];
-  const title = (questType && questTypeTranslations[questType as keyof typeof questTypeTranslations]) || "Неизвестный квест";
+  const totalItems = data?.totalItems || 0;
+
+  const title =
+    (questType && questTypeTranslations[questType as keyof typeof questTypeTranslations]) ||
+    "Неизвестный квест";
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setDebouncedSearch(searchText);
+      setPage(1);
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
+  }, [searchText]);
+
+  const handleComplexityChange = (value: number | null) => {
+    setComplexity(value);
+    setPage(1);
+  };
 
   return (
     <div className={styles.introPage}>
@@ -31,9 +61,59 @@ const QuestsDetailsPage = () => {
       <div className={styles.contentBlock}>
         <h2>{title}</h2>
         <p className={styles.description}>
-          В этом блоке вы узнаете, с чем сталкивается студент – медицинский
-          физик во время обучения в ИФИБ НИЯУ МИФИ.
+          В этом блоке вы узнаете, с чем сталкивается студент – медицинский физик во время обучения в ИФИБ НИЯУ МИФИ.
         </p>
+
+        <div className={styles.filtersContainer}>
+        <div className={styles.starRating}>
+          <p className={styles.starRatingTitle}>Выберите уровень сложности:</p>
+            <div className={styles.stars}>
+              {[1, 2, 3].map((value) => (
+                <span
+                  key={value}
+                  className={`${styles.star} ${
+                    (hoveredComplexity && value <= hoveredComplexity) || (complexity && value <= complexity)
+                      ? styles.filled
+                      : ""
+                  }`}
+                  onClick={() => handleComplexityChange(complexity === value ? null : value)}
+                  onMouseEnter={() => setHoveredComplexity(value)}
+                  onMouseLeave={() => setHoveredComplexity(undefined)}
+                >
+                  ★
+                </span>
+              ))}
+            </div>
+        </div>
+
+        <div className={styles.tags}>
+          <p className={styles.starRatingTitle}>Выберите формат:</p>
+
+          <div className={styles.tagsContainer}>
+            <button
+              className={`${styles.tag} ${isOnline === "online" ? styles.active : ""}`}
+              onClick={() => setIsOnline(isOnline === "online" ? null : "online")}
+            >
+              Онлайн
+            </button>
+            <button
+              className={`${styles.tag} ${isOnline === "offline" ? styles.active : ""}`}
+              onClick={() => setIsOnline(isOnline === "offline" ? null : "offline")}
+            >
+              Оффлайн
+            </button>
+          </div>
+        </div>
+
+        <Input
+          className={styles.searchInput}
+          placeholder="Поиск по квестам"
+          prefix={<SearchOutlined />}
+          bordered={false}
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+      </div>
       </div>
 
       {isLoading ? (
@@ -51,10 +131,7 @@ const QuestsDetailsPage = () => {
       ) : (
         <div className={styles.cardsContainer}>
           {quests.map((quest) => (
-            <Link
-              to={`/quests/${quest.questType}/${quest.id}`}
-              key={quest.id}
-            >
+            <Link to={`/quests/${quest.questType}/${quest.id}`} key={quest.id}>
               <QuestCard
                 title={quest.name}
                 isOnline={quest.isOnline}
@@ -64,6 +141,19 @@ const QuestsDetailsPage = () => {
             </Link>
           ))}
         </div>
+      )}
+
+      {totalItems > pageSize && (
+        <Pagination
+          current={page}
+          pageSize={pageSize}
+          total={totalItems}
+          onChange={(newPage, newPageSize) => {
+            setPage(newPage);
+            setPageSize(newPageSize || pageSize);
+          }}
+          className={styles.pagination}
+        />
       )}
     </div>
   );

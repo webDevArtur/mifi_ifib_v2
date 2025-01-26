@@ -21,7 +21,7 @@
       justify-content: center;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px;
+      padding: 0 30px;
     }
 
     .profileContainer {
@@ -65,10 +65,11 @@
       }
 
       .form {
-        padding: 0 50px;
+        padding: 0 30px;
         display: flex;
         flex-wrap: wrap;
         gap: 10px 50px;
+        width: 100%;
 
         .formItem {
           width: 100px;
@@ -101,23 +102,13 @@
 
     .notesCard {
       padding: 0;
-      flex: 1;
+      flex: 2;
     }
 
     .questsCard {
       padding: 0;
-      flex: 3;
+      flex: 5;
     }
-  }
-
-  .listItem {
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 10px;
-  }
-
-  .listItem:hover {
-    background-color: #f5f5f5;
   }
 
   .notesCard,
@@ -131,10 +122,15 @@
   .questsColumns {
     display: flex;
     justify-content: space-between;
+    padding: 0 20px;
 
     .activeQuests,
     .completedQuests {
       width: 48%;
+
+      .listItem {
+        padding: 10px 20px;
+      }
     }
   }
 
@@ -172,14 +168,49 @@
   }
 }
 
+.requiredStar {
+  color: green;
+  margin-left: 3px;
+}
+
 h2 {
   margin: 10px 0;
+}
+
+.h2 {
+  padding: 0 20px;
 }
 
 h3 {
   margin: 10px 0;
   color: #1f832e;
   font-size: 18px;
+}
+
+.listContainer {
+  overflow-y: auto;
+  height: 170px;
+  scrollbar-width: thin;
+  scrollbar-color: #1f832e85 transparent;
+}
+
+.list {
+  padding: 0;
+  margin: 0;
+}
+
+.link {
+  font-size: 14px;
+  color: #1f832e;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline;
+  padding: 8px 0;
+  word-break: break-all;
+}
+
+.link:hover {
+  color: #116e1d;
 }
 
 @media (max-width: 895px) {
@@ -217,6 +248,17 @@ h3 {
           width: 100%;
           margin-bottom: 30px;
         }
+      }
+    }
+
+    .questsColumns {
+      flex-direction: column;
+    }
+
+    .questsColumns {
+      .activeQuests,
+      .completedQuests {
+        width: 100%;
       }
     }
   }

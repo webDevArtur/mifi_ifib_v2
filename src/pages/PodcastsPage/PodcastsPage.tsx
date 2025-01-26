@@ -8,19 +8,28 @@ import ReactPlayer from "react-player";
 import styles from "./PodcastsPage.module.scss";
 import { usePodcasts } from "hooks/usePodcasts";
 import { useAuth } from "hooks/AuthProvider"
+import { usePodcastAsMark } from "hooks/usePodcastAsMark";
 import { usePodcastAsViewed } from "hooks/usePodcastAsViewed";
+import marked from "./assets/marked.png";
+import unmarked from "./assets/unmarked.png";
 
 const PodcastsPage = () => {
   const [currentPodcastUrl, setCurrentPodcastUrl] = useState("");
   const [currentPodcastId, setCurrentPodcastId] = useState<number | null>(null);
   const [search, setSearch] = useState<string>("");
   const [debouncedSearch, setDebouncedSearch] = useState<string>("");
+  const [markedPodcasts, setMarkedPodcasts] = useState<Set<number>>(new Set());
 
   const { isAuthenticated } = useAuth();
 
-  const { data: podcastsData, isLoading } = usePodcasts(1, 20, debouncedSearch);
+  const { data: podcastsData, isLoading, refetch } = usePodcasts(1, 20, debouncedSearch);
 
   const { mutate: markPodcastAsViewed } = usePodcastAsViewed();
+  const { mutate: markPodcast } = usePodcastAsMark();
+
+  useEffect(() => {
+    refetch();
+  }, [markedPodcasts, refetch]);  
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -31,6 +40,38 @@ const PodcastsPage = () => {
       clearTimeout(handler);
     };
   }, [search]);
+
+  useEffect(() => {
+    if (podcastsData?.items) {
+      const initialMarkedPodcasts = new Set(
+        podcastsData.items.filter((podcast) => podcast.marked).map((podcast) => podcast.id)
+      );
+      setMarkedPodcasts(initialMarkedPodcasts);
+    }
+  }, [podcastsData?.items]);
+
+  const handleMarkPodcast = async (podcastId: number) => {
+    try {
+      await markPodcast(podcastId);
+
+      setMarkedPodcasts((prev) => {
+        const newMarkedPodcasts = new Set(prev);
+        if (newMarkedPodcasts.has(podcastId)) {
+          newMarkedPodcasts.delete(podcastId);
+        } else {
+          newMarkedPodcasts.add(podcastId);
+        }
+        return newMarkedPodcasts;
+      });
+    } catch (error) {
+      console.error("Ошибка при пометке подкаста:", error);
+    }
+  };
+
+  const handleCheckboxClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
 
   const handleCardClick = (url: string, id: number) => {
     setCurrentPodcastUrl(url);
@@ -114,6 +155,30 @@ const PodcastsPage = () => {
                   className={styles.isCompletedCheckbox}
                   checked={podcast.completed}
                 />
+              )}
+
+              {isAuthenticated && (
+                <div
+                  className={styles.iconCheckbox}
+                  onClick={(e) => {
+                    handleCheckboxClick(e);
+                    handleMarkPodcast(podcast.id);
+                  }}
+                >
+                  {markedPodcasts.has(podcast.id) ? (
+                    <img
+                      src={marked}
+                      alt="Отмечено"
+                      className={styles.marked}
+                    />
+                  ) : (
+                    <img
+                      src={unmarked}
+                      alt="Не отмечено"
+                      className={styles.unmarked}
+                    />
+                  )}
+                </div>
               )}
             </div>
           </div>

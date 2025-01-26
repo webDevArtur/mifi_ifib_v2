@@ -1,3 +1,5 @@
+import { getProgressStatistics } from "services/progressStatistics";
+
 export const techObjectsKeys = {
   articles: ["articles"] as const,
   equipments: ["equipments"] as const,
@@ -11,6 +13,7 @@ export const techObjectsKeys = {
   quests: ["quests"] as const,
   questTasks: ["questTasks"] as const,
   userRanks: ["userRanks"] as const,
+  progressStatistics: ["progressStatistics"] as const,
 };
 
 export const articleDetailsKeys = {

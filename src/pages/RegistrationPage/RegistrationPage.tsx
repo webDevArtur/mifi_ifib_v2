@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Form, Input, Button, Checkbox, Select, DatePicker, Alert } from "antd";
 import { useRegister } from "hooks/useRegistration";
@@ -21,6 +21,12 @@ const RegistrationPage = () => {
   const { login } = useAuth();
   const { mutate: register, isPending } = useRegister();
   const { mutate: loginMutation, isPending: isLoginPending } = useLogin();
+
+  useEffect(() => {
+    if (errorMessage) {
+      window.scrollTo(0, 0);
+    }
+  }, [errorMessage]);
 
   const handleSubmit = async (values: any) => {
     setSubmitted(true);
@@ -237,7 +243,10 @@ const RegistrationPage = () => {
           >
             <DatePicker
               placeholder="__.__.____"
-              format="DD.MM.YYYY"
+              format={{
+                format: 'DD.MM.YYYY',
+                type: 'mask',
+              }}
               showToday={false}
               style={{ width: "100%" }}
             />

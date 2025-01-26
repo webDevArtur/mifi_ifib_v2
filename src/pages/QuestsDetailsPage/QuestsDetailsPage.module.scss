@@ -39,7 +39,7 @@ h1 {
   margin-bottom: 10px;
 }
 
-.contentBlock p {
+.description {
   font-size: 16px;
   line-height: 1.5;
   margin-bottom: 15px;
@@ -62,11 +62,129 @@ h1 {
   height: 250px !important;
 }
 
+.searchInput {
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #b0b0b0;
+  border-radius: 5px;
+}
+
+.filtersContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.starRating {
+  gap: 9px;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.starRatingTitle {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #333;
+  margin: 0;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-direction: row;
+}
+
+.star {
+  font-size: 20px;
+  color: #d3d3d3;
+  cursor: pointer;
+  transition: color 0.3s;
+  transition: transform 0.3s ease;
+}
+
+.star.filled {
+  color: gold;
+  transform: scale(1.1);
+}
+
+
+.resetButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+}
+
+.tags {
+  display: flex;
+  align-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  background-color: rgb(255, 255, 255);
+  color: #333;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: 1px solid #b0b0b0;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.tag:hover {
+  background-color: #f0f0f0;
+}
+
+.tag.active {
+  background-color: #333;
+  color: white;
+}
+
+.select {
+  width: 150px;
+}
+
+.select .ant-select-selector {
+  border: 1px solid #000000;
+  border-radius: 4px;
+  padding: 4px 8px;
+  height: auto;
+}
+
+.select .ant-select-selection-placeholder {
+  line-height: normal;
+}
+
+.select .ant-select-arrow {
+  color: #bfbfbf;
+}
+
 @media (max-width: 650px) {
   .breadcrumb {
     font-size: 14px;
     margin-bottom: 20px;
     line-height: 1.5;
+  }
+}
+
+@media (max-width: 420px) {
+  .starRating {
+    flex-direction: column;
+  }
+
+  .tags {
+    flex-direction: column;
   }
 }
 

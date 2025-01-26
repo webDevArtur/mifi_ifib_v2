@@ -11,6 +11,7 @@ const questTasksQuery = (
 ) => ({
   queryKey: [techObjectsKeys.questTasks, { quest, orderNum, page, size }],
   queryFn: async () => getQuestTasks(quest, orderNum, page, size),
+  enabled: quest !== undefined && quest.length > 0,
 });
 
 export const useQuestTasks = (
@@ -22,36 +23,37 @@ export const useQuestTasks = (
   useQuery<QuestTasksResponse>({
     ...questTasksQuery(quest, orderNum, page, size),
     throwOnError: false,
-});
+    enabled: !!quest && quest.length > 0,
+  });
 
 interface SubmitQuestTaskRequest {
-    options?: number[];
-    text?: string;
-  }
-  
-  interface SubmitQuestTaskResponse {
-    score: number;
-    isCorrect: boolean;
-    userInput: {
-      options: number[];
-      text: string;
-    };
-  }
+  options?: number[];
+  text?: string;
+}
 
-  export const useSubmitQuestTask = () => {
-    return useMutation<
-      SubmitQuestTaskResponse,
-      Error,
-      { questTaskId: number; data: SubmitQuestTaskRequest }
-    >({
-      mutationFn: async ({ questTaskId, data }) => {
-        return submitQuestTask(questTaskId, data);
-      },
-      onError: (error) => {
-        console.error("Ошибка при выполнении задания квеста:", error);
-      },
-      onSuccess: (response) => {
-        console.log("Задание выполнено успешно:", response);
-      },
-    });
+interface SubmitQuestTaskResponse {
+  score: number;
+  isCorrect: boolean;
+  userInput: {
+    options: number[];
+    text: string;
   };
+}
+
+export const useSubmitQuestTask = () => {
+  return useMutation<
+    SubmitQuestTaskResponse,
+    Error,
+    { questTaskId: number; data: SubmitQuestTaskRequest }
+  >({
+    mutationFn: async ({ questTaskId, data }) => {
+      return submitQuestTask(questTaskId, data);
+    },
+    onError: (error) => {
+      console.error("Ошибка при выполнении задания квеста:", error);
+    },
+    onSuccess: (response) => {
+      console.log("Задание выполнено успешно:", response);
+    },
+  });
+};

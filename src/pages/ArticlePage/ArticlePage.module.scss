@@ -44,6 +44,7 @@ p {
 }
 
 .articleItem {
+  position: relative;
   display: flex;
   align-items: center;
   margin-bottom: 20px;
@@ -99,6 +100,7 @@ p {
     &:checked {
       background-color: #1f832e;
       border: none;
+      margin-right: 15px;
   
       &::before {
         content: "";
@@ -118,12 +120,12 @@ p {
     }
 }
 
-
 .articleImage {
-  width: 120px;
-  height: 160px;
+  width: 90px;
+  height: 120px;
   object-fit: cover;
-  margin-right: 20px;
+  margin-right: 15px;
+  border-radius: 5px;
 }
 
 .loading {
@@ -136,6 +138,33 @@ p {
   width: 100% !important;
   height: 150px !important;
 }
+
+.iconCheckbox {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 4px;
+  left: 8px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.marked,
+.unmarked {
+  width: 20px;
+  height: auto;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.marked:hover,
+.unmarked:hover {
+  opacity: 1;
+}
+
 
 
 @media (max-width: 768px) {

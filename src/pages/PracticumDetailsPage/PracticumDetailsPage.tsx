@@ -1,60 +1,36 @@
-import { useParams, Link } from "react-router-dom";
-import { NoData } from "components/NoData/NoData";
-import { usePractices } from "hooks/usePracticum";
-import { Skeleton } from 'antd';
-import styles from "./PracticumDetailsPage.module.scss";
+import { useParams } from "react-router-dom";
+import { useQuests } from "hooks/useQuests";
+import QuestPage from "components/QuestComponent/QuestComponent";
 import { practicumTitles, PracticumKeys, practicumDescriptions } from "catalogs/practicums";
-import IframeWithLoader from "components/IframeWithLoader/IframeWithLoader";
+import { Link } from "react-router-dom";
+import styles from "./PracticumDetailsPage.module.scss";
 
 const PracticumDetailsPage = () => {
-  const { id } = useParams<{ id: PracticumKeys }>();
-  if (!id) {
-    return <div>Ошибка: id не удалось получить</div>;
-  }
+  const { id: questType } = useParams<{ id: string }>();
+  const validQuestType = questType ?? "";
 
-  const { data: practices, isLoading } = usePractices(undefined, [id]);
+  const { data: questsData, isLoading: questsLoading, error: questsError } = useQuests(questType);
 
-  const practicumTitle = id ? practicumTitles[id] : "Неизвестный практикум";
-  const practicumDescription = practicumDescriptions[id] || "";
+  const practicumTitle = questType ? practicumTitles[questType as PracticumKeys] : "Неизвестный практикум";
+  const practicumDescription = practicumDescriptions[questType as PracticumKeys] || "";
 
-  if (isLoading) {
-    return (
-      <div className={styles.container}>
-        <nav className={styles.breadcrumb}>
-          <Link to="/">Главная</Link> / <Link to="/practicum">Практикум</Link> /{" "}
-          <Skeleton.Button className={styles.skeletonBreadcrumb} active={true} />
-        </nav>
-
-        <h1 className={styles.h1}>
-          <Skeleton.Input className={styles.skeletonTitle} active={true} size="large" />
-        </h1>
-
-        <p className={styles.description}>
-          <Skeleton active paragraph={{ rows: 5 }} className={styles.skeletonDescription} />
-        </p>
-
-        <Skeleton.Button className={styles.skeletonContent} active />
-      </div>
-    );
-  }
+  const questId = questsData?.items[0]?.id;
+  const questArray = questId ? [questId] : [];
 
   return (
     <div className={styles.container}>
       <nav className={styles.breadcrumb}>
-        <Link to="/">Главная</Link> / <Link to="/practicum">Практикум</Link> /{" "}
-        {practicumTitle}
+        <Link to="/">Главная</Link> / <Link to="/practicum">Практикум</Link> / {practicumTitle}
       </nav>
 
       <h1 className={styles.h1}>{practicumTitle}</h1>
 
-      <p className={styles.description} dangerouslySetInnerHTML={{ __html: practicumDescription }} />
+      <p
+        className={styles.description}
+        dangerouslySetInnerHTML={{ __html: practicumDescription }}
+      ></p>
 
-      {practices?.[0]?.link ? (
-        <IframeWithLoader src={practices[0].link} />
-      ) : (
-        <NoData text="Практикум пуст" />
-      )}
-
+      <QuestPage title="Practicum Tasks" questArray={questArray} questType={validQuestType} />
     </div>
   );
 };
