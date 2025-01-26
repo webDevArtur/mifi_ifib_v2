@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Table, Tabs, Avatar, Spin, Alert } from "antd";
+import { Table, Tabs, Avatar, Alert, Skeleton } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import styles from "./UserRatingPage.module.scss";
 import { useUserRanks } from "hooks/useUserRanks";
@@ -94,7 +94,10 @@ const UserRating: React.FC = () => {
           },
         ]
       : []),
-  ];
+  ].filter((user, index, self) => 
+    self.findIndex((u) => u.key === user.key) === index
+  );
+  
 
   const handleTabChange = (key: string) => {
     setActiveTab(key);
@@ -116,9 +119,7 @@ const UserRating: React.FC = () => {
         {["school_student", "university_student"].map((role) => (
           <TabPane tab={roleToStatusMap[role]} key={role}>
             {isLoading ? (
-              <div className={styles.loading}>
-                <Spin tip="Загрузка данных..." />
-              </div>
+              <Skeleton.Button active className={styles.skeleton} />
             ) : isError ? (
               <Alert
                 message="Ошибка загрузки"

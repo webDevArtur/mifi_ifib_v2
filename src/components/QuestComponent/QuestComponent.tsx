@@ -131,7 +131,7 @@ const QuestPage = ({ title, questArray, questType }: QuestPageProps) => {
   const quests = data?.items || [];
 
   return (
-    <div className={styles.container}>
+    <div className={styles.questComponentContainer}>
       {isLoading ? (
         <Skeleton active />
       ) : quests.length === 0 ? (
