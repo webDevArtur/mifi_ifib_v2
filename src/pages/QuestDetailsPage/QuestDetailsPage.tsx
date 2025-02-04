@@ -26,7 +26,12 @@ const QuestDetailsPage = () => {
   return (
     <div className={styles.container}>
       <nav className={styles.breadcrumb}>
-        <Link to="/">Главная</Link> / <Link to="/quests">Квесты</Link> / {practicumTitle}
+        <Link to="/">Главная</Link> / <Link to="/quests">Квесты</Link> / {questType !== "common_quest" ? (
+  <Link to={`/quests/${questType}`}>{practicumTitle}</Link>
+) : (
+  <span>{practicumTitle}</span>
+)}
+
       </nav>
 
       <h1 className={styles.h1}>Квест</h1>

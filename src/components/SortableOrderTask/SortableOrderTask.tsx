@@ -16,7 +16,8 @@ import {
 } from '@dnd-kit/sortable';
 
 import { SortableItem } from './SortableItem/SortableItem';
-import { QuestTask } from "entities"; // Assuming QuestTask interface
+import { QuestTask } from "entities";
+import styles from "./SortableOrderTask.module.scss"
 
 interface SortableOrderTaskProps {
   quest: QuestTask;
@@ -81,7 +82,7 @@ const SortableOrderTask: React.FC<SortableOrderTaskProps> = ({
         </div>
       </SortableContext>
 
-      <button onClick={() => handleSubmit(quest.id)}>
+      <button className={styles.submitButton} onClick={() => handleSubmit(quest.id)}>
         Отправить
       </button>
     </DndContext>

@@ -124,7 +124,7 @@ const QuestsPage = () => {
 
           const questPath = quest.questType !== 'common_quest' 
             ? `/quests/${quest.questType}` 
-            : `/quests/${quest.questType}/1`;
+            : `/quests/${quest.questType}/2`;
 
           return (
             <React.Fragment key={quest.id}>

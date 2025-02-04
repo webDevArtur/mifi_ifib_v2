@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Skeleton, Spin, Pagination } from "antd";
+import { useSearchParams } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
 import { NoData } from "components/NoData/NoData";
 import { useQuestTasks, useSubmitQuestTask } from "hooks/useQuestTasks";
@@ -14,7 +15,10 @@ interface QuestPageProps {
 }
 
 const QuestPage = ({ questArray, pageSize = 1 }: QuestPageProps) => {
-  const [page, setPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialPage = Number(searchParams.get("page")) || 1;
+
+  const [page, setPage] = useState(initialPage);
 
   const [inputValues, setInputValues] = useState<{ [key: number]: string }>({});
   const [isCorrectValues, setIsCorrectValues] = useState<{ [key: number]: boolean | null }>({});
@@ -23,6 +27,11 @@ const QuestPage = ({ questArray, pageSize = 1 }: QuestPageProps) => {
   const { mutate: submitTask, isPending } = useSubmitQuestTask();
 
   const totalItems = data?.totalItems || 0;
+
+  useEffect(() => {
+    searchParams.set("page", String(page)); // <-- Обновляем URL при изменении страницы
+    setSearchParams(searchParams);
+  }, [page]);
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
