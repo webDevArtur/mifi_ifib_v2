@@ -1,0 +1,55 @@
+.partnersSection {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+  }
+  
+  .sectionTitle {
+    font-size: 40px;
+    font-weight: bold;
+    color: #2b5329;
+    margin-bottom: 30px;
+    text-align: left;
+  }
+  
+  .partnersContainer {
+    display: flex;
+    align-items: start;
+    gap: 20px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #efefef transparent;
+    padding-bottom: 10px;
+  }
+  
+  .partner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 260px;
+    flex: 0 0 auto;
+  }
+  
+  .partnerLogo {
+    width: 260px;
+    height: 180px;
+    border-radius: 10px;
+    object-fit: contain;
+    padding: 10px;
+  }
+  
+  @media (max-width: 720px) {
+    .sectionTitle {
+      font-size: 30px;
+      margin-bottom: 25px;
+    }
+  
+    .partner {
+      min-width: 200px;
+    }
+  
+    .partnerLogo {
+      width: 200px;
+      height: 140px;
+    }
+  }

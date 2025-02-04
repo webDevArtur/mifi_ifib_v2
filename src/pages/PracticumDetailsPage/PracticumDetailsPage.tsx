@@ -30,7 +30,7 @@ const PracticumDetailsPage = () => {
         dangerouslySetInnerHTML={{ __html: practicumDescription }}
       ></p>
 
-      <QuestPage title="Practicum Tasks" questArray={questArray} questType={validQuestType} />
+      <QuestPage questArray={questArray} pageSize={4} />
     </div>
   );
 };

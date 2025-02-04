@@ -86,8 +86,12 @@
     display: flex;
     justify-content: center;
     background-color: #2a6f2b;
+    height: auto;
     color: white;
     border: none;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .editBtn:hover {
@@ -146,7 +150,7 @@
     justify-content: space-between;
 
     .materials {
-      width: 30%;
+      width: 100%;
     }
 
     .graphs {
@@ -211,6 +215,45 @@ h3 {
 
 .link:hover {
   color: #116e1d;
+}
+
+.documentBtn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #2a6f2b;
+  color: white;
+  border: none;
+}
+
+.documentBtn:hover {
+  color: white !important;
+  background-color: #040 !important;
+}
+
+.documentBtn:disabled {
+  background-color: #f0f0f0;
+  color: #474747;
+  border: 1px solid #474747;
+  cursor: default;
+}
+
+.documentBtn:disabled:hover {
+  background-color: #f0f0f0 !important;
+  color: #474747 !important;
+  border: 1px solid #474747 !important;
+  cursor: default;
+}
+
+.uploadBtn {
+  width: 100% !important;
+}
+
+.registeredText {
+  font-size: 16px;
+  color: #040;
+  font-weight: bold;
+  text-align: center;
 }
 
 @media (max-width: 895px) {

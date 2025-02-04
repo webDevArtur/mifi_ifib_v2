@@ -29,6 +29,7 @@ interface SubmitQuestTaskRequest {
     isCorrect: boolean;
     userInput: {
       options: number[];
+      order_options: number[];
       text: string;
     };
   }

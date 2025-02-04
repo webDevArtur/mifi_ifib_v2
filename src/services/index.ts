@@ -83,8 +83,8 @@ export const configureAxios = () => {
       }
 
       if (axiosError.response?.status === 403) {
-        const accessToken = getAccessToken();
-        window.location.href = `/registration/confirmation/${accessToken}`;
+        // const accessToken = getAccessToken();
+        // window.location.href = `/registration/confirmation/${accessToken}`;
         throw new Error("У вас нет доступа к этой странице");
       }
 

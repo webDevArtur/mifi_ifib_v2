@@ -1,25 +1,30 @@
 import { useState, useEffect } from "react";
-import { Card, Form, Input, Button, List, Statistic, Progress, Select, Spin, Collapse, Alert, DatePicker } from "antd";
+import { Card, Form, Input, Button, List, Statistic, Progress, Select, Skeleton, Collapse, Alert, DatePicker, Modal, Upload, message } from "antd";
 import { Link } from "react-router-dom";
-import { EditOutlined } from "@ant-design/icons";
+import { EditOutlined, UploadOutlined } from "@ant-design/icons";
 import { useCurrentUser } from "hooks/useCurrentUser";
 import { useEditUser } from "hooks/useEditUser";
 import { useQuests } from "hooks/useQuests";
 import { useVideos } from "hooks/useVideos";
 import { useArticles } from "hooks/useArticles";
 import { usePodcasts } from "hooks/usePodcasts";
+import { useDeleteUser } from "hooks/useDeleteUser";
 import { useProgressStatistics } from "hooks/useProgressStatistics";
+import { useRegisterForOlympiad } from "hooks/useRegisterForOlympiad";
+import { useUploadDocument } from "hooks/useUploadDocument";
+import { useAuth } from "hooks/AuthProvider";
 import dayjs from "dayjs";
 import styles from "./ProfilePage.module.scss";
-import avatar from "./assets/avatar.png";
 
 const { Option } = Select;
 const { Panel } = Collapse;
 
 const ProfilePage = () => {
-  const { data, isLoading } = useCurrentUser();
+  const { logout } = useAuth();
+  const { data, isLoading, refetch: refetchCurrentUser } = useCurrentUser();
   const [error, setError] = useState<string | null>(null);
   const { mutateAsync: editUser } = useEditUser();
+  const { mutate: deleteUser, isPending: isLoadingDelete } = useDeleteUser();
 
   const { data: quests, isLoading: isQuestsLoading, refetch: refetchQuests } = useQuests();
   const { data: progressStats, isLoading: isStatsLoading, refetch: refetchStats } = useProgressStatistics();
@@ -49,12 +54,12 @@ const ProfilePage = () => {
         middleName: user.middleName || "",
         birthdate: user.birthDate ? dayjs(user.birthDate, "YYYY-MM-DD") : null,
         socialNetwork: user.socialNetwork || "",
-        educationalStatus: user.educationalStatus || "",
+        educationalStatus: user.role || "",
         educationalFacility: user.educationalFacility || "",
         sphereOfInterest: user.sphereOfInterest || "",
       });
 
-      setEducationalStatus(user.educationalStatus || "");
+      setEducationalStatus(user.role || "");
     }
   }, [user, form]);
 
@@ -86,6 +91,7 @@ const ProfilePage = () => {
             .then(() => {
               setIsEditing(false);
               setError(null);
+              refetchCurrentUser();
             })
             .catch((error) => {
               const errorData = error?.response?.data;
@@ -116,12 +122,79 @@ const ProfilePage = () => {
     setEducationalStatus(value);
   };
 
+  const handleDeleteAccount = () => {
+    deleteUser(undefined, {
+      onSuccess: () => {
+        logout();
+      },
+      onError: () => {
+        message.error("Ошибка при удалении аккаунта. Попробуйте снова.");
+      }
+    });
+  };  
+
   const activeQuests = quests?.items.filter((quest) => quest.isStarted && !quest.isCompleted) || [];
   const completedQuests = quests?.items.filter((quest) => quest.isCompleted) || [];
 
   const markedVideos = videoData?.items.filter((item) => item.marked) || [];
   const markedArticles = articlesData?.items.filter((item) => item.marked) || [];
   const markedPodcasts = podcastsData?.items.filter((item) => item.marked) || [];
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+  
+  const { mutate: registerForOlympiad, isPending: isRegistering } = useRegisterForOlympiad();
+  const { mutate: uploadDocument, isPending: isUploading } = useUploadDocument();
+  
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+  
+  const handleFileChange = ({ file }: any) => {
+    setFile(file?.status !== "removed" ? file : null);
+  };
+  
+  const handleFileRemove = () => {
+    setFile(null);
+  };
+  
+  const handleSubmit = () => {
+    if (!file && !data?.user?.isDocumentUploaded) {
+      message.error("Пожалуйста, загрузите документ, подтверждающий статус студента/школьника.");
+      return;
+    }
+  
+    // Если документ не загружен, начинаем загрузку
+    if (!data?.user?.isDocumentUploaded) {
+      uploadDocument(file, {
+        onSuccess: () => {
+          message.success("Документ загружен. Теперь, ждите подтверждения!");
+          refetchCurrentUser();
+          setIsModalOpen(false);
+        },
+        onError: () => {
+          message.error("Ошибка загрузки документа. Попробуйте снова.");
+        },
+      });
+      return; // Прерываем дальнейшее выполнение до завершения загрузки документа
+    }
+  
+    // Если документ уже загружен, выполняем регистрацию
+    registerForOlympiad(undefined, {
+      onSuccess: () => {
+        message.success("Вы успешно зарегистрированы на олимпиаду!");
+        form.resetFields();
+        setFile(null);
+        setIsModalOpen(false);
+        refetchCurrentUser();
+      },
+      onError: () => message.error("Ошибка регистрации. Попробуйте снова."),
+    });
+  };  
 
   return (
     <div className={styles.profilePage}>
@@ -147,20 +220,6 @@ const ProfilePage = () => {
           )}
 
         <div className={styles.profileContainer}>
-          {/* <div className={styles.teamMember}>
-            <div className={styles.avatarContainer}>
-              <img
-                src={avatar}
-                alt="Avatar"
-                className={styles.teamMemberImage}
-              />
-              <Button
-                className={styles.avatarEditBtn}
-                icon={<EditOutlined />}
-              />
-            </div>
-          </div> */}
-
           <Form
             form={form}
             layout="vertical"
@@ -348,9 +407,10 @@ const ProfilePage = () => {
               placeholder="Выберите Ваш статус"
               onChange={handleEducationalStatusChange}
             >
-              <Option value="school_student">Учусь в школе</Option>
-
-              <Option value="university_student">Учусь в вузе</Option>
+              <Option value="school_student">Школьник</Option>
+              <Option value="university_student">Студент</Option>
+              <Option value="practicing_specialist">Практикующий специалист</Option>
+              <Option value="not_related_field">Не связано с медицинской физикой</Option>
             </Select>
           </Form.Item>
 
@@ -403,12 +463,73 @@ const ProfilePage = () => {
             className={styles.formItem}
           >
             <Select disabled={!isEditing || isLoading} placeholder="Выберите сферу интересов">
-              <Option value="science">Наука</Option>
-              <Option value="it">Программирование</Option>
+                <Option value="radiation_therapy">Лучевая терапия</Option>
+                <Option value="radionuclide_diagnostics_and_therapy">Радионуклидная диагностика и терапия</Option>
+                <Option value="it_in_medicine">ИТ в медицине</Option>
+                <Option value="functional_diagnostics">Функциональная диагностика</Option>
+                <Option value="radiopharmaceutical_development">Разработка радиофармацевтических препаратов</Option>
+                <Option value="not_decided">Не определился</Option>
+                <Option value="other">Другое</Option>
+                <Option value="not_related_to_medical_physics">Не связанное с медицинской физикой</Option>
             </Select>
           </Form.Item>
           </Form>
         </div>
+
+        {data?.user?.role && !["practicing_specialist", "not_related_field"].includes(data.user.role) && (
+            data?.user?.olympiadRegistration ? (
+                <p className={styles.registeredText}>
+                    Поздравляем! Вы успешно зарегистрированы на первую фиджитал олимпиаду по медицинской физике.
+                </p>
+            ) : (
+                <Button
+                    className={styles.editBtn}
+                    type="primary"
+                    onClick={showModal}
+                >
+                    {!data?.user?.isDocumentaryVerified ? `Для регистрация на первую фиджитал олимпиаду по медицинской физике необходимо подтвердить свой статус на портале` : `Регистрация на первую фиджитал олимпиаду по медицинской физике`}
+                </Button>
+            )
+        )}
+
+<Modal
+  title="Регистрация на олимпиаду"
+  open={isModalOpen}
+  onCancel={handleCancel}
+  footer={null}
+>
+  <Form layout="vertical" form={form} onFinish={handleSubmit}>
+    {!data?.user?.isDocumentUploaded && (
+      <Form.Item label="Для регистрации загрузите документ подтверждающий ваш статус:">
+        <Upload beforeUpload={() => false} onRemove={handleFileRemove} onChange={handleFileChange} maxCount={1}>
+          <Button className={styles.uploadBtn} icon={<UploadOutlined />}>Загрузить файл</Button>
+        </Upload>
+      </Form.Item>
+    )}
+
+    {data?.user?.isDocumentUploaded && !data?.user?.isDocumentaryVerified && !data?.user?.olympiadRegistration && (
+      <p>Документ загружен. Ждите подтверждения</p>
+    )}
+
+    {data?.user?.isDocumentaryVerified && !data?.user?.olympiadRegistration && (
+      <p>Документ подтвержден. Теперь можно зарегистрироваться!</p>
+    )}
+
+    {
+      ((!data?.user?.olympiadRegistration && data?.user?.isDocumentaryVerified) || !data?.user?.isDocumentUploaded) && (
+        <Button
+        type="primary"
+        htmlType="submit"
+        className={styles.documentBtn}
+        disabled={!file && !data?.user?.isDocumentUploaded}
+      >
+        {data?.user?.isDocumentaryVerified ? "Зарегистрироваться" : "Подтвердить документ"}
+      </Button>
+      )
+    }
+  </Form>
+</Modal>
+
       </div>
 
       <div className={styles.achievementsCard}>
@@ -462,10 +583,11 @@ const ProfilePage = () => {
         </Collapse>
       </Card>
 
+      { educationalStatus !== "practicing_specialist" && educationalStatus !== "not_related_field"  && (
         <Card className={styles.questsCard}>
           <h2 className={styles.h2}>Мои квесты</h2>
           {isLoading ? (
-            <Spin />
+            <Skeleton active />
           ) : (
             <div className={styles.questsColumns}>
       <div className={styles.activeQuests}>
@@ -503,12 +625,13 @@ const ProfilePage = () => {
             </div>
           )}
         </Card>
+      )}
       </div>
 
       <Card className={styles.statisticsCard}>
   <h2 className={styles.statisticsTitle}>Моя статистика</h2>
   {isStatsLoading ? (
-    <Spin />
+    <Skeleton active />
   ) : progressStats ? (
     <div className={styles.statistics}>
       <div className={styles.materials}>
@@ -520,6 +643,7 @@ const ProfilePage = () => {
         </List>
       </div>
 
+    { educationalStatus !== "practicing_specialist" && educationalStatus !== "not_related_field" && (
       <div className={styles.graphs}>
         <div className={styles.tasks}>
           <h3 className={styles.taskTitle}>Задачи</h3>
@@ -575,11 +699,22 @@ const ProfilePage = () => {
           />
         </div>
       </div>
+      )}
     </div>
   ) : (
     <p>Не удалось загрузить статистику.</p>
   )}
 </Card>
+
+<Button
+  danger
+  type="primary"
+  onClick={handleDeleteAccount}
+  disabled={isLoadingDelete}
+>
+  Удалить аккаунт
+</Button>
+
     </div>
   );
 };

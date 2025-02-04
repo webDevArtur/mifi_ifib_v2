@@ -10,7 +10,6 @@ const { TabPane } = Tabs;
 interface User {
   key: string;
   number: string | null;
-  photo: string | null;
   name: string;
   status: string;
   points: number;
@@ -23,18 +22,6 @@ const columns: ColumnsType<User> = [
     key: "number",
     className: styles.centeredCell,
     render: (number) => number || "...",
-  },
-  {
-    title: "Фото",
-    dataIndex: "photo",
-    key: "photo",
-    render: (photo) =>
-      photo ? (
-        <Avatar src={photo} size={40} />
-      ) : (
-        <Avatar size={40} style={{ backgroundColor: "#e6e6e6" }} icon={<span>👤</span>} />
-      ),
-    className: styles.centeredCell,
   },
   {
     title: "ФИО пользователя",
@@ -71,7 +58,6 @@ const UserRating: React.FC = () => {
   const mapUserToTableData = (user: any, index: number): User => ({
     key: user.id.toString(),
     number: (index + 1).toString(),
-    photo: user.photo || null,
     name: `${user.firstName} ${user.lastName}`,
     status: roleToStatusMap[user.role] || "Неизвестный статус",
     points: user.score,
@@ -81,23 +67,18 @@ const UserRating: React.FC = () => {
 
   const dataSource: User[] = [
     ...usersData,
-    { key: "separator", number: "...", photo: null, name: "...", status: "...", points: 0 },
-    ...(currentUser
+    ...(currentUser && currentUser.role === activeTab
       ? [
           {
             key: currentUser.id.toString(),
             number: null,
-            photo: null,
             name: `${currentUser.firstName} ${currentUser.lastName}`,
             status: roleToStatusMap[currentUser.role] || "Неизвестный статус",
             points: currentUser.score,
           },
         ]
       : []),
-  ].filter((user, index, self) => 
-    self.findIndex((u) => u.key === user.key) === index
-  );
-  
+  ].filter((user, index, self) => self.findIndex((u) => u.key === user.key) === index);  
 
   const handleTabChange = (key: string) => {
     setActiveTab(key);

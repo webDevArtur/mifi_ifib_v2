@@ -5,6 +5,7 @@ import React, {
   useEffect,
   ReactNode,
 } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -19,6 +20,8 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const queryClient = useQueryClient();
+
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     localStorage.getItem("authToken") !== null
   );
@@ -35,6 +38,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const logout = () => {
+    queryClient.clear();
     localStorage.removeItem("authToken");
     localStorage.removeItem("refreshToken");
     setIsAuthenticated(false);

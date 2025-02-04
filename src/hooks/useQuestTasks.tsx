@@ -36,6 +36,7 @@ interface SubmitQuestTaskResponse {
   isCorrect: boolean;
   userInput: {
     options: number[];
+    order_options: number[];
     text: string;
   };
 }
@@ -48,12 +49,6 @@ export const useSubmitQuestTask = () => {
   >({
     mutationFn: async ({ questTaskId, data }) => {
       return submitQuestTask(questTaskId, data);
-    },
-    onError: (error) => {
-      console.error("Ошибка при выполнении задания квеста:", error);
-    },
-    onSuccess: (response) => {
-      console.log("Задание выполнено успешно:", response);
     },
   });
 };

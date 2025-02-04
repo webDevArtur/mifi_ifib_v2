@@ -5,6 +5,7 @@ import PlatformSection from "./components/PlatformSection/PlatformSection";
 import TeamSection from "./components/TeamSection/TeamSection";
 import FeedbackSection from "./components/FeedbackSection/FeedbackSection";
 import styles from "./HomePage.module.scss";
+import PartnersSection from "./components/PartnersSection/PartnersSection";
 
 function HomePage() {
   return (
@@ -18,6 +19,8 @@ function HomePage() {
       <PlatformSection />
 
       <TeamSection />
+
+      <PartnersSection />
 
       <FeedbackSection />
     </div>

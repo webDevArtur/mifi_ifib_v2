@@ -29,6 +29,7 @@ import QuestDetailsPage from "pages/QuestDetailsPage/QuestDetailsPage";
 import TasksPage from "pages/TasksPage/TasksPage";
 import OfflineQuestDetailsPage from "pages/OfflineQuestDetailsPage/OfflineQuestDetailsPage";
 import UserRatingPage from "pages/UserRatingPage/UserRatingPage";
+import ProtectedRoute from "pages/ProtectedRoute/ProtectedRoute";
 import ScrollToTop from "hooks/ScrollToTop";
 import { AuthProvider } from "hooks/AuthProvider";
 import App from "app/App";
@@ -111,27 +112,55 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 
                 {/* Практикум */}
 
-                <Route path="/practicum" element={<PracticumPage />} />
+                <Route path="/practicum" element={
+                  <ProtectedRoute unAllowedStatuses={["practicing_specialist", "not_related_field"]}>
+                      <PracticumPage />
+                  </ProtectedRoute>
+                } />
 
                 <Route
                   path="/practicum/:id"
-                  element={<PracticumDetailsPage />}
+                  element={
+                    <ProtectedRoute unAllowedStatuses={["practicing_specialist", "not_related_field"]}>
+                      <PracticumDetailsPage />
+                    </ProtectedRoute>
+                }
                 />
 
                 {/* Квесты */}
 
-                <Route path="/quests" element={<QuestsPage />} />
+                <Route path="/quests" element={
+                  <ProtectedRoute unAllowedStatuses={["practicing_specialist", "not_related_field"]}>
+                    <QuestsPage />
+                  </ProtectedRoute>
+                } />
 
-                <Route path="/quests/:name" element={<QuestsDetailsPage />} />
+                <Route path="/quests/:name" element={
+                    <ProtectedRoute unAllowedStatuses={["practicing_specialist", "not_related_field"]}>
+                      <QuestsDetailsPage />
+                    </ProtectedRoute>
+                } />
 
                 <Route
                   path="/quests/:name/:id"
-                  element={<QuestDetailsPage />}
+                  element={
+                    <ProtectedRoute unAllowedStatuses={["practicing_specialist", "not_related_field"]}>
+                      <QuestDetailsPage />
+                    </ProtectedRoute>
+                  }
                 />
 
-                <Route path="/quests/:name/:id/offline" element={<OfflineQuestDetailsPage />} />
+                <Route path="/quests/:name/:id/offline" element={
+                  <ProtectedRoute unAllowedStatuses={["practicing_specialist", "not_related_field"]}>
+                    <OfflineQuestDetailsPage />
+                  </ProtectedRoute>
+                } />
 
-                <Route path="/userRating" element={<UserRatingPage />} />
+                <Route path="/userRating" element={
+                  <ProtectedRoute unAllowedStatuses={["practicing_specialist", "not_related_field"]}>
+                    <UserRatingPage />
+                  </ProtectedRoute>
+                } />
               </Route>
             </Routes>
           </Router>

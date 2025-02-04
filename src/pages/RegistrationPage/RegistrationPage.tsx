@@ -346,9 +346,10 @@ const RegistrationPage = () => {
               placeholder="Выберите Ваш статус"
               onChange={handleEducationalStatusChange}
             >
-              <Option value="school_student">Учусь в школе</Option>
-
-              <Option value="university_student">Учусь в вузе</Option>
+              <Option value="school_student">Школьник</Option>
+              <Option value="university_student">Студент</Option>
+              <Option value="practicing_specialist">Практикующий специалист</Option>
+              <Option value="not_related_field">Не связано с медицинской физикой</Option>
             </Select>
           </Form.Item>
 
@@ -401,9 +402,15 @@ const RegistrationPage = () => {
             className={styles.inputItem}
           >
             <Select placeholder="Выберите сферу интересов">
-              <Option value="science">Наука</Option>
-              <Option value="it">Программирование</Option>
-            </Select>
+                <Option value="radiation_therapy">Лучевая терапия</Option>
+                <Option value="radionuclide_diagnostics_and_therapy">Радионуклидная диагностика и терапия</Option>
+                <Option value="it_in_medicine">ИТ в медицине</Option>
+                <Option value="functional_diagnostics">Функциональная диагностика</Option>
+                <Option value="radiopharmaceutical_development">Разработка радиофармацевтических препаратов</Option>
+                <Option value="not_decided">Не определился</Option>
+                <Option value="other">Другое</Option>
+                <Option value="not_related_to_medical_physics">Не связанное с медицинской физикой</Option>
+              </Select>
           </Form.Item>
 
           <hr style={{ border: "1px solid #E3E3E3" }} />

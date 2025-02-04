@@ -52,7 +52,7 @@ const QuestDetailsPage = () => {
         </Link>
       </div>
 
-      <QuestPage title={practicumTitle} questArray={questArray} questType={questType} />
+      <QuestPage questArray={questArray} />
     </div>
   );
 };

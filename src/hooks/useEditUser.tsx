@@ -8,9 +8,9 @@ interface EditUserData {
   middleName?: string;
   birthDate?: string;
   socialNetwork?: string;
-  educationalStatus?: string;
   educationalFacility?: string;
   sphereOfInterest?: string;
+  role?: string;
 }
 
 export const useEditUser = () => {

@@ -7,12 +7,14 @@ export const CurrentUserDetailsSchema = z.object({
   birthDate: z.string(),
   email: z.string().email(),
   socialNetwork: z.string().optional(),
-  educationalStatus: z.string().nullable(),
   educationalFacility: z.string(),
   sphereOfInterest: z.string(),
-  role: z.number(),
+  role: z.string().nullable(),
   isVerified: z.boolean(),
   questsScore: z.number(),
+  olympiadRegistration: z.boolean(),
+  isDocumentaryVerified: z.boolean(),
+  isDocumentUploaded: z.boolean(), 
 });
 
 export const CurrentUserSchema = z.object({
