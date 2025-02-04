@@ -499,13 +499,25 @@ const ProfilePage = () => {
   footer={null}
 >
   <Form layout="vertical" form={form} onFinish={handleSubmit}>
-    {!data?.user?.isDocumentUploaded && (
-      <Form.Item label="Для регистрации загрузите документ подтверждающий ваш статус:">
-        <Upload beforeUpload={() => false} onRemove={handleFileRemove} onChange={handleFileChange} maxCount={1}>
-          <Button className={styles.uploadBtn} icon={<UploadOutlined />}>Загрузить файл</Button>
-        </Upload>
-      </Form.Item>
-    )}
+  {!data?.user?.isDocumentUploaded && (
+    <Form.Item label="Для регистрации загрузите документ, подтверждающий ваш статус:">
+      <Upload className={styles.upload} beforeUpload={() => false} onRemove={handleFileRemove} onChange={handleFileChange} maxCount={1}>
+      {data?.user?.role === "university_student" && (
+        <p className={styles.hint}>
+          Подтверждение обучения в НИЯУ МИФИ: <br/> - справка об обучении <br/> - фото студенческого билета.
+        </p>
+      )}
+      {data?.user?.role === "school_student" && (
+        <p className={styles.hint}>
+          Подтверждение обучения в Лицее №1511 или №1523: <br/> - справка об обучении.
+        </p>
+      )}
+        <Button className={styles.uploadBtn} icon={<UploadOutlined />}>
+          Загрузить файл
+        </Button>
+      </Upload>
+    </Form.Item>
+  )}
 
     {data?.user?.isDocumentUploaded && !data?.user?.isDocumentaryVerified && !data?.user?.olympiadRegistration && (
       <p>Документ загружен. Ждите подтверждения</p>

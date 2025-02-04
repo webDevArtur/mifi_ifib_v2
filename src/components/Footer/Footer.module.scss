@@ -103,6 +103,11 @@
   justify-content: center;
 }
 
+.docLink {
+  color: white;
+  text-decoration: underline;
+}
+
 @media (max-width: 768px) {
   .contentContainer {
     flex-direction: column;

@@ -542,9 +542,9 @@ const RegistrationPage = () => {
               <Checkbox />
               <div className={styles.checkboxTextBlock}>
                 Нажимая кнопку «Зарегистрироваться», я даю согласие на{" "}
-                <span className={styles.dataAllow}>
+                <a className={styles.dataAllow} href="https://mephi.ru/content/public/files/policy.pdf" target="_blank" rel="noopener noreferrer">
                   обработку, передачу и хранение персональных данных
-                </span>
+                </a>
               </div>
             </div>
           </Form.Item>

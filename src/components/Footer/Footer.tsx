@@ -207,7 +207,27 @@ const Footer = () => {
 
             <p>115409, Российская Федерация, г. Москва, Каширское ш., 31</p>
 
-            <p>Политика конфиденциальности и обработки персональных данных</p>
+            <p>
+              <a 
+                className={styles.docLink}
+                href="https://mephi.ru/content/public/files/policy.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                Политика НИЯУ МИФИ в отношении обработки персональных данных
+              </a>
+            </p>
+
+            <p>
+              <a 
+                className={styles.docLink}
+                href="https://mephi.ru/content/public/files/policy.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                Пользовательское соглашение
+              </a>
+            </p>
 
             <p>© 2024 — ИФИБ НИЯУ МИФИ</p>
           </div>

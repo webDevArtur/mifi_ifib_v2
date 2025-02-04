@@ -61,6 +61,7 @@
 .checkboxBlock {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .checkboxTextBlock {
@@ -70,6 +71,12 @@
 }
 
 .dataAllow {
+  color: #000;
+  text-decoration: underline;
+}
+
+.dataAllow:hover {
+  color: #000;
   text-decoration: underline;
 }
 

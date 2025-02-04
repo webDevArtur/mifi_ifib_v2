@@ -142,11 +142,12 @@ const QuestPage = ({ questArray, pageSize = 1 }: QuestPageProps) => {
       </div>
     )}
 
-    {/* Отображение баллов */}
-    <div className={styles.scoreContainer}>
-      <p>Ваш лучший балл: {quest?.submission?.bestScore || 0} из {quest.maxScore}</p>
-      <p>Ваш текущий балл: {quest?.submission?.score || 0}</p>
-    </div>
+    { quest?.submission && (
+   <div className={styles.scoreContainer}>
+   <p>Ваш лучший балл: {quest?.submission?.bestScore || 0} из {quest.maxScore}</p>
+   <p>Ваш текущий балл: {quest?.submission?.score || 0}</p>
+ </div>
+)}
 
     {/* В зависимости от типа задания */}
     {quest.type === "text_task" && (

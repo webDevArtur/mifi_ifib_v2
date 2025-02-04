@@ -239,8 +239,10 @@ const FeedbackSection = () => {
             >
               <Checkbox />
               <span style={{ marginLeft: "8px" }}>
-                Нажимая кнопку «Отправить», я даю согласие на обработку,
-                передачу и хранение персональных данных
+                Нажимая кнопку «Отправить», я даю согласие на{" "}
+                <a className={styles.docLink} href="https://mephi.ru/content/public/files/policy.pdf" target="_blank" rel="noopener noreferrer">
+                  обработку, передачу и хранение персональных данных
+                </a>
               </span>
             </div>
           </Form.Item>

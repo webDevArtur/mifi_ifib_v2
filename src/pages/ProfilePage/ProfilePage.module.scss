@@ -256,6 +256,21 @@ h3 {
   text-align: center;
 }
 
+.upload * {
+  width: 100%;
+
+  button * {
+    width: auto;
+  }
+}
+
+.hint {
+  font-size: 14px;
+  color: #808080;
+  margin: 8px 0;
+  margin-top: 0;
+}
+
 @media (max-width: 895px) {
   .profilePage {
     .profileCard {

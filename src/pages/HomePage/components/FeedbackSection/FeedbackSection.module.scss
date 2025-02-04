@@ -106,6 +106,16 @@
   margin: 5px 0;
 }
 
+.docLink {
+  color: #000;
+  text-decoration: underline;
+}
+
+.docLink:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
 @media (max-width: 1024px) {
   .imageContainer {
     display: none;
