@@ -10,7 +10,7 @@ import styles from "./QuestsDetailsPage.module.scss";
 const { Search } = Input;
 
 const questTypeTranslations = {
-  nuclear_medicine_history: "История ядерной медицины",
+  nuclear_medicine_history: "Погружение в историю",
   diagnostics: "Диагностика",
   therapy: "Терапия",
   common_quest: "Общий квест",
@@ -65,6 +65,7 @@ const QuestsDetailsPage = () => {
         </p>
 
         <div className={styles.filtersContainer}>
+        {questType !== "nuclear_medicine_history" && (
         <div className={styles.starRating}>
           <p className={styles.starRatingTitle}>Выберите уровень сложности:</p>
             <div className={styles.stars}>
@@ -85,7 +86,9 @@ const QuestsDetailsPage = () => {
               ))}
             </div>
         </div>
+        )}
 
+      {questType !== "nuclear_medicine_history" && (
         <div className={styles.tags}>
           <p className={styles.starRatingTitle}>Выберите формат:</p>
 
@@ -104,6 +107,7 @@ const QuestsDetailsPage = () => {
             </button>
           </div>
         </div>
+      )}
 
         <Input
           className={styles.searchInput}

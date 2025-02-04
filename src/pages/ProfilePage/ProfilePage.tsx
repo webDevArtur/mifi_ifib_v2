@@ -476,7 +476,7 @@ const ProfilePage = () => {
           </Form>
         </div>
 
-        {data?.user?.role && !["practicing_specialist", "not_related_field"].includes(data.user.role) && (
+        {data?.user?.role && !["practicing_specialist", "not_related_field"].includes(data.user.role) && data?.user?.isVerified && (
             data?.user?.olympiadRegistration ? (
                 <p className={styles.registeredText}>
                     Поздравляем! Вы успешно зарегистрированы на первую фиджитал олимпиаду по медицинской физике.

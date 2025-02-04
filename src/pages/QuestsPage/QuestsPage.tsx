@@ -7,7 +7,7 @@ import image1 from "./assets/image1.png";
 import image2 from "./assets/image2.png";
 
 const questTypeTranslations = {
-  nuclear_medicine_history: "История ядерной медицины",
+  nuclear_medicine_history: "Погружение в историю",
   diagnostics: "Диагностика",
   therapy: "Терапия",
   common_quest: "Общий квест",
@@ -122,9 +122,13 @@ const QuestsPage = () => {
 
           const isTextAfter4 = index === 3;
 
+          const questPath = quest.questType !== 'common_quest' 
+            ? `/quests/${quest.questType}` 
+            : `/quests/${quest.questType}/1`;
+
           return (
             <React.Fragment key={quest.id}>
-              <Link to={`/quests/${quest.questType}`} className={cardClass}>
+              <Link to={questPath} className={cardClass}>
                 <QuestCard title={quest.title} backgroundImage={quest.backgroundImage} isOnline={quest.isOnline} />
               </Link>
               {isTextAfter4 && (

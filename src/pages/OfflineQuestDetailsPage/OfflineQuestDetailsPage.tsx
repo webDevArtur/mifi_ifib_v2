@@ -9,7 +9,7 @@ import { QuestTask } from "entities";
 import styles from "./OfflineQuestDetailsPage.module.scss";
 
 const questTypeTranslations = {
-  nuclear_medicine_history: "История ядерной медицины",
+  nuclear_medicine_history: "Погружение в историю",
   diagnostics: "Диагностика",
   therapy: "Терапия",
   common_quest: "Общий квест",

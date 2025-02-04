@@ -3,7 +3,7 @@ import QuestPage from "components/QuestComponent/QuestComponent";
 import styles from "./QuestDetailsPage.module.scss";
 
 const questTypeTranslations: { [key: string]: string } = {
-  nuclear_medicine_history: "История ядерной медицины",
+  nuclear_medicine_history: "Погружение в историю",
   diagnostics: "Диагностика",
   therapy: "Терапия",
   common_quest: "Общий квест",
