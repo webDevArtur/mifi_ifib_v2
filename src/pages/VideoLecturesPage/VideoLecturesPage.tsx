@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Input, Skeleton } from "antd";
+import { Input, Skeleton, Select } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import RegistraionBlock from "components/RegistrationBlock/RegistrationBlock";
@@ -11,26 +11,37 @@ import styles from "./VideoLecturesPage.module.scss";
 import marked from "./assets/marked.png";
 import unmarked from "./assets/unmarked.png";
 
+const categories = [
+  { label: "Все", value: "" },
+  { label: "Лекции", value: "lectures" },
+  { label: "Как это работает?", value: "how_does_it_work" },
+  { label: "Анимации", value: "animations" },
+  { label: "Теоретические основы", value: "theoretical_base" },
+];
+
 const VideoLecturesPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
-
   const queryParams = new URLSearchParams(location.search);
+
   const initialSearch = queryParams.get("search") || "";
   const initialPage = Number(queryParams.get("page")) || 1;
   const initialPageSize = Number(queryParams.get("pageSize")) || 20;
+  const initialCategory = queryParams.get("category") || "";
 
   const [search, setSearch] = useState<string>(initialSearch);
   const [page, setPage] = useState<number>(initialPage);
   const [pageSize, setPageSize] = useState<number>(initialPageSize);
   const [debouncedSearch, setDebouncedSearch] = useState<string>(initialSearch);
+  const [category, setCategory] = useState<string>(initialCategory);
 
   const { data: videos, isLoading, refetch } = useVideos(
     undefined,
     debouncedSearch,
     page,
-    pageSize
+    pageSize,
+    category
   );
 
   const [markedVideos, setMarkedVideos] = useState<Set<number>>(new Set());
@@ -80,6 +91,9 @@ const VideoLecturesPage = () => {
       if (search.trim()) {
         params.set("search", search);
       }
+      if (category) {
+        params.set("category", category);
+      }
       if (page !== 1) {
         params.set("page", String(page));
       }
@@ -90,7 +104,7 @@ const VideoLecturesPage = () => {
     }, 500);
 
     return () => clearTimeout(timeoutId);
-  }, [search, page, pageSize, navigate]);
+  }, [search, page, pageSize, category, navigate]);
 
   return (
     <div className={styles.container}>
@@ -120,6 +134,14 @@ const VideoLecturesPage = () => {
         bordered={false}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+      />
+
+      <Select
+        value={category}
+        onChange={(value) => setCategory(value)}
+        options={categories}
+        className={styles.select}
+        dropdownClassName={styles.selectList}
       />
 
       {isLoading && (
