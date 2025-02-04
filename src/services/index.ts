@@ -25,7 +25,7 @@ const setRefreshToken = (token: string) => {
 
 const refreshToken = async (): Promise<string> => {
   try {
-    const response = await axios.post("https://medphysicists.mephi.ru/api/v1/user/auth/token/refresh/", {
+    const response = await axios.post("https://medphysicists-stage.ru/api/v1/user/auth/token/refresh/", {
       refresh: getRefreshToken(),
     });
     const { access, refresh } = response.data;

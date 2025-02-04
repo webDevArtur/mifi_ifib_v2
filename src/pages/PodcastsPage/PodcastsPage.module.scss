@@ -204,9 +204,16 @@ h1 {
   opacity: 1;
 }
 
+@media (max-width: 768px) {
+  .podcastGrid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 @media (max-width: 440px) {
   .podcastGrid {
     display: flex;
+    grid-template-columns: 1fr;
     flex-direction: column;
     justify-content: center;
     align-items: center;

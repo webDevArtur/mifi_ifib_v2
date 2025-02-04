@@ -21,7 +21,7 @@ export const getQuests = (
       ? `&is_online=false`
       : "";
 
-  const url = `https://medphysicists.mephi.ru/api/v1/quests?${pageQuery}${sizeQuery}${complexityQuery}${questTypeQuery}${searchQuery}${isOnlineQuery}`;
+  const url = `https://medphysicists-stage.ru/api/v1/quests?${pageQuery}${sizeQuery}${complexityQuery}${questTypeQuery}${searchQuery}${isOnlineQuery}`;
 
   return api<QuestResponse>(url, {
     method: "GET",
