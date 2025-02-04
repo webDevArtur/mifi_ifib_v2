@@ -17,6 +17,6 @@ export const getTerms = (
   if (pageNumber) params.append("page", pageNumber.toString());
 
   return api<TermResponse>(
-    `https://medphysicists-stage.ru/api/v1/knowledge-base/terms/?${params.toString()}`
+    `https://medphysicists.mephi.ru/api/v1/knowledge-base/terms/?${params.toString()}`
   );
 };

@@ -4,7 +4,7 @@ export const uploadDocument = (file: File): Promise<void> => {
   const formData = new FormData();
   formData.append("file", file);
 
-  return api("https://medphysicists-stage.ru/api/v1/user/upload-document/", {
+  return api("https://medphysicists.mephi.ru/api/v1/user/upload-document/", {
     method: "POST",
     data: formData,
     headers: {

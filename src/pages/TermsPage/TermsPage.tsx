@@ -12,12 +12,12 @@ const alphabet = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭ
 const DEBOUNCE_DELAY = 800;
 
 const termLinks: Record<TermKeys, string> = {
-  radionuclidesDiagnosis: "https://medphysicists-stage.ru/biowiki/index.html",
-  radiationTherapy: "https://medphysicists-stage.ru/biowiki/index.html",
-  ultraSoundDiagnosis: "https://medphysicists-stage.ru/biowiki/index.html",
-  mriDiagnosis: "https://medphysicists-stage.ru/biowiki/index.html",
-  safety: "https://medphysicists-stage.ru/biowiki/index.html",
-  regulatoryDocuments: "https://medphysicists-stage.ru/biowiki/page8.html",
+  radionuclidesDiagnosis: "https://medphysicists.mephi.ru/biowiki/index.html",
+  radiationTherapy: "https://medphysicists.mephi.ru/biowiki/index.html",
+  ultraSoundDiagnosis: "https://medphysicists.mephi.ru/biowiki/index.html",
+  mriDiagnosis: "https://medphysicists.mephi.ru/biowiki/index.html",
+  safety: "https://medphysicists.mephi.ru/biowiki/index.html",
+  regulatoryDocuments: "https://medphysicists.mephi.ru/biowiki/page8.html",
 };
 
 const TermsPage = () => {
@@ -98,7 +98,7 @@ const TermsPage = () => {
     }
   };
 
-  const link = type ? termLinks[type] : "https://medphysicists-stage.ru/biowiki/index.html";
+  const link = type ? termLinks[type] : "https://medphysicists.mephi.ru/biowiki/index.html";
 
   return (
     <div className={styles.container}>

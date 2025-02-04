@@ -20,7 +20,7 @@ interface RegisterData {
 
 export const registerUser = (data: RegisterData) =>
   api<RegistrationResponse>(
-    "https://medphysicists-stage.ru/api/v1/user/auth/register",
+    "https://medphysicists.mephi.ru/api/v1/user/auth/register",
     {
       method: "POST",
       data,
@@ -31,7 +31,7 @@ export const confirmRegistration = async (data: {
   confirmationCode: string;
 }) => {
   return api<ConfirmRegistrationResponse>(
-    "https://medphysicists-stage.ru/api/v1/user/auth/register/confirm",
+    "https://medphysicists.mephi.ru/api/v1/user/auth/register/confirm",
     {
       method: "POST",
       data,
@@ -40,7 +40,7 @@ export const confirmRegistration = async (data: {
 };
 
 export const resendConfirmationCode = (data: { register_token?: string }) =>
-  api("https://medphysicists-stage.ru/api/v1/user/auth/update-confirmation-code", {
+  api("https://medphysicists.mephi.ru/api/v1/user/auth/update-confirmation-code", {
     method: "POST",
     data,
   });
