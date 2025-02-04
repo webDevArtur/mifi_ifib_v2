@@ -163,7 +163,7 @@ const ProfilePage = () => {
   };
   
   const handleSubmit = () => {
-    if (!file && !data?.user?.isDocumentUploaded) {
+    if (!file || !data?.user?.isDocumentUploaded) {
       message.error("Пожалуйста, загрузите документ, подтверждающий статус студента/школьника.");
       return;
     }

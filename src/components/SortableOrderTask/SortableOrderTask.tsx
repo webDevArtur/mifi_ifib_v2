@@ -6,6 +6,7 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
+  DragEndEvent,  // Import DragEndEvent type
 } from '@dnd-kit/core';
 import {
   arrayMove,
@@ -15,7 +16,7 @@ import {
 } from '@dnd-kit/sortable';
 
 import { SortableItem } from './SortableItem/SortableItem';
-import { QuestTask } from "entities"; // Если у вас есть интерфейс QuestTask
+import { QuestTask } from "entities"; // Assuming QuestTask interface
 
 interface SortableOrderTaskProps {
   quest: QuestTask;
@@ -40,12 +41,12 @@ const SortableOrderTask: React.FC<SortableOrderTaskProps> = ({
   );
 
   const handleDragEnd = useCallback(
-    (event: { active: { id: string }; over: { id: string } }) => {
+    (event: DragEndEvent) => {  // Use DragEndEvent type here
       const { active, over } = event;
-      if (active.id !== over.id) {
+      if (active.id !== over?.id) {
         setOrderOptions((prevOptions) => {
-          const oldIndex = prevOptions.findIndex((option) => option.id.toString() === active.id);
-          const newIndex = prevOptions.findIndex((option) => option.id.toString() === over.id);
+          const oldIndex = prevOptions.findIndex((option) => option.id.toString() === active.id.toString());
+          const newIndex = prevOptions.findIndex((option) => option.id.toString() === over?.id.toString());
           const updatedOptions = arrayMove(prevOptions, oldIndex, newIndex);
           return updatedOptions;
         });
@@ -55,7 +56,7 @@ const SortableOrderTask: React.FC<SortableOrderTaskProps> = ({
   );
 
   useEffect(() => {
-    // Обновляем inputValues при изменении порядка
+    // Update inputValues when order changes
     const updatedOrder = orderOptions.map(option => option.id);
     setInputValues((prevValues) => ({
       ...prevValues,
@@ -80,9 +81,7 @@ const SortableOrderTask: React.FC<SortableOrderTaskProps> = ({
         </div>
       </SortableContext>
 
-      <button
-        onClick={() => handleSubmit(quest.id)}
-      >
+      <button onClick={() => handleSubmit(quest.id)}>
         Отправить
       </button>
     </DndContext>
