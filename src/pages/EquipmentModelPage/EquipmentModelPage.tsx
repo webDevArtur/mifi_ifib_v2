@@ -76,7 +76,7 @@ const EquipmentModelPage = () => {
         {isLoading ? (
           <Skeleton.Button active className={styles.skeletonDescription} />
         ) : (
-          "Ознакомьтесь с выбранной моделью для более глубокого изучения её строения, принципов работы и характеристик..."
+          data?.items[0]?.description
         )}
       </p>
 
