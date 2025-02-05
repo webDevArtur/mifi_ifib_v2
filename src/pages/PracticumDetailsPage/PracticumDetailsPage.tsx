@@ -61,7 +61,7 @@ const PracticumDetailsPage = () => {
         )}
       </div>
 
-      <QuestPage pageType="practicum" questArray={questArray} pageSize={4} />
+      <QuestPage questArray={questArray} pageSize={4} />
     </div>
   );
 };
