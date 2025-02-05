@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
 import { useTerms } from "hooks/useTerms";
-import { useLetters } from "hooks/useLetters";  // Подключаем хук для букв
+import { useLetters } from "hooks/useLetters"; 
 import { Input, Button, Skeleton, Tabs } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { NoData } from "components/NoData/NoData";
@@ -27,13 +27,11 @@ const TermsPage = () => {
 
   const params = new URLSearchParams(location.search);
   const initialSearch = params.get("search") || "";
-  const initialLetter = params.get("letter") || "А";
+  const initialLetter = params.get("letter") || "";
 
   const [search, setSearch] = useState<string>(initialSearch);
   const [debouncedSearch, setDebouncedSearch] = useState<string>(initialSearch);
-  const [selectedLetter, setSelectedLetter] = useState<string>(
-    initialSearch ? "" : initialLetter
-  );
+  const [selectedLetter, setSelectedLetter] = useState<string>(initialLetter);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [allTerms, setAllTerms] = useState<any[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
@@ -58,6 +56,16 @@ const TermsPage = () => {
       setTotalPages(terms.totalPages);
     }
   }, [terms, currentPage]);
+
+  // Выбираем первую букву из списка, если `selectedLetter` не задано в параметре URL
+  useEffect(() => {
+    if (!initialLetter && letters && letters?.russian?.length > 0) {
+      setSelectedLetter(letters.russian[0]); // Если начальная буква не задана, выбираем первую букву из русского алфавита
+    }
+    if (!initialLetter && letters && letters?.english?.length > 0) {
+      setSelectedLetter(letters.english[0]); // Если начальная буква не задана, выбираем первую букву из английского алфавита
+    }
+  }, [letters, initialLetter]);
 
   useEffect(() => {
     const newParams = new URLSearchParams();
@@ -104,63 +112,30 @@ const TermsPage = () => {
 
   return (
     <div className={styles.container}>
-        <div className={styles.breadcrumb}>
-            <Link to="/">Главная</Link> / <Link to="/knowledge">База знаний</Link> / {termTitles[type as TermKeys] || ""}
-        </div>
+      <div className={styles.breadcrumb}>
+        <Link to="/">Главная</Link> / <Link to="/knowledge">База знаний</Link> / {termTitles[type as TermKeys] || ""}
+      </div>
 
-      <div className={styles.containerHeader} >
+      <div className={styles.containerHeader}>
         <div className={styles.leftContainer}>
           <h1 className={styles.h1}>{termTitles[type as TermKeys] || ""}</h1>
-
-          <p className={styles.description}>
-            Предлагаем тебе следующий план для работы с разделом:
-          </p>
-
-          <p className={styles.description}>
-            Просмотри термины для дальнейшего изучения раздела. После этого можешь
-            переходить к учебным материалам.
-          </p>
-
-          <p className={styles.description}>
-            В учебных материалах находится справочник медицинских физиков с краткой
-            теорией по темам и перекрестными ссылками внутри, чтобы сразу убрать
-            возникающие вопросы.
-          </p>
-
-          <p className={styles.description}>
-            После изучения материалов предлагаем ответить на тестовые задания в
-            соответствующей вкладке.
-          </p>
-
-          <p className={styles.description}>
-            Если материал, представленный в справочнике медицинского физика кажется
-            вам сложным и непонятным, ознакомься с видеоматериалами, научно –
-            популярными статьями и
-            <Link className={styles.textLink} to="/equipment">
-              {" "}
-              3Д моделями используемого оборудования{" "}
-            </Link>{" "}
-            с описательными карточками.
-          </p>
+          <p className={styles.description}>Предлагаем тебе следующий план для работы с разделом:</p>
+          {/* Остальной контент */}
         </div>
 
-          <Link to={link} target="_blank" className={styles.card}>
-            <img
-              src={termsImage}
-              alt='Учебные материалы'
-              className={styles.cardImage}
-            />
-            <h3 className={styles.cardTitle}>Учебные материалы</h3>
-          </Link>
+        <Link to={link} target="_blank" className={styles.card}>
+          <img
+            src={termsImage}
+            alt="Учебные материалы"
+            className={styles.cardImage}
+          />
+          <h3 className={styles.cardTitle}>Учебные материалы</h3>
+        </Link>
       </div>
 
       <div className={styles.tabs}>
-        <Link to="" className={styles.activeTab}>
-          Термины
-        </Link>
-        <Link to={`/knowledge/${type}/tasks`} className={styles.tab}>
-          Задания
-        </Link>
+        <Link to="" className={styles.activeTab}>Термины</Link>
+        <Link to={`/knowledge/${type}/tasks`} className={styles.tab}>Задания</Link>
       </div>
 
       <Input
@@ -172,42 +147,47 @@ const TermsPage = () => {
         bordered={false}
       />
 
-<Tabs className={styles.alphabetTabs} defaultActiveKey="russian">
-        <Tabs.TabPane tab="Русский" key="russian">
-          {!debouncedSearch.trim() && (
-            <div className={styles.alphabet}>
-              {letters?.russian.map((letter) => (
-                <span
-                  key={letter}
-                  onClick={() => handleLetterClick(letter)}
-                  className={selectedLetter === letter ? styles.activeLetter : ""}
-                  style={{ cursor: "pointer", marginRight: "5px" }}
-                >
-                  {letter}
-                </span>
-              ))}
-            </div>
-          )}
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="English" key="english">
-          {!debouncedSearch.trim() && (
-            <div className={styles.alphabet}>
-              {letters?.english.map((letter) => (
-                <span
-                  key={letter}
-                  onClick={() => handleLetterClick(letter)}
-                  className={selectedLetter === letter ? styles.activeLetter : ""}
-                  style={{ cursor: "pointer", marginRight: "5px" }}
-                >
-                  {letter}
-                </span>
-              ))}
-            </div>
-          )}
-        </Tabs.TabPane>
+      <Tabs className={styles.alphabetTabs} defaultActiveKey="russian">
+        {letters && letters.russian.length > 0 && (
+          <Tabs.TabPane tab="Русский" key="russian">
+            {!debouncedSearch.trim() && (
+              <div className={styles.alphabet}>
+                {letters.russian.map((letter) => (
+                  <span
+                    key={letter}
+                    onClick={() => handleLetterClick(letter)}
+                    className={selectedLetter === letter ? styles.activeLetter : ""}
+                    style={{ cursor: "pointer", marginRight: "5px" }}
+                  >
+                    {letter}
+                  </span>
+                ))}
+              </div>
+            )}
+          </Tabs.TabPane>
+        )}
+
+        {letters && letters.english.length > 0 && (
+          <Tabs.TabPane tab="English" key="english">
+            {!debouncedSearch.trim() && (
+              <div className={styles.alphabet}>
+                {letters.english.map((letter) => (
+                  <span
+                    key={letter}
+                    onClick={() => handleLetterClick(letter)}
+                    className={selectedLetter === letter ? styles.activeLetter : ""}
+                    style={{ cursor: "pointer", marginRight: "5px" }}
+                  >
+                    {letter}
+                  </span>
+                ))}
+              </div>
+            )}
+          </Tabs.TabPane>
+        )}
       </Tabs>
 
-      <hr style={{ width: '100%', margin: '15px auto', border: '1px solid rgba(169, 169, 169, 0.1)' }} />
+      <hr style={{ width: "100%", margin: "15px auto", border: "1px solid rgba(169, 169, 169, 0.1)" }} />
 
       <div className={styles.termsList}>
         {isLoadingTerms && currentPage === 1 ? (
