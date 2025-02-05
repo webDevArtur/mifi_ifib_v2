@@ -36,27 +36,6 @@ const QuestDetailsPage = () => {
 
       <h1 className={styles.h1}>Квест</h1>
 
-      <p className={styles.description}>
-        В этом блоке вы узнаете, с чем сталкивается студент – медицинский физик
-        во время обучения в ИФИБ НИЯУ МИФИ.
-      </p>
-
-      <p className={styles.description}>
-        Для выполнения заданий вам необходимо быть зарегистрированными на
-        платформе Stepik.
-      </p>
-
-      <p className={styles.description}>Выберите уровень сложности:</p>
-
-      <div className={styles.tabHeaders}>
-        <Link to={`/quests/${questType}/${questId}`} className={`${styles.tab} ${styles.active}`}>
-          Онлайн
-        </Link>
-        <Link to={`/quests/${questType}/${questId}/offline`} className={`${styles.tab}`}>
-          Оффлайн
-        </Link>
-      </div>
-
       <QuestPage questArray={questArray} />
     </div>
   );

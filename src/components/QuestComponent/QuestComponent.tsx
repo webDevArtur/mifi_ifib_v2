@@ -123,7 +123,7 @@ const QuestPage = ({ questArray, pageSize = 1 }: QuestPageProps) => {
       {isLoading ? (
         <Skeleton active />
       ) : quests.length === 0 ? (
-        <NoData text="Нет доступных заданий." />
+        <NoData text={`Мы стараемся сделать задачи интереснее... Скоро загрузим!`} />
       ) : (
         <div className={styles.cardsContainer}>
 {quests.map((quest) => (

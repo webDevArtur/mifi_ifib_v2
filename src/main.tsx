@@ -27,7 +27,6 @@ import QuestsPage from "pages/QuestsPage/QuestsPage";
 import QuestsDetailsPage from "pages/QuestsDetailsPage/QuestsDetailsPage";
 import QuestDetailsPage from "pages/QuestDetailsPage/QuestDetailsPage";
 import TasksPage from "pages/TasksPage/TasksPage";
-import OfflineQuestDetailsPage from "pages/OfflineQuestDetailsPage/OfflineQuestDetailsPage";
 import UserRatingPage from "pages/UserRatingPage/UserRatingPage";
 import ProtectedRoute from "pages/ProtectedRoute/ProtectedRoute";
 import ScrollToTop from "hooks/ScrollToTop";
@@ -149,12 +148,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                     </ProtectedRoute>
                   }
                 />
-
-                <Route path="/quests/:name/:id/offline" element={
-                  <ProtectedRoute unAllowedStatuses={["practicing_specialist", "not_related_field"]}>
-                    <OfflineQuestDetailsPage />
-                  </ProtectedRoute>
-                } />
 
                 <Route path="/userRating" element={
                   <ProtectedRoute unAllowedStatuses={["practicing_specialist", "not_related_field"]}>

@@ -14,9 +14,18 @@
 }
 
 .noDataText {
+  width: 45%;
+  text-align: center;
   font-size: 24px;
   color: #2b5329;
   position: relative;
-  top: -40px;
+  top: -20px;
   left: 10px;
+}
+
+@media (max-width: 768px) {
+  .noDataText {
+    width: 100%;
+    font-size: 20px;
+  }
 }

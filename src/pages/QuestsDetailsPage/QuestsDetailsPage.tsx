@@ -131,7 +131,7 @@ const QuestsDetailsPage = () => {
             ))}
         </div>
       ) : quests.length === 0 ? (
-        <NoData text="Квесты отсутствуют." />
+        <NoData hideImage text="Придумываем сюжеты и готовим лаборатории... Обязательно сообщим о добавлении квестов!" />
       ) : (
         <div className={styles.cardsContainer}>
           {quests.map((quest) => (
