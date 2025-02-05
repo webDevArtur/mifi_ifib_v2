@@ -27,11 +27,10 @@ const TermsPage = () => {
 
   const params = new URLSearchParams(location.search);
   const initialSearch = params.get("search") || "";
-  const initialLetter = params.get("letter") || "";
 
   const [search, setSearch] = useState<string>(initialSearch);
   const [debouncedSearch, setDebouncedSearch] = useState<string>(initialSearch);
-  const [selectedLetter, setSelectedLetter] = useState<string>(initialSearch ? "" : initialLetter);
+  const [selectedLetter, setSelectedLetter] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [allTerms, setAllTerms] = useState<any[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
@@ -64,13 +63,17 @@ const TermsPage = () => {
     }
   }, [terms, currentPage]);
 
-  useEffect(() => {
-    if (activeTab === "russian" && letters && letters?.russian?.length > 0) {
+  const updateSelectedLetter = (activeTab: string, letters: any, setSelectedLetter: (letter: string) => void) => {
+    if (activeTab === "russian" && letters?.russian?.length > 0) {
       setSelectedLetter(letters.russian[0]);
-    } else if (activeTab === "english" && letters && letters?.english?.length > 0) {
+    } else if (activeTab === "english" && letters?.english?.length > 0) {
       setSelectedLetter(letters.english[0]);
     }
-  }, [activeTab, letters]);
+  };  
+
+  useEffect(() => {
+    updateSelectedLetter(activeTab, letters, setSelectedLetter);
+  }, [activeTab, letters]);  
 
   useEffect(() => {
     const newParams = new URLSearchParams();
@@ -87,14 +90,14 @@ const TermsPage = () => {
     const handler = setTimeout(() => {
       setDebouncedSearch(search);
       if (!search.trim()) {
-        setSelectedLetter(initialLetter || "А");
+        updateSelectedLetter(activeTab, letters, setSelectedLetter);
       } else {
         setSelectedLetter("");
       }
     }, DEBOUNCE_DELAY);
 
     return () => clearTimeout(handler);
-  }, [search, initialLetter]);
+  }, [search]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);

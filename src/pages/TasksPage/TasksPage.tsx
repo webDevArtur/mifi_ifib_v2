@@ -2,10 +2,13 @@ import { Link, useParams } from "react-router-dom";
 import tasksImage from "./assets/tasks.png";
 import styles from "./TasksPage.module.scss";
 import { termTitles, TermKeys } from "catalogs/terms";
+import { useTasks } from "hooks/useTasks";
 import IframeWithLoader from "components/IframeWithLoader/IframeWithLoader";
 
 const TasksPage = () => {
   const { type } = useParams<{ type: TermKeys }>();
+
+  const { data: tasks, isLoading, error } = useTasks(type);
 
   return (
     <div className={styles.container}>
@@ -68,7 +71,7 @@ const TasksPage = () => {
         </Link>
       </div>
 
-      <IframeWithLoader src="https://stepik.org/course/67/syllabus"/>
+      <IframeWithLoader src={tasks?.[0]?.url} loading={isLoading} />
     </div>
   );
 };
