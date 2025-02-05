@@ -57,6 +57,10 @@ h1 {
   border-radius: 15px !important;
 }
 
+.description {
+  white-space: pre-line;
+}
+
 @media (max-width: 768px) {
   .breadcrumb {
     font-size: 14px;

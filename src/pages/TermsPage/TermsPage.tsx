@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
 import { useTerms } from "hooks/useTerms";
-import { Input, Button, Skeleton } from "antd";
+import { useLetters } from "hooks/useLetters";  // Подключаем хук для букв
+import { Input, Button, Skeleton, Tabs } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { NoData } from "components/NoData/NoData";
 import { TermKeys, termTitles } from "catalogs/terms";
 import termsImage from "./assets/terms.png";
 import styles from "./TermsPage.module.scss";
 
-const alphabet = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ".split("");
 const DEBOUNCE_DELAY = 800;
 
 const termLinks: Record<TermKeys, string> = {
@@ -32,7 +32,7 @@ const TermsPage = () => {
   const [search, setSearch] = useState<string>(initialSearch);
   const [debouncedSearch, setDebouncedSearch] = useState<string>(initialSearch);
   const [selectedLetter, setSelectedLetter] = useState<string>(
-    initialSearch ? "" : initialLetter,
+    initialSearch ? "" : initialLetter
   );
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [allTerms, setAllTerms] = useState<any[]>([]);
@@ -45,13 +45,15 @@ const TermsPage = () => {
     selectedLetter,
     debouncedSearch,
     pageSize,
-    currentPage,
+    currentPage
   );
+
+  const { data: letters, isLoading: isLoadingLetters } = useLetters(type);
 
   useEffect(() => {
     if (terms?.items) {
       setAllTerms((prev) =>
-        currentPage === 1 ? terms.items : [...prev, ...terms.items],
+        currentPage === 1 ? terms.items : [...prev, ...terms.items]
       );
       setTotalPages(terms.totalPages);
     }
@@ -170,29 +172,46 @@ const TermsPage = () => {
         bordered={false}
       />
 
-      {debouncedSearch.trim() === "" && (
-        <div className={styles.alphabet}>
-          {alphabet.map((letter) => (
-            <span
-              key={letter}
-              onClick={() => handleLetterClick(letter)}
-              className={selectedLetter === letter ? styles.activeLetter : ""}
-              style={{ cursor: "pointer", marginRight: "5px" }}
-            >
-              {letter}
-            </span>
-          ))}
-        </div>
-      )}
+<Tabs className={styles.alphabetTabs} defaultActiveKey="russian">
+        <Tabs.TabPane tab="Русский" key="russian">
+          {!debouncedSearch.trim() && (
+            <div className={styles.alphabet}>
+              {letters?.russian.map((letter) => (
+                <span
+                  key={letter}
+                  onClick={() => handleLetterClick(letter)}
+                  className={selectedLetter === letter ? styles.activeLetter : ""}
+                  style={{ cursor: "pointer", marginRight: "5px" }}
+                >
+                  {letter}
+                </span>
+              ))}
+            </div>
+          )}
+        </Tabs.TabPane>
+        <Tabs.TabPane tab="English" key="english">
+          {!debouncedSearch.trim() && (
+            <div className={styles.alphabet}>
+              {letters?.english.map((letter) => (
+                <span
+                  key={letter}
+                  onClick={() => handleLetterClick(letter)}
+                  className={selectedLetter === letter ? styles.activeLetter : ""}
+                  style={{ cursor: "pointer", marginRight: "5px" }}
+                >
+                  {letter}
+                </span>
+              ))}
+            </div>
+          )}
+        </Tabs.TabPane>
+      </Tabs>
+
+      <hr style={{ width: '100%', margin: '15px auto', border: '1px solid rgba(169, 169, 169, 0.1)' }} />
 
       <div className={styles.termsList}>
         {isLoadingTerms && currentPage === 1 ? (
-          <Skeleton
-            active
-            paragraph={{ rows: 18 }}
-            title={false}
-            className={styles.skeleton}
-          />
+          <Skeleton active paragraph={{ rows: 18 }} title={false} className={styles.skeleton} />
         ) : allTerms.length > 0 ? (
           allTerms.map(({ name, definition, id }) => (
             <div className={styles.term} key={id}>

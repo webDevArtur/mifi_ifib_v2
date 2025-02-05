@@ -105,6 +105,9 @@ const Header = () => {
       <Menu.Item key="10">
         <Link to="/practicum/lingwaves">Lingwaves</Link>
       </Menu.Item>
+      <Menu.Item key="11">
+        <Link to="/practicum/partners">Задачи от партнеров</Link>
+      </Menu.Item>
     </Menu>
   );
 
@@ -327,6 +330,11 @@ const Header = () => {
             <Menu.Item key="/practicum/lingwaves">
               <Link to="/practicum/lingwaves" onClick={handleLinkClick}>
                 Lingwaves
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="/practicum/partners">
+              <Link to="/practicum/partners" onClick={handleLinkClick}>
+                Задачи от партнеров
               </Link>
             </Menu.Item>
 

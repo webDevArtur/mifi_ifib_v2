@@ -116,6 +116,10 @@ const Footer = () => {
               <li>
                 <Link to="/practicum/lingwaves">Lingwaves</Link>
               </li>
+
+              <li>
+                <Link to="/practicum/partners">Задачи от партнеров</Link>
+              </li>
             </ul>
           </div>
 

@@ -11,6 +11,7 @@ import cardImage7 from "./assets/Biopac.png";
 import cardImage8 from "./assets/GATE.jpg";
 import cardImage9 from "./assets/Monitor.png";
 import cardImage10 from "./assets/LingWaves.jpg";
+import cardImage11 from "./assets/partners.jpg"
 
 const cardData = [
   { to: "/practicum/vert", src: cardImage1, alt: "VERT", title: "VERT" },
@@ -47,6 +48,12 @@ const cardData = [
     src: cardImage10,
     alt: "Lingwaves",
     title: "Lingwaves",
+  },
+  {
+    to: "/practicum/partners",
+    src: cardImage11,
+    alt: "Задачи от партнеров",
+    title: "Задачи от партнеров",
   },
 ];
 

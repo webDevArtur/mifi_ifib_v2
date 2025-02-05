@@ -128,13 +128,26 @@ const QuestPage = ({ questArray, pageSize = 1 }: QuestPageProps) => {
         <div className={styles.cardsContainer}>
 {quests.map((quest) => (
   <div key={quest.id} className={styles.card}>
-    <h3 className={styles.cardTitle}>{quest.body}</h3>
+<h3 className={styles.cardTitle}>
+  {quest.body.split("<picture>").map((part, index, arr) => (
+    <div key={index}>
+      {part}
+      {index < arr.length - 1 && quest.picture && (
+        <div className={styles.cardImageContainer}>
+          <img src={quest.picture} alt="quest image" className={styles.cardImage} />
+        </div>
+      )}
+    </div>
+  ))}
+</h3>
 
-    {quest.picture && (
+
+      {quest.picture && !quest.body.includes("<picture>") && (
       <div className={styles.cardImageContainer}>
         <img src={quest.picture} alt={quest.body} className={styles.cardImage} />
       </div>
     )}
+
 
     {isCorrectValues[quest.id] !== undefined && isCorrectValues[quest.id] !== null && (
       <div className={styles.feedbackContainer}>

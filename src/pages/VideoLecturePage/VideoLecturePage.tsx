@@ -22,6 +22,8 @@ const VideoLecturePage = () => {
     undefined
   );
 
+  console.log(videos)
+
   useEffect(() => {
     if (isAuthenticated && id) {
       markAsRead(Number(id));
@@ -71,6 +73,8 @@ const VideoLecturePage = () => {
 
       <h1>{video.name}</h1>
       <p className={styles.subtitle}>{video.theme}</p>
+
+      <p className={styles.description}>{video.description}</p>
 
       <div className={styles.videoContainer}>
         <VideoPlayer src={video.link} />
