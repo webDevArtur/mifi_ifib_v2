@@ -349,7 +349,7 @@ const RegistrationPage = () => {
               <Option value="school_student">Школьник</Option>
               <Option value="university_student">Студент</Option>
               <Option value="practicing_specialist">Практикующий специалист</Option>
-              <Option value="not_related_field">Не связано с медицинской физикой</Option>
+              <Option value="not_related_field">Не связан с медицинской физикой</Option>
             </Select>
           </Form.Item>
 
@@ -409,7 +409,7 @@ const RegistrationPage = () => {
                 <Option value="radiopharmaceutical_development">Разработка радиофармацевтических препаратов</Option>
                 <Option value="not_decided">Не определился</Option>
                 <Option value="other">Другое</Option>
-                <Option value="not_related_to_medical_physics">Не связанное с медицинской физикой</Option>
+                <Option value="not_related_to_medical_physics">Не связан с медицинской физикой</Option>
               </Select>
           </Form.Item>
 
