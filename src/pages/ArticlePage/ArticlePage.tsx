@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Input, Pagination, Skeleton } from "antd";
-import { SearchOutlined } from "@ant-design/icons"; // Импортируем иконки
+import { SearchOutlined } from "@ant-design/icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useArticles } from "hooks/useArticles";
 import { useArticleAsMark } from "hooks/useArticleAsMark";
@@ -53,7 +53,6 @@ const ArticlePage = () => {
     };
   }, [search, navigate]);
 
-  // Синхронизация markedArticles с данными сервера
   useEffect(() => {
     if (data?.items) {
       const initialMarkedArticles = new Set(
@@ -83,7 +82,6 @@ const ArticlePage = () => {
     try {
       await markArticle(articleId);
 
-      // Обновляем состояние после успешного запроса
       setMarkedArticles((prev) => {
         const newMarkedArticles = new Set(prev);
         if (newMarkedArticles.has(articleId)) {

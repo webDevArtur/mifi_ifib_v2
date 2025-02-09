@@ -52,8 +52,6 @@ const PracticumDetailsPage = () => {
         }}
       ></p>
 
-
-        {/* Показываем кнопку только если текст содержит "Читать далее" */}
         {hasReadMore && (
           <button onClick={toggleText} className={styles.readMoreButton}>
             {isExpanded ? 'Скрыть' : 'Читать дальше...'}

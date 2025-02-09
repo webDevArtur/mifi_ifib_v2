@@ -6,7 +6,7 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
-  DragEndEvent,  // Import DragEndEvent type
+  DragEndEvent,
 } from '@dnd-kit/core';
 import {
   arrayMove,
@@ -42,7 +42,7 @@ const SortableOrderTask: React.FC<SortableOrderTaskProps> = ({
   );
 
   const handleDragEnd = useCallback(
-    (event: DragEndEvent) => {  // Use DragEndEvent type here
+    (event: DragEndEvent) => {
       const { active, over } = event;
       if (active.id !== over?.id) {
         setOrderOptions((prevOptions) => {
@@ -57,7 +57,6 @@ const SortableOrderTask: React.FC<SortableOrderTaskProps> = ({
   );
 
   useEffect(() => {
-    // Update inputValues when order changes
     const updatedOrder = orderOptions.map(option => option.id);
     setInputValues((prevValues) => ({
       ...prevValues,

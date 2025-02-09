@@ -6,7 +6,6 @@ interface LettersResponse {
   russian: string[];
 }
 
-// Хук useLetters
 export const useLetters = (knowledgeBase?: string) => 
   useQuery<LettersResponse>({
     queryKey: ["letters", knowledgeBase],

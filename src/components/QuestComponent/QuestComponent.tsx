@@ -7,7 +7,7 @@ import { useQuestTasks, useSubmitQuestTask } from "hooks/useQuestTasks";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import styles from "./QuestComponent.module.scss";
 import { QuestTask } from "entities";
-import SortableOrderTask from "components/SortableOrderTask/SortableOrderTask"; // Импортируем компонент
+import SortableOrderTask from "components/SortableOrderTask/SortableOrderTask";
 
 interface QuestPageProps {
   questArray: number[];
@@ -29,7 +29,7 @@ const QuestPage = ({ questArray, pageSize = 1 }: QuestPageProps) => {
   const totalItems = data?.totalItems || 0;
 
   useEffect(() => {
-    searchParams.set("page", String(page)); // <-- Обновляем URL при изменении страницы
+    searchParams.set("page", String(page));
     setSearchParams(searchParams);
   }, [page]);
 
@@ -171,7 +171,6 @@ const QuestPage = ({ questArray, pageSize = 1 }: QuestPageProps) => {
  </div>
 )}
 
-    {/* В зависимости от типа задания */}
     {quest.type === "text_task" && (
       <div className={styles.textTaskContainer}>
         <input

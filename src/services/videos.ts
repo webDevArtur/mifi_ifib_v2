@@ -14,7 +14,7 @@ export const getVideos = (
   if (name) queryParams.append("name", name);
   if (page) queryParams.append("page", String(page));
   if (pageSize) queryParams.append("pageSize", String(pageSize));
-  if (category) queryParams.append("category", category); // Добавляем категорию
+  if (category) queryParams.append("category", category);
 
   const url = `https://medphysicists.mephi.ru/api/v1/nuclear-medicine-intro/films?${queryParams.toString()}`;
 

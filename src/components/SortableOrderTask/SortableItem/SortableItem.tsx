@@ -23,16 +23,16 @@ export function SortableItem({ id, value }: SortableItemProps) {
     border: '1px solid #ccc',
     padding: '10px',
     margin: '5px',
-    backgroundColor: isDragging ? '#f0f0f0' : 'white', // Изменение фона при перетаскивании
+    backgroundColor: isDragging ? '#f0f0f0' : 'white',
     cursor: 'move',
-    boxShadow: isDragging ? '0 4px 8px rgba(0, 0, 0, 0.1)' : 'none', // Тень для элемента при перетаскивании
-    opacity: isDragging ? 0.8 : 1, // Полупрозрачность при перетаскивании
-    borderRadius: '4px', // Скругленные углы
+    boxShadow: isDragging ? '0 4px 8px rgba(0, 0, 0, 0.1)' : 'none',
+    opacity: isDragging ? 0.8 : 1,
+    borderRadius: '4px',
   };
 
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      {value} {/* Отображаем значение элемента */}
+      {value}
     </div>
   );
 }

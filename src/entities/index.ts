@@ -4,7 +4,6 @@ import { RegistrationResponseSchema } from "./registrationResponse";
 import { ConfirmRegistrationResponseSchema } from "./confirmRegistrationResponse";
 import { AuthResponseSchema } from "./authResponse";
 import { ArticleResponseSchema } from "./articleResponse";
-import { mainVideoResponseSchema } from "./mainVideoResponse";
 import { TeamMembersResponseSchema } from "./teamMembersResponse";
 import { PartnersResponseSchema } from "./partnersResponse";
 import { TermResponseSchema } from "./termResponse";
@@ -24,7 +23,6 @@ export type ConfirmRegistrationResponse = z.infer<
 >;
 export type AuthResponse = z.infer<typeof AuthResponseSchema>;
 export type ArticleResponse = z.infer<typeof ArticleResponseSchema>;
-export type MainVideoResponse = z.infer<typeof mainVideoResponseSchema>;
 export type TeamMembersResponse = z.infer<typeof TeamMembersResponseSchema>;
 export type TermResponse = z.infer<typeof TermResponseSchema>;
 export type PartnersResponse = z.infer<typeof PartnersResponseSchema>;

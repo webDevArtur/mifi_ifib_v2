@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { Card, Form, Input, Button, List, Statistic, Progress, Select, Skeleton, Collapse, Alert, DatePicker, Modal, Upload, message } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { EditOutlined, UploadOutlined } from "@ant-design/icons";
 import { useCurrentUser } from "hooks/useCurrentUser";
 import { useEditUser } from "hooks/useEditUser";
-import { useQuests } from "hooks/useQuests";
 import { useVideos } from "hooks/useVideos";
 import { useArticles } from "hooks/useArticles";
 import { usePodcasts } from "hooks/usePodcasts";
 import { useDeleteUser } from "hooks/useDeleteUser";
-import { useProgressStatistics } from "hooks/useProgressStatistics";
 import { useRegisterForOlympiad } from "hooks/useRegisterForOlympiad";
 import { useUploadDocument } from "hooks/useUploadDocument";
+import { useProgressStatistics } from "hooks/useProgressStatistics";
+import { useQuests } from "hooks/useQuests";
 import { useAuth } from "hooks/AuthProvider";
 import dayjs from "dayjs";
 import styles from "./ProfilePage.module.scss";
@@ -19,8 +19,13 @@ import styles from "./ProfilePage.module.scss";
 const { Option } = Select;
 const { Panel } = Collapse;
 
+const getAccessToken = (): string | null => {
+  return localStorage.getItem("authToken");
+};
+
 const ProfilePage = () => {
   const { logout } = useAuth();
+  const navigate = useNavigate();
   const { data, isLoading, refetch: refetchCurrentUser } = useCurrentUser();
   const [error, setError] = useState<string | null>(null);
   const { mutateAsync: editUser } = useEditUser();
@@ -167,8 +172,7 @@ const ProfilePage = () => {
       message.error("Пожалуйста, загрузите документ, подтверждающий статус студента/школьника.");
       return;
     }
-  
-    // Если документ не загружен, начинаем загрузку
+
     if (!data?.user?.isDocumentUploaded) {
       uploadDocument(file, {
         onSuccess: () => {
@@ -180,10 +184,9 @@ const ProfilePage = () => {
           message.error("Ошибка загрузки документа. Попробуйте снова.");
         },
       });
-      return; // Прерываем дальнейшее выполнение до завершения загрузки документа
+      return;
     }
   
-    // Если документ уже загружен, выполняем регистрацию
     registerForOlympiad(undefined, {
       onSuccess: () => {
         message.success("Вы успешно зарегистрированы на олимпиаду!");
@@ -195,6 +198,12 @@ const ProfilePage = () => {
       onError: () => message.error("Ошибка регистрации. Попробуйте снова."),
     });
   };  
+
+
+  const confirmarionOfAuth = () => {
+      const accessToken = getAccessToken();
+      navigate(`/registration/confirmation/${accessToken}`);
+  }
 
   return (
     <div className={styles.profilePage}>
@@ -476,6 +485,14 @@ const ProfilePage = () => {
           </Form>
         </div>
 
+        {!data?.user?.isVerified &&                 <Button
+                    className={styles.editBtn}
+                    type="primary"
+                    onClick={confirmarionOfAuth}
+                >
+                  Необходимо подтвердить почту
+                </Button>}
+
         {data?.user?.role && !["practicing_specialist", "not_related_field"].includes(data.user.role) && data?.user?.isVerified && (
             data?.user?.olympiadRegistration ? (
                 <p className={styles.registeredText}>
@@ -714,7 +731,7 @@ const ProfilePage = () => {
       )}
     </div>
   ) : (
-    <p>Не удалось загрузить статистику.</p>
+    <p>Текущий статус на платформе не соответствует требованиям для просмотра этого блока.</p>
   )}
 </Card>
 

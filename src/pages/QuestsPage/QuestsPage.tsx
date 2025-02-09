@@ -5,6 +5,7 @@ import { useCurrentUser } from "hooks/useCurrentUser";
 import styles from "./QuestsPage.module.scss";
 import image1 from "./assets/image1.png";
 import image2 from "./assets/image2.png";
+import image3 from "./assets/image3.png";
 
 const questTypeTranslations = {
   nuclear_medicine_history: "Погружение в историю",
@@ -23,7 +24,7 @@ const quests = [
     isOnline: true,
     rating: 2,
     questType: "nuclear_medicine_history",
-    backgroundImage: image1,
+    backgroundImage: image3,
   },
   {
     id: 2,

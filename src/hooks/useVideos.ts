@@ -9,7 +9,7 @@ const videosQuery = (
   pageSize?: number,
   category?: string
 ) => ({
-  queryKey: ['videos', { id, name, page, pageSize, category }], // Учитываем категорию
+  queryKey: ['videos', { id, name, page, pageSize, category }],
   queryFn: async () => getVideos(id, name, page, pageSize, category),
 });
 

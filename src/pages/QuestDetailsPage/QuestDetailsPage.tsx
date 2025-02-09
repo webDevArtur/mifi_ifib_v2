@@ -15,7 +15,6 @@ const questTypeTranslations: { [key: string]: string } = {
 const QuestDetailsPage = () => {
   const { name: questType, id: questId } = useParams<{ name: string; id: string }>();
 
-  // Даем значение по умолчанию, если questType не найдено
   const practicumTitle = questType ? questTypeTranslations[questType] ?? "Задание" : "Задание";
   const questArray = questId ? [parseInt(questId, 10)] : [];
 

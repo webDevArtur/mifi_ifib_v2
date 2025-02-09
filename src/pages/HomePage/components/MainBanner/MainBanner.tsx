@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
-import { useMainVideo } from "hooks/useMainVideo";
-import VideoPlayer from "components/VideoPlayer/VideoPlayer";
+import VideoPlayer from "components/MainPageVideoPlayer/MainPageVideoPlayer";
 import atom from "./assets/atom.png";
 import styles from "./MainBanner.module.scss";
 
 const MainBanner = () => {
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // const { data } = useMainVideo();
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <section className={styles.bannerContainer}>
