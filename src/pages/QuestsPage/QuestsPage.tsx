@@ -6,6 +6,9 @@ import styles from "./QuestsPage.module.scss";
 import image1 from "./assets/image1.png";
 import image2 from "./assets/image2.png";
 import image3 from "./assets/image3.png";
+import image4 from "./assets/image4.jpg";
+import image5 from "./assets/image5.jpg";
+import image6 from "./assets/image6.jpg";
 
 const questTypeTranslations = {
   nuclear_medicine_history: "Погружение в историю",
@@ -56,7 +59,7 @@ const quests = [
     isOnline: true,
     rating: 4,
     questType: "nuclear_medicine_economics",
-    backgroundImage: image1,
+    backgroundImage: image4,
   },
   {
     id: 6,
@@ -64,7 +67,7 @@ const quests = [
     isOnline: true,
     rating: 5,
     questType: "clinical_cases",
-    backgroundImage: image1,
+    backgroundImage: image5,
   },
   {
     id: 7,
@@ -72,7 +75,7 @@ const quests = [
     isOnline: true,
     rating: 3,
     questType: "emergency_situations",
-    backgroundImage: image1,
+    backgroundImage: image6,
   },
 ];
 
