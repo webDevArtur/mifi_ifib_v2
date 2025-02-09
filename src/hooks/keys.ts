@@ -2,6 +2,7 @@ export const techObjectsKeys = {
   articles: ["articles"] as const,
   equipments: ["equipments"] as const,
   terms: ["terms"] as const,
+  teamMembers: ["teamMembers"] as const,
   currentUser: ["currentUser"] as const,
   videos: ["videos"] as const,
   podcasts: ["podcasts"] as const,

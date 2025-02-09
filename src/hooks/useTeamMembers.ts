@@ -6,7 +6,7 @@ import { TeamMembersResponse } from "entities";
 import { techObjectsKeys } from "./keys";
 
 const teamMembersQuery = () => ({
-  queryKey: [techObjectsKeys.mainVideo],
+  queryKey: [techObjectsKeys.teamMembers],
   queryFn: async () => getTeamMembers(),
 });
 
