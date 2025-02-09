@@ -8,5 +8,5 @@ export const getLetters = (knowledgeBase?: string) => {
   return api<{
     english: string[];
     russian: string[];
-  }>(`v1/knowledge-base/terms/letters/?${params.toString()}`);
+  }>(`https://medphysicists.mephi.ru/api/v1/knowledge-base/terms/letters/?${params.toString()}`);
 };

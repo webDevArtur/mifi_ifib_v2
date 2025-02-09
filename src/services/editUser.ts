@@ -12,7 +12,7 @@ interface EditUserData {
   }
   
   export const editUser = (data: EditUserData): Promise<void> =>
-    api("v1/user/edit/", {
+    api("https://medphysicists.mephi.ru/api/v1/user/edit/", {
       method: "PATCH",
       data,
     });

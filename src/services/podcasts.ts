@@ -16,7 +16,7 @@ export const getPodcasts = (
     ids.forEach((idValue) => params.append("id", idValue.toString()));
   }
 
-  const url = `v1/nuclear-medicine-intro/podcasts?${params.toString()}`;
+  const url = `https://medphysicists.mephi.ru/api/v1/nuclear-medicine-intro/podcasts?${params.toString()}`;
 
   return api<PodcastResponse>(url, {
     method: "GET",
@@ -24,11 +24,11 @@ export const getPodcasts = (
 };
 
 export const podcastAsViewed = (podcastId: number) => 
-  api<void>(`v1/nuclear-medicine-intro/podcasts/${podcastId}/complete/`, {
+  api<void>(`https://medphysicists.mephi.ru/api/v1/nuclear-medicine-intro/podcasts/${podcastId}/complete/`, {
     method: "POST",
   });
 
 export const markPodcast = (podcastId: number) =>
-  api<void>(`v1/nuclear-medicine-intro/podcasts/${podcastId}/mark/`, {
+  api<void>(`https://medphysicists.mephi.ru/api/v1/nuclear-medicine-intro/podcasts/${podcastId}/mark/`, {
     method: "POST",
   });

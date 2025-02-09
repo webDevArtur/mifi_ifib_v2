@@ -16,7 +16,7 @@ export const getVideos = (
   if (pageSize) queryParams.append("pageSize", String(pageSize));
   if (category) queryParams.append("category", category);
 
-  const url = `v1/nuclear-medicine-intro/films?${queryParams.toString()}`;
+  const url = `https://medphysicists.mephi.ru/api/v1/nuclear-medicine-intro/films?${queryParams.toString()}`;
 
   return api<VideoResponse>(url, {
     method: "GET",
@@ -24,12 +24,12 @@ export const getVideos = (
 };
 
 export const videoAsRead = (filmId: number) =>
-  api<void>(`v1/nuclear-medicine-intro/films/${filmId}/complete/`, {
+  api<void>(`https://medphysicists.mephi.ru/api/v1/nuclear-medicine-intro/films/${filmId}/complete/`, {
     method: "POST",
   });
 
 export const markVideo = (videoId: number) =>
-  api<void>(`v1/nuclear-medicine-intro/films/${videoId}/mark/`, {
+  api<void>(`https://medphysicists.mephi.ru/api/v1/nuclear-medicine-intro/films/${videoId}/mark/`, {
     method: "POST",
   });
   
