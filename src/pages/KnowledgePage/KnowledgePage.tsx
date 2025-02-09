@@ -8,6 +8,7 @@ import cardImage3 from "./assets/ultrasound.png";
 import cardImage4 from "./assets/mri.png";
 import cardImage5 from "./assets/safety.png";
 import cardImage6 from "./assets/documents.png";
+import cardImage7 from "./assets/rkt.png";
 
 const cardsData = [
   {
@@ -45,6 +46,12 @@ const cardsData = [
     image: cardImage6,
     alt: "Нормативно-правовые документы",
     title: "Нормативно-правовые документы",
+  },
+  {
+    to: "/knowledge/X-RAY",
+    image: cardImage7,
+    alt: "РКТ",
+    title: "РКТ",
   },
 ];
 

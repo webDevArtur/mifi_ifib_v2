@@ -12,7 +12,7 @@ export const getQuestTasks = (
   const pageQuery = page ? `&page=${page}` : "";
   const sizeQuery = size ? `&pageSize=${size}` : "";
 
-  const url = `https://medphysicists.mephi.ru/api/v1/quests/tasks/?${questQuery}${orderNumQuery}${pageQuery}${sizeQuery}`;
+  const url = `v1/quests/tasks/?${questQuery}${orderNumQuery}${pageQuery}${sizeQuery}`;
 
   return api<QuestTasksResponse>(url, {
     method: "GET",
@@ -38,7 +38,7 @@ interface SubmitQuestTaskRequest {
     questTaskId: number,
     data: SubmitQuestTaskRequest
   ) => {
-    const url = `https://medphysicists.mephi.ru/api/v1/quests/tasks/${questTaskId}/submit/`;
+    const url = `v1/quests/tasks/${questTaskId}/submit/`;
   
     return api<SubmitQuestTaskResponse>(url, {
       method: "POST",

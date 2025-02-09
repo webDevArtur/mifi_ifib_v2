@@ -4,6 +4,7 @@ import { useQuests } from "hooks/useQuests";
 import QuestPage from "components/QuestComponent/QuestComponent";
 import { practicumTitles, PracticumKeys, practicumDescriptions } from "catalogs/practicums";
 import { Link } from "react-router-dom";
+import parse from "html-react-parser";
 import styles from "./PracticumDetailsPage.module.scss";
 
 const PracticumDetailsPage = () => {
@@ -45,12 +46,9 @@ const PracticumDetailsPage = () => {
       <h1 className={styles.h1}>{practicumTitle}</h1>
 
       <div>
-      <p
-        className={styles.description}
-        dangerouslySetInnerHTML={{
-          __html: isExpanded ? getFullText(practicumDescription) : getTruncatedText(practicumDescription),
-        }}
-      ></p>
+      <p className={styles.description}>
+        {parse(isExpanded ? getFullText(practicumDescription) : getTruncatedText(practicumDescription))}
+      </p>
 
         {hasReadMore && (
           <button onClick={toggleText} className={styles.readMoreButton}>

@@ -52,7 +52,7 @@ const TasksPage = () => {
           </p>
         </div>
 
-          <Link to="https://medphysicists.mephi.ru/biowiki/" target="_blank" className={styles.card}>
+          <Link to="/biowiki/" target="_blank" className={styles.card}>
             <img
               src={tasksImage}
               alt='Учебные материалы'

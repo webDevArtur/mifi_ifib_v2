@@ -4,7 +4,8 @@ export type TermKeys =
   | "ultraSoundDiagnosis"
   | "mriDiagnosis"
   | "safety"
-  | "regulatoryDocuments";
+  | "regulatoryDocuments"
+  | "X-RAY";
 
 export const termTitles: Record<TermKeys, string> = {
   radionuclidesDiagnosis: "Радионуклидная диагностика и терапия",
@@ -13,4 +14,5 @@ export const termTitles: Record<TermKeys, string> = {
   mriDiagnosis: "МРТ",
   safety: "Техника безопасности",
   regulatoryDocuments: "Нормативно-правовые документы",
+  "X-RAY": "РКТ",
 };

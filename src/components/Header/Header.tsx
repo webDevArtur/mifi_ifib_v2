@@ -66,6 +66,9 @@ const Header = () => {
           Нормативно-правовые документы
         </Link>
       </Menu.Item>
+      <Menu.Item key="7">
+        <Link to="/knowledge/X-RAY">РКТ</Link>
+      </Menu.Item>
     </Menu>
   );
 
@@ -271,6 +274,11 @@ const Header = () => {
           <Menu.Item key="/knowledge/regulatoryDocuments">
             <Link to="/knowledge/regulatoryDocuments" onClick={handleLinkClick}>
               Нормативно-правовые документы
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="/knowledge/X-RAY">
+            <Link to="/knowledge/X-RAY" onClick={handleLinkClick}>
+            РКТ
             </Link>
           </Menu.Item>
 

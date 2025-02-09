@@ -6,7 +6,7 @@ import { NoData } from "components/NoData/NoData";
 import { useQuestTasks, useSubmitQuestTask } from "hooks/useQuestTasks";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import styles from "./QuestComponent.module.scss";
-import { QuestTask } from "entities";
+import parse from "html-react-parser";
 import SortableOrderTask from "components/SortableOrderTask/SortableOrderTask";
 
 interface QuestPageProps {
@@ -131,7 +131,7 @@ const QuestPage = ({ questArray, pageSize = 1 }: QuestPageProps) => {
 <h3 className={styles.cardTitle}>
   {quest.body.split("<picture>").map((part, index, arr) => (
     <div key={index}>
-      {part}
+        {parse(part)} 
       {index < arr.length - 1 && quest.picture && (
         <div className={styles.cardImageContainer}>
           <img src={quest.picture} alt="quest image" className={styles.cardImage} />
@@ -220,7 +220,7 @@ const QuestPage = ({ questArray, pageSize = 1 }: QuestPageProps) => {
                 }}
                 className={styles.optionInput}
               />
-              {option.value}
+              {parse(option.value)}
             </label>
           ))}
         </div>

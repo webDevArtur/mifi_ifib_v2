@@ -12,12 +12,13 @@ import styles from "./TermsPage.module.scss";
 const DEBOUNCE_DELAY = 800;
 
 const termLinks: Record<TermKeys, string> = {
-  radionuclidesDiagnosis: "https://medphysicists.mephi.ru/biowiki/index.html",
-  radiationTherapy: "https://medphysicists.mephi.ru/biowiki/index.html",
-  ultraSoundDiagnosis: "https://medphysicists.mephi.ru/biowiki/index.html",
-  mriDiagnosis: "https://medphysicists.mephi.ru/biowiki/index.html",
-  safety: "https://medphysicists.mephi.ru/biowiki/index.html",
-  regulatoryDocuments: "https://medphysicists.mephi.ru/biowiki/page8.html",
+  radionuclidesDiagnosis: "/biowiki/index.html",
+  radiationTherapy: "/biowiki/index.html",
+  ultraSoundDiagnosis: "/biowiki/index.html",
+  mriDiagnosis: "/biowiki/index.html",
+  safety: "/biowiki/index.html",
+  regulatoryDocuments: "/biowiki/page8.html",
+  "X-RAY": "/biowiki/index.html",
 };
 
 const TermsPage = () => {
@@ -111,7 +112,7 @@ const TermsPage = () => {
     }
   };
 
-  const link = type ? termLinks[type] : "https://medphysicists.mephi.ru/biowiki/index.html";
+  const link = type ? termLinks[type] : "/biowiki/index.html";
 
   const handleTabChange = (key: string) => {
     setActiveTab(key);

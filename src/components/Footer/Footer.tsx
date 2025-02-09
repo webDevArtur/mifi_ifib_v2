@@ -64,6 +64,12 @@ const Footer = () => {
                   Нормативно-правовые документы
                 </Link>
               </li>
+
+              <li>
+                <Link to="/knowledge/X-RAY">
+                РКТ
+                </Link>
+              </li>
             </ul>
           </div>
 

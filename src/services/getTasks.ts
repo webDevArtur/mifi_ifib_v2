@@ -11,6 +11,6 @@ export const getTasks = (knowledgeBase?: string) => {
   if (knowledgeBase) params.append("knowledge_base", knowledgeBase);
 
   return api<TaskResponse[]>(
-    `https://medphysicists.mephi.ru/api/v1/knowledge-base/tasks/?${params.toString()}`
+    `v1/knowledge-base/tasks/?${params.toString()}`
   );
 };
