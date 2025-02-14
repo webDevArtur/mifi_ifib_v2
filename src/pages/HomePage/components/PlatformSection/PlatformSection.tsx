@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "hooks/AuthProvider";
 import styles from "./PlatformSection.module.scss";
 import books from "./assets/books.png";
 
 const PlatformSection = () => {
+  const { isAuthenticated } = useAuth();
+
   return (
     <section className={styles.platformSection}>
       <div className={styles.content}>
@@ -23,9 +26,11 @@ const PlatformSection = () => {
         </div>
       </div>
 
+      {!isAuthenticated && (
       <Link to="/registration" className={styles.registerButton}>
         Зарегистрироваться
       </Link>
+      )}
     </section>
   );
 };

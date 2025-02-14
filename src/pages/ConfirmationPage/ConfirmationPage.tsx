@@ -119,6 +119,11 @@ const ConfirmationPage = () => {
           placeholder="Код подтверждения"
           value={confirmationCode}
           onChange={(e) => setConfirmationCode(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleConfirm();
+            }
+          }}
         />
 
         <Button

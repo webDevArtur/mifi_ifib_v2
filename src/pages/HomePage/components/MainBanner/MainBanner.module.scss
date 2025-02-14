@@ -21,6 +21,10 @@
   padding: 20px;
   border-radius: 16px;
   margin-bottom: 10px;
+
+  &.authenticated {
+    margin-bottom: 0;
+  }
 }
 
 .title {

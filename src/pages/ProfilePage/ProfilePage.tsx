@@ -127,9 +127,16 @@ const ProfilePage = () => {
     setEducationalStatus(value);
   };
 
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const showDeleteConfirm = () => {
+    setIsDeleteModalOpen(true);
+  };
+
   const handleDeleteAccount = () => {
     deleteUser(undefined, {
       onSuccess: () => {
+        setIsDeleteModalOpen(false);
         logout();
       },
       onError: () => {
@@ -738,11 +745,24 @@ const ProfilePage = () => {
 <Button
   danger
   type="primary"
-  onClick={handleDeleteAccount}
+  onClick={showDeleteConfirm}
   disabled={isLoadingDelete}
 >
   Удалить аккаунт
 </Button>
+
+<Modal
+        title="Подтверждение удаления"
+        open={isDeleteModalOpen}
+        onOk={handleDeleteAccount}
+        confirmLoading={isLoadingDelete}
+        onCancel={() => setIsDeleteModalOpen(false)}
+        okText="Удалить"
+        cancelText="Отмена"
+        okButtonProps={{ danger: true }}
+      >
+        <p>Вы уверены, что хотите удалить аккаунт? <br/> Это действие необратимо.</p>
+      </Modal>
 
     </div>
   );

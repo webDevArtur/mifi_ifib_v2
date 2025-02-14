@@ -1,5 +1,9 @@
 .platformSection {
   margin: 20px;
+
+  &.authenticated {
+    margin-bottom: 0;
+  }
 }
 
 .content {

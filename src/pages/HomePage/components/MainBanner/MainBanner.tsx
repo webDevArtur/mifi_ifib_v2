@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
+import { useAuth } from "hooks/AuthProvider";
 import VideoPlayer from "components/MainPageVideoPlayer/MainPageVideoPlayer";
 import atom from "./assets/atom.png";
 import styles from "./MainBanner.module.scss";
 
 const MainBanner = () => {
+  const { isAuthenticated } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -16,7 +18,7 @@ const MainBanner = () => {
   return (
     <section className={styles.bannerContainer}>
       <div className={styles.bannerContent}>
-        <div className={styles.leftContainer}>
+        <div className={`${styles.leftContainer} ${isAuthenticated ? styles.authenticated : ""}`}>
           <h1 className={styles.title}>Платформа медицинских физиков</h1>
 
           <div className={styles.infoContainer}>
@@ -74,11 +76,13 @@ const MainBanner = () => {
           </div>
         </div>
 
-        <Link style={{ width: "100%" }} to="/registration">
-          <Button className={styles.registerBtn} type="primary">
-            Зарегистрироваться
-          </Button>
-        </Link>
+        {!isAuthenticated && (
+          <Link style={{ width: "100%" }} to="/registration">
+            <Button className={styles.registerBtn} type="primary">
+              Зарегистрироваться
+            </Button>
+          </Link>
+        )}
       </div>
 
       <div className={styles.videoContainer}>
