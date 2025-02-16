@@ -126,131 +126,131 @@ const QuestPage = ({ questArray, pageSize = 1 }: QuestPageProps) => {
         <NoData text={`Мы стараемся сделать задачи интереснее... Скоро загрузим!`} />
       ) : (
         <div className={styles.cardsContainer}>
-{quests.map((quest) => (
-  <div key={quest.id} className={styles.card}>
-<h3 className={styles.cardTitle}>
-  {quest.body.split("<picture>").map((part, index, arr) => (
-    <div key={index}>
-        {parse(part)} 
-      {index < arr.length - 1 && quest.picture && (
-        <div className={styles.cardImageContainer}>
-          <img src={quest.picture} alt="quest image" className={styles.cardImage} />
+        {quests.map((quest) => (
+          <div key={quest.id} className={styles.card}>
+              <h3 className={styles.cardTitle}>
+                {quest.body.split("<picture>").map((part, index, arr) => (
+                  <div key={index}>
+                      {parse(part)} 
+                    {index < arr.length - 1 && quest.picture && (
+                      <div className={styles.cardImageContainer}>
+                        <img src={quest.picture} alt="quest image" className={styles.cardImage} />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </h3>
+
+
+              {quest.picture && !quest.body.includes("<picture>") && (
+              <div className={styles.cardImageContainer}>
+                <img src={quest.picture} alt={quest.body} className={styles.cardImage} />
+              </div>
+            )}
+
+
+            {isCorrectValues[quest.id] !== undefined && isCorrectValues[quest.id] !== null && (
+              <div className={styles.feedbackContainer}>
+                {isCorrectValues[quest.id] ? (
+                  <CheckCircleOutlined className={styles.correctIcon} />
+                ) : (
+                  <CloseCircleOutlined className={styles.incorrectIcon} />
+                )}
+                <p className={styles.feedbackText}>
+                  {isCorrectValues[quest.id]
+                    ? "Ответ верный!"
+                    : quest?.incorrectSubmissionText || "Ответ неверный"}
+                </p>
+              </div>
+            )}
+
+            { quest?.submission && (
+          <div className={styles.scoreContainer}>
+          <p>Ваш лучший балл: {quest?.submission?.bestScore || 0} из {quest.maxScore}</p>
+          <p>Ваш текущий балл: {quest?.submission?.score || 0}</p>
         </div>
-      )}
-    </div>
-  ))}
-</h3>
-
-
-      {quest.picture && !quest.body.includes("<picture>") && (
-      <div className={styles.cardImageContainer}>
-        <img src={quest.picture} alt={quest.body} className={styles.cardImage} />
-      </div>
-    )}
-
-
-    {isCorrectValues[quest.id] !== undefined && isCorrectValues[quest.id] !== null && (
-      <div className={styles.feedbackContainer}>
-        {isCorrectValues[quest.id] ? (
-          <CheckCircleOutlined className={styles.correctIcon} />
-        ) : (
-          <CloseCircleOutlined className={styles.incorrectIcon} />
         )}
-        <p className={styles.feedbackText}>
-          {isCorrectValues[quest.id]
-            ? "Ответ верный!"
-            : quest?.incorrectSubmissionText || "Ответ неверный"}
-        </p>
-      </div>
-    )}
 
-    { quest?.submission && (
-   <div className={styles.scoreContainer}>
-   <p>Ваш лучший балл: {quest?.submission?.bestScore || 0} из {quest.maxScore}</p>
-   <p>Ваш текущий балл: {quest?.submission?.score || 0}</p>
- </div>
-)}
+            {quest.type === "text_task" && (
+              <div className={styles.textTaskContainer}>
+                <input
+                  type="text"
+                  value={inputValues[quest.id] || ""}
+                  onChange={(e) => {
+                    setInputValues((prevValues) => ({
+                      ...prevValues,
+                      [quest.id]: e.target.value,
+                    }));
+                  }}
+                  className={styles.inputField}
+                  placeholder="Введите ваш ответ"
+                />
+                <button
+                  onClick={() => handleSubmit(quest.id)}
+                  className={styles.submitButton}
+                  disabled={!inputValues[quest.id]?.trim()}
+                >
+                  {isPending ? <Spin indicator={<LoadingOutlined spin />} size="small" /> : "Отправить"}
+                </button>
+              </div>
+            )}
 
-    {quest.type === "text_task" && (
-      <div className={styles.textTaskContainer}>
-        <input
-          type="text"
-          value={inputValues[quest.id] || ""}
-          onChange={(e) => {
-            setInputValues((prevValues) => ({
-              ...prevValues,
-              [quest.id]: e.target.value,
-            }));
-          }}
-          className={styles.inputField}
-          placeholder="Введите ваш ответ"
-        />
-        <button
-          onClick={() => handleSubmit(quest.id)}
-          className={styles.submitButton}
-          disabled={!inputValues[quest.id]?.trim()}
-        >
-          {isPending ? <Spin indicator={<LoadingOutlined spin />} size="small" /> : "Отправить"}
-        </button>
-      </div>
-    )}
+            {quest.type === "options_task" && quest.options && (
+              <div className={styles.optionsTaskContainer}>
+                <div className={styles.optionsContainer}>
+                  {quest.options.map((option) => (
+                    <label key={option.id} className={styles.optionLabel}>
+                      <input
+                        type={quest.multipleSelectionAllowed ? "checkbox" : "radio"}
+                        name={`quest-${quest.id}`}
+                        value={option.id}
+                        checked={
+                          quest.multipleSelectionAllowed
+                            ? inputValues[quest.id]?.split(",").includes(option.id.toString()) || false
+                            : inputValues[quest.id] === option.id.toString()
+                        }
+                        onChange={(e) => {
+                          let updatedValues: string[];
+                          if (quest.multipleSelectionAllowed) {
+                            const currentValue = inputValues[quest.id] ? inputValues[quest.id].split(",") : [];
+                            updatedValues = currentValue.includes(option.id.toString())
+                              ? currentValue.filter((value) => value !== option.id.toString())
+                              : [...currentValue, option.id.toString()];
+                          } else {
+                            updatedValues = [option.id.toString()];
+                          }
 
-    {quest.type === "options_task" && quest.options && (
-      <div className={styles.optionsTaskContainer}>
-        <div className={styles.optionsContainer}>
-          {quest.options.map((option) => (
-            <label key={option.id} className={styles.optionLabel}>
-              <input
-                type={quest.multipleSelectionAllowed ? "checkbox" : "radio"}
-                name={`quest-${quest.id}`}
-                value={option.id}
-                checked={
-                  quest.multipleSelectionAllowed
-                    ? inputValues[quest.id]?.split(",").includes(option.id.toString()) || false
-                    : inputValues[quest.id] === option.id.toString()
-                }
-                onChange={(e) => {
-                  let updatedValues: string[];
-                  if (quest.multipleSelectionAllowed) {
-                    const currentValue = inputValues[quest.id] ? inputValues[quest.id].split(",") : [];
-                    updatedValues = currentValue.includes(option.id.toString())
-                      ? currentValue.filter((value) => value !== option.id.toString())
-                      : [...currentValue, option.id.toString()];
-                  } else {
-                    updatedValues = [option.id.toString()];
-                  }
+                          setInputValues((prevValues) => ({
+                            ...prevValues,
+                            [quest.id]: updatedValues.join(","),
+                          }));
+                        }}
+                        className={styles.optionInput}
+                      />
+                      {parse(option.value)}
+                    </label>
+                  ))}
+                </div>
+                <button
+                  onClick={() => handleSubmit(quest.id)}
+                  className={styles.submitButton}
+                  disabled={!inputValues[quest.id]?.length}
+                >
+                  Отправить
+                </button>
+              </div>
+            )}
 
-                  setInputValues((prevValues) => ({
-                    ...prevValues,
-                    [quest.id]: updatedValues.join(","),
-                  }));
-                }}
-                className={styles.optionInput}
+            {quest.type === "order_options_task" && quest.orderOptions && (
+              <SortableOrderTask
+                quest={quest}
+                inputValues={inputValues}
+                setInputValues={setInputValues}
+                handleSubmit={handleSubmit}
               />
-              {parse(option.value)}
-            </label>
-          ))}
-        </div>
-        <button
-          onClick={() => handleSubmit(quest.id)}
-          className={styles.submitButton}
-          disabled={!inputValues[quest.id]?.length}
-        >
-          Отправить
-        </button>
-      </div>
-    )}
-
-    {quest.type === "order_options_task" && quest.orderOptions && (
-      <SortableOrderTask
-        quest={quest}
-        inputValues={inputValues}
-        setInputValues={setInputValues}
-        handleSubmit={handleSubmit}
-      />
-    )}
-  </div>
-))}
+            )}
+          </div>
+        ))}
 
         </div>
       )}
