@@ -347,7 +347,7 @@ const Header = () => {
             </Menu.Item>
 
           <Menu.Item
-            key="/quests"
+            key="no-select"
             style={{ fontWeight: "bold", paddingLeft: "5" }}
           >
             <Link to="/quests" onClick={handleLinkClick}>

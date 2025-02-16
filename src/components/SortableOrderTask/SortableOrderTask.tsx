@@ -35,7 +35,12 @@ const SortableOrderTask: React.FC<SortableOrderTaskProps> = ({
   const [orderOptions, setOrderOptions] = useState(quest.orderOptions || []);
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        delay: 150,
+        tolerance: 5,
+      },
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
