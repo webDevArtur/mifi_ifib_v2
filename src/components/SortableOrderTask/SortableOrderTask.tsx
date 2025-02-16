@@ -79,7 +79,7 @@ const SortableOrderTask: React.FC<SortableOrderTaskProps> = ({
         items={orderOptions.map((option) => option.id.toString())}
         strategy={verticalListSortingStrategy}
       >
-        <div>
+        <div className={styles.sortableList}>
           {orderOptions.map((option) => (
             <SortableItem key={option.id} id={option.id.toString()} value={option.value} />
           ))}

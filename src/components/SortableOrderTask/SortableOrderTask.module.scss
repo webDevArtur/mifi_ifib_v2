@@ -21,3 +21,13 @@
     cursor: default;
     opacity: 0.6;
   }
+
+  .sortableList {
+    touch-action: none;
+  }
+  
+  @media (max-width: 462px) {
+    .submitButton {
+      width: 100%;
+    }
+  }
