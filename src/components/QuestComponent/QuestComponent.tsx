@@ -68,7 +68,7 @@ const QuestPage = ({ questArray, pageSize = 1 }: QuestPageProps) => {
     }
 
     const questType = quests.find((q) => q.id === questId)?.type;
-    let requestData: { options?: number[]; text?: string, order_options?: number[] } = {};
+    let requestData: { options?: number[]; text?: string, orderOptions?: number[] } = {};
 
     if (questType === "options_task") {
       const selectedOptions = inputValues[questId]
@@ -78,7 +78,7 @@ const QuestPage = ({ questArray, pageSize = 1 }: QuestPageProps) => {
     } else if (questType === "text_task") {
       requestData.text = inputValues[questId];
     } else if (questType === "order_options_task") {
-      requestData.order_options = inputValues[questId]
+      requestData.orderOptions = inputValues[questId]
       ? inputValues[questId].split(",").map((optionId) => parseInt(optionId, 10))
       : [];
     }
@@ -204,15 +204,22 @@ const QuestPage = ({ questArray, pageSize = 1 }: QuestPageProps) => {
                 type={quest.multipleSelectionAllowed ? "checkbox" : "radio"}
                 name={`quest-${quest.id}`}
                 value={option.id}
-                checked={inputValues[quest.id]?.includes(option.id.toString()) || false}
-                onChange={() => {
-                  const currentValue = inputValues[quest.id] ? inputValues[quest.id].split(",") : [];
-                  let updatedValues = [...currentValue];
-                  if (updatedValues.includes(option.id.toString())) {
-                    updatedValues = updatedValues.filter((value) => value !== option.id.toString());
+                checked={
+                  quest.multipleSelectionAllowed
+                    ? inputValues[quest.id]?.split(",").includes(option.id.toString()) || false
+                    : inputValues[quest.id] === option.id.toString()
+                }
+                onChange={(e) => {
+                  let updatedValues;
+                  if (quest.multipleSelectionAllowed) {
+                    const currentValue = inputValues[quest.id] ? inputValues[quest.id].split(",") : [];
+                    updatedValues = currentValue.includes(option.id.toString())
+                      ? currentValue.filter((value) => value !== option.id.toString())
+                      : [...currentValue, option.id.toString()];
                   } else {
-                    updatedValues.push(option.id.toString());
+                    updatedValues = [option.id.toString()];
                   }
+
                   setInputValues((prevValues) => ({
                     ...prevValues,
                     [quest.id]: updatedValues.join(","),
