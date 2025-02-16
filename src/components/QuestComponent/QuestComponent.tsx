@@ -210,7 +210,7 @@ const QuestPage = ({ questArray, pageSize = 1 }: QuestPageProps) => {
                     : inputValues[quest.id] === option.id.toString()
                 }
                 onChange={(e) => {
-                  let updatedValues;
+                  let updatedValues: string[];
                   if (quest.multipleSelectionAllowed) {
                     const currentValue = inputValues[quest.id] ? inputValues[quest.id].split(",") : [];
                     updatedValues = currentValue.includes(option.id.toString())

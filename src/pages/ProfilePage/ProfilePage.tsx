@@ -685,7 +685,7 @@ const ProfilePage = () => {
           <h3 className={styles.taskTitle}>Задачи</h3>
           <Progress
             type="circle"
-            percent={((progressStats.practiceTasksCompletedCount / progressStats.practiceTasksTotalCount) * 100).toFixed(2)}
+            percent={+((progressStats.practiceTasksCompletedCount / progressStats.practiceTasksTotalCount) * 100).toFixed(2)}
             strokeColor="#4CAF50"
           />
           <Statistic
