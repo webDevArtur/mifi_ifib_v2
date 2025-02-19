@@ -129,13 +129,13 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                 {/* Квесты */}
 
                 <Route path="/quests" element={
-                  <ProtectedRoute unAllowedStatuses={["practicing_specialist", "not_related_field"]}>
+                  <ProtectedRoute unAllowedStatuses={["practicing_specialist", "not_related_field", "school_student", "university_student"]}>
                     <QuestsPage />
                   </ProtectedRoute>
                 } />
 
                 <Route path="/quests/:name" element={
-                    <ProtectedRoute unAllowedStatuses={["practicing_specialist", "not_related_field"]}>
+                    <ProtectedRoute unAllowedStatuses={["practicing_specialist", "not_related_field", "school_student", "university_student"]}>
                       <QuestsDetailsPage />
                     </ProtectedRoute>
                 } />
