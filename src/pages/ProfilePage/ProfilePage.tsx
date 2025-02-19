@@ -175,12 +175,12 @@ const ProfilePage = () => {
   };
   
   const handleSubmit = () => {
-    if (!file || !data?.user?.isDocumentUploaded) {
+    if (!file && !data?.user?.isDocumentUploaded) {
       message.error("Пожалуйста, загрузите документ, подтверждающий статус студента/школьника.");
       return;
     }
 
-    if (!data?.user?.isDocumentUploaded) {
+    if (file && !data?.user?.isDocumentUploaded) {
       uploadDocument(file, {
         onSuccess: () => {
           message.success("Документ загружен. Теперь, ждите подтверждения!");
