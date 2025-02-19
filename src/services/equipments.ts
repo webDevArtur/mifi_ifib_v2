@@ -22,7 +22,7 @@ export const getEquipments = (
 };
 
 export const getEquipmentGroups = () => {
-  const url = '${baseUrl}api/v1/nuclear-medicine-intro/equipment/groups/';
+  const url = `${baseUrl}api/v1/nuclear-medicine-intro/equipment/groups/`;
 
   return api<EquipmentGroupsResponse[]>(url, {
     method: "GET",
