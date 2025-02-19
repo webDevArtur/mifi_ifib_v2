@@ -10,15 +10,16 @@ import termsImage from "./assets/terms.png";
 import styles from "./TermsPage.module.scss";
 
 const DEBOUNCE_DELAY = 800;
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const termLinks: Record<TermKeys, string> = {
-  radionuclidesDiagnosis: "/biowiki/index.html",
-  radiationTherapy: "/biowiki/index.html",
-  ultraSoundDiagnosis: "/biowiki/index.html",
-  mriDiagnosis: "/biowiki/index.html",
-  safety: "/biowiki/index.html",
-  regulatoryDocuments: "/biowiki/page8.html",
-  "X-RAY": "/biowiki/index.html",
+  radionuclidesDiagnosis: `${baseUrl}/biowiki/index.html`,
+  radiationTherapy: `${baseUrl}/biowiki/index.html`,
+  ultraSoundDiagnosis: `${baseUrl}/biowiki/index.html`,
+  mriDiagnosis: `${baseUrl}/biowiki/index.html`,
+  safety: `${baseUrl}/biowiki/index.html`,
+  regulatoryDocuments: `${baseUrl}/biowiki/index.html`,
+  "X-RAY": `${baseUrl}/biowiki/index.html`,
 };
 
 const TermsPage = () => {

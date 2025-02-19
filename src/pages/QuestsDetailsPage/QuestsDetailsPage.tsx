@@ -29,8 +29,15 @@ const QuestsDetailsPage = () => {
   const [pageSize, setPageSize] = useState(10);
   const [debouncedSearch, setDebouncedSearch] = useState("");
 
-  const { data, isLoading } = useQuests(questType, page, pageSize, complexity || undefined, debouncedSearch, isOnline || undefined);
-
+  const { data, isLoading } = useQuests({
+    questType,
+    page,
+    size: pageSize,
+    complexity: complexity ? complexity : undefined,
+    search: debouncedSearch,
+    isOnline: isOnline ? isOnline : undefined,
+  });
+  
   const quests = data?.items || [];
   const totalItems = data?.totalItems || 0;
 

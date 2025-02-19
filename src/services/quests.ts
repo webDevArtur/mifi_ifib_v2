@@ -9,7 +9,8 @@ export const getQuests = (
   size?: number,
   complexity?: number,
   search?: string,
-  isOnline?: string
+  isOnline?: string,
+  questCategory?: string
 ) => {
   const pageQuery = page ? `&page=${page}` : "";
   const sizeQuery = size ? `&pageSize=${size}` : "";
@@ -22,8 +23,9 @@ export const getQuests = (
       : isOnline === "offline"
       ? `&is_online=false`
       : "";
+  const questCategoryQuery = questCategory ? `&quest_category=${questCategory}` : "";
 
-  const url = `${baseUrl}api/v1/quests?${pageQuery}${sizeQuery}${complexityQuery}${questTypeQuery}${searchQuery}${isOnlineQuery}`;
+  const url = `${baseUrl}api/v1/quests?${pageQuery}${sizeQuery}${complexityQuery}${questTypeQuery}${searchQuery}${isOnlineQuery}${questCategoryQuery}`;
 
   return api<QuestResponse>(url, {
     method: "GET",

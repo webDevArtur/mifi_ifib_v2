@@ -9,19 +9,41 @@ const questsQuery = (
   size?: number,
   complexity?: number,
   search?: string,
-  isOnline?: string
+  isOnline?: string,
+  questCategory?: string
 ) => ({
-  queryKey: [techObjectsKeys.quests, { page, size, complexity, questType, search, isOnline }],
-  queryFn: async () => getQuests(questType, page, size, complexity, search, isOnline),
+  queryKey: [techObjectsKeys.quests, { page, size, complexity, questType, search, isOnline, questCategory }],
+  queryFn: async () => getQuests(questType, page, size, complexity, search, isOnline, questCategory),
 });
 
-export const useQuests = (
-  questType?: string,
-  page?: number,
-  size?: number,
-  complexity?: number,
-  search?: string,
-  isOnline?: string
-) => {
-  return useQuery(questsQuery(questType, page, size, complexity, search, isOnline));
+interface UseQuestsParams {
+  questType?: string;
+  page?: number;
+  size?: number;
+  complexity?: number;
+  search?: string;
+  isOnline?: string;
+  questCategory?: string;
+}
+
+export const useQuests = ({
+  questType,
+  page,
+  size,
+  complexity,
+  search,
+  isOnline,
+  questCategory,
+}: UseQuestsParams) => {
+  return useQuery(
+    questsQuery(
+      questType,
+      page,
+      size,
+      complexity,
+      search,
+      isOnline,
+      questCategory
+    )
+  );
 };

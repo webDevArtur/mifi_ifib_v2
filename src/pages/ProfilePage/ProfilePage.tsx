@@ -31,7 +31,7 @@ const ProfilePage = () => {
   const { mutateAsync: editUser } = useEditUser();
   const { mutate: deleteUser, isPending: isLoadingDelete } = useDeleteUser();
 
-  const { data: quests, isLoading: isQuestsLoading, refetch: refetchQuests } = useQuests();
+  const { data: quests, isLoading: isQuestsLoading, refetch: refetchQuests } = useQuests({ questCategory: "quest" });
   const { data: progressStats, isLoading: isStatsLoading, refetch: refetchStats } = useProgressStatistics();
   const { data: videoData, isLoading: isVideosLoading, refetch } = useVideos();
   const { data: articlesData, isLoading: isArticlesLoading, refetch: refetchArticles } = useArticles();

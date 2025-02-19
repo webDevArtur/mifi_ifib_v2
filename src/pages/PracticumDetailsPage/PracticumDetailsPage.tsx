@@ -11,7 +11,7 @@ const PracticumDetailsPage = () => {
   const { id: questType } = useParams<{ id: string }>();
   const validQuestType = questType ?? "";
 
-  const { data: questsData, isLoading: questsLoading, error: questsError } = useQuests(questType);
+  const { data: questsData, isLoading: questsLoading, error: questsError } = useQuests({questType});
 
   const practicumTitle = questType ? practicumTitles[questType as PracticumKeys] : "Неизвестный практикум";
   const practicumDescription = practicumDescriptions[questType as PracticumKeys] || "";
