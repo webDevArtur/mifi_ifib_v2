@@ -6,6 +6,8 @@ import styles from "./FeedbackSection.module.scss";
 
 const { TextArea } = Input;
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 interface FeedbackData {
   name: string;
   phoneNumber: string;
@@ -240,7 +242,7 @@ const FeedbackSection = () => {
               <Checkbox />
               <span style={{ marginLeft: "8px" }}>
                 Нажимая кнопку «Отправить», я даю согласие на{" "}
-                <a className={styles.docLink} href="https://mephi.ru/content/public/files/policy.pdf" target="_blank" rel="noopener noreferrer">
+                <a className={styles.docLink} href={`${baseUrl}static/docs/privacy.pdf`} target="_blank" rel="noopener noreferrer">
                   обработку, передачу и хранение персональных данных
                 </a>
               </span>

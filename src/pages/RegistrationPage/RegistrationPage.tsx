@@ -10,6 +10,8 @@ import styles from "./RegistrationPage.module.scss";
 
 const { Option } = Select;
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 const RegistrationPage = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -542,7 +544,7 @@ const RegistrationPage = () => {
               <Checkbox />
               <div className={styles.checkboxTextBlock}>
                 Нажимая кнопку «Зарегистрироваться», я даю согласие на{" "}
-                <a className={styles.dataAllow} href="https://mephi.ru/content/public/files/policy.pdf" target="_blank" rel="noopener noreferrer">
+                <a className={styles.dataAllow} href={`${baseUrl}static/docs/privacy.pdf`} target="_blank" rel="noopener noreferrer">
                   обработку, передачу и хранение персональных данных
                 </a>
               </div>

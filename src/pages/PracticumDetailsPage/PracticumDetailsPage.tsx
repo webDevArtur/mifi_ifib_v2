@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Skeleton } from "antd";
 import { useParams } from "react-router-dom";
 import { useQuests } from "hooks/useQuests";
+import { useQuestTypes } from 'hooks/useQuestsType';
 import QuestPage from "components/QuestComponent/QuestComponent";
 import { practicumTitles, PracticumKeys, practicumDescriptions } from "catalogs/practicums";
 import { Link } from "react-router-dom";
@@ -9,12 +11,13 @@ import styles from "./PracticumDetailsPage.module.scss";
 
 const PracticumDetailsPage = () => {
   const { id: questType } = useParams<{ id: string }>();
-  const validQuestType = questType ?? "";
+  const questCategory = "practice";
 
   const { data: questsData, isLoading: questsLoading, error: questsError } = useQuests({questType});
-
+  const { data: questTypes, isLoading: questTypesLoading } = useQuestTypes(questCategory, questType);
+  
   const practicumTitle = questType ? practicumTitles[questType as PracticumKeys] : "Неизвестный практикум";
-  const practicumDescription = practicumDescriptions[questType as PracticumKeys] || "";
+  const practicumDescription = questTypes?.[0]?.description || "";
 
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -45,17 +48,21 @@ const PracticumDetailsPage = () => {
 
       <h1 className={styles.h1}>{practicumTitle}</h1>
 
-      <div>
-      <p className={styles.description}>
-        {parse(isExpanded ? getFullText(practicumDescription) : getTruncatedText(practicumDescription))}
-      </p>
-
-        {hasReadMore && (
-          <button onClick={toggleText} className={styles.readMoreButton}>
-            {isExpanded ? 'Скрыть' : 'Читать дальше...'}
-          </button>
+      { questTypesLoading ? (
+          <Skeleton active />
+        ) : (
+          <div>
+          <p className={styles.description}>
+            {parse(isExpanded ? getFullText(practicumDescription) : getTruncatedText(practicumDescription))}
+          </p>
+    
+            {hasReadMore && (
+              <button onClick={toggleText} className={styles.readMoreButton}>
+                {isExpanded ? 'Скрыть' : 'Читать дальше...'}
+              </button>
+            )}
+          </div>
         )}
-      </div>
 
       <QuestPage questArray={questArray} pageSize={4} />
     </div>

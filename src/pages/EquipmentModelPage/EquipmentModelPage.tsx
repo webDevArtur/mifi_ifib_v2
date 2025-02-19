@@ -4,6 +4,7 @@ import { Skeleton } from "antd";
 import styles from "./EquipmentModelPage.module.scss";
 import RegistrationBlock from "components/RegistrationBlock/RegistrationBlock";
 import { NoData } from "components/NoData/NoData";
+import parse from "html-react-parser";
 import { useEquipments } from "hooks/useEquipments";
 
 const equipmentNames = {
@@ -76,7 +77,7 @@ const EquipmentModelPage = () => {
         {isLoading ? (
           <Skeleton.Button active className={styles.skeletonDescription} />
         ) : (
-          data?.items[0]?.description
+          parse(data?.items[0]?.description ?? "")
         )}
       </p>
 

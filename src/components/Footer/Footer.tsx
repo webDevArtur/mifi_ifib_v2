@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import rosMolod from "./assets/rosMolod.png";
 import styles from "./Footer.module.scss";
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 const Footer = () => {
   return (
     <footer className={styles.footer}>
@@ -220,18 +222,18 @@ const Footer = () => {
             <p>
               <a 
                 className={styles.docLink}
-                href="https://mephi.ru/content/public/files/policy.pdf" 
+                href={`${baseUrl}static/docs/privacy.pdf`} 
                 target="_blank" 
                 rel="noopener noreferrer"
               >
-                Политика НИЯУ МИФИ в отношении обработки персональных данных
+                Политика обработки персональных данных
               </a>
             </p>
 
             <p>
               <a 
                 className={styles.docLink}
-                href="https://mephi.ru/content/public/files/policy.pdf" 
+                href={`${baseUrl}static/docs/terms.pdf`}
                 target="_blank" 
                 rel="noopener noreferrer"
               >

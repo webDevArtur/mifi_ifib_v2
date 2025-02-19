@@ -3,7 +3,9 @@ import { Skeleton, Input, Select, Pagination } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";
 import { useQuests } from "hooks/useQuests";
+import { useQuestTypes } from 'hooks/useQuestsType';
 import { NoData } from "components/NoData/NoData";
+import parse from "html-react-parser";
 import QuestCard from "components/QuestCard/QuestCard";
 import styles from "./QuestsDetailsPage.module.scss";
 
@@ -29,6 +31,8 @@ const QuestsDetailsPage = () => {
   const [pageSize, setPageSize] = useState(10);
   const [debouncedSearch, setDebouncedSearch] = useState("");
 
+  const questCategory = "quest";
+
   const { data, isLoading } = useQuests({
     questType,
     page,
@@ -37,6 +41,8 @@ const QuestsDetailsPage = () => {
     search: debouncedSearch,
     isOnline: isOnline ? isOnline : undefined,
   });
+
+  const { data: questTypes, isLoading: questTypesLoading } = useQuestTypes(questCategory, questType);
   
   const quests = data?.items || [];
   const totalItems = data?.totalItems || 0;
@@ -59,6 +65,26 @@ const QuestsDetailsPage = () => {
     setPage(1);
   };
 
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleText = () => {
+    setIsExpanded((prev) => !prev);
+  };
+
+  const practicumDescription = questTypes?.[0]?.description || "";
+
+  const getTruncatedText = (text: string) => {
+    const breakPoint = text.indexOf('Читать дальше');
+    if (breakPoint !== -1) {
+      return text.slice(0, breakPoint);
+    }
+    return text;
+  };
+
+  const hasReadMore = practicumDescription.includes('Читать дальше');
+
+  const getFullText = (text: string) => text.replace("Читать дальше", "");
+
   return (
     <div className={styles.introPage}>
       <nav className={styles.breadcrumb}>
@@ -67,9 +93,23 @@ const QuestsDetailsPage = () => {
 
       <div className={styles.contentBlock}>
         <h2>{title}</h2>
-        <p className={styles.description}>
-          В этом блоке вы узнаете, с чем сталкивается студент – медицинский физик во время обучения в ИФИБ НИЯУ МИФИ.
-        </p>
+
+      { questTypesLoading ? (
+          <Skeleton active />
+        ) : (
+          <div>
+          <p className={styles.description}>
+            {parse(isExpanded ? getFullText(practicumDescription) : getTruncatedText(practicumDescription))}
+          </p>
+    
+            {hasReadMore && (
+              <button onClick={toggleText} className={styles.readMoreButton}>
+                {isExpanded ? 'Скрыть' : 'Читать дальше...'}
+              </button>
+            )}
+          </div>
+        )
+      }
 
         <div className={styles.filtersContainer}>
         {questType !== "nuclear_medicine_history" && (
