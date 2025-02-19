@@ -9,6 +9,7 @@ import image3 from "./assets/image3.png";
 import image4 from "./assets/image4.jpg";
 import image5 from "./assets/image5.jpg";
 import image6 from "./assets/image6.jpg";
+import image7 from "./assets/image7.png";
 
 const questTypeTranslations = {
   nuclear_medicine_history: "Погружение в историю",
@@ -43,7 +44,7 @@ const quests = [
     isOnline: "all",
     rating: 4,
     questType: "therapy",
-    backgroundImage: image2,
+    backgroundImage: image7,
   },
   {
     id: 4,

@@ -1,5 +1,7 @@
 import { api } from "./index";
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 export const getLetters = (knowledgeBase?: string) => {
   const params = new URLSearchParams();
 
@@ -8,5 +10,5 @@ export const getLetters = (knowledgeBase?: string) => {
   return api<{
     english: string[];
     russian: string[];
-  }>(`https://medphysicists.mephi.ru/api/v1/knowledge-base/terms/letters/?${params.toString()}`);
+  }>(`${baseUrl}api/v1/knowledge-base/terms/letters/?${params.toString()}`);
 };

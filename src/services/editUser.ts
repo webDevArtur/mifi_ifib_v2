@@ -1,5 +1,7 @@
 import { api } from "./index";
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 interface EditUserData {
     lastName?: string;
     firstName?: string;
@@ -12,7 +14,7 @@ interface EditUserData {
   }
   
   export const editUser = (data: EditUserData): Promise<void> =>
-    api("https://medphysicists.mephi.ru/api/v1/user/edit/", {
+    api(`${baseUrl}api/v1/user/edit/`, {
       method: "PATCH",
       data,
     });

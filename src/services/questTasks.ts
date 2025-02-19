@@ -1,6 +1,8 @@
 import { api } from "./index";
 import { QuestTasksResponse } from "entities";
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 export const getQuestTasks = (
   quest?: number[],
   orderNum?: number,
@@ -12,7 +14,7 @@ export const getQuestTasks = (
   const pageQuery = page ? `&page=${page}` : "";
   const sizeQuery = size ? `&pageSize=${size}` : "";
 
-  const url = `https://medphysicists.mephi.ru/api/v1/quests/tasks/?${questQuery}${orderNumQuery}${pageQuery}${sizeQuery}`;
+  const url = `${baseUrl}api/v1/quests/tasks/?${questQuery}${orderNumQuery}${pageQuery}${sizeQuery}`;
 
   return api<QuestTasksResponse>(url, {
     method: "GET",
@@ -38,7 +40,7 @@ interface SubmitQuestTaskRequest {
     questTaskId: number,
     data: SubmitQuestTaskRequest
   ) => {
-    const url = `https://medphysicists.mephi.ru/api/v1/quests/tasks/${questTaskId}/submit/`;
+    const url = `${baseUrl}api/v1/quests/tasks/${questTaskId}/submit/`;
   
     return api<SubmitQuestTaskResponse>(url, {
       method: "POST",

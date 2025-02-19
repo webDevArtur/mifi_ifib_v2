@@ -1,6 +1,8 @@
 import { api } from "./index";
 import { QuestResponse } from "entities";
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 export const getQuests = (
   questType?: string,
   page?: number,
@@ -21,7 +23,7 @@ export const getQuests = (
       ? `&is_online=false`
       : "";
 
-  const url = `https://medphysicists.mephi.ru/api/v1/quests?${pageQuery}${sizeQuery}${complexityQuery}${questTypeQuery}${searchQuery}${isOnlineQuery}`;
+  const url = `${baseUrl}api/v1/quests?${pageQuery}${sizeQuery}${complexityQuery}${questTypeQuery}${searchQuery}${isOnlineQuery}`;
 
   return api<QuestResponse>(url, {
     method: "GET",

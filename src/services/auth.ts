@@ -1,13 +1,15 @@
 import { api } from "./index";
 import { AuthResponse } from "entities/index";
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 interface LoginData {
   username: string;
   password: string;
 }
 
 export const loginUser = (data: LoginData) =>
-  api<AuthResponse>("https://medphysicists.mephi.ru/api/v1/user/auth/login", {
+  api<AuthResponse>(`${baseUrl}api/v1/user/auth/login`, {
     method: "POST",
     data,
   });
@@ -30,7 +32,7 @@ export const loginUser = (data: LoginData) =>
   
 export const refreshToken = async (): Promise<string> => {
     try {
-      const response = await api<{ accessToken: string }>("https://medphysicists.mephi.ru/api/v1/user/auth/token/refresh", {
+      const response = await api<{ accessToken: string }>(`${baseUrl}api/v1/user/auth/token/refresh`, {
         method: "POST",
         data: { refresh: getRefreshToken() },
       });

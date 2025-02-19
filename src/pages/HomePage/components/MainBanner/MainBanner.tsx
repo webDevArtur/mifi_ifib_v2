@@ -1,19 +1,14 @@
-import { useState, useEffect } from "react";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
 import { useAuth } from "hooks/AuthProvider";
 import VideoPlayer from "components/MainPageVideoPlayer/MainPageVideoPlayer";
+import { useHomeVideo } from "hooks/useHomeVideo";
 import atom from "./assets/atom.png";
 import styles from "./MainBanner.module.scss";
 
 const MainBanner = () => {
   const { isAuthenticated } = useAuth();
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 3000);
-    return () => clearTimeout(timer);
-  }, []);
+  const { data, isLoading } = useHomeVideo();
 
   return (
     <section className={styles.bannerContainer}>
@@ -87,7 +82,8 @@ const MainBanner = () => {
 
       <div className={styles.videoContainer}>
         <VideoPlayer
-          src="https://vk.com/video_ext.php?oid=-142173315&id=456239350&hd=2&autoplay=1"
+          src={data?.url} 
+          isLoading={isLoading}
         ></VideoPlayer>
       </div>
     </section>

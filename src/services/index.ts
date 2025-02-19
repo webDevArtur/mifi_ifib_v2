@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosHeaders, AxiosRequestConfig } from "axios";
 
 const key = "authToken";
 const refreshKey = "refreshToken";
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const getAccessToken = (): string | null => {
   return localStorage.getItem(key);
@@ -25,7 +26,7 @@ const setRefreshToken = (token: string) => {
 
 const refreshToken = async (): Promise<string> => {
   try {
-    const response = await axios.post("https://medphysicists.mephi.ru/api/v1/user/auth/token/refresh/", {
+    const response = await axios.post(`${baseUrl}api/v1/user/auth/token/refresh/`, {
       refresh: getRefreshToken(),
     });
     const { access, refresh } = response.data;

@@ -15,7 +15,7 @@ const categories = [
   { label: "Все", value: "" },
   { label: "Лекции от практикующих медицинских физиков", value: "lectures" },
   { label: "Как это работает?", value: "how_does_it_work" },
-  { label: "Анимации", value: "animations" },
+  { label: "Интервью", value: "animations" },
   { label: "Теоретические основы", value: "theoretical_base" },
 ];
 

@@ -11,7 +11,7 @@
       "*": ["src/*"]
     },
     "target": "esnext",
-    "module": "commonjs",
+    "module": "esnext",
     "strict": true,
     "jsx": "react-jsx",
     "moduleResolution": "node",

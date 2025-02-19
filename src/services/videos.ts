@@ -1,6 +1,8 @@
 import { api } from "./index";
 import { VideoResponse } from "entities";
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 export const getVideos = (
   id?: number[],
   name?: string,
@@ -16,7 +18,7 @@ export const getVideos = (
   if (pageSize) queryParams.append("pageSize", String(pageSize));
   if (category) queryParams.append("category", category);
 
-  const url = `https://medphysicists.mephi.ru/api/v1/nuclear-medicine-intro/films?${queryParams.toString()}`;
+  const url = `${baseUrl}api/v1/nuclear-medicine-intro/films?${queryParams.toString()}`;
 
   return api<VideoResponse>(url, {
     method: "GET",
@@ -24,12 +26,12 @@ export const getVideos = (
 };
 
 export const videoAsRead = (filmId: number) =>
-  api<void>(`https://medphysicists.mephi.ru/api/v1/nuclear-medicine-intro/films/${filmId}/complete/`, {
+  api<void>(`${baseUrl}api/v1/nuclear-medicine-intro/films/${filmId}/complete/`, {
     method: "POST",
   });
 
 export const markVideo = (videoId: number) =>
-  api<void>(`https://medphysicists.mephi.ru/api/v1/nuclear-medicine-intro/films/${videoId}/mark/`, {
+  api<void>(`${baseUrl}api/v1/nuclear-medicine-intro/films/${videoId}/mark/`, {
     method: "POST",
   });
   

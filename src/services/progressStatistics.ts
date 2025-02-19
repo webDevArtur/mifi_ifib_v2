@@ -1,7 +1,9 @@
 import { api } from "./index";
 import { ProgressStatisticsResponse } from "entities";
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 export const getProgressStatistics = () =>
   api<ProgressStatisticsResponse>(
-    `https://medphysicists.mephi.ru/api/v1/user/progress_statistics/`
+    `${baseUrl}api/v1/user/progress_statistics/`
   );

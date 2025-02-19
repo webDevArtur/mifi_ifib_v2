@@ -4,6 +4,8 @@ import {
   ConfirmRegistrationResponse,
 } from "entities/index";
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 interface RegisterData {
   lastName: string;
   firstName: string;
@@ -20,7 +22,7 @@ interface RegisterData {
 
 export const registerUser = (data: RegisterData) =>
   api<RegistrationResponse>(
-    "https://medphysicists.mephi.ru/api/v1/user/auth/register",
+    `${baseUrl}api/v1/user/auth/register`,
     {
       method: "POST",
       data,
@@ -31,7 +33,7 @@ export const confirmRegistration = async (data: {
   confirmationCode: string;
 }) => {
   return api<ConfirmRegistrationResponse>(
-    "https://medphysicists.mephi.ru/api/v1/user/auth/register/confirm",
+    `${baseUrl}api/v1/user/auth/register/confirm`,
     {
       method: "POST",
       data,
@@ -40,7 +42,7 @@ export const confirmRegistration = async (data: {
 };
 
 export const resendConfirmationCode = (data: { register_token?: string }) =>
-  api("https://medphysicists.mephi.ru/api/v1/user/auth/update-confirmation-code", {
+  api(`${baseUrl}api/v1/user/auth/update-confirmation-code`, {
     method: "POST",
     data,
   });

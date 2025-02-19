@@ -1,6 +1,8 @@
 import { api } from "./index";
 import { TermResponse } from "entities/index";
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 export const getTerms = (
   knowledgeBase?: string,
   startsWith?: string,
@@ -17,6 +19,6 @@ export const getTerms = (
   if (pageNumber) params.append("page", pageNumber.toString());
 
   return api<TermResponse>(
-    `https://medphysicists.mephi.ru/api/v1/knowledge-base/terms/?${params.toString()}`
+    `${baseUrl}api/v1/knowledge-base/terms/?${params.toString()}`
   );
 };

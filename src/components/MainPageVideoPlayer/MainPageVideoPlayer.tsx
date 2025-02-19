@@ -3,27 +3,24 @@ import { Skeleton } from "antd";
 import styles from "./MainPageVideoPlayer.module.scss";
 
 interface VideoPlayerProps {
-  src: string;
+  src?: string;
+  isLoading?: boolean;
 }
 
-const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleIframeLoad = () => {
-    setIsLoading(false);
-  };
+const VideoPlayer: React.FC<VideoPlayerProps> = ({ src, isLoading }) => {
 
   return (
     <>
       {isLoading && <Skeleton.Button active className={styles.skeleton} />}
+
+      
       <iframe
         src={src}
         title="Video"
         frameBorder="0"
         allowFullScreen
-        onLoad={handleIframeLoad}
         className={styles.video}
-        style={{ display: isLoading ? "none" : "block" }}
+        style={{ display: isLoading ? "none" : "block", backgroundColor: isLoading ? "transparent" : "#D3D3D3" }}
       />
     </>
   );
