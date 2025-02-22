@@ -93,7 +93,7 @@ const LoginPage = () => {
           </Form.Item>
 
           <Form.Item className={styles.inputItem}>
-            <Link to="#" className={styles.forgotPasswordLink}>
+            <Link to="/update-password" className={styles.forgotPasswordLink}>
               Забыли пароль?
             </Link>
           </Form.Item>

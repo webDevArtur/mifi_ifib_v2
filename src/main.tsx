@@ -34,6 +34,8 @@ import { AuthProvider } from "hooks/AuthProvider";
 import App from "app/App";
 import ProtectedApp from "app/ProtectedApp";
 import {configureAxios} from "services/index";
+import RestorePasswordPage from "pages/RestorePasswordPage/RestorePasswordPage";
+import UpdatePasswordPage from "pages/UpdatePasswordPage/UpdatePasswordPage";
 
 configureAxios();
 
@@ -65,6 +67,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
               />
 
               <Route path="login" element={<LoginPage />} />
+
+              <Route path="restore-password/:uuid" element={<UpdatePasswordPage />} />
+
+              <Route path="update-password" element={<RestorePasswordPage />} />
 
               <Route path="/" element={<App />}>
                 <Route index element={<HomePage />} />
