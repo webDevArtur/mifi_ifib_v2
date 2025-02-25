@@ -13,13 +13,13 @@ const DEBOUNCE_DELAY = 800;
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const termLinks: Record<TermKeys, string> = {
-  radionuclidesDiagnosis: `${baseUrl}biowiki/index.html`,
-  radiationTherapy: `${baseUrl}biowiki/page2.html`,
-  ultraSoundDiagnosis: `${baseUrl}biowiki/index.html`,
-  mriDiagnosis: `${baseUrl}biowiki/index.html`,
-  safety: `${baseUrl}biowiki/index.html`,
-  regulatoryDocuments: `${baseUrl}biowiki/page8.html`,
-  "X-RAY": `${baseUrl}biowiki/index.html`,
+  radionuclidesDiagnosis: `${baseUrl}biowiki/pageRD&T.html`,
+  radiationTherapy: `${baseUrl}biowiki/pageLT.html`,
+  ultraSoundDiagnosis: `${baseUrl}biowiki/pageUI.html`,
+  mriDiagnosis: `${baseUrl}biowiki/pageMRT.html`,
+  safety: `${baseUrl}biowiki/pageSP.html`,
+  regulatoryDocuments: `${baseUrl}biowiki/pageRD.html`,
+  "X-RAY": `${baseUrl}biowiki/pageRKT.html`,
 };
 
 const TermsPage = () => {
