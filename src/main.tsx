@@ -27,6 +27,7 @@ import QuestsPage from "pages/QuestsPage/QuestsPage";
 import QuestsDetailsPage from "pages/QuestsDetailsPage/QuestsDetailsPage";
 import QuestDetailsPage from "pages/QuestDetailsPage/QuestDetailsPage";
 import TasksPage from "pages/TasksPage/TasksPage";
+import DocPage from "pages/DocPage/DocPage";
 import UserRatingPage from "pages/UserRatingPage/UserRatingPage";
 import ProtectedRoute from "pages/ProtectedRoute/ProtectedRoute";
 import ScrollToTop from "hooks/ScrollToTop";
@@ -114,6 +115,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                 <Route path="/knowledge/:type" element={<TermsPage />} />
 
                 <Route path="/knowledge/:type/tasks" element={<TasksPage />} />
+
+                {/* Учебные материалы */}
+
+                <Route path="/documents/:category/:filename" element={<DocPage />} />
 
                 {/* Практикум */}
 

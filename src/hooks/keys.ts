@@ -12,6 +12,7 @@ export const techObjectsKeys = {
   questTasks: ["questTasks"] as const,
   userRanks: ["userRanks"] as const,
   progressStatistics: ["progressStatistics"] as const,
+  docContent: ["docContent"] as const
 };
 
 export const articleDetailsKeys = {
