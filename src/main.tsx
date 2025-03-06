@@ -73,6 +73,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 
               <Route path="update-password" element={<RestorePasswordPage />} />
 
+              {/* Учебные материалы */}
+
+              <Route path="/documents/:category/:filename" element={<DocPage />} />
+
               <Route path="/" element={<App />}>
                 <Route index element={<HomePage />} />
 
@@ -115,10 +119,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                 <Route path="/knowledge/:type" element={<TermsPage />} />
 
                 <Route path="/knowledge/:type/tasks" element={<TasksPage />} />
-
-                {/* Учебные материалы */}
-
-                <Route path="/documents/:category/:filename" element={<DocPage />} />
 
                 {/* Практикум */}
 
