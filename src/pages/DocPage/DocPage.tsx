@@ -11,22 +11,18 @@ const DocPage: React.FC = () => {
 
   const { data: htmlContent, isLoading, error } = useDocContent(category, filename);
 
-  if (isLoading) {
-    return (
-      <div className={styles.docPage}>
-        <Skeleton active paragraph={{ rows: 24 }} />
-      </div>
-    );
-  }
-
-  if (error) return <NoData text={`Мы стараемся сделать учебные материалы интересными... Скоро загрузим!`} />;
-
   return (
     <>
       <DocHeader />
 
       <div className={styles.docPage}>
-        {htmlContent ? (
+        {isLoading ? (
+          <Skeleton active paragraph={{ rows: 24 }} />
+        ) : error ? (
+          <div className={styles.errorContainer}>
+            <NoData text="Мы стараемся сделать учебные материалы интересными... Скоро загрузим!" />
+          </div>
+        ) : htmlContent ? (
           <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
         ) : (
           <Alert message="Не удалось загрузить документ" type="error" showIcon />

@@ -9,7 +9,6 @@ const sections = [
       name: 'Лучевая терапия', 
       link: `/documents/RadiationTherapy/HomeRadiationTherapy.docx`,
       subSections: [
-        { name: 'Лучевая терапия', link: `/documents/RadiationTherapy/HomeRadiationTherapy.docx` },
         { name: 'Лучевая терапия протонами и пучками ионов', link: `/documents/RadiationTherapy/RadiationTherapyWithProtonsAndIonBeams.docx` },
         { name: 'Нейтронная терапия', link: `/documents/RadiationTherapy/NeutronTherapy.docx` },
         { name: 'Спецификация объёмов', link: `/documents/RadiationTherapy/VolumeSpecification.docx` },
@@ -25,7 +24,6 @@ const sections = [
     { name: 'Техника безопасности',
       link: `/documents/SafetyPrecautions/HomeSafetyPrecautions.docx`,
       subSections: [
-        { name: 'Техника безопасности', link: `/documents/SafetyPrecautions/HomeSafetyPrecautions.docx` },
         { name: 'Дополнение к гарантии качества', link: `/documents/SafetyPrecautions/AdditionsToTheQualityAssurance.docx` },
         { name: 'Гарантия качества', link: `/documents/SafetyPrecautions/QualityAssurance.docx` }
       ]
@@ -34,16 +32,28 @@ const sections = [
       name: 'Нормативно-правовые документы', 
       link: `/documents/RegulatoryDocuments/HomeRegulatoryDocuments.docx`,
       subSections: [
-        { name: 'Нормативно-правовые документы', link: `/documents/RegulatoryDocuments/HomeRegulatoryDocuments.docx` },
         { name: 'Лицензирование деятельности в области обращения с ИИИ', link: `/documents/RegulatoryDocuments/LicensingOfActivitiesInTheFieldOfIonizingRadiationSourcesManagement.docx` },
         { name: 'Нормы радиационной безопасности', link: `/documents/RegulatoryDocuments/RadiationSafetyStandards.docx` },
+        { name: 'Основные санитарные правила обеспечения радиационной безопасности', link: `/documents/RegulatoryDocuments/BasicSanitaryRulesForRadiationSafety.docx` },
+        { name: 'Контроль и учет индивидуальных доз облучения граждан', link: `/documents/RegulatoryDocuments/AssessmentAccountingAndControlOfEffectiveRadiationDosesToPatientsDuringRadionuclideDiagnosticStudies.docx` },
+        { name: 'Основные правила учета и контроля радиоактивных веществ и радиоактивных отходов в организации', link: `/documents/RegulatoryDocuments/BasicRulesForAccountingAndControlOfRadioactiveSubstancesAndRadioactiveWasteInAnOrganization.docx` },
+        { name: 'Правила физической защиты радиоактивных веществ, радиационных источников, отдельных ядерных материалов и пунктов хранения', link: `/documents/RegulatoryDocuments/RulesForThePhysicalProtectionOfRadioactiveSubstancesRadiationSourcesIndividualNuclearMaterialsAndStorageFacilities.docx` },
+        { name: 'Требования к программам обеспечения качества', link: `/documents/RegulatoryDocuments/RequirementsForQualityAssurancePrograms.docx` },
+        { name: 'Безопасность при обращении с радиоактивными отходами. Общие положения', link: `/documents/RegulatoryDocuments/SafetyInRadioactiveWasteManagementGeneralProvisions.docx` },
+        { name: 'Сбор, переработка, хранение и кондиционирование жидких радиоактивных отходов. Требования безопасности.', link: `/documents/RegulatoryDocuments/CollectionProcessingStorageAndConditioningOfLiquidRadioactiveWasteSafetyRequirements.docx` },
+        { name: 'Система менеджмента качества', link: `/documents/RegulatoryDocuments/QualityManagementSystem.docx` },
+        { name: 'Гигиенические требования по обеспечению радиационной безопасности при проведении лучевой терапии с помощью открытых радионуклидных источников', link: `/documents/RegulatoryDocuments/HygienicRequirementsForRadiationSafetyDuringRadiationTherapyUsingOpenRadionuclideSources.docx` },
+        { name: 'Гигиенические требования к устройству и эксплуатации рентгеновских кабинетов, аппаратов и проведению рентгенологических исследований', link: `/documents/RegulatoryDocuments/HygienicRequirementsForTheInstallationAndOperationOfX-rayRoomsDevicesAndX-rayExaminations.docx` },
+        { name: 'Гигиенические требования по обеспечению радиационной безопасности при проведении радионуклидной диагностики с помощью радиофармпрепаратов', link: `/documents/RegulatoryDocuments/HygienicRequirementsForRadiationSafetyDuringRadionuclideDiagnosticsUsingRadiopharmaceuticals.docx` },
+        { name: 'Оценка, учет и контроль эффективных доз облучения пациентов при проведении радионуклидных диагностических исследований', link: `/documents/RegulatoryDocuments/AssessmentAccountingAndControlOfEffectiveRadiationDosesToPatientsDuringRadionuclideDiagnosticStudies.docx` },
+        { name: 'Гигиенические требования по обеспечению радиационной безопасности при подготовке и проведении позитронной эмиссионной томографии', link: `/documents/RegulatoryDocuments/HygienicRequirementsForThePlacementAndOperationOfElectronAcceleratorsWithAnEnergyOfUpTo100MeV.docx` },
+        { name: 'Гигиенические требования по обеспечению радиационной безопасности при внутритканевой лучевой терапии (брахитерапии) методом имплантации закрытых радионуклидных источников', link: `/documents/RegulatoryDocuments/HRfRSdInterstitialRadiationTherapy-brachytherapy-byImplantationOfClosedRadionuclideSources.docx` },
+        { name: 'Мониторинг и учет индивидуальных доз облучения граждан', link: `/documents/RegulatoryDocuments/MonitoringAndAccountingOfIndividualRadiationDosesOfCitizens.docx` }
       ]
-    },
-    { name: 'РКТ', link: `/documents/RCT/RCT.docx` },
+    }
   ];  
 
   const DocHeader: React.FC = () => {
-    const [glossaryAvailable, setGlossaryAvailable] = useState(false);
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   
     return (
@@ -82,14 +92,6 @@ const sections = [
               )}
             </div>
           ))}
-          {glossaryAvailable && (
-            <Link
-              to="/glossary"
-              className={styles.sectionLink}
-            >
-              Глоссарий
-            </Link>
-          )}
         </div>
       </div>
     );
