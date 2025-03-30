@@ -28,7 +28,7 @@ import styles from './DocHeader.module.scss';
               onMouseLeave={() => setOpenDropdown(null)}
             >
               <Link
-                to={section.subSections ? "#" : section.link}
+                to={section.link}
                 className={styles.sectionLink}
               >
                 {section.name}
