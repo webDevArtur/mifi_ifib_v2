@@ -22,7 +22,7 @@ import styles from './DocHeader.module.scss';
         ) : (
           sections?.map((section) => (
             <div 
-              key={section.name} 
+              key={section.link}
               className={styles.sectionWrapper} 
               onMouseEnter={() => section.subSections && setOpenDropdown(section.name)}
               onMouseLeave={() => setOpenDropdown(null)}
@@ -37,7 +37,7 @@ import styles from './DocHeader.module.scss';
                 <div className={styles.dropdownMenu}>
                   {section.subSections.map((sub) => (
                     <Link
-                      key={sub.name}
+                      key={sub.link}
                       to={sub.link}
                       className={styles.dropdownItem}
                     >
