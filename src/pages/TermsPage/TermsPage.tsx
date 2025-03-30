@@ -13,13 +13,13 @@ const DEBOUNCE_DELAY = 800;
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const termLinks: Record<TermKeys, string> = {
-  radionuclidesDiagnosis: `${baseUrl}biowiki/pageRD&T.html`,
-  radiationTherapy: `${baseUrl}biowiki/pageLT.html`,
-  ultraSoundDiagnosis: `${baseUrl}biowiki/pageUI.html`,
-  mriDiagnosis: `${baseUrl}biowiki/pageMRT.html`,
-  safety: `${baseUrl}biowiki/pageSP.html`,
-  regulatoryDocuments: `${baseUrl}biowiki/pageRD.html`,
-  "X-RAY": `${baseUrl}biowiki/pageRKT.html`,
+  radionuclidesDiagnosis: `/documents/RadionuclideDiagnosticsAndTherapy/RPP.docx`,
+  radiationTherapy: `/documents/RadiationTherapy/HomeRadiationTherapy.docx`,
+  ultraSoundDiagnosis: `/documents/UltrasoundScan/UltrasoundReferenceBook.docx`,
+  mriDiagnosis: `/documents/MRIScan/MRIReferenceBook.docx`,
+  safety: `/documents/SafetyPrecautions/HomeSafetyPrecautions.docx`,
+  regulatoryDocuments: `/documents/RegulatoryDocuments/HomeRegulatoryDocuments.docx`,
+  "X-RAY": `/documents/RCT/RCT.docx`,
 };
 
 const TermsPage = () => {
@@ -113,7 +113,7 @@ const TermsPage = () => {
     }
   };
 
-  const link = type ? termLinks[type] : "/biowiki/index.html";
+  const link = type ? termLinks[type] : "/documents/RadionuclideDiagnosticsAndTherapy/RPP.docx";
 
   const handleTabChange = (key: string) => {
     setActiveTab(key);
